@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Alats;
 use App\Models\Dosen;
 use App\Models\Praktikum;
+use App\Models\Membermodul;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -23,6 +25,11 @@ class Modul extends Model
     public  function membermodul()
     {
         return $this->belongsTo(Membermodul::class, 'id_modul', 'modul_id');
+    }
+
+    public function alat()
+    {
+        return $this->belongsToMany(Alats::class, 'membermodul','modul_id', 'alat_id');
     }
 
 

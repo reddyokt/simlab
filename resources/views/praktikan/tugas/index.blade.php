@@ -45,8 +45,8 @@
                                         <div class="col-9">
                                             <select class="form-control" name="jenis_tugas" required>
                                                 <option selected disabled>Pilih Jenis Test</option>
-                                                <option value="Pre-Test">Pre Test</option>
-                                                <option value='Post-Test'>Post Test</option>
+                                                <option value="pretest">Pre Test</option>
+                                                <option value="posttest">Post Test</option>
                                             </select>
                                         </div>
                                 </div>

@@ -9,7 +9,8 @@
     <!--begin::Container-->
     <div class="container">
         <!--begin::Form-->
-        <form id="form_add_manual">
+        <form id="form_add_manual" action="/praktikan/createkelompok" method="POST">
+            @csrf
             <!--begin::Card-->
             <div class="card card-custom card-sticky mt-5" id="kt_page_sticky_card">
                 <div class="card-header">
@@ -47,7 +48,7 @@
                                 <tbody>
                                      @foreach($dataMhs as $key=>$value)
                                     <tr>
-                                        <td><input type="hidden" value="{{$value->id_mahasiswa}}"></td>
+                                        <td><input type="checkbox" value="{{$value->id_mahasiswa}}" name="id_mahasiswa[]"></td>
                                         <td>{{$value->nim}}</td>
                                         <td>{{$value->nama_mahasiswa}}</td>
                                         <td>{{$value->nama_kelas}}</td>

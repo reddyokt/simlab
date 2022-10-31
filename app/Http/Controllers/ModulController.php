@@ -25,19 +25,19 @@ class ModulController extends BaseController
     {
 
 
-           $member = DB::table('membermodul')
-           ->join('modul', 'modul.id_modul', '=' ,'membermodul.modul_id')
-           ->join ('alat', 'alat.id_alat', '=' , 'membermodul.alat_id')
-           ->get();
+        //    $member = DB::table('membermodul')
+        //    ->join('modul', 'modul.id_modul', '=' ,'membermodul.modul_id')
+        //    ->join ('alat', 'alat.id_alat', '=' , 'membermodul.alat_id')
+        //    ->get();
 
 
-           $dataModul = DB::table('modul')
-            ->join('praktikum','praktikum.id_praktikum','=','modul.kelas_id')
-            ->join('dosen', 'dosen.id_dosen', '=', 'praktikum.dosen_id')
-            ->get();
+        //    $dataModul = DB::table('modul')
+        //     ->join('praktikum','praktikum.id_praktikum','=','modul.kelas_id')
+        //     ->join('dosen', 'dosen.id_dosen', '=', 'praktikum.dosen_id')
+        //     ->get();
+        $dataModul = Modul::all();
 
-
-           return view ('modul.index', compact('dataModul','member'));
+           return view ('modul.index', compact('dataModul'));
 
     }
 

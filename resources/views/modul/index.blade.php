@@ -36,10 +36,10 @@
          <td>{{ $loop->iteration  }}</td>
          <td>{{ $dt->nama_modul }}</td>
          <td>{{ $dt->tanggal_praktek }}</td>
-         <td>{{ $dt->nama_kelas }}</td>
+         <td>{{ $dt->kelas->nama_kelas }}</td>
          <td>{{ $dt->nama_dosen }}</td>
          <td>
-             <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $dt->modul_id }}"><span data-feather="eye"></span></a>
+             <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $dt->id_modul }}"><span data-feather="eye"></span></a>
              <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
              <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
          </td>
@@ -49,9 +49,9 @@
 </table>
 
 <!-- Modal -->
-@foreach ($member as $dt )
+@foreach ($dataModul as $dt )
 
-<div class="modal fade" id="Modaldetail-{{ $dt->modul_id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Modaldetail-{{ $dt->id_modul }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -68,10 +68,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">{{$loop->iteration}}</th>
-                    <td>{{ $dt->nama_alat}}</td>
-                  </tr>
+                    {{-- dd($dt->alat()) --}}
+                     @foreach ($dt->alat as $x  )
+
+                    <tr>
+                      <th scope="row">{{$loop->iteration}}</th>
+                      <td>{{ $x->nama_alat}}-{{ $x->ukuran}}</td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

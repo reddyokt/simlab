@@ -42,4 +42,10 @@ class PesertaController extends Controller
         return view ('praktikan.kelompok.create', compact('dataMhs'));
     }
 
+    public function storekelompok(Request $request)
+    {
+        //dd($request->all());
+
+    }
+
 }
