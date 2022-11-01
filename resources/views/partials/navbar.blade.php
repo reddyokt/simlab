@@ -10,12 +10,27 @@
           <a class="nav-link {{ ($title === "Beranda") ? 'active' : '' }}" href="/">Beranda</a>
         </li>
       </ul>
+
       <ul class="navbar-nav ms-auto ">
-        <li class="nav-item ">
-            <a href="/login" class="nav-link {{ ($title === "Login") ? 'active' : '' }} px-3 fw-bold " style="background-color: #ff0000;">
-            <i class="bi bi-box-arrow-in-right px-2"></i>Login</a>
-        </li>
-      </ul>
+            @auth
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Welcome Back, {{ auth()->users()->username }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">My Dashboard</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+              </li>
+            @else
+                    <li class="nav-item ">
+                        <a href="/login" class="nav-link {{ ($title === "Login") ? 'active' : '' }} px-3 fw-bold " style="background-color: #ff0000;">
+                        <i class="bi bi-box-arrow-in-right px-2"></i>Logisn</a>
+                    </li>
+            @endauth
+        </ul>
+
     </div>
   </div>
 </nav>
