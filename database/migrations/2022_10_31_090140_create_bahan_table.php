@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKelompokMhsTable extends Migration
+class CreateBahanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateKelompokMhsTable extends Migration
      */
     public function up()
     {
-        Schema::create('kelompok_mhs', function (Blueprint $table) {
-            $table->id('id_kelompokMhs');
-            $table->foreignId('kelompok_id');
-            $table->foreignId('mahasiswa_id');
-            $table->foreignId('periode_id');
-            $table->foreignId('modul_id');
+        Schema::create('bahan', function (Blueprint $table) {
+            $table->id('id_bahan');
+            $table->string('nama_bahan');
+            $table->string('rumus');
+            $table->string('jumlah');
+            $table->foreignId('lokasi_id');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateKelompokMhsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelompok_mhs');
+        Schema::dropIfExists('bahan');
     }
 }

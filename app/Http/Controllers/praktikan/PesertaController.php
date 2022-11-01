@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\praktikan;
 
+use DataTables;
 use App\Models\Peserta;
+use App\Models\Membermodul;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use DataTables;
+use App\Models\Kelompok;
+use App\Models\KelompokMhs;
 
 class PesertaController extends Controller
 {
@@ -29,10 +32,17 @@ class PesertaController extends Controller
 
     public function indexkelompok()
     {
-        return view ('praktikan.kelompok.index');
+        $datakelompok = DB::table ('kelompok')
+        ->join('kelompok_mhs', 'kelompok_mhs.kelompok_id', '=' ,'kelompok.id_kelompok')
+        ->join('mahasiswa', 'mahasiswa.id_mahasiswa', '=' ,'kelompok_mhs.mahasiswa_id')
+        ->join('praktikum','praktikum.id_praktikum', '=' ,'kelompok.kelas_id')
+        ->get();
+
+        return view ('praktikan.kelompok.index', compact('datakelompok'));
     }
 
     public function createkelompok()
+
     {
         $dataMhs = DB::table('pendaftaran')
         -> join('mahasiswa', 'mahasiswa.id_mahasiswa', '=' , 'pendaftaran.mahasiswa_id')
@@ -45,6 +55,26 @@ class PesertaController extends Controller
     public function storekelompok(Request $request)
     {
         //dd($request->all());
+        $data = $request->all();
+
+
+       $kelompok = new Kelompok();
+       $kelompok->nama_kelompok=$data['nama_kelompok'];
+       $kelompok->kelas_id=$data['kelas_id'];
+       $kelompok->save();
+
+       if (is_countable($data['id_mahasiswa']) && count($data['id_mahasiswa'])>0) {
+        foreach ($data['id_mahasiswa'] as $item =>$value) {
+        $data2 = array(
+            'kelompok_id'=>$kelompok->id_kelompok,
+            'mahasiswa_id'=>$data['id_mahasiswa'][$item],
+        );
+        KelompokMhs::create($data2);
+        }
+
+        }
+
+        return redirect('/praktikan/kelompok');
 
     }
 

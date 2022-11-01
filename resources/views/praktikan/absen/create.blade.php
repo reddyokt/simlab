@@ -12,40 +12,34 @@
 </div>
 @endif
 
-
 <div>
-    <h3 class="title my-3">Daftar Bahan Kimia</h3>
-    <a class="btn btn-success my-3 ms-auto" href="/user/create" role="button">Tambah Bahan Kimia</a>
+    <h3 class="title my-3">Absensi </h3>
 </div>
 
 <table id="example" class="display" style="width:100%">
     <thead>
         <tr>
             <th>#</th>
-            <th>Nama Bahan</th>
-            <th>Rumus Kimia</th>
-            <th>Lokasi</th>
-            <th>Jumlah</th>
+            <th>Nama Kelas</th>
+            <th>Nama Modul</th>
+            <th>Nama Mahasiswa</th>
+            <th>Tanggal Praktek</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-    @foreach ($bahan as $b )
-
-    <tr>
-        <td>{{ $loop->iteration }}</td>
-        <td>{{ $b->nama_bahan }}</td>
-        <td>{{ $b->rumus }}</td>
-        <td>{{ $b->lokasi_id }}</td>
-        <td>{{ $b->jumlah }}</td>
-        <td>
-            <a href="" class="badge bg-info"><span data-feather="edit"></span></a>
-            <a href="" class="badge bg-danger"><span data-feather="x-circle"></span></a>
-
-        </td>
-    </tr>
-
-    @endforeach
+        @foreach ( $absen as $b )
+        <tr>
+            <td>{{ $loop->iteration  }}</td>
+            <td>{{ $b->nama_kelas }}</td>
+            <td>{{ $b->nama_modul }}</td>
+            <td>{{ $b->nama_mahasiswa }}</td>
+            <td>{{ $b->tanggal_praktek }}</td>
+            <td>
+                <a href="/absen/{{ $b->id_modul}}" class="badge bg-info"><span data-feather="calendar"></span></a>
+            </td>
+        </tr>
+        @endforeach
     </tbody>
 </table>
 
@@ -56,7 +50,4 @@
     $(document).ready(function () {
     $('#example').DataTable();
 });</script>
-
-
-
 

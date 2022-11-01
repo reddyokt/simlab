@@ -103,9 +103,9 @@ class ModulController extends BaseController
             'alat_id'=>$data['alat'][$item],
         );
         Membermodul::create($data2);
-       }
+        }
 
-    }
+        }
 
         return redirect ('/modul')->with('success', 'Data Modul berhasil ditambahkan');
     }

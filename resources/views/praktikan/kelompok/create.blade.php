@@ -23,7 +23,26 @@
                     <div class="row">
                         <div class="col-xl-2"></div>
                         <div class="col-xl-8">
-                            <div class="my-5">
+                            <div>
+                                <div class="form-group row">
+                                    <label class="col-3">Pilih Kelas</label>
+                                    <div class="col-9">
+                                        <select class="form-control" name="kelas_id" id="kelas_id" value="{{ old ('kelas_id') }}">
+                                            <option selected disabled> Pilih Kelas</option>
+                                            @foreach ( $dataMhs as $d)
+                                            <option value="{{ $d->kelas_id }}">{{ $d->nama_kelas }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2"></div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-xl-2"></div>
+                        <div class="col-xl-8">
+                            <div >
                                 <div class="form-group row">
                                     <label class="col-3">Nama Kelompok</label>
                                     <div class="col-9">
@@ -34,7 +53,8 @@
                         </div>
                         <div class="col-xl-2"></div>
                     </div>
-                    <div class="row">
+
+                    <div class="row mt-3">
                         <div class="table-responsive">
                             <table id="dtM" class="table table-bordered table-striped table-hover dataTable">
                                 <thead>

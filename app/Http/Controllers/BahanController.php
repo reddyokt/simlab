@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\inventory;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Bahan;
 use Illuminate\Http\Request;
 
@@ -15,7 +14,7 @@ class BahanController extends Controller
      */
     public function index()
     {
-        $bahan = Bahan::all();
+        $bahan = Bahan::all;
         return view ('inventory.bahan.index', compact('bahan'));
     }
 
