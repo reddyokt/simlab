@@ -50,10 +50,10 @@ Route::get('/findNim', 'DaftarController@findNim');
 
 
 //-----------------------------------Login-Dashboard---------------------------------//
-Route::get('/login',[LoginController::class, 'index'])->middleware('guest');
+Route::get('/login',[LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login',[LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 
 //----------------------------------User-------------------------------------//

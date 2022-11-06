@@ -6,6 +6,7 @@
     <title>Login</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
+
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,20 +29,21 @@
     <link href="/css/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    @if (session()-> has('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
 
-    @if (session()-> has('loginError'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        {{ session('loginError') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
         <main class="form-signin">
+            @if (session()-> has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
+            @if (session()-> has('loginError'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('loginError') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <form action="/login" method="post">
                 @csrf
                 <img class="mb-2 mx-auto d-block" src="../img/simlab.png" alt="" width="30%">

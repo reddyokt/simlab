@@ -14,7 +14,7 @@ class BahanController extends Controller
      */
     public function index()
     {
-        $bahan = Bahan::all;
+        $bahan = Bahan::all();
         return view ('inventory.bahan.index', compact('bahan'));
     }
 
