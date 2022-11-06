@@ -18,8 +18,7 @@ class CreatePraktikumTable extends Migration
             $table->foreignId('periode_id');
             $table->foreignId('dosen_id');
             $table->string('nama_kelas');
-            $table->bigInteger('jumlah_modul');
-            $table->enum('isActive',['Y','N']);
+            $table->enum('is_active',['Y','N']);
             $table->timestamps();
         });
     }

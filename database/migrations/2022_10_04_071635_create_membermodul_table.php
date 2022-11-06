@@ -16,8 +16,9 @@ class CreateMembermodulTable extends Migration
         Schema::create('membermodul', function (Blueprint $table) {
             $table->id('id_membermodul');
             $table->foreignId('modul_id');
-            $table->foreignId('alat_id');
-            $table->foreignId('bahan_id');
+            $table->foreignId('alat_id')->nullable();
+            $table->foreignId('bahan_id')->nullable();
+            $table->integer('jumlah')->nullable();
             $table->timestamps();
         });
     }

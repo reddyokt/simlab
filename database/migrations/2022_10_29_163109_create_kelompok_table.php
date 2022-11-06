@@ -15,7 +15,8 @@ class CreateKelompokTable extends Migration
     {
         Schema::create('kelompok', function (Blueprint $table) {
             $table->id('id_kelompok');
-            $table->foreignId('kelas_id');
+            $table->foreignId('periode_id');
+            $table->foreignId('kelas_id'); // merujuk ke table praktikum
             $table->string('nama_kelompok');
             $table->timestamps();
         });

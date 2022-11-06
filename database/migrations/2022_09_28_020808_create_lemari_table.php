@@ -15,8 +15,8 @@ class CreateLemariTable extends Migration
     {
         Schema::create('lemari', function (Blueprint $table) {
             $table->id('id_lemari');
+            $table->foreignId('lokasi_id');
             $table->string('nama_lemari');
-            $table->foreignId('id_lokasi');
             $table->timestamps();
         });
     }

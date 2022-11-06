@@ -15,10 +15,10 @@ class CreateBahanTable extends Migration
     {
         Schema::create('bahan', function (Blueprint $table) {
             $table->id('id_bahan');
-            $table->string('nama_bahan');
-            $table->string('rumus');
-            $table->string('jumlah');
             $table->foreignId('lokasi_id');
+            $table->string('nama_bahan');
+            $table->string('rumus')->nullable();
+            $table->integer('jumlah')->nullable();
             $table->timestamps();
         });
     }

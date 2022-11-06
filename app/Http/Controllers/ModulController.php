@@ -55,14 +55,14 @@ class ModulController extends BaseController
         //->whereIn('praktikum.is_active',['YA'])
         //->get();
 
-        $alat = DB::table('alat')
-        ->get();
+        $alat = DB::table('alat')->get();
+        $bahan = DB::table('bahan')->get();
 
 
         $kelas = Praktikum::all();
 
 
-        return view ('modul.createmodul', compact('alat','kelas'));
+        return view ('modul.createmodul', compact('alat','kelas', 'bahan'));
 
     }
 

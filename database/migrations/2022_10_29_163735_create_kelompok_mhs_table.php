@@ -14,11 +14,9 @@ class CreateKelompokMhsTable extends Migration
     public function up()
     {
         Schema::create('kelompok_mhs', function (Blueprint $table) {
-            $table->id('id_kelompokMhs');
+            $table->id('id_kelompok_mhs');
             $table->foreignId('kelompok_id');
             $table->foreignId('mahasiswa_id');
-            $table->foreignId('periode_id');
-            $table->foreignId('modul_id');
             $table->timestamps();
         });
     }

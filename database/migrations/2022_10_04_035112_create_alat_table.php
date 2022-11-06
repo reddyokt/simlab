@@ -15,17 +15,17 @@ class CreateAlatTable extends Migration
     {
         Schema::create('alat', function (Blueprint $table) {
             $table->id('id_alat');
-            $table->string('nama_alat');
-            $table->string('merk');
-            $table->string('ukuran');
-            $table->string('pabrikan');
-            $table->string('jumlah');
-            $table->string('rusak');
-            $table->enum('jenis',['c2a','c2b']);
             $table->foreignId('lokasi_id');
-            $table->foreignId('lemari_id');
-            $table->string('kolom');
-            $table->string('baris');
+            $table->foreignId('lemari_id')->nullable();
+            $table->enum('jenis',['c2a','c2b']);
+            $table->string('kolom')->nullable();
+            $table->string('baris')->nullable();
+            $table->string('nama_alat');
+            $table->string('merk')->nullable();
+            $table->string('ukuran')->nullable();
+            $table->string('pabrikan')->nullable();
+            $table->string('jumlah')->nullable();
+            $table->string('rusak')->nullable();
             $table->timestamps();
         });
     }

@@ -58,6 +58,27 @@
                 </select>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-6 form-group mb-1">
+            <label for="nama_modul">Tambah Bahan</label>
+            <div class="bahan_wrapper">
+                <div class="clone_bahan">
+                    <div class="input-group">
+                        <select class="selectpicker form-control w-100" name="id_bahan" id="bahan" multiple data-live-search="true">
+                            @foreach ($bahan as $b )
+                                <option value="{{ $b->id_bahan }}">{{ $b->nama_bahan }}{{' '.$b->rumus }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <input type="number" name="jumlah_bahan[]" class="form-control" placeholder="Masukkan Jumlah Bahan">
+                    </div>
+                </div>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" id="add_button" type="button">+</button>
+        </div>
+    </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Buat Modul</button>
     </form>
 </div>
@@ -85,5 +106,14 @@
         $('#tanggal_praktek',).datepicker(
             {format:'yyyy-mm-dd'}
         );
+
+        // add bahan when
+        $('#add_button').on('click', function() {
+            let bahanPicker = $('.clone_bahan').first().clone()
+            console.log(bahanPicker)
+            let wrapper = $('.bahan_wrapper')
+            console.log('wrapper' ,wrapper)
+            $('.bahan_wrapper').html(bahanPicker)
+        })
     });
 </script>
