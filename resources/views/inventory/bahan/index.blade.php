@@ -15,7 +15,7 @@
 
 <div>
     <h3 class="title my-3">Daftar Bahan Kimia</h3>
-    <a class="btn btn-success my-3 ms-auto" href="/user/create" role="button">Tambah Bahan Kimia</a>
+    <a class="btn btn-success my-3 ms-auto" href="/bahan/create" role="button">Tambah Bahan Kimia</a>
 </div>
 
 <table id="example" class="display" style="width:100%">

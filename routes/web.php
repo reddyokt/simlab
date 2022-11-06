@@ -94,6 +94,8 @@ Route::post('/editc2b/{id_alat}', [AlatController::class, 'editalatc2b']);
 Route::get('/deletec2b/{id_alat}', [AlatController::class, 'deletec2b']);
 
 Route::get('/inventory/bahan', [BahanController::class, 'index']);
+Route::get('/bahan/create', [BahanController::class, 'create']);
+Route::post('/bahan/create', [BahanController::class, 'store']);
 
 Route::get('/inventory/barang', [BarangController::class, 'index']);
 Route::get('/inventory/barang/create', [BarangController::class, 'create']);
