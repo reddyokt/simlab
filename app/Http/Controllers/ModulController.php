@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alats;
+use App\Models\Bahan;
 use App\Models\Modul;
 use App\Models\Periode;
 use App\Models\c2a_alat;
 use App\Models\c2b_alat;
 use App\Models\Dosen;
+use App\Models\Kelas;
 use App\Models\Praktikum;
 use App\Models\Membermodul;
 use Illuminate\Http\Request;
@@ -55,14 +57,13 @@ class ModulController extends BaseController
         //->whereIn('praktikum.is_active',['YA'])
         //->get();
 
-        $alat = DB::table('alat')->get();
-        $bahan = DB::table('bahan')->get();
+        $alat = Alats::all();
+        $bahan = Bahan::all();
+        $kelas = Kelas::all();
+        $praktik = Praktikum::all();
 
 
-        $kelas = Praktikum::all();
-
-
-        return view ('modul.createmodul', compact('alat','kelas', 'bahan'));
+        return view ('modul.createmodul', compact('alat','kelas', 'bahan', 'praktik'));
 
     }
 
@@ -96,16 +97,35 @@ class ModulController extends BaseController
        $modul->tanggal_praktek=$data['tanggal_praktek'];
        $modul->save();
 
-       if (is_countable($data['alat']) && count($data['alat'])>0) {
-        foreach ($data['alat'] as $item =>$value) {
-        $data2 = array(
-            'modul_id'=>$modul->id_modul,
-            'alat_id'=>$data['alat'][$item],
-        );
-        Membermodul::create($data2);
-        }
+    //    if (is_countable($data['alat']) && count($data['alat'])>0) {
+    //     foreach ($data['alat'] as $item =>$value) {
+    //     $data2 = array(
+    //         'modul_id'=>$modul->id_modul,
+    //         'alat_id'=>$data['alat'][$item],
 
-        }
+    //     );
+    //     Membermodul::create($data2);
+    //     }
+
+    //     }
+
+    foreach ($data['alat'] as $index=>$alat){
+        $x = ['modul_id'=>$modul->id_modul,
+            'alat_id'=>$data['alat'][$index],
+            'bahan_id'=>0,
+            'jumlah_bahan'=>0,
+    ];
+        Membermodul::create($x);
+    }
+
+    foreach ($data['id_bahan'] as $index=>$bahan){
+        $x = ['modul_id'=>$modul->id_modul,
+             'bahan_id'=>$bahan,
+             'alat_id'=>0,
+             'jumlah_bahan'=>$data['jumlah_bahan'][$index],
+    ];
+        Membermodul::create($x);
+    }
 
         return redirect ('/modul')->with('success', 'Data Modul berhasil ditambahkan');
     }

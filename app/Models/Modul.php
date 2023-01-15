@@ -32,6 +32,15 @@ class Modul extends Model
         return $this->belongsToMany(Alats::class, 'membermodul','modul_id', 'alat_id');
     }
 
+    public function bahan()
+    {
+        return $this->belongsToMany(Bahan::class, 'membermodul','modul_id', 'bahan_id');
+    }
+    public  function modul()
+    {
+        return $this->belongsTo(Tugas::class, 'id_modul', 'modul_id');
+    }
+
 
 
 }

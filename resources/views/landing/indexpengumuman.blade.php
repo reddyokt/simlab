@@ -13,35 +13,33 @@
 @endif
 
 <div>
-    <h3 class="title my-3">Daftar Kelompok</h3>
-    <a class="btn btn-success my-3 ms-auto" href="/praktikan/createkelompok" role="button">Buat Kelompok</a>
+    <h3 class="title my-3">Daftar Pengumuman</h3>
+    <a class="btn btn-success my-3 ms-auto" href="/pengumuman/create" role="button">Buat Pengumuman</a>
 </div>
 
 <table id="example" class="display" style="width:100%">
     <thead>
         <tr>
             <th>#</th>
-            <th>Kelompok</th>
-            <th>Nama Kelas</th>
-            <th>Nama Mahasiswa</th>
-            <th>NIM</th>
+            <th>Judul Pengumuman</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ( $datakelompok as $mhs )
+       {{--   @foreach ( $datakelompok as $mhs )
         <tr>
             <td>{{ $loop->iteration  }}</td>
-            <td>{{ $mhs->kelompok->nama_kelompok }}</td>
-            <td>{{ $mhs->kelompok->praktikum->kelas->nama_kelas }}</td>
-            <td>{{ $mhs->mahasiswa->nama_mahasiswa }}</td>
-            <td>{{ $mhs->mahasiswa->nim }}</td>
+            <td>{{ $mhs->nama_kelompok }}</td>
+            <td>{{ $mhs->nama_kelas }}</td>
+            <td>{{ $mhs->nama_mahasiswa }}</td>
+            <td>{{ $mhs->nim }}</td>
             <td>
-                <a href="/praktikan/editkelompok/{{ $mhs->mahasiswa_id }}/{{ $mhs->praktikum_id }}" class="badge bg-info"><span data-feather="edit"></span></a>
+                <a href="/mhs/" class="badge bg-info"><span data-feather="edit"></span></a>
                 <a href="/delete/" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Mahasiswa?!!!')"><span data-feather="x-circle"></span></a>
             </td>
         </tr>
         @endforeach
+        --}}
     </tbody>
 </table>
 

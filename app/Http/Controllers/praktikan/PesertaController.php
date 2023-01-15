@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Kelompok;
 use App\Models\KelompokMhs;
+use App\Models\Periode;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\PraktikanImport;
+use App\Models\PraktikumMahasiswa;
+use Dotenv\Validator;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
 
 class PesertaController extends Controller
 {
@@ -18,37 +24,61 @@ class PesertaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function import(Request $request)
+    {
+        //dd($request->all());
+        Excel::import(new PraktikanImport($request->periode_id), $request->file('dataimport'));
+
+        return redirect ('praktikan/peserta');
+
+        //dd($request->all());
+    }
     public function index ()
     {
-            $dataMhs = DB::table('mahasiswa')
-            ->join('pendaftaran','pendaftaran.mahasiswa_id','=','mahasiswa.id_mahasiswa')
-            ->join('praktikum','praktikum.id_praktikum','=','pendaftaran.kelas_id')
-            ->whereIn('pendaftaran.status',['Diterima'])
+            $periode = Periode::where('status_periode','Aktif')
+            ->get();
+            // $dataMhs = DB::table('mahasiswa')
+            // ->join('pendaftaran','pendaftaran.mahasiswa_id','=','mahasiswa.id_mahasiswa')
+            // ->join('praktikum','praktikum.id_praktikum','=','pendaftaran.kelas_id')
+            // ->leftJoin('kelas', 'kelas.id_kelas', '=' ,'praktikum.kelas_id')
+            // ->whereIn('pendaftaran.status',['Diterima'])
+            // ->get();
+            $dataMhs = PraktikumMahasiswa::with([
+                'mahasiswa','praktikum','praktikum.periode','praktikum.kelas'
+            ])
             ->get();
 
 
-            return view ('praktikan.peserta.index', compact('dataMhs'));
+            //dd ($dataMhs->toArray());
+            return view ('praktikan.peserta.index', compact('dataMhs','periode'));
     }
 
     public function indexkelompok()
     {
-        $datakelompok = DB::table ('kelompok')
-        ->join('kelompok_mhs', 'kelompok_mhs.kelompok_id', '=' ,'kelompok.id_kelompok')
-        ->join('mahasiswa', 'mahasiswa.id_mahasiswa', '=' ,'kelompok_mhs.mahasiswa_id')
-        ->join('praktikum','praktikum.id_praktikum', '=' ,'kelompok.kelas_id')
+        $datakelompok = PraktikumMahasiswa::
+        whereHas('kelompok', function ($q){
+            $q->whereHas('praktikum', function ($q2){
+                $q2->whereHas('periode',function ($q3){
+                    $q3->where('status_periode', 'Aktif');
+                });
+            });
+        })
         ->get();
-
+        //dd ($datakelompok->toArray());
         return view ('praktikan.kelompok.index', compact('datakelompok'));
     }
 
     public function createkelompok()
-
     {
-        $dataMhs = DB::table('pendaftaran')
-        -> join('mahasiswa', 'mahasiswa.id_mahasiswa', '=' , 'pendaftaran.mahasiswa_id')
-        -> join('praktikum', 'praktikum.id_praktikum', '=' ,'pendaftaran.kelas_id')
-        -> whereIn('pendaftaran.status', ['Diterima'])
-        -> get();
+        $dataMhs = PraktikumMahasiswa::with([
+            'mahasiswa', 'praktikum.kelas', 'praktikum.periode'
+            ])
+            ->whereHas('praktikum', function ($q){
+                $q->whereHas('periode', function ($q2){
+                    $q2->where('status_periode','Aktif');
+                });
+            })->whereNull('kelompok_id')
+            ->get();
         return view ('praktikan.kelompok.create', compact('dataMhs'));
     }
 
@@ -57,25 +87,58 @@ class PesertaController extends Controller
         //dd($request->all());
         $data = $request->all();
 
+        $idMhs = [];
+        $idPraktikum = [];
+
+        foreach($request->id_mahasiswa as $x) {
+            $y=explode('-',$x);
+            $idMhs[]=$y[0];
+            $idPraktikum[]=$y[1];
+        }
+        $field=[
+                'id_praktikum'=>$idPraktikum,
+                'idp'=>$idPraktikum[0]
+        ];
+        $rules=[
+                'id_praktikum.*'=>'same:idp'
+        ];
+        $validator=FacadesValidator::make($field,$rules)->validate();
+
 
        $kelompok = new Kelompok();
        $kelompok->nama_kelompok=$data['nama_kelompok'];
-       $kelompok->kelas_id=$data['kelas_id'];
+       $kelompok->praktikum_id=$idPraktikum[0];
        $kelompok->save();
 
-       if (is_countable($data['id_mahasiswa']) && count($data['id_mahasiswa'])>0) {
-        foreach ($data['id_mahasiswa'] as $item =>$value) {
-        $data2 = array(
-            'kelompok_id'=>$kelompok->id_kelompok,
-            'mahasiswa_id'=>$data['id_mahasiswa'][$item],
-        );
-        KelompokMhs::create($data2);
+        foreach ($idMhs as $x){
+            $praktikumMhs = PraktikumMahasiswa::where('mahasiswa_id', $x)
+            ->where('praktikum_id',$idPraktikum[0])
+            ->update(['kelompok_id'=>$kelompok->id_kelompok]);
         }
-
-        }
-
         return redirect('/praktikan/kelompok');
 
+    }
+
+    public function editkelompok($mahasiswa_id, $praktikum_id)
+    {
+        $data = PraktikumMahasiswa::where('mahasiswa_id', $mahasiswa_id)
+        ->where('praktikum_id', $praktikum_id)
+        ->first();
+
+        $kelompok = Kelompok::where('praktikum_id', $praktikum_id)
+        ->get();
+
+        return view ('praktikan.kelompok.editkelompok', compact ('data','kelompok'));
+    }
+
+    public function updatekelompok(Request $request, $mahasiswa_id, $praktikum_id)
+    {
+       // dd ($request->all());
+       $data = PraktikumMahasiswa::where('mahasiswa_id', $mahasiswa_id)
+       ->where('praktikum_id', $praktikum_id)
+       ->update(['kelompok_id'=>$request->kelompok_id]);
+
+       return redirect('/praktikan/kelompok')->with('success', 'Data Kelompok berhasil diubah');
     }
 
 }

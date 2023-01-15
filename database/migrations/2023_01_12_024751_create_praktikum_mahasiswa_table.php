@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePendaftaranTable extends Migration
+class CreatePraktikumMahasiswaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreatePendaftaranTable extends Migration
      */
     public function up()
     {
-        Schema::create('pendaftaran', function (Blueprint $table) {
-            $table->id('id_pendaftaran');
+        Schema::create('praktikum_mahasiswa', function (Blueprint $table) {
+            $table->id('id_praktikum_mahasiswa');
             $table->foreignId('mahasiswa_id');
-            $table->foreignId('kelas_id');
-            $table->string('email');
-            $table->string('phone');
-            $table->enum('status',['Belum divalidasi','Diterima', 'Ditolak']);
-            $table->string('created_by');
+            $table->foreignId('praktikum_id');
+            $table->foreignId('kelompok_id')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreatePendaftaranTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pendaftaran');
+        Schema::dropIfExists('praktikum_mahasiswa');
     }
 }

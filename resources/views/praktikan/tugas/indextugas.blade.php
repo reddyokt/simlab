@@ -13,12 +13,17 @@
     <!--begin::Container-->
     <div class="container">
         <!--begin::Form-->
-
+        @if (session()-> has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
             <!--begin::Card-->
             <div class="card card-custom card-sticky mt-5" id="kt_page_sticky_card">
                 <div class="card-header">
                     <div class="card-title">
-                        <h4 class="card-label float-start">Daftar Tugas Menunggu Validasi</h4> <a class="btn btn-success float-end " href="/praktikan/createtugas" role="button">Buat Tugas</a>
+                        <h4 class="card-label float-start">Daftar Tugas</h4> <a class="btn btn-success float-end " href="/praktikan/createtugas" role="button">Buat Tugas</a>
 
                     </div>
 
@@ -34,20 +39,32 @@
                                         <th>#</th>
                                         <th>Nama Modul</th>
                                         <th>Jenis Tugas</th>
+                                        <th>Status Tugas</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($tugas as $tg )
+                                    @foreach ($modul as $tg )
                                     <tr>
 
                                         <td>{{ $loop->iteration  }}</td>
-                                        <td>{{ $tg->nama_modul }}</td>
-                                        <td>{{ $tg->jenis_tugas }}</td>
+                                        <td>{{ $tg->kelas->kelas->nama_kelas }} | {{ $tg->nama_modul }}</td>
+                                        <td>{{ $tg->modul->jenis_tugas }}</td>
+                                        @if ($tg->modul->is_validated == 'N')
+                                            <td>Belum Divalidasi</td>
+                                            @else
+                                            <td>Sudah Divalidasi</td>
+                                        @endif
+
                                         <td>
-                                            <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $tg->id_tugas }}"><span data-feather="eye"></span></a>
+                                            <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $tg->id_tugas }}">
+                                            <span data-feather="eye"></span></a>
                                             <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
-                                            <a href="#" class="badge bg-warning"><span data-feather="check-circle"></span></a>
+                                            @if ($tg->modul->is_validated !='N')
+                                            <a href="/praktikan/showtugas/{{ $tg->modul->id_tugas }}" class="badge bg-warning" onclick="return confirm('Yakin akan mengirimkan Tugas ini?!!!')"><span data-feather="sunrise"></span></a>
+                                            {{--  @elseif ($tg->is_active ='Y')
+                                            <a href="/praktikan/hidetugas/{{ $tg->id_tugas }}" class="badge bg-danger" onclick="return confirm('Yakin akan menyembunyikan Tugas ini?!!!')"><span data-feather="sunset"></span></a>--}}
+                                            @endif
                                             <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
                                         </td>
 
@@ -74,7 +91,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <p><td>{!! $tg->uraian !!}</td></p>
+            <p><td>{!! $tg->uraian_tugas !!}</td></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

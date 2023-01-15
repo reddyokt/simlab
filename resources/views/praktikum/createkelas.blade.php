@@ -5,9 +5,12 @@
     <form action="/praktikum/createkelas" method="POST" class="col-md-5 d-block text-center mx-auto">
         @csrf
         <div class=" form-floating mb-1">
-            <input type="text" name="nama_kelas" class="form-control @error('nama_kelas') is-invalid @enderror"
-            id="nama_kelas" placeholder="Nama Kelas" required value="{{ old ('nama_kelas') }}" >
-            <label for="name">Nama Kelas</label>
+            <select class="form-control" name="nama_kelas" id="nama_kelas" value="{{ old ('nama_kelas') }}">
+                <option selected disabled>Pilih Kelas</option>
+                @foreach ( $kelas as $kel )
+                <option value="{{ $kel->id_kelas }}">{{ $kel->nama_kelas }} | {{ $kel->kode_kelas }}</option>
+                @endforeach
+            </select>
             @error('nama_kelas')
                 <div class="invalid-feedback">
                     {{ $message }}

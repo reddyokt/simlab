@@ -18,7 +18,7 @@
             <div class="card card-custom card-sticky mt-5" id="kt_page_sticky_card">
                 <div class="card-header">
                     <div class="card-title">
-                        <h4 class="card-label float-start">Daftar Tugas Menunggu Validasi</h4> <a class="btn btn-success float-end " href="/praktikan/createtugas" role="button">Buat Tugas</a>
+                        <h4 class="card-label float-start">Daftar Soal Ujian</h4> <a class="btn btn-success float-end " href="/praktikan/createujian" role="button">Buat Soal Ujian</a>
 
                     </div>
 
@@ -32,22 +32,19 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nama Modul</th>
-                                        <th>Jenis Tugas</th>
+                                        <th>Nama Kelas</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($tugas as $tg )
+                                    @foreach ($ujian as $tg )
                                     <tr>
 
                                         <td>{{ $loop->iteration  }}</td>
-                                        <td>{{ $tg->nama_modul }}</td>
-                                        <td>{{ $tg->jenis_tugas }}</td>
+                                        <td>{{ $tg->nama_kelas }}</td>
                                         <td>
-                                            <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $tg->id_tugas }}"><span data-feather="eye"></span></a>
+                                            <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $tg->id_ujian }}"><span data-feather="eye"></span></a>
                                             <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
-                                            <a href="#" class="badge bg-warning"><span data-feather="check-circle"></span></a>
                                             <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
                                         </td>
 
@@ -64,17 +61,17 @@
         <!--end::Form-->
     </div>
     <!-- Modal -->
-@foreach ($tugas as $tg )
+@foreach ($ujian as $tg )
 
-<div class="modal fade" id="Modaldetail-{{ $tg->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Modaldetail-{{ $tg->id_ujian }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Uraian Tugas {{ $tg->jenis_tugas }} {{ $tg->nama_modul }}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Uraian Soal Ujian {{ $tg->nama_kelas }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <p><td>{!! $tg->uraian !!}</td></p>
+            <p><td>{!! $tg->uraian_ujian !!}</td></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

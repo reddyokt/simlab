@@ -1,26 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\praktikan;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Absen;
+use App\Models\Nilai;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class AbsenController extends Controller
+class NilaiController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexnilaitugas()
     {
-        $absen =DB::table('praktikum')
-        ->leftJoin('modul','modul.kelas_id', '=' ,'praktikum.id_praktikum')
-        ->leftJoin('pendaftaran','pendaftaran.kelas_id', '=' ,'praktikum.id_praktikum')
-        ->get();
-        return view ('praktikan.absen.create', compact('absen'));
+        return view ('praktikan.nilai.indexnilaitugas');
     }
 
     /**
@@ -47,10 +41,10 @@ class AbsenController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Absen  $absen
+     * @param  \App\Models\Nilai  $nilai
      * @return \Illuminate\Http\Response
      */
-    public function show(Absen $absen)
+    public function show(Nilai $nilai)
     {
         //
     }
@@ -58,10 +52,10 @@ class AbsenController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Absen  $absen
+     * @param  \App\Models\Nilai  $nilai
      * @return \Illuminate\Http\Response
      */
-    public function edit(Absen $absen)
+    public function edit(Nilai $nilai)
     {
         //
     }
@@ -70,10 +64,10 @@ class AbsenController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Absen  $absen
+     * @param  \App\Models\Nilai  $nilai
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Absen $absen)
+    public function update(Request $request, Nilai $nilai)
     {
         //
     }
@@ -81,10 +75,10 @@ class AbsenController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Absen  $absen
+     * @param  \App\Models\Nilai  $nilai
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Absen $absen)
+    public function destroy(Nilai $nilai)
     {
         //
     }

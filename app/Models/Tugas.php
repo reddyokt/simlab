@@ -9,6 +9,11 @@ class Tugas extends Model
 {
     use HasFactory;
     protected $table = 'tugas';
-    protected $fillable =  ['id_tugas','modul_id','jenis_tugas','uraian'];
+    protected $fillable =  ['id_tugas','modul_id','jenis_tugas','uraian_tugas','is_active','is_validated'];
     protected $primaryKey = 'id_tugas';
+
+    public  function tugas()
+    {
+        return $this->belongsTo(Modul::class, 'modul_id', 'id_modul');
+    }
 }

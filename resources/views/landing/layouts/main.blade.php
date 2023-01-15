@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -61,7 +62,59 @@
         </div>
     </section>
     <!-- END HOME -->
+    <!-- START JADWAL -->
+    <section class="section bg-cta" id="jadwal">
+        <div class="bg-overlay-3"></div>
 
+        <div class="container d-block mx-auto align-item-center"">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cta-content text-white text-center">
+                    @if(count($jadwal)>0)
+                    <div class="text-center text-white">
+                        <h2 class="title">Daftar Jadwal Praktikum</h2>
+                            <div class="card text-dark">
+                                <div class="card-body">
+                                    <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nama Kelas</th>
+                                            <th scope="col">Nama Modul</th>
+                                            <th scope="col">Tanggal Praktek</th>
+                                            <th scope="col">Dosen Pengampu</th>
+                                            <th scope="col">Action</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach ($jadwal as $key=>$value)
+                                          <tr>
+                                            <th>{{ $loop->iteration  }} </th>
+                                            <td>{{$value->nama_kelas}}</td>
+                                            <td>{{$value->nama_modul}}</td>
+                                            <td>{{ \Carbon\Carbon::parse($value->tanggal_praktek)->isoFormat('Do MMMM YYYY')}}</td>
+                                            <td>{{ $value->nama_dosen}}</td>
+                                            <td><a href="#" class="badge bg-success"
+                                                data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $value->id_tugas }}"><i class="fa fa-eye"></i></a>
+                                            </td>
+                                          </tr>
+                                        @endforeach
+                                        </tbody>
+                                      </table>
+                                </div>
+                            </div>
+                    </div>
+                    @else
+                    <div class="card">
+                        <h5 class="text-center text-dark">Belum ada Jadwal Praktek tersedia</h5>
+                    </div>
+                    @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END CTA -->
 
     <!-- START CTA -->
     <section class="section bg-cta" id="cta">
@@ -72,9 +125,9 @@
                     <div class="cta-content text-white text-center">
 
                         <div class="text-white">
-                            <h2 class="title">Daftar Kelas Praktikum</h2>
-                            <div class="mt-5">
-                                <a href="/daftarPraktikum" class="btn btn-primary">Klik Disini</a>
+                            <h2 class="title">Pengumuman</h2>
+                            <div class="mt-2">
+                                <!--<a href="/daftarPraktikum" class="btn btn-primary">Klik Disini</a>-->
                             </div>
                         </div>
                     </div>
@@ -84,58 +137,9 @@
     </section>
     <!-- END CTA -->
 
-        <!-- START JADWAL -->
-        <section class="section bg-cta" id="jadwal">
-            <div class="bg-overlay-3"></div>
 
-            <div class="container d-block mx-auto align-item-center"">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="cta-content text-white text-center">
-                        @if(count($jadwal)>0)
-                        <div class="text-center text-white">
-                            <h2 class="title">Daftar Jadwal Praktikum</h2>
-                                <div class="card text-dark">
-                                    <div class="card-body">
-                                        <table class="table">
-                                            <thead>
-                                              <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Nama Kelas</th>
-                                                <th scope="col">Nama Modul</th>
-                                                <th scope="col">Tanggal Praktek</th>
-                                                <th scope="col">Dosen Pengampu</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach ($jadwal as $key=>$value)
-                                              <tr>
-                                                <th>{{ $loop->iteration  }} </th>
-                                                <td>{{$value->nama_kelas}}</td>
-                                                <td>{{$value->nama_modul}}</td>
-                                                <td>{{ \Carbon\Carbon::parse($value->tanggal_praktek)->isoFormat('Do MMMM YYYY')}}</td>
-                                                <td>{{ $value->nama_dosen}}</td>
-                                              </tr>
-                                            @endforeach
-                                            </tbody>
-                                          </table>
-                                    </div>
-                                </div>
-                        </div>
-                        @else
-                        <div class="card">
-                            <h5 class="text-center text-dark">Belum ada Jadwal Praktek tersedia</h5>
-                        </div>
 
-                        @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- END CTA -->
-
-        <!-- START SCREENSHOT
+        <!--START SCREENSHOT-->
         <section class="section" id="screenshot">
             <div class="container">
                 <div class="row">
@@ -213,7 +217,7 @@
                 </div>
             </div>
         </section>
-        END SREENSHORT -->
+        END SREENSHORT
 
 
     <!-- START FOOTER -->
@@ -270,6 +274,45 @@
         </div>
     </section>
     <!-- END FOOTER -->
+    @foreach ( $jadwal as $jd )
+    <div class="modal fade " id="Modaldetail-{{ $jd->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Kelas {{ $jd->nama_kelas }} - Modul {{ $jd->nama_modul }} </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="dtM" class="table table-bordered table-striped table-hover dataTable">
+                    <tr>
+                        <td>Tanggal Praktek</td>
+                        <td>{{ $jd->tanggal_praktek }} </td>
+                    </tr>
+
+                    @if ($jd->is_active !='N' and $jd->id_tugas !='0')
+
+                    <tr>
+                        <td>Jenis Tugas</td>
+                        <td>{{ $jd->jenis_tugas }} </td>
+                    </tr>
+                    <tr>
+                        <td>Uraian Tugas</td>
+                        <td>{!! $jd->uraian_tugas !!}</td>
+
+                    @else
+                    <tr> <td colspan="2" class="text-center">Tugas Belum Tersedia!</td></tr>
+
+                    @endif
+
+                </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    @endforeach
 
 
     <!-- javascript -->

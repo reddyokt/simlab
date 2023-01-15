@@ -34,9 +34,16 @@
                                         <th>#</th>
                                         <th>Nama Modul</th>
                                         <th>Jenis Tugas</th>
+                                        <th>Status Tugas</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
+                                @if (session()-> has('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                @endif
                                 <tbody>
                                     @foreach ($tugas as $tg )
                                     <tr>
@@ -44,10 +51,18 @@
                                         <td>{{ $loop->iteration  }}</td>
                                         <td>{{ $tg->nama_modul }}</td>
                                         <td>{{ $tg->jenis_tugas }}</td>
+                                        @if ($tg->is_validated == 'N')
+                                            <td>Belum Divalidasi</td>
+                                        @else
+                                            <td>Sudah Divalidasi</td>
+                                        @endif
+
                                         <td>
                                             <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $tg->id_tugas }}"><span data-feather="eye"></span></a>
                                             <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
-                                            <a href="#" class="badge bg-warning"><span data-feather="check-circle"></span></a>
+                                            @if ($tg->is_validated !='Sudah divalidasi')
+                                            <a href="/praktikan/validasi/{{ $tg->id_tugas }}" class="badge bg-warning"><span data-feather="check-circle"></span></a>
+                                            @endif
                                             <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
                                         </td>
 
@@ -74,7 +89,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <p><td>{!! $tg->uraian !!}</td></p>
+            <p><td>{!! $tg->uraian_tugas !!}</td></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

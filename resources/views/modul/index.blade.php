@@ -36,8 +36,8 @@
          <td>{{ $loop->iteration  }}</td>
          <td>{{ $dt->nama_modul }}</td>
          <td>{{ $dt->tanggal_praktek }}</td>
-         <td>{{ $dt->kelas->nama_kelas }}</td>
-         <td>{{ $dt->nama_dosen }}</td>
+         <td>{{ $dt->kelas->kelas->nama_kelas }}</td>
+         <td>{{ $dt->kelas->dosen->nama_dosen }}</td>
          <td>
              <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $dt->id_modul }}"><span data-feather="eye"></span></a>
              <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
@@ -78,6 +78,24 @@
                     @endforeach
                 </tbody>
             </table>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nama Bahan</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{-- dd($dt->alat()) --}}
+                   @foreach ($dt->bahan as $y  )
+
+                  <tr>
+                    <th scope="row">{{$loop->iteration}}</th>
+                    <td>{{ $y->nama_bahan}} = {{ $y->jumlah_bahan }}</td>
+                  </tr>
+                  @endforeach
+              </tbody>
+          </table>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

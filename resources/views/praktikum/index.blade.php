@@ -15,7 +15,7 @@
 
 <div>
     <h3 class="title my-3">List Kelas Praktikum</h3>
-    <a class="btn btn-success my-3 ms-auto" href="/praktikum/createkelas" role="button">Tambah Praktikum</a>
+    <a class="btn btn-success my-3 ms-auto" href="/praktikum/createkelas" role="button">Tambah Kelas Praktikum</a>
 </div>
 
 <table id="example" class="display" style="width:100%">
@@ -35,8 +35,8 @@
 
         <tr>
             <td>{{ $loop->iteration  }}</td>
-            <td>{{ $praktik->nama_kelas }}</td>
-            <td>{{ $praktik->practice->semester}} | {{ $praktik->practice->tahun_ajaran}}</td>
+            <td>{{ $praktik->kelas->nama_kelas }}</td>
+            <td>{{ $praktik->periode->semester}} | {{ $praktik->periode->tahun_ajaran}}</td>
             <td>{{ $praktik->modul }}</td>
             <td>{{ $praktik->dosen->nama_dosen}} <br> {{ $praktik->dosen->nidn}}  </td>
             <td class="text-center">{{ $praktik->is_active }}</td>

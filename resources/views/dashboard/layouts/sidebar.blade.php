@@ -133,14 +133,18 @@
                     </li>
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#praktikan-collapse" aria-expanded="false">
-                            <span class="mx-3" data-feather="user-check"></span> Praktikan
+                            <span class="mx-3" data-feather="slack"></span> Praktikan
                         </button>
                         <div class="collapse" id="praktikan-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 big mt-2">
                             <li><a href="/praktikan/peserta" class="link-dark rounded">Daftar Peserta</a></li>
                             <li><a href="/praktikan/kelompok" class="link-dark rounded">Kelompok</a></li>
                             <li><a href="/praktikan/absen" class="link-dark rounded">Absen</a></li>
-                            <li><a href="/praktikan/tugas" class="link-dark rounded">Tugas & Nilai</a></li>
+                            <li><a href="/praktikan/tugas" class="link-dark rounded">Tugas</a></li>
+                            <li><a href="/praktikan/validasi" class="link-dark rounded">Validasi Soal Tugas</a></li>
+                            <li><a href="/praktikan/ujian" class="link-dark rounded">Ujian Akhir</a></li>
+                            <li><a href="/praktikan/nilaitugas" class="link-dark rounded">Nilai Tugas</a></li>
+                            <li><a href="/praktikan/nilaiakhir" class="link-dark rounded">Nilai Akhir</a></li>
                         </ul>
                         </div>
                     </li>
@@ -165,6 +169,17 @@
                             <li><a href="/user" class="link-dark rounded">Admin</a></li>
                             <li><a href="/dosen" class="link-dark rounded">Dosen</a></li>
                             <li><a href="/mahasiswa" class="link-dark rounded">Mahasiswa</a></li>
+                        </ul>
+                        </div>
+                    </li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#landing-collapse" aria-expanded="false">
+                            <span class="mx-3" data-feather="layout"></span> Landing Page
+                        </button>
+                        <div class="collapse" id="landing-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 big mt-2">
+                            <li><a href="/pengumuman" class="link-dark rounded">Pengumuman</a></li>
+                            <li><a href="/download" class="link-dark rounded">Download</a></li>
                         </ul>
                         </div>
                     </li>

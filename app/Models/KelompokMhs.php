@@ -11,5 +11,16 @@ class KelompokMhs extends Model
 
     protected $table = 'kelompok_mhs';
     protected $primaryKey = 'id_kelompokMhs';
-    protected $fillable = ['kelompok_id','mahasiswa_id','periode_id','modul_id'];
+    protected $guarded =[];
+
+    public function kelompok ()
+    {
+        return $this->belongsTo(Kelompok::class, 'kelompok_id','id_kelompok');
+    }
+
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id', 'id_mahasiswa');
+    }
+
 }

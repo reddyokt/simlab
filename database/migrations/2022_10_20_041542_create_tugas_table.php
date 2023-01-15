@@ -17,7 +17,9 @@ class CreateTugasTable extends Migration
             $table->id('id_tugas');
             $table->foreignId('modul_id');
             $table->enum('jenis_tugas',['pretest','posttest']);
+            $table->string('uraian_tugas');
             $table->enum('is_active',['Y','N']);
+            $table->enum('is_validated',['Y','N']);
             $table->timestamps();
         });
     }

@@ -24,17 +24,17 @@
                         <div class="col-xl-2"></div>
                         <div class="col-xl-8">
                             <div>
-                                <div class="form-group row">
+                               {{--   <div class="form-group row">
                                     <label class="col-3">Pilih Kelas</label>
                                     <div class="col-9">
                                         <select class="form-control" name="kelas_id" id="kelas_id" value="{{ old ('kelas_id') }}">
                                             <option selected disabled> Pilih Kelas</option>
                                             @foreach ( $dataMhs as $d)
-                                            <option value="{{ $d->kelas_id }}">{{ $d->nama_kelas }}</option>
+                                            <option value="{{ $d->kelas->kelas_id }}">{{ $d->kelas->nama_kelas }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                         <div class="col-xl-2"></div>
@@ -66,12 +66,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                     @foreach($dataMhs as $key=>$value)
+                                     @foreach($dataMhs as $value)
                                     <tr>
-                                        <td><input type="checkbox" value="{{$value->id_mahasiswa}}" name="id_mahasiswa[]"></td>
-                                        <td>{{$value->nim}}</td>
-                                        <td>{{$value->nama_mahasiswa}}</td>
-                                        <td>{{$value->nama_kelas}}</td>
+                                        <td><input type="checkbox" value="{{$value->mahasiswa_id.'-'.$value->praktikum_id}}" name="id_mahasiswa[]"></td>
+                                        <td>{{$value->mahasiswa->nim}}</td>
+                                        <td>{{$value->mahasiswa->nama_mahasiswa}}</td>
+                                        <td>{{$value->praktikum->kelas->nama_kelas}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

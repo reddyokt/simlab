@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePendaftaranTable extends Migration
+class CreateUjianTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreatePendaftaranTable extends Migration
      */
     public function up()
     {
-        Schema::create('pendaftaran', function (Blueprint $table) {
-            $table->id('id_pendaftaran');
-            $table->foreignId('mahasiswa_id');
+        Schema::create('ujian', function (Blueprint $table) {
+            $table->id('id_ujian');
             $table->foreignId('kelas_id');
-            $table->string('email');
-            $table->string('phone');
-            $table->enum('status',['Belum divalidasi','Diterima', 'Ditolak']);
-            $table->string('created_by');
+            $table->string('uraian_ujian');
+            $table->enum('is_active', ['Y','N']);
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreatePendaftaranTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pendaftaran');
+        Schema::dropIfExists('ujian');
     }
 }

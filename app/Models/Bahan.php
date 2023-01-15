@@ -13,4 +13,11 @@ class Bahan extends Model
     protected $primaryKey = 'id_bahan';
     protected $fillable = ['id_bahan', 'nama_bahan','rumus', 'jumlah', 'lokasi_id','created_at',
                             'updated_at'];
+
+    public function memberbahan()
+    {
+        return $this->belongsTo(Membermodul::class, 'id_bahan', 'bahan_id');
+    }
+
 }
+

@@ -5,10 +5,10 @@
     <form action="/user/create" method="POST" class="col-md-5 d-block text-center mx-auto">
         @csrf
         <div class=" form-floating mb-1">
-            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-            id="name" placeholder="Name" required value="{{ old ('name') }}" >
-            <label for="name">Nama</label>
-            @error('name')
+            <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
+            id="username" placeholder="Name" required value="{{ old ('username') }}" >
+            <label for="username">Nama</label>
+            @error('username')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>

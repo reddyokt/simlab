@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Landing;
 use App\Models\Modul;
+use App\Models\Pengumuman;
 use App\Models\Praktikum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,10 +22,13 @@ class LandingController extends Controller
         $kelas = Praktikum::all();
         $now = Carbon::now()->toDateString();
         //$jadwal = Modul::where('is_active','YA')
-        $jadwal = DB::table('modul')
+        $jadwal = DB::table('tugas')
+        ->join('modul', 'modul.id_modul', '=' , 'tugas.modul_id')
         ->join('praktikum', 'praktikum.id_praktikum', '=', 'modul.kelas_id')
         ->join('dosen', 'dosen.id_dosen', '=' , 'praktikum.dosen_id' )
-        ->wherein('modul.is_active',['YA'])
+        ->leftJoin('kelas', 'kelas.id_kelas', '=' ,'praktikum.kelas_id')
+        //->leftJoin('tugas', 'tugas.modul_id', '=' ,'modul.id_modul')
+        ->wherein('tugas.is_active',['Y'])
         ->get();
 
 
@@ -77,6 +81,35 @@ class LandingController extends Controller
         }
 
         return $format;
+    }
+
+    public function pengumuman()
+    {
+        return view ('landing.indexpengumuman');
+    }
+
+    public function createpengumuman()
+    {
+        return view ('landing.createpengumuman');
+    }
+
+    public function storepengumuman(Request $request)
+    {
+       // ddd($request);
+
+        $validatedData = $request->validate([
+            'judul_pengumuman'=> 'required|max:255',
+            'uraian_pengumuman'=> 'required',
+            'image'=> 'image|file|max:2048'
+        ]);
+
+        if($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('gambar_pengumuman');
+        }
+
+        Pengumuman::create($validatedData);
+
+        return redirect ('/pengumuman');
     }
 
 }

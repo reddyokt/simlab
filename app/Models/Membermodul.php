@@ -10,7 +10,7 @@ class Membermodul extends Model
     use HasFactory;
 
     protected $table = 'membermodul';
-    protected $fillable = ['modul_id','alat_id'];
+    protected $guarded=[];
 
     public function member(){
         return $this->belongsTo(Modul::class, 'modul_id','id_modul');

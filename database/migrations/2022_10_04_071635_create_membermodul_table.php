@@ -18,7 +18,7 @@ class CreateMembermodulTable extends Migration
             $table->foreignId('modul_id');
             $table->foreignId('alat_id')->nullable();
             $table->foreignId('bahan_id')->nullable();
-            $table->integer('jumlah')->nullable();
+            $table->integer('jumlah_bahan')->nullable();
             $table->timestamps();
         });
     }

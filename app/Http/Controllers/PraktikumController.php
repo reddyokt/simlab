@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Praktikum;
 use App\Models\Dosen;
+use App\Models\Kelas;
 use App\Models\Periode;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,8 @@ class PraktikumController extends Controller
     {
         $dosens = Dosen::all();
         $periode= Periode::all();
-        return view ('praktikum.createkelas', compact('dosens','periode'));
+        $kelas=Kelas::all();
+        return view ('praktikum.createkelas', compact('dosens','periode','kelas'));
     }
 
     /**
@@ -52,7 +54,7 @@ class PraktikumController extends Controller
        ]);
 
        $praktikum = new Praktikum;
-       $praktikum->nama_kelas = $request->nama_kelas;
+       $praktikum->kelas_id = $request->nama_kelas;
        $praktikum->periode_id= $request->periode;
        $praktikum->dosen_id= $request->dosen_id;
        $praktikum->jumlah_modul = $request->modul;

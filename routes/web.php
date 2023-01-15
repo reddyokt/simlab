@@ -19,6 +19,7 @@ use App\Http\Controllers\inventory\BahanController;
 use App\Http\Controllers\praktikan\AbsenController;
 use App\Http\Controllers\praktikan\TugasController;
 use App\Http\Controllers\inventory\BarangController;
+use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\praktikan\JadwalController;
 use App\Http\Controllers\praktikan\PesertaController;
 
@@ -35,6 +36,9 @@ use App\Http\Controllers\praktikan\PesertaController;
 
 //----------------------------------Landing-------------------------------------//
 Route::get('/', [LandingController::class, 'index']);
+Route::get('/pengumuman', [LandingController::class, 'pengumuman']);
+Route::get('/pengumuman/create', [LandingController::class, 'createpengumuman']);
+Route::post('/pengumuman/create', [LandingController::class, 'storepengumuman']);
 
 
 //-----------------------------------Pendaftaran--------------------------------//
@@ -106,15 +110,27 @@ Route::get('/deletebarang/{id_alat}', [BarangController::class, 'deletebarang'])
 
 //---------------------------------Praktikan----------------------------------//
 Route::get('/praktikan/peserta', [PesertaController::class,'index']);
+Route::post('/praktikan/import', [PesertaController::class,'import']);
 
 Route::get('/praktikan/kelompok', [PesertaController::class, 'indexkelompok']);
 Route::get('/praktikan/createkelompok', [PesertaController::class, 'createkelompok']);
 Route::post('/praktikan/createkelompok', [PesertaController::class, 'storekelompok']);
+Route::get('/praktikan/editkelompok/{mahasiswa_id}/{praktikum_id}', [PesertaController::class, 'editkelompok']);
+Route::post('/praktikan/editkelompok/{mahasiswa_id}/{praktikum_id}', [PesertaController::class, 'updatekelompok']);
 
 
 Route::get('/praktikan/absen', [AbsenController::class, 'index']);
-Route::get('/praktikan/tugas', [TugasController::class, 'index']);
-Route::post('/praktikan/createtugas', [TugasController::class, 'store']);
+Route::get('/praktikan/tugas', [TugasController::class, 'indextugas']);
+Route::get('/praktikan/showtugas/{id_tugas}', [TugasController::class, 'showtugas']);
+Route::get('/praktikan/hidetugas/{id_tugas}', [TugasController::class, 'hidetugas']);
+
+Route::get('/praktikan/ujian', [TugasController::class, 'indexujian']);
+Route::get('/praktikan/validasi', [TugasController::class, 'validasi']);
+Route::get('/praktikan/validasi/{id_tugas}', [TugasController::class, 'validasitugas']);
+Route::get('/praktikan/createtugas', [TugasController::class, 'createtugas']);
+Route::get('/praktikan/createujian', [TugasController::class, 'createujian']);
+Route::post('/praktikan/createtugas', [TugasController::class, 'storetugas']);
+Route::post('/praktikan/createujian', [TugasController::class, 'storeujian']);
 
 //---------------------------------Praktikum----------------------------------//
 Route::get('/periode', [PeriodeController::class, 'index']);
@@ -143,4 +159,7 @@ Route::post('/modul/addItem', [ModulController::class, 'storeItem']);
 Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 
 
+//----------------------------------------Nilai-----------------------------//
+Route::get('/praktikan/nilaitugas', [NilaiController::class, 'indexnilaitugas']);
+Route::get('/praktikan/nilaiakhir', [NilaiController::class, 'indexnilaiakhir']);
 

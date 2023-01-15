@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\praktikan;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Absen;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class AbsenController extends Controller
+class KelasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +14,7 @@ class AbsenController extends Controller
      */
     public function index()
     {
-        $absen =DB::table('praktikum')
-        ->leftJoin('modul','modul.kelas_id', '=' ,'praktikum.id_praktikum')
-        ->leftJoin('pendaftaran','pendaftaran.kelas_id', '=' ,'praktikum.id_praktikum')
-        ->get();
-        return view ('praktikan.absen.create', compact('absen'));
+        //
     }
 
     /**
@@ -47,10 +41,10 @@ class AbsenController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Absen  $absen
+     * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function show(Absen $absen)
+    public function show(Kelas $kelas)
     {
         //
     }
@@ -58,10 +52,10 @@ class AbsenController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Absen  $absen
+     * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Absen $absen)
+    public function edit(Kelas $kelas)
     {
         //
     }
@@ -70,10 +64,10 @@ class AbsenController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Absen  $absen
+     * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Absen $absen)
+    public function update(Request $request, Kelas $kelas)
     {
         //
     }
@@ -81,10 +75,10 @@ class AbsenController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Absen  $absen
+     * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Absen $absen)
+    public function destroy(Kelas $kelas)
     {
         //
     }
