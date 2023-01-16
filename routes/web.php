@@ -125,6 +125,7 @@ Route::post('/praktikan/editkelompok/{mahasiswa_id}/{praktikum_id}', [PesertaCon
 
 
 Route::get('/praktikan/absen', [AbsenController::class, 'index']);
+Route::post('/praktikan/absen', [AbsenController::class, 'store']);
 Route::get('/praktikan/tugas', [TugasController::class, 'indextugas']);
 Route::get('/praktikan/showtugas/{id_tugas}', [TugasController::class, 'showtugas']);
 Route::get('/praktikan/hidetugas/{id_tugas}', [TugasController::class, 'hidetugas']);

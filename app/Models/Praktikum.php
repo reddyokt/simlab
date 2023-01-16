@@ -23,9 +23,13 @@ class Praktikum extends Model
         return $this->belongsTo(Kelas::class, 'kelas_id','id_kelas' );
     }
 
-
     public function periode()
     {
         return $this->belongsTo(Periode::class, 'periode_id', 'id_periode');
+    }
+
+    public function mahasiswa()
+    {
+        return $this->belongsToMany(Mahasiswa::class, 'praktikum_mahasiswa', 'praktikum_id','mahasiswa_id','id_praktikum', 'id_mahasiswa');
     }
 }

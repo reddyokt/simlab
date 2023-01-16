@@ -86,10 +86,11 @@
               </thead>
               <tbody>
                     {{-- dd($dt->alat()) --}}
-                    @foreach ($dt->bahan as $y  )
+                    @foreach ($dt->membermodul()->where('bahan_id',"!=",0)->get() as $y)
+
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
-                        <td>{{ $y->nama_bahan}} = {{ $dt->jumlah_bahan }}</td>
+                        <td>{{ $y->bahan->nama_bahan}} = {{ $y->jumlah_bahan }}</td>
                     </tr>
                     @endforeach
               </tbody>

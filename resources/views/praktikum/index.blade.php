@@ -37,7 +37,7 @@
             <td>{{ $loop->iteration  }}</td>
             <td>{{ $praktik->kelas->nama_kelas }}</td>
             <td>{{ $praktik->periode->semester}} | {{ $praktik->periode->tahun_ajaran}}</td>
-            <td>{{ $praktik->modul }}</td>
+            <td>{{ $praktik->jumlah_modul }}</td>
             <td>{{ $praktik->dosen->nama_dosen}} <br> {{ $praktik->dosen->nidn}}  </td>
             <td class="text-center">{{ $praktik->is_active }}</td>
             <td>

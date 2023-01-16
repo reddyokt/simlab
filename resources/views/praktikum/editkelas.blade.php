@@ -6,7 +6,7 @@
         @csrf
         <div class=" form-floating mb-1">
             <input type="text" name="nama_kelas" class="form-control @error('nama_kelas') is-invalid @enderror"
-            id="nama_kelas" placeholder="Nama Kelas" required value="{{ $praktikum->nama_kelas }}" >
+            id="nama_kelas" placeholder="Nama Kelas" required value="{{ $praktikum->kelas->nama_kelas }}" disabled >
             <label for="name">Nama Kelas</label>
             @error('nama_kelas')
                 <div class="invalid-feedback">
@@ -48,10 +48,10 @@
         </div>
 
         <div class=" form-floating mb-1">
-            <input type="text" name="modul" class="form-control @error('modul') is-invalid @enderror"
-            id="phone" placeholder="Modul" required value="{{ $praktikum->modul }}" >
+            <input type="text" name="jumlah_modul" class="form-control @error('jumlah_modul') is-invalid @enderror"
+            id="jumlah_modul" placeholder="Jumlah Modul" required value="{{ $praktikum->jumlah_modul }}" >
             <label for="phone">Jumlah Modul</label>
-            @error('modul')
+            @error('jumlah_modul')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>

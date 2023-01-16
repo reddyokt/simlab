@@ -4,6 +4,7 @@ namespace App\Http\Controllers\praktikan;
 
 use App\Http\Controllers\Controller;
 use App\Models\Absen;
+use App\Models\Modul;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,23 +17,15 @@ class AbsenController extends Controller
      */
     public function index()
     {
-        // $absen =DB::table('praktikum')
-        // ->leftJoin('modul','modul.kelas_id', '=' ,'praktikum.id_praktikum')
-        // ->leftJoin('pendaftaran','pendaftaran.kelas_id', '=' ,'praktikum.id_praktikum')
-        // ->get();
-        // return view ('praktikan.absen.index', compact('absen'));
+        $data = Modul::whereHas('praktikum',function ($q){
+            $q->whereHas('periode', function ($q2){
+                $q2->where('status_periode','Aktif');
+            });
+        }) ->get();
 
-        // $absen = Absen::with('absen','kelompok.praktikum','praktikum.periode')
-        // ->get();
-        //dd($absen->all());
-       // return view ('praktikan.absen.index', compact('absen'));
+        return view ('praktikan.absen.index', compact ('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
@@ -46,7 +39,16 @@ class AbsenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        Absen::where('modul_id',$request->modul_id)->delete();
+        foreach ($request->mahasiswa_id as $x){
+            Absen::updateOrcreate([
+                'mahasiswa_id'=>$x,
+                'modul_id'=>$request->modul_id
+            ]);
+        }
+
+        return redirect ('/praktikan/absen');
     }
 
     /**

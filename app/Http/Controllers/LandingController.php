@@ -14,11 +14,7 @@ use App\Models\Download;
 
 class LandingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $pengumuman = DB::table('pengumuman')
@@ -31,7 +27,7 @@ class LandingController extends Controller
         //$jadwal = Modul::where('is_active','YA')
         $jadwal = DB::table('tugas')
         ->join('modul', 'modul.id_modul', '=' , 'tugas.modul_id')
-        ->join('praktikum', 'praktikum.id_praktikum', '=', 'modul.kelas_id')
+        ->join('praktikum', 'praktikum.id_praktikum', '=', 'modul.praktikum_id')
         ->join('dosen', 'dosen.id_dosen', '=' , 'praktikum.dosen_id' )
         ->leftJoin('kelas', 'kelas.id_kelas', '=' ,'praktikum.kelas_id')
         ->leftJoin('praktikum_mahasiswa','praktikum_mahasiswa.praktikum_id', '=' , 'praktikum.id_praktikum')

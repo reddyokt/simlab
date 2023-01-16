@@ -12,16 +12,18 @@ class Membermodul extends Model
     protected $table = 'membermodul';
     protected $guarded=[];
 
-    public function member(){
+    public function member()
+    {
         return $this->belongsTo(Modul::class, 'modul_id','id_modul');
     }
 
-    public function alatmember(){
+    public function alatmember()
+    {
         return $this->belongsTo(Alats::class, 'alat_id','id_alat');
     }
 
        public function bahan()
     {
-        return $this->belongsToMany(Bahan::class, 'membermodul','modul_id', 'bahan_id');
+        return $this->belongsTo(Bahan::class,'bahan_id', 'id_bahan');
     }
 }

@@ -49,7 +49,7 @@ class PraktikumController extends Controller
             'nama_kelas' => 'required|max:255',
             'periode'=>'required',
             'dosen_id' => 'required',
-            'modul' => 'required|integer'
+            'jumlah_modul' => 'required|integer'
 
        ]);
 
@@ -57,7 +57,7 @@ class PraktikumController extends Controller
        $praktikum->kelas_id = $request->nama_kelas;
        $praktikum->periode_id= $request->periode;
        $praktikum->dosen_id= $request->dosen_id;
-       $praktikum->jumlah_modul = $request->modul;
+       $praktikum->jumlah_modul = $request->jumlah_modul;
 
        $praktikum->save();
 
@@ -85,31 +85,14 @@ class PraktikumController extends Controller
      */
     public function editkelas(Request $request, $id_praktikum)
     {
-        //return $request;
+        //dd($request->all());
         $praktikum = Praktikum::find($id_praktikum);
         $praktikum->update($request->all());
 
         return redirect ('/kelas')->with('success', 'Data Kelas berhasil diubah');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Praktikum  $praktikum
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Praktikum $praktikum)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Praktikum  $praktikum
-     * @return \Illuminate\Http\Response
-     */
     public function deletekelas($id_praktikum)
     {
         $praktikum = Praktikum::find($id_praktikum);

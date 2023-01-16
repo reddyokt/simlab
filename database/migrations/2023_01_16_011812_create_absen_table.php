@@ -15,8 +15,8 @@ class CreateAbsenTable extends Migration
     {
         Schema::create('absen', function (Blueprint $table) {
             $table->id('id_absen');
+            $table->foreignId('modul_id');
             $table->foreignId('mahasiswa_id');
-            $table->enum('kehadiran', ['Hadir','Tidak Hadir']);
             $table->timestamps();
         });
     }

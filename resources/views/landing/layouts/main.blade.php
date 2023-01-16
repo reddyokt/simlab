@@ -185,7 +185,7 @@
                                         <div class="card-body">
                                         <h5 class="card-title">{{ $p->judul_pengumuman }}</h5>
                                         <p class="card-text text-justify">{!!$p->uraian_pengumuman !!}</p>
-                                        <p class="card-text"><small class="text-muted">{{ $p->created_at }}</small></p>
+                                        <p class="card-text"><small class="text-muted">{{ \Carbon\Carbon::parse($p->created_at)->isoFormat('Do MMMM YYYY' )}}</small></p>
                                         </div>
                                     </div>
                                 </div>
@@ -276,7 +276,7 @@
                                                     <div class="card-body">
                                                     {{--<h5 class="card-title">{{ $d->judul_file }}</h5>--}}
                                                     <a href="{{ $d->pdf }}" target="_blank"> <p class="card-text">{!!$d->uraian_file !!}</p></a>
-                                                    <p class="card-text"><small class="text-muted">{{ $d->created_at }}</small></p>
+                                                    <p class="card-text"><small class="text-muted">{{ \Carbon\Carbon::parse($d->created_at)->isoFormat('Do MMMM YYYY' )}}</small></p>
                                                     </div>
                                                 </div>
                                             </div>

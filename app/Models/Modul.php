@@ -24,7 +24,7 @@ class Modul extends Model
 
     public  function membermodul()
     {
-        return $this->belongsTo(Membermodul::class, 'id_modul', 'modul_id');
+        return $this->hasMany(Membermodul::class, 'modul_id', 'id_modul');
     }
 
     public function alat()
@@ -35,6 +35,11 @@ class Modul extends Model
     public function bahan()
     {
         return $this->belongsToMany(Bahan::class, 'membermodul','modul_id', 'bahan_id');
+    }
+
+    public function praktikum()
+    {
+        return $this->belongsTo(Praktikum::class, 'praktikum_id', 'id_praktikum');
     }
 
 
