@@ -10,6 +10,7 @@ use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\Download;
 
 class LandingController extends Controller
 {
@@ -20,6 +21,11 @@ class LandingController extends Controller
      */
     public function index()
     {
+        $pengumuman = DB::table('pengumuman')
+        ->get();
+        $download = DB::table('download')
+        ->get();
+
         $kelas = Praktikum::all();
         $now = Carbon::now()->toDateString();
         //$jadwal = Modul::where('is_active','YA')
@@ -34,7 +40,7 @@ class LandingController extends Controller
         ->wherein('tugas.is_active',['Y'])
         ->get();
 
-        return view ('landing.layouts.main',compact('jadwal','kelas'));
+        return view ('landing.layouts.main',compact('jadwal','kelas','pengumuman','download'));
     }
 
     function changeFormat($date, $reverse = false){
@@ -116,4 +122,32 @@ class LandingController extends Controller
         dd($request->all());
     }
 
+    public function download()
+    {
+        return view ('landing.indexdownload');
+    }
+
+    public function createdownload()
+    {
+        return view ('landing.createdownload');
+    }
+
+    public function storedownload(Request $request)
+    {
+       //ddd($request->all());
+
+        $validatedData = $request->validate([
+            'judul_file'=> 'required|max:255',
+            'uraian_file'=> 'required',
+            'pdf'=> 'required|mimes:pdf|max:10120'
+        ]);
+
+        if($request->file('pdf')) {
+            $validatedData['pdf'] = $request->file('pdf')->store('pdf_download');
+        }
+
+        Download::create($validatedData);
+
+        return redirect ('/download');
+    }
 }

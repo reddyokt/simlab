@@ -144,17 +144,61 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center title-content">
-                            <h6 class="text-uppercase f-14 text-primary">screenshots </h6>
-                            <h2 class="mt-3">Get Awesome Features,Without<br>Extra Charges</h2>
-                            <p class="text-muted mt-3">Tempus porta massa sed eleifend sagittis eget aliquam iaculis enim.
-                            </p>
+                            {{--<h6 class="text-uppercase f-14 text-primary">Pengumuman </h6>
+                            @foreach ( $pengumuman as $p)
+                            <img src="{{ $p->image }}" style="width:20%">
+                            <h2 class="mt-3">{{ $p->judul_pengumuman }}</h2>
+                            <p class="text-muted mt-3">{!! $p->uraian_pengumuman !!}</p>
+                            @endforeach--}}
+                            <!--carousel-->
+                            {{--<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    @foreach ( $pengumuman as $p)
+                                     <div class="carousel-item active">
+                                        <img src="{{URL($p->image)}}" class="dblock justify-content-center" alt="..." style="width: 50%">
+                                    </div>
+                                    @endforeach
+                                    <br>
+                                    @foreach ( $pengumuman as $p)
+                                    <div class="carousel-item">
+                                        <h2 class="mt-3 text-primary">{{ $p->judul_pengumuman }}</h2>
+                                        <p class="text-muted mt-3">{!! $p->uraian_pengumuman !!}</p>
+                                    </div>
+                                    @endforeach
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                      </button>
+                                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                      </button>
+                                </div>
+                              </div>--}}
+                            <!--end carousel-->
+
+                            <div class="row">
+                                @foreach ( $pengumuman as $p)
+                                <div class="col-sm-6">
+                                    <div class="card mb-3">
+                                        <img src="{{URL($p->image)}}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                        <h5 class="card-title">{{ $p->judul_pengumuman }}</h5>
+                                        <p class="card-text text-justify">{!!$p->uraian_pengumuman !!}</p>
+                                        <p class="card-text"><small class="text-muted">{{ $p->created_at }}</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row mt-5">
-                    <div class="col-lg-12 swiper-container pb-5">
+                <div class="row mt-1">
+                    <div class="col-lg-12 swiper-container ">
                         <div class="swiper-wrapper">
+
                             <!--
                             <div class="item mt-4">
                             </div>
@@ -208,6 +252,40 @@
                             <img src="images/arrow-left.png" class="img-fluid" alt="">
                         </div>
 
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-cta" id="download">
+            <div class="bg-overlay-3"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="cta-content text-white text-center">
+
+                            <div class="text-dark" style="font-weight:100;">
+                                <h2 class="title text-white">Download</h2>
+                                <div class="mt-4">
+                                    <div class="container d-block mx-auto align-item-center">
+                                        <div class="row">
+                                            @foreach ( $download as $d)
+                                            <div class="col-sm-3">
+                                                <div class="card mb-3">
+                                                    <img src="{{asset('img/pdf.png')}}" class="card-img-top mx-auto d-block mt-1" alt="..." style="width:60%">
+                                                    <div class="card-body">
+                                                    {{--<h5 class="card-title">{{ $d->judul_file }}</h5>--}}
+                                                    <a href="{{ $d->pdf }}" target="_blank"> <p class="card-text">{!!$d->uraian_file !!}</p></a>
+                                                    <p class="card-text"><small class="text-muted">{{ $d->created_at }}</small></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

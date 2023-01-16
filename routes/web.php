@@ -39,6 +39,10 @@ Route::get('/', [LandingController::class, 'index']);
 Route::get('/pengumuman', [LandingController::class, 'pengumuman']);
 Route::get('/pengumuman/create', [LandingController::class, 'createpengumuman']);
 Route::post('/pengumuman/create', [LandingController::class, 'storepengumuman']);
+Route::get('/download', [LandingController::class, 'download']);
+Route::get('/download/create', [LandingController::class, 'createdownload']);
+Route::post('/download/create', [LandingController::class, 'storedownload']);
+
 Route::post('/praktikan/uploadjawabantugas',[LandingController::class, 'uploadjawabantugas']);
 
 
