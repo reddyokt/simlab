@@ -15,7 +15,7 @@ class CreateModulTable extends Migration
     {
         Schema::create('modul', function (Blueprint $table) {
             $table->id('id_modul');
-            $table->foreignId('kelas_id'); // mengacu pada praktikum table
+            $table->foreignId('praktikum_id'); // mengacu pada praktikum table
             $table->string('nama_modul');
             $table->date('tanggal_praktek');
             $table->enum('is_active',['Y','N']);

@@ -19,7 +19,7 @@ class Modul extends Model
 
     public  function kelas()
     {
-        return $this->belongsTo(Praktikum::class, 'kelas_id', 'id_praktikum');
+        return $this->belongsTo(Praktikum::class, 'praktikum_id', 'id_praktikum');
     }
 
     public  function membermodul()

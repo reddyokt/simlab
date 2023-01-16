@@ -38,12 +38,6 @@ class ModulController extends BaseController
      */
    public function create()
     {
-      //  $dataModuls = DB::table('modul')
-        //->join('praktikum','praktikum.id_praktikum','=','modul.kelas_id')
-        //->join('c2a_alat','c2a_alat.id_alat_c2a','=','modul.alatc2a_id')
-        //->join('c2b_alat','c2b_alat.id_alat_c2b','=','modul.alatc2b_id')
-        //->whereIn('praktikum.is_active',['YA'])
-        //->get();
 
         $alat = Alats::all();
         $bahan = Bahan::all();
@@ -55,33 +49,15 @@ class ModulController extends BaseController
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function storemodul(Request $request)
     {
-    //     return $request;
-    //     $modul =  $request->validate([
-    //         'nama_modul' => 'required|max:255',
-    //         'kelas_id'=>'required',
-    //         'tanggal_praktek' => 'required|date'
-
-    //    ]);
-
-    //    $modul = new Modul;
-    //    $modul->nama_modul = $request->nama_modul;
-    //    $modul->kelas_id= $request->kelas_id;
-    //    $modul->tanggal_praktek= $request->tanggal_praktek;
-
        $data = $request->all();
        //dd($data);
 
        $modul = new Modul;
        $modul->nama_modul=$data['nama_modul'];
-       $modul->kelas_id=$data['kelas_id'];
+       $modul->praktikum_id=$data['kelas_id'];
        $modul->tanggal_praktek=$data['tanggal_praktek'];
        $modul->save();
 
