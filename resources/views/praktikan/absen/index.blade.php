@@ -18,7 +18,7 @@
             <div class="card card-custom card-sticky mt-5" id="kt_page_sticky_card">
                 <div class="card-header">
                     <div class="card-title">
-                        <h4 class="card-label float-start">Daftar Tugas Menunggu Validasi</h4>
+                        <h4 class="card-label float-start">Isi Absen</h4>
 
                     </div>
 

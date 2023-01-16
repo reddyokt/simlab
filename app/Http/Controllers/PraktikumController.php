@@ -44,7 +44,7 @@ class PraktikumController extends Controller
      */
     public function storekelas(Request $request)
     {
-        //return $request;
+        //dd($request->all());
         $praktikum =  $request->validate([
             'nama_kelas' => 'required|max:255',
             'periode'=>'required',

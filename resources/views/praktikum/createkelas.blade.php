@@ -47,10 +47,10 @@
              @enderror
         </div>
         <div class=" form-floating mb-1">
-            <input type="text" name="modul" class="form-control @error('modul') is-invalid @enderror"
-            id="phone" placeholder="Modul" required value="{{ old ('modul') }}" >
+            <input type="text" name="jumlah_modul" class="form-control @error('jumlah_modul') is-invalid @enderror"
+            id="jumlah_modul" placeholder="Jumlah Modul" required value="{{ old ('jumlah_modul') }}" >
             <label for="phone">Jumlah Modul</label>
-            @error('modul')
+            @error('jumlah_modul')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
