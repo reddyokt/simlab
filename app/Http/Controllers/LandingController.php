@@ -90,7 +90,8 @@ class LandingController extends Controller
 
     public function pengumuman()
     {
-        return view ('landing.indexpengumuman');
+        $pengumuman = Pengumuman::all();
+        return view ('landing.indexpengumuman', compact('pengumuman'));
     }
 
     public function createpengumuman()
@@ -124,7 +125,8 @@ class LandingController extends Controller
 
     public function download()
     {
-        return view ('landing.indexdownload');
+        $download = Download::all();
+        return view ('landing.indexdownload',compact ('download'));
     }
 
     public function createdownload()

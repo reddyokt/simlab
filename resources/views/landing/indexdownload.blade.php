@@ -22,24 +22,24 @@
         <tr>
             <th>#</th>
             <th>Judul File</th>
+            <th>Uraian File</th>
+            <th>Download File</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-       {{--   @foreach ( $datakelompok as $mhs )
+       @foreach ( $download as $d )
         <tr>
             <td>{{ $loop->iteration  }}</td>
-            <td>{{ $mhs->nama_kelompok }}</td>
-            <td>{{ $mhs->nama_kelas }}</td>
-            <td>{{ $mhs->nama_mahasiswa }}</td>
-            <td>{{ $mhs->nim }}</td>
+            <td>{{ $d->judul_file }}</td>
+            <td>{!! $d->uraian_file !!}</td>
+            <td><a href="{{ $d->pdf }}" target="_blank">Download</a></td>
             <td>
                 <a href="/mhs/" class="badge bg-info"><span data-feather="edit"></span></a>
                 <a href="/delete/" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Mahasiswa?!!!')"><span data-feather="x-circle"></span></a>
             </td>
         </tr>
         @endforeach
-        --}}
     </tbody>
 </table>
 

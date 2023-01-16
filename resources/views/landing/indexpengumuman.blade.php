@@ -22,24 +22,23 @@
         <tr>
             <th>#</th>
             <th>Judul Pengumuman</th>
+            <th>Uraian Pengumuman</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-       {{--   @foreach ( $datakelompok as $mhs )
+       @foreach ( $pengumuman as $p )
         <tr>
             <td>{{ $loop->iteration  }}</td>
-            <td>{{ $mhs->nama_kelompok }}</td>
-            <td>{{ $mhs->nama_kelas }}</td>
-            <td>{{ $mhs->nama_mahasiswa }}</td>
-            <td>{{ $mhs->nim }}</td>
+            <td style="font-size:12px">{{ $p->judul_pengumuman }}</td>
+            <td style="font-size:12px">{!! $p->uraian_pengumuman !!}</td>
             <td>
                 <a href="/mhs/" class="badge bg-info"><span data-feather="edit"></span></a>
                 <a href="/delete/" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Mahasiswa?!!!')"><span data-feather="x-circle"></span></a>
             </td>
         </tr>
         @endforeach
-        --}}
+
     </tbody>
 </table>
 
