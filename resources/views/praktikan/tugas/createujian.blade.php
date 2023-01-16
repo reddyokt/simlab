@@ -30,10 +30,10 @@
                             <div class="form-group row mb-1">
                                 <label class="col-3">Nama Kelas :</label>
                                 <div class="col-9">
-                                    <select class="form-control" name="id_kelas" required>
+                                    <select class="form-control" name="praktikum_id" required>
                                         <option selected disabled>Pilih Kelas</option>
-                                        @foreach ($kelas as $key=> $kel )
-                                         <option value="{{ $kel->id_praktikum }}">{{ $kel->nama_kelas }}</option>
+                                        @foreach ($praktikum as $prak)
+                                         <option value="{{ $prak->id_praktikum }}">{{ $prak->nama_kelas }}</option>
                                         @endforeach
                                     </select>
                                 </div>

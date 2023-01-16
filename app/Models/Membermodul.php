@@ -19,4 +19,9 @@ class Membermodul extends Model
     public function alatmember(){
         return $this->belongsTo(Alats::class, 'alat_id','id_alat');
     }
+
+       public function bahan()
+    {
+        return $this->belongsToMany(Bahan::class, 'membermodul','modul_id', 'bahan_id');
+    }
 }

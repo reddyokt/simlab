@@ -37,17 +37,10 @@ class PesertaController extends Controller
     {
             $periode = Periode::where('status_periode','Aktif')
             ->get();
-            // $dataMhs = DB::table('mahasiswa')
-            // ->join('pendaftaran','pendaftaran.mahasiswa_id','=','mahasiswa.id_mahasiswa')
-            // ->join('praktikum','praktikum.id_praktikum','=','pendaftaran.kelas_id')
-            // ->leftJoin('kelas', 'kelas.id_kelas', '=' ,'praktikum.kelas_id')
-            // ->whereIn('pendaftaran.status',['Diterima'])
-            // ->get();
             $dataMhs = PraktikumMahasiswa::with([
                 'mahasiswa','praktikum','praktikum.periode','praktikum.kelas'
             ])
             ->get();
-
 
             //dd ($dataMhs->toArray());
             return view ('praktikan.peserta.index', compact('dataMhs','periode'));

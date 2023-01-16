@@ -22,21 +22,19 @@ class TugasController extends Controller
      */
     public function indextugas()
     {
-
-        $modul=Modul::all();
         $tugas=DB::table('tugas')
         ->leftJoin('modul','modul.id_modul', '=' ,'tugas.modul_id')
+        ->leftJoin('praktikum','praktikum.kelas_id','=','modul.kelas_id')
+        ->leftJoin('kelas','kelas.id_kelas','=','praktikum.kelas_id')
         //->whereIn('tugas.is_validated',['Y'])
         ->get();
-        return view ('praktikan.tugas.indextugas', compact ('tugas','modul'));
+        return view ('praktikan.tugas.indextugas', compact ('tugas'));
     }
 
     public function indexujian()
     {
-        $kelas=Praktikum::all();
-        $ujian=DB::table('ujian')
-        ->leftJoin('praktikum','praktikum.id_praktikum', '=' ,'ujian.kelas_id')
-        ->get();
+        $ujian = Ujian::all();
+        //dd($ujian->all());
         return view ('praktikan.tugas.indexujian', compact ('ujian'));
     }
 
@@ -58,11 +56,7 @@ class TugasController extends Controller
         return redirect ('/praktikan/validasi')->with('success', 'Tugas berhasil divalidasi');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function createtugas()
     {
         $modul=Modul::all();
@@ -74,20 +68,16 @@ class TugasController extends Controller
 
     public function createujian()
     {
-        $kelas=Praktikum::all();
-        return view ('praktikan.tugas.createujian', compact ('kelas'));
+        $praktikum=DB::table('praktikum')
+        ->leftJoin('kelas','praktikum.kelas_id', '=' ,'kelas.id_kelas')
+        ->where('praktikum.is_active','Y')
+        ->get();
+
+        //dd($praktikum->toArray());
+        return view ('praktikan.tugas.createujian', compact ('praktikum'));
     }
 
 
-
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function storetugas(Request $request)
     {
         //return $request;
@@ -107,13 +97,13 @@ class TugasController extends Controller
 
     public function storeujian(Request $request)
     {
-        //return $request;
+        //dd ($request->toArray());
         $ujian =  $request->validate([
-            'id_kelas'  => 'required',
+            'praktikum_id'  => 'required',
             'uraian_ujian' => 'required'
        ]);
        $ujian = new Ujian();
-       $ujian->kelas_id= $request->id_kelas;
+       $ujian->praktikum_id= $request->praktikum_id;
        $ujian->uraian_ujian= $request->uraian_ujian;
 
        $ujian->save();
@@ -138,48 +128,23 @@ class TugasController extends Controller
         return redirect ('/praktikan/tugas')->with('success', 'Tugas berhasil disembunyikan di landing page');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Tugas  $tugas
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tugas $tugas)
+    public function showujian($id_ujian)
     {
-        //
+        //dd($id_tugas);
+        $showujian = Ujian::find($id_ujian);
+        $showujian->update(['is_active'=>'Y']);
+
+        return redirect ('/praktikan/ujian')->with('success', 'Ujian berhasil dimunculkan di landing page');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Tugas  $tugas
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tugas $tugas)
+    public function hideujian($id_ujian)
     {
-        //
+        //dd($id_tugas);
+        $hideujian = Ujian::find($id_ujian);
+        $hideujian->update(['is_active'=>'N']);
+
+        return redirect ('/praktikan/ujian')->with('success', 'Ujian berhasil disembunyikan di landing page');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tugas  $tugas
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Tugas $tugas)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Tugas  $tugas
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Tugas $tugas)
-    {
-        //
-    }
 }

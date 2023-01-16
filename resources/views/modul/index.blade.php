@@ -69,8 +69,7 @@
                 </thead>
                 <tbody>
                     {{-- dd($dt->alat()) --}}
-                     @foreach ($dt->alat as $x  )
-
+                    @foreach ($dt->alat as $x  )
                     <tr>
                       <th scope="row">{{$loop->iteration}}</th>
                       <td>{{ $x->nama_alat}}-{{ $x->ukuran}}</td>
@@ -86,14 +85,13 @@
                 </tr>
               </thead>
               <tbody>
-                  {{-- dd($dt->alat()) --}}
-                   @foreach ($dt->bahan as $y  )
-
-                  <tr>
-                    <th scope="row">{{$loop->iteration}}</th>
-                    <td>{{ $y->nama_bahan}} = {{ $y->jumlah_bahan }}</td>
-                  </tr>
-                  @endforeach
+                    {{-- dd($dt->alat()) --}}
+                    @foreach ($dt->bahan as $y  )
+                    <tr>
+                        <th scope="row">{{$loop->iteration}}</th>
+                        <td>{{ $y->nama_bahan}} = {{ $dt->jumlah_bahan }}</td>
+                    </tr>
+                    @endforeach
               </tbody>
           </table>
         </div>

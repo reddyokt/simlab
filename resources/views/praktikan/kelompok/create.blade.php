@@ -60,6 +60,7 @@
                                 <thead>
                                     <tr>
                                         <th><input type="checkbox" name="select_all3" value="1" id="example-select-all3"></th>
+                                        <th>#</th>
                                         <th>NIM</th>
                                         <th>Nama</th>
                                         <th>Praktikum Dipilih</th>
@@ -69,6 +70,7 @@
                                      @foreach($dataMhs as $value)
                                     <tr>
                                         <td><input type="checkbox" value="{{$value->mahasiswa_id.'-'.$value->praktikum_id}}" name="id_mahasiswa[]"></td>
+                                        <td>{{ $loop->iteration  }}</td>
                                         <td>{{$value->mahasiswa->nim}}</td>
                                         <td>{{$value->mahasiswa->nama_mahasiswa}}</td>
                                         <td>{{$value->praktikum->kelas->nama_kelas}}</td>

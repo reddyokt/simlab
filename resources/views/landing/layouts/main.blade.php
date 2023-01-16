@@ -96,6 +96,8 @@
                                             <td>{{ $value->nama_dosen}}</td>
                                             <td><a href="#" class="badge bg-success"
                                                 data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $value->id_tugas }}"><i class="fa fa-eye"></i></a>
+                                                <a href="#" class="badge bg-danger"
+                                                data-bs-toggle="modal" data-bs-target="#Modaldetail2-{{ $value->id_tugas }}"><i class="fa fa-upload"></i></a>
                                             </td>
                                           </tr>
                                         @endforeach
@@ -136,9 +138,6 @@
         </div>
     </section>
     <!-- END CTA -->
-
-
-
         <!--START SCREENSHOT-->
         <section class="section" id="screenshot">
             <div class="container">
@@ -156,12 +155,9 @@
                 <div class="row mt-5">
                     <div class="col-lg-12 swiper-container pb-5">
                         <div class="swiper-wrapper">
-
+                            <!--
                             <div class="item mt-4">
-
                             </div>
-
-
                             <div class="swiper-slide mt-4">
                                 <a class="mfp-image" href="images/screenshot/screenshot-1.jpg" title="">
                                     <img src="images/screenshot/screenshot-1.jpg" class="img-fluid box-shadow-lg" alt="">
@@ -202,10 +198,9 @@
                                 <a class="mfp-image" href="images/screenshot/screenshot-7.jpg" title="">
                                     <img src="images/screenshot/screenshot-7.jpg" class="img-fluid box-shadow-lg" alt="">
                                 </a>
-                            </div>
+                            </div>-->
                         </div>
 
-                        Add Arrows
                         <div class="swiper-button-next">
                             <img src="images/arrow-right.png" class="img-fluid" alt="">
                         </div>
@@ -217,7 +212,6 @@
                 </div>
             </div>
         </section>
-        END SREENSHORT
 
 
     <!-- START FOOTER -->
@@ -274,6 +268,7 @@
         </div>
     </section>
     <!-- END FOOTER -->
+    <!-- Modal1 -->
     @foreach ( $jadwal as $jd )
     <div class="modal fade " id="Modaldetail-{{ $jd->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -305,6 +300,71 @@
                     @endif
 
                 </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    @endforeach
+
+    <!-- Modal2 -->
+    @foreach ( $jadwal as $jd )
+    <div class="modal fade " id="Modaldetail2-{{ $jd->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Kelas {{ $jd->nama_kelas }} - Modul {{ $jd->nama_modul }} </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="dtM" class="table table-bordered table-striped table-hover dataTable">
+                    <tr>
+                        <td>Tanggal Praktek</td>
+                        <td>{{ $jd->tanggal_praktek }} </td>
+                    </tr>
+                </table>
+                <form id="tugas" action="/praktikan/uploadjawabantugas" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-xl-2"></div>
+                        <div class="col-xl-8">
+                            <div class="my-5">
+                                <div class="form-group row mb-1">
+                                    <label class="col-4">NIM</label>
+                                    <div class="col-8">
+                                        <select class="form-control" name="nim" required>
+                                            <option selected >Pilih NIM</option>
+                                            @foreach ($jadwal as $j)
+                                                <option value="{{ $j->nim }}">{{ $j->nama_mahasiswa }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                        <label class="col-4">Masukkan Email</label>
+                                        <div class="col-8">
+                                            <input class="form-control" id="email" type="text" name="email" required>
+                                        </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label class="col-4">Upload File Jawaban</label>
+                                    <div class="col-8">
+                                        <input accept="image/png, image/jpeg, image/jpg, application/pdf"
+                                        class="form-control" type="file" id="dataimport" name="dataimport" placeholder="Hanya Menerima Image file (png,jpeg,jpg) dan PDF File">
+                                        <p class="text-secondary"><small> Hanya Image file (png,jpeg,jpg) dan PDF File</small></p>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button class="btn btn-primary" type="submit">Kirim Tugas</button>
+                                </div>
+                                </div>
+                            </div>
+                    </div>
+                </form>
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

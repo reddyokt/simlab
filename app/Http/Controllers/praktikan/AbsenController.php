@@ -16,11 +16,16 @@ class AbsenController extends Controller
      */
     public function index()
     {
-        $absen =DB::table('praktikum')
-        ->leftJoin('modul','modul.kelas_id', '=' ,'praktikum.id_praktikum')
-        ->leftJoin('pendaftaran','pendaftaran.kelas_id', '=' ,'praktikum.id_praktikum')
-        ->get();
-        return view ('praktikan.absen.create', compact('absen'));
+        // $absen =DB::table('praktikum')
+        // ->leftJoin('modul','modul.kelas_id', '=' ,'praktikum.id_praktikum')
+        // ->leftJoin('pendaftaran','pendaftaran.kelas_id', '=' ,'praktikum.id_praktikum')
+        // ->get();
+        // return view ('praktikan.absen.index', compact('absen'));
+
+        // $absen = Absen::with('absen','kelompok.praktikum','praktikum.periode')
+        // ->get();
+        //dd($absen->all());
+       // return view ('praktikan.absen.index', compact('absen'));
     }
 
     /**

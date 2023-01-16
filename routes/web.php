@@ -39,6 +39,7 @@ Route::get('/', [LandingController::class, 'index']);
 Route::get('/pengumuman', [LandingController::class, 'pengumuman']);
 Route::get('/pengumuman/create', [LandingController::class, 'createpengumuman']);
 Route::post('/pengumuman/create', [LandingController::class, 'storepengumuman']);
+Route::post('/praktikan/uploadjawabantugas',[LandingController::class, 'uploadjawabantugas']);
 
 
 //-----------------------------------Pendaftaran--------------------------------//
@@ -123,6 +124,8 @@ Route::get('/praktikan/absen', [AbsenController::class, 'index']);
 Route::get('/praktikan/tugas', [TugasController::class, 'indextugas']);
 Route::get('/praktikan/showtugas/{id_tugas}', [TugasController::class, 'showtugas']);
 Route::get('/praktikan/hidetugas/{id_tugas}', [TugasController::class, 'hidetugas']);
+Route::get('/praktikan/showujian/{id_ujian}', [TugasController::class, 'showujian']);
+Route::get('/praktikan/hideujian/{id_ujian}', [TugasController::class, 'hideujian']);
 
 Route::get('/praktikan/ujian', [TugasController::class, 'indexujian']);
 Route::get('/praktikan/validasi', [TugasController::class, 'validasi']);

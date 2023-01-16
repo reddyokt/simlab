@@ -44,13 +44,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($modul as $tg )
+                                    @foreach ($tugas as $tg )
                                     <tr>
 
                                         <td>{{ $loop->iteration  }}</td>
-                                        <td>{{ $tg->kelas->kelas->nama_kelas }} | {{ $tg->nama_modul }}</td>
-                                        <td>{{ $tg->modul->jenis_tugas }}</td>
-                                        @if ($tg->modul->is_validated == 'N')
+                                        <td>{{ $tg->nama_kelas }} | {{ $tg->nama_modul }}</td>
+                                        <td>{{ $tg->jenis_tugas }}</td>
+                                        @if ($tg->is_validated == 'N')
                                             <td>Belum Divalidasi</td>
                                             @else
                                             <td>Sudah Divalidasi</td>
@@ -60,8 +60,8 @@
                                             <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $tg->id_tugas }}">
                                             <span data-feather="eye"></span></a>
                                             <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
-                                            @if ($tg->modul->is_validated !='N')
-                                            <a href="/praktikan/showtugas/{{ $tg->modul->id_tugas }}" class="badge bg-warning" onclick="return confirm('Yakin akan mengirimkan Tugas ini?!!!')"><span data-feather="sunrise"></span></a>
+                                            @if ($tg->is_validated !='N')
+                                            <a href="/praktikan/showtugas/{{ $tg->id_tugas }}" class="badge bg-warning" onclick="return confirm('Yakin akan mengirimkan Tugas ini?!!!')"><span data-feather="sunrise"></span></a>
                                             {{--  @elseif ($tg->is_active ='Y')
                                             <a href="/praktikan/hidetugas/{{ $tg->id_tugas }}" class="badge bg-danger" onclick="return confirm('Yakin akan menyembunyikan Tugas ini?!!!')"><span data-feather="sunset"></span></a>--}}
                                             @endif

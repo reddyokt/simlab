@@ -9,6 +9,11 @@ class Ujian extends Model
 {
     use HasFactory;
     protected $table = 'ujian';
-    protected $fillable =  ['id_ujian','kelas_id','uraian_ujian'];
     protected $primaryKey = 'id_ujian';
+    protected $guarded =[];
+
+    public function praktikum()
+    {
+        return $this->belongsTo(Praktikum::class, 'praktikum_id','id_praktikum');
+    }
 }

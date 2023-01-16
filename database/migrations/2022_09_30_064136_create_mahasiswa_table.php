@@ -17,8 +17,8 @@ class CreateMahasiswaTable extends Migration
             $table->id('id_mahasiswa');
             $table->string('nama_mahasiswa');
             $table->integer('nim');
-            $table->string('phone');
-            $table->string('email');
+            $table->string('phone')->null();
+            $table->string('email')->null();
             $table->timestamps();
         });
     }

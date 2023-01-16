@@ -32,20 +32,20 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nama Modul</th>
+                                        <th>Nama Kelompok</th>
                                         <th>Jenis Tugas</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($tugas as $tg )
+                                    @foreach ($absen as $tg )
                                     <tr>
 
                                         <td>{{ $loop->iteration  }}</td>
-                                        <td>{{ $tg->nama_modul }}</td>
-                                        <td>{{ $tg->jenis_tugas }}</td>
+                                        <td>{{ $tg->mahasiswa->nama_mahasiswa }}</td>
+
                                         <td>
-                                            <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $tg->id_tugas }}"><span data-feather="eye"></span></a>
+                                            <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ '' }}"><span data-feather="eye"></span></a>
                                             <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
                                             <a href="#" class="badge bg-warning"><span data-feather="check-circle"></span></a>
                                             <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
@@ -64,17 +64,17 @@
         <!--end::Form-->
     </div>
     <!-- Modal -->
-@foreach ($tugas as $tg )
 
-<div class="modal fade" id="Modaldetail-{{ $tg->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="Modaldetail-{{''}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Uraian Tugas {{ $tg->jenis_tugas }} {{ $tg->nama_modul }}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Uraian Tugas {{ '' }} {{ '' }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <p><td>{!! $tg->uraian !!}</td></p>
+            <p><td>{''}</td></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -82,7 +82,7 @@
       </div>
     </div>
   </div>
-@endforeach
+
 @stop
 
 @section('page-script')

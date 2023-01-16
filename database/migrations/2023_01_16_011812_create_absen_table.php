@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUjianTable extends Migration
+class CreateAbsenTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateUjianTable extends Migration
      */
     public function up()
     {
-        Schema::create('ujian', function (Blueprint $table) {
-            $table->id('id_ujian');
-            $table->foreignId('praktikum_id');
-            $table->foreignId('kelas_id');
-            $table->string('uraian_ujian');
-            $table->enum('is_active', ['Y','N']);
+        Schema::create('absen', function (Blueprint $table) {
+            $table->id('id_absen');
+            $table->foreignId('mahasiswa_id');
+            $table->enum('kehadiran', ['Hadir','Tidak Hadir']);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateUjianTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ujian');
+        Schema::dropIfExists('absen');
     }
 }

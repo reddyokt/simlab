@@ -6,6 +6,7 @@ use App\Models\Landing;
 use App\Models\Modul;
 use App\Models\Pengumuman;
 use App\Models\Praktikum;
+use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -27,13 +28,11 @@ class LandingController extends Controller
         ->join('praktikum', 'praktikum.id_praktikum', '=', 'modul.kelas_id')
         ->join('dosen', 'dosen.id_dosen', '=' , 'praktikum.dosen_id' )
         ->leftJoin('kelas', 'kelas.id_kelas', '=' ,'praktikum.kelas_id')
+        ->leftJoin('praktikum_mahasiswa','praktikum_mahasiswa.praktikum_id', '=' , 'praktikum.id_praktikum')
+        ->leftJoin('mahasiswa','mahasiswa.id_mahasiswa', '=' ,'praktikum_mahasiswa.mahasiswa_id')
         //->leftJoin('tugas', 'tugas.modul_id', '=' ,'modul.id_modul')
         ->wherein('tugas.is_active',['Y'])
         ->get();
-
-
-           // $jadwal['tanggal_praktek'] = $this->changeFormat(['tanggal_praktek'], true);
-
 
         return view ('landing.layouts.main',compact('jadwal','kelas'));
     }
@@ -110,6 +109,11 @@ class LandingController extends Controller
         Pengumuman::create($validatedData);
 
         return redirect ('/pengumuman');
+    }
+
+    public function uploadjawabantugas(Request $request)
+    {
+        dd($request->all());
     }
 
 }
