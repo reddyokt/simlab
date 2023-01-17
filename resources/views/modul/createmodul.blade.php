@@ -75,12 +75,12 @@
                     </div>
                 </div>
                 <div class="col-3 form-group mb-1">
-                    <label for="nama_modul">Jumlah Bahan</label>
+                    <label for="jumlah_bahan">Jumlah Bahan</label>
                     <input type="number" name="jumlah_bahan[]" class="form-control" placeholder="Masukkan Jumlah Bahan">
                 </div>
 
                 <div class="col form-group mb-1">
-                    <label for="nama_modul">Tambah</label>
+                    <label for="tambah">Tambah</label>
                 <button class="w-100 btn btn-md btn-warning " id="add_button" type="button">+</button>
                 </div>
             </div>
