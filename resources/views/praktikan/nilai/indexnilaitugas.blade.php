@@ -28,18 +28,19 @@
         </tr>
     </thead>
     <tbody>
-
+        @foreach ($data as $dt )
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <a href="" class="badge bg-info"><span data-feather="download"></span></a>
-                <a href="" class="badge bg-danger"><span data-feather="eye"></span></a>
-            </td>
+                <td>{{ $loop->iteration  }}</td>
+                <td>{{ $dt->mahasiswa->nama_mahasiswa}}</td>
+                <td>{{ $dt->praktikum->kelas->nama_kelas}}</td>
+                <td>{{ $dt->praktikum->modul}}</td>
+                <td>{{ $dt->praktikum->modul}}</td>
+                <td>
+                    <a href="" class="badge bg-info"><span data-feather="download"></span></a>
+                    <a href="" class="badge bg-danger"><span data-feather="eye"></span></a>
+                </td>
         </tr>
+        @endforeach
 
     </tbody>
 </table>

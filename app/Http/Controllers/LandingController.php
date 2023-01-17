@@ -25,18 +25,24 @@ class LandingController extends Controller
         $kelas = Praktikum::all();
         $now = Carbon::now()->toDateString();
         //$jadwal = Modul::where('is_active','YA')
-        $jadwal = DB::table('tugas')
-        ->join('modul', 'modul.id_modul', '=' , 'tugas.modul_id')
-        ->join('praktikum', 'praktikum.id_praktikum', '=', 'modul.praktikum_id')
-        ->join('dosen', 'dosen.id_dosen', '=' , 'praktikum.dosen_id' )
-        ->leftJoin('kelas', 'kelas.id_kelas', '=' ,'praktikum.kelas_id')
-        ->leftJoin('praktikum_mahasiswa','praktikum_mahasiswa.praktikum_id', '=' , 'praktikum.id_praktikum')
-        ->leftJoin('mahasiswa','mahasiswa.id_mahasiswa', '=' ,'praktikum_mahasiswa.mahasiswa_id')
-        //->leftJoin('tugas', 'tugas.modul_id', '=' ,'modul.id_modul')
-        ->wherein('tugas.is_active',['Y'])
-        ->get();
+        // $jadwal = DB::table('tugas')
+        // ->join('modul', 'modul.id_modul', '=' , 'tugas.modul_id')
+        // ->join('praktikum', 'praktikum.id_praktikum', '=', 'modul.praktikum_id')
+        // ->join('dosen', 'dosen.id_dosen', '=' , 'praktikum.dosen_id' )
+        // ->leftJoin('kelas', 'kelas.id_kelas', '=' ,'praktikum.kelas_id')
+        // ->leftJoin('praktikum_mahasiswa','praktikum_mahasiswa.praktikum_id', '=' , 'praktikum.id_praktikum')
+        // ->leftJoin('mahasiswa','mahasiswa.id_mahasiswa', '=' ,'praktikum_mahasiswa.mahasiswa_id')
+        // //->leftJoin('tugas', 'tugas.modul_id', '=' ,'modul.id_modul')
+        // ->wherein('tugas.is_active',['Y'])
+        // ->get();
 
-        return view ('landing.layouts.main',compact('jadwal','kelas','pengumuman','download'));
+        $data = Modul::whereHas('praktikum',function ($q){
+            $q->whereHas('periode', function ($q2){
+                $q2->where('status_periode','Aktif');
+            });
+        }) ->get();
+
+        return view ('landing.layouts.main',compact('data','kelas','pengumuman','download'));
     }
 
     function changeFormat($date, $reverse = false){

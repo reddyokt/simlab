@@ -70,7 +70,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="cta-content text-white text-center">
-                    @if(count($jadwal)>0)
+                    @if(count($data)>0)
                     <div class="text-center text-white">
                         <h2 class="title">Daftar Jadwal Praktikum</h2>
                             <div class="card text-dark">
@@ -87,17 +87,17 @@
                                           </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($jadwal as $key=>$value)
+                                        @foreach ($data as $d)
                                           <tr>
                                             <th>{{ $loop->iteration  }} </th>
-                                            <td>{{$value->nama_kelas}}</td>
-                                            <td>{{$value->nama_modul}}</td>
-                                            <td>{{ \Carbon\Carbon::parse($value->tanggal_praktek)->isoFormat('Do MMMM YYYY')}}</td>
-                                            <td>{{ $value->nama_dosen}}</td>
+                                            <td>{{$d->praktikum->kelas->nama_kelas}}</td>
+                                            <td>{{$d->nama_modul}}</td>
+                                            <td>{{ \Carbon\Carbon::parse($d->tanggal_praktek)->isoFormat('Do MMMM YYYY')}}</td>
+                                            <td>{{ $d->praktikum->dosen->nama_dosen}}</td>
                                             <td><a href="#" class="badge bg-success"
-                                                data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $value->id_tugas }}"><i class="fa fa-eye"></i></a>
+                                                data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $d->id_tugas }}"><i class="fa fa-eye"></i></a>
                                                 <a href="#" class="badge bg-danger"
-                                                data-bs-toggle="modal" data-bs-target="#Modaldetail2-{{ $value->id_tugas }}"><i class="fa fa-upload"></i></a>
+                                                data-bs-toggle="modal" data-bs-target="#Modaldetail2-{{ $d->id_tugas }}"><i class="fa fa-upload"></i></a>
                                             </td>
                                           </tr>
                                         @endforeach
@@ -119,7 +119,7 @@
     <!-- END CTA -->
 
     <!-- START CTA -->
-    <section class="section bg-cta" id="cta">
+    <!--<section class="section bg-cta" id="cta">
         <div class="bg-overlay-3"></div>
         <div class="container">
             <div class="row">
@@ -129,54 +129,22 @@
                         <div class="text-white">
                             <h2 class="title">Pengumuman</h2>
                             <div class="mt-2">
-                                <!--<a href="/daftarPraktikum" class="btn btn-primary">Klik Disini</a>-->
+                                <a href="/daftarPraktikum" class="btn btn-primary">Klik Disini</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!-- END CTA -->
         <!--START SCREENSHOT-->
-        <section class="section" id="screenshot">
+        <section class="section bg-cta" id="pengumuman">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center title-content">
-                            {{--<h6 class="text-uppercase f-14 text-primary">Pengumuman </h6>
-                            @foreach ( $pengumuman as $p)
-                            <img src="{{ $p->image }}" style="width:20%">
-                            <h2 class="mt-3">{{ $p->judul_pengumuman }}</h2>
-                            <p class="text-muted mt-3">{!! $p->uraian_pengumuman !!}</p>
-                            @endforeach--}}
-                            <!--carousel-->
-                            {{--<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                    @foreach ( $pengumuman as $p)
-                                     <div class="carousel-item active">
-                                        <img src="{{URL($p->image)}}" class="dblock justify-content-center" alt="..." style="width: 50%">
-                                    </div>
-                                    @endforeach
-                                    <br>
-                                    @foreach ( $pengumuman as $p)
-                                    <div class="carousel-item">
-                                        <h2 class="mt-3 text-primary">{{ $p->judul_pengumuman }}</h2>
-                                        <p class="text-muted mt-3">{!! $p->uraian_pengumuman !!}</p>
-                                    </div>
-                                    @endforeach
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                      </button>
-                                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                      </button>
-                                </div>
-                              </div>--}}
-                            <!--end carousel-->
-
+                            <h1 class="text-white mb-5">PENGUMUMAN</h1>
                             <div class="row">
                                 @foreach ( $pengumuman as $p)
                                 <div class="col-sm-6">
@@ -199,50 +167,6 @@
                     <div class="col-lg-12 swiper-container ">
                         <div class="swiper-wrapper">
 
-                            <!--
-                            <div class="item mt-4">
-                            </div>
-                            <div class="swiper-slide mt-4">
-                                <a class="mfp-image" href="images/screenshot/screenshot-1.jpg" title="">
-                                    <img src="images/screenshot/screenshot-1.jpg" class="img-fluid box-shadow-lg" alt="">
-                                </a>
-                            </div>
-
-                            <div class="swiper-slide mt-4">
-                                <a class="mfp-image" href="images/screenshot/screenshot-2.jpg" title="">
-                                    <img src="images/screenshot/screenshot-2.jpg" class="img-fluid box-shadow-lg" alt="">
-                                </a>
-                            </div>
-
-                            <div class="swiper-slide mt-4">
-                                <a class="mfp-image" href="images/screenshot/screenshot-3.jpg" title="">
-                                    <img src="images/screenshot/screenshot-3.jpg" class="img-fluid box-shadow-lg" alt="">
-                                </a>
-                            </div>
-
-                            <div class="swiper-slide mt-4">
-                                <a class="mfp-image" href="images/screenshot/screenshot-4.jpg" title="">
-                                    <img src="images/screenshot/screenshot-4.jpg" class="img-fluid box-shadow-lg" alt="">
-                                </a>
-                            </div>
-
-                            <div class="swiper-slide mt-4">
-                                <a class="mfp-image" href="images/screenshot/screenshot-5.jpg" title="">
-                                    <img src="images/screenshot/screenshot-5.jpg" class="img-fluid box-shadow-lg" alt="">
-                                </a>
-                            </div>
-
-                            <div class="swiper-slide mt-4">
-                                <a class="mfp-image" href="images/screenshot/screenshot-6.jpg" title="">
-                                    <img src="images/screenshot/screenshot-6.jpg" class="img-fluid box-shadow-lg" alt="">
-                                </a>
-                            </div>
-
-                            <div class="swiper-slide mt-4">
-                                <a class="mfp-image" href="images/screenshot/screenshot-7.jpg" title="">
-                                    <img src="images/screenshot/screenshot-7.jpg" class="img-fluid box-shadow-lg" alt="">
-                                </a>
-                            </div>-->
                         </div>
 
                         <div class="swiper-button-next">
@@ -347,30 +271,32 @@
     </section>
     <!-- END FOOTER -->
     <!-- Modal1 -->
-    @foreach ( $jadwal as $jd )
-    <div class="modal fade " id="Modaldetail-{{ $jd->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    @foreach ( $data as $dt )
+
+    <div class="modal fade " id="Modaldetail-{{ $dt->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Kelas {{ $jd->nama_kelas }} - Modul {{ $jd->nama_modul }} </h5>
+              <h5 class="modal-title" id="exampleModalLabel">Kelas {{ $dt->praktikum->nama_kelas }} - Modul {{ $dt->nama_modul }} </h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <table id="dtM" class="table table-bordered table-striped table-hover dataTable">
                     <tr>
                         <td>Tanggal Praktek</td>
-                        <td>{{ $jd->tanggal_praktek }} </td>
+                        <td>{{ $dt->tanggal_praktek }} </td>
                     </tr>
 
-                    @if ($jd->is_active !='N' and $jd->id_tugas !='0')
+                    @if ($dt->is_active !='N' and $dt->id_tugas !='0')
 
                     <tr>
                         <td>Jenis Tugas</td>
-                        <td>{{ $jd->jenis_tugas }} </td>
+                        <td>{{ $dt->tugas }} </td>
                     </tr>
                     <tr>
                         <td>Uraian Tugas</td>
-                        <td>{!! $jd->uraian_tugas !!}</td>
+                        <td>{!! $dt->tugas !!}</td>
 
                     @else
                     <tr> <td colspan="2" class="text-center">Tugas Belum Tersedia!</td></tr>
@@ -388,19 +314,19 @@
     @endforeach
 
     <!-- Modal2 -->
-    @foreach ( $jadwal as $jd )
-    <div class="modal fade " id="Modaldetail2-{{ $jd->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    @foreach ( $data as $dt )
+    <div class="modal fade " id="Modaldetail2-{{ $dt->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Kelas {{ $jd->nama_kelas }} - Modul {{ $jd->nama_modul }} </h5>
+              <h5 class="modal-title" id="exampleModalLabel">Kelas {{ $dt->nama_kelas }} - {{ $dt->nama_modul }} </h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <table id="dtM" class="table table-bordered table-striped table-hover dataTable">
                     <tr>
                         <td>Tanggal Praktek</td>
-                        <td>{{ $jd->tanggal_praktek }} </td>
+                        <td>{{ $dt->tanggal_praktek }} </td>
                     </tr>
                 </table>
                 <form id="tugas" action="/praktikan/uploadjawabantugas" method="POST">
@@ -414,8 +340,8 @@
                                     <div class="col-8">
                                         <select class="form-control" name="nim" required>
                                             <option selected >Pilih NIM</option>
-                                            @foreach ($jadwal as $j)
-                                                <option value="{{ $j->nim }}">{{ $j->nama_mahasiswa }}</option>
+                                            @foreach ($data as $dt)
+                                                <option value="{{ $dt->praktikum->mahasiswa }}"> {{ $dt->praktikum->mahasiswa }}</option>
                                             @endforeach
                                         </select>
                                     </div>

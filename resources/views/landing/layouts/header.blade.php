@@ -4,7 +4,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/7c2dd59b38.js"></script>
 
-<nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark">
+<nav class="col-lg-12 navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark">
     <div class="container">
         <!-- LOGO -->
         <a class="navbar-brand logo text-uppercase" href="index-1.html">
@@ -27,10 +27,10 @@
                     <a href="#jadwal" class="nav-link">Jadwal Praktikum</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#jadwal" class="nav-link">Pengumuman</a>
+                    <a href="#pengumuman" class="nav-link">Pengumuman</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#jadwal" class="nav-link">Download</a>
+                    <a href="#download" class="nav-link">Download</a>
                 </li>
 
             </ul>

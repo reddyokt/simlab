@@ -42,6 +42,10 @@ class Modul extends Model
         return $this->belongsTo(Praktikum::class, 'praktikum_id', 'id_praktikum');
     }
 
+    public function tugas()
+    {
+        return $this->hasMany(Tugas::class, 'modul_id', 'id_modul');
+    }
 
 
 }

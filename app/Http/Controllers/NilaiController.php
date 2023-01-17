@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Modul;
 use App\Models\Nilai;
+use App\Models\PraktikumMahasiswa;
 use Illuminate\Http\Request;
 
 class NilaiController extends Controller
@@ -13,8 +15,14 @@ class NilaiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function indexnilaitugas()
+
     {
-        return view ('praktikan.nilai.indexnilaitugas');
+        $data = PraktikumMahasiswa::whereHas('praktikum',function ($q){
+            $q->whereHas('periode', function ($q2){
+                $q2->where('status_periode','Aktif');
+            });
+        }) ->get();
+        return view ('praktikan.nilai.indexnilaitugas', compact ('data'));
     }
 
     /**

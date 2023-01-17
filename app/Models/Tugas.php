@@ -14,6 +14,6 @@ class Tugas extends Model
 
     public  function tugas()
     {
-        return $this->belongsTo(Modul::class, 'modul_id', 'id_modul');
+        return $this->hasMany(Modul::class, 'id_modul', 'modul_id');
     }
 }

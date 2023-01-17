@@ -22,9 +22,9 @@
     <thead>
         <tr>
             <th>#</th>
+            <th>Nama Kelas</th>
             <th>Nama Modul</th>
             <th>Jadwal Praktek</th>
-            <th>Nama Kelas</th>
             <th>Dosen Pengampu</th>
             <th>Action</th>
         </tr>
@@ -34,9 +34,9 @@
 
         <tr>
          <td>{{ $loop->iteration  }}</td>
+         <td>{{ $dt->kelas->kelas->nama_kelas }}</td>
          <td>{{ $dt->nama_modul }}</td>
          <td>{{ $dt->tanggal_praktek }}</td>
-         <td>{{ $dt->kelas->kelas->nama_kelas }}</td>
          <td>{{ $dt->kelas->dosen->nama_dosen }}</td>
          <td>
              <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $dt->id_modul }}"><span data-feather="eye"></span></a>
