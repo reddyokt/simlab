@@ -30,14 +30,15 @@
     <tbody>
         @foreach ($data as $dt )
         <tr>
+
                 <td>{{ $loop->iteration  }}</td>
                 <td>{{ $dt->mahasiswa->nama_mahasiswa}}</td>
-                <td>{{ $dt->praktikum->kelas->nama_kelas}}</td>
-                <td>{{ $dt->praktikum->modul}}</td>
-                <td>{{ $dt->praktikum->modul}}</td>
+                <td>{{ $dt->tugas->modul->praktikum->kelas->nama_kelas}}</td>
+                <td>{{ $dt->tugas->modul->nama_modul}}</td>
+                <td>{{ $dt->tugas->jenis_tugas}}</td>
                 <td>
                     <a href="" class="badge bg-info"><span data-feather="download"></span></a>
-                    <a href="" class="badge bg-danger"><span data-feather="eye"></span></a>
+                    <a href="" class="badge bg-danger"><span data-feather="edit"></span></a>
                 </td>
         </tr>
         @endforeach

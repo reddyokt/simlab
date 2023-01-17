@@ -44,26 +44,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($tugas as $tg )
+                                    @foreach ($data as $dt )
                                     <tr>
 
                                         <td>{{ $loop->iteration  }}</td>
-                                        <td>{{ $tg->nama_kelas }} | {{ $tg->nama_modul }}</td>
-                                        <td>{{ $tg->jenis_tugas }}</td>
-                                        @if ($tg->is_validated == 'N')
+                                        <td>{{ $dt->modul->praktikum->kelas->nama_kelas }} | {{ $dt->modul->nama_modul }}</td>
+                                        <td>{{ $dt->jenis_tugas }}</td>
+                                        @if ($dt->is_validated == 'N')
                                             <td>Belum Divalidasi</td>
                                             @else
                                             <td>Sudah Divalidasi</td>
                                         @endif
 
                                         <td>
-                                            <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $tg->id_tugas }}">
+                                            <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $dt->id_tugas }}">
                                             <span data-feather="eye"></span></a>
                                             <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
-                                            @if ($tg->is_validated !='N')
-                                            <a href="/praktikan/showtugas/{{ $tg->id_tugas }}" class="badge bg-warning" onclick="return confirm('Yakin akan mengirimkan Tugas ini?!!!')"><span data-feather="sunrise"></span></a>
-                                            {{--  @elseif ($tg->is_active ='Y')
-                                            <a href="/praktikan/hidetugas/{{ $tg->id_tugas }}" class="badge bg-danger" onclick="return confirm('Yakin akan menyembunyikan Tugas ini?!!!')"><span data-feather="sunset"></span></a>--}}
+                                            @if ($dt->is_validated !='N')
+                                                @if ($dt->is_active =='N')
+                                                <a href="/praktikan/showtugas/{{ $dt->id_tugas }}" class="badge bg-warning" onclick="return confirm('Yakin akan mengirimkan Tugas ini?!!!')">
+                                                    <span data-feather="sunrise"></span></a>
+                                                    @else
+                                                    <a href="/praktikan/hidetugas/{{ $dt->id_tugas }}" class="badge bg-danger" onclick="return confirm('Yakin akan menyembunyikan Tugas ini?!!!')">
+                                                    <span data-feather="sunset"></span></a>
+                                                @endif
                                             @endif
                                             <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
                                         </td>
@@ -81,17 +85,17 @@
         <!--end::Form-->
     </div>
     <!-- Modal -->
-@foreach ($tugas as $tg )
+@foreach ($data as $dt )
 
-<div class="modal fade" id="Modaldetail-{{ $tg->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Modaldetail-{{ $dt->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Uraian Tugas {{ $tg->jenis_tugas }} {{ $tg->nama_modul }}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Uraian Tugas {{ $dt->jenis_tugas }} {{ $dt->nama_modul }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <p><td>{!! $tg->uraian_tugas !!}</td></p>
+            <p><td>{!! $dt->uraian_tugas !!}</td></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

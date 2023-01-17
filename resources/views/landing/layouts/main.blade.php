@@ -270,15 +270,15 @@
         </div>
     </section>
     <!-- END FOOTER -->
-    <!-- Modal1 -->
 
+    <!-- Modal1 -->
     @foreach ( $data as $dt )
 
     <div class="modal fade " id="Modaldetail-{{ $dt->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Kelas {{ $dt->praktikum->nama_kelas }} - Modul {{ $dt->nama_modul }} </h5>
+              <h5 class="modal-title" id="exampleModalLabel">Kelas {{ $dt->praktikum->kelas->nama_kelas }} - Modul {{ $dt->nama_modul }} </h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -288,21 +288,22 @@
                         <td>{{ $dt->tanggal_praktek }} </td>
                     </tr>
 
-                    @if ($dt->is_active !='N' and $dt->id_tugas !='0')
-
+                  @foreach ( $dt->tugas as $tugas )
+                  @if ($tugas->is_active=='Y')
                     <tr>
                         <td>Jenis Tugas</td>
-                        <td>{{ $dt->tugas }} </td>
+                        <td>{{ $tugas->jenis_tugas }} </td>
                     </tr>
                     <tr>
                         <td>Uraian Tugas</td>
-                        <td>{!! $dt->tugas !!}</td>
-
-                    @else
-                    <tr> <td colspan="2" class="text-center">Tugas Belum Tersedia!</td></tr>
-
+                        <td>{!! $tugas->uraian_tugas !!} </td>
+                    </tr>
                     @endif
+                  @endforeach
 
+                  @if ($dt->tugas->where('is_active', 'Y')->count()==0)
+                  <tr> <td colspan="2" class="text-center">Tugas Belum Tersedia!</td></tr>
+                  @endif
                 </table>
             </div>
             <div class="modal-footer">
@@ -324,34 +325,43 @@
             </div>
             <div class="modal-body">
                 <table id="dtM" class="table table-bordered table-striped table-hover dataTable">
+                    @foreach ( $dt->tugas as $tugas)
+                    <tr>
+                        <td>Jenis Tugas</td>
+                        <td>{{$tugas->jenis_tugas  }} </td>
+                    </tr>
                     <tr>
                         <td>Tanggal Praktek</td>
                         <td>{{ $dt->tanggal_praktek }} </td>
                     </tr>
+
                 </table>
-                <form id="tugas" action="/praktikan/uploadjawabantugas" method="POST">
+                <form id="tugas" action="/praktikan/uploadjawabantugas" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-xl-2"></div>
                         <div class="col-xl-8">
                             <div class="my-5">
+                                <div>
+                                    <input type="hidden" name="tugas_id" value="{{ $tugas->id_tugas }}">
+                                </div>
                                 <div class="form-group row mb-1">
                                     <label class="col-4">NIM</label>
                                     <div class="col-8">
-                                        <select class="form-control" name="nim" required>
+                                        <select class="form-control" name="mahasiswa_id" required>
                                             <option selected >Pilih NIM</option>
-                                            @foreach ($data as $dt)
-                                                <option value="{{ $dt->praktikum->mahasiswa }}"> {{ $dt->praktikum->mahasiswa }}</option>
+                                            @foreach ($tugas->modul->praktikum->mahasiswa as $mhs)
+                                                <option value="{{ $mhs->id_mahasiswa }}">{{ $mhs->nim }} - {{ $mhs->nama_mahasiswa}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group row mb-2">
+                                <!--<div class="form-group row mb-2">
                                         <label class="col-4">Masukkan Email</label>
                                         <div class="col-8">
                                             <input class="form-control" id="email" type="text" name="email" required>
                                         </div>
-                                </div>
+                                </div>-->
                                 <div class="form-group row mb-2">
                                     <label class="col-4">Upload File Jawaban</label>
                                     <div class="col-8">
@@ -368,6 +378,7 @@
                             </div>
                     </div>
                 </form>
+                @endforeach
 
             </div>
             <div class="modal-footer">

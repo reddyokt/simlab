@@ -22,13 +22,18 @@ class TugasController extends Controller
      */
     public function indextugas()
     {
-        $tugas=DB::table('tugas')
-        ->leftJoin('modul','modul.id_modul', '=' ,'tugas.modul_id')
-        ->leftJoin('praktikum','praktikum.kelas_id','=','modul.kelas_id')
-        ->leftJoin('kelas','kelas.id_kelas','=','praktikum.kelas_id')
-        //->whereIn('tugas.is_validated',['Y'])
+
+
+        $data = Tugas::whereHas('modul', function ($q){
+            $q->whereHas('praktikum', function ($q2){
+                $q2->whereHas('periode',function ($q3){
+                    $q3->where('status_periode', 'Aktif');
+                });
+            });
+        })
         ->get();
-        return view ('praktikan.tugas.indextugas', compact ('tugas'));
+        //dd($data->toArray());
+        return view ('praktikan.tugas.indextugas', compact ('data'));
     }
 
     public function indexujian()
@@ -145,6 +150,5 @@ class TugasController extends Controller
 
         return redirect ('/praktikan/ujian')->with('success', 'Ujian berhasil disembunyikan di landing page');
     }
-
 
 }

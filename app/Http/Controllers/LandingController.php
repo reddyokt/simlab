@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Download;
+use App\Models\JawabanTugas;
 
 class LandingController extends Controller
 {
@@ -41,7 +42,6 @@ class LandingController extends Controller
                 $q2->where('status_periode','Aktif');
             });
         }) ->get();
-
         return view ('landing.layouts.main',compact('data','kelas','pengumuman','download'));
     }
 
@@ -122,7 +122,22 @@ class LandingController extends Controller
 
     public function uploadjawabantugas(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
+
+       $validatedData = $request->validate([
+            'tugas_id'=>'required',
+            'mahasiswa_id'=>'required',
+            'dataimport'=>'required|mimes:png,jpg,pdf|max:2048'
+        ]);
+
+        if($request->file('dataimport')) {
+            $validatedData['file_jawaban'] = $request->file('dataimport')->store('upload_jawaban');
+        }
+        unset($validatedData['dataimport']);
+        JawabanTugas::create($validatedData);
+
+        return redirect ('/');
+
     }
 
     public function download()

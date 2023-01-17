@@ -15,10 +15,10 @@ class CreateJawabanTugasTable extends Migration
     {
         Schema::create('jawaban_tugas', function (Blueprint $table) {
             $table->id('id_jawaban_tugas');
-            $table->foreignId('modul_id');
             $table->foreignId('tugas_id');
             $table->foreignId('mahasiswa_id');
             $table->string('file_jawaban');
+            $table->integer('nilaitugas')->nullable();
             $table->timestamps();
         });
     }

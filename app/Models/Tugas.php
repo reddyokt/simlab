@@ -12,8 +12,9 @@ class Tugas extends Model
     protected $fillable =  ['id_tugas','modul_id','jenis_tugas','uraian_tugas','is_active','is_validated'];
     protected $primaryKey = 'id_tugas';
 
-    public  function tugas()
+
+    public function modul()
     {
-        return $this->hasMany(Modul::class, 'id_modul', 'modul_id');
+        return $this->belongsTo(Modul::class,'modul_id', 'id_modul' );
     }
 }
