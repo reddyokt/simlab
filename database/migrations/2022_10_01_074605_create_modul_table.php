@@ -19,6 +19,7 @@ class CreateModulTable extends Migration
             $table->string('nama_modul');
             $table->date('tanggal_praktek');
             $table->enum('is_active',['Y','N']);
+            $table->boolean('used')->default(0);
             $table->timestamps();
         });
     }

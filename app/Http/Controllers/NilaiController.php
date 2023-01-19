@@ -24,9 +24,15 @@ class NilaiController extends Controller
         //dd($data->toArray());
         return view('praktikan.nilai.indexnilaitugas', compact('data'));
     }
-    public function isinilaitugas(Request $request, $id_mahasiswa)
+    public function isinilaitugas(Request $request)
     {
         //dd($request->all());
+
+        $jawaban = JawabanTugas::find($request->id_jawaban_tugas);
+        $jawaban->nilaitugas=$request->nilaitugas;
+        $jawaban->save();
+
+        return redirect ('/praktikan/nilaitugas')->with('success', 'Nilai berhasil ditambahkan');
 
     }
 

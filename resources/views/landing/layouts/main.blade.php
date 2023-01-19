@@ -100,9 +100,9 @@
                                             <td>{{ \Carbon\Carbon::parse($d->tanggal_praktek)->isoFormat('Do MMMM YYYY')}}</td>
                                             <td>{{ $d->praktikum->dosen->nama_dosen}}</td>
                                             <td><a href="#" class="badge bg-success"
-                                                data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $d->id_tugas }}"><i class="fa fa-eye"></i></a>
+                                                data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $d->id_modul }}"><i class="fa fa-eye"></i></a>
                                                 <a href="#" class="badge bg-danger"
-                                                data-bs-toggle="modal" data-bs-target="#Modaldetail2-{{ $d->id_tugas }}"><i class="fa fa-upload"></i></a>
+                                                data-bs-toggle="modal" data-bs-target="#Modaldetail2-{{ $d->id_modul }}"><i class="fa fa-upload"></i></a>
                                             </td>
                                           </tr>
                                         @endforeach
@@ -279,7 +279,7 @@
     <!-- Modal1 -->
     @foreach ( $data as $dt )
 
-    <div class="modal fade " id="Modaldetail-{{ $dt->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="Modaldetail-{{ $dt->id_modul }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
@@ -321,16 +321,16 @@
 
     <!-- Modal2 -->
     @foreach ( $data as $dt )
-    <div class="modal fade " id="Modaldetail2-{{ $dt->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="Modaldetail2-{{ $dt->id_modul }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Kelas {{ $dt->nama_kelas }} - {{ $dt->nama_modul }} </h5>
+              <h5 class="modal-title" id="exampleModalLabel">Kelas {{ $dt->praktikum->kelas->nama_kelas }} - {{ $dt->nama_modul }} </h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                @foreach ( $dt->tugas as $tugas)
                 <table id="dtM" class="table table-bordered table-striped table-hover dataTable">
-                    @foreach ( $dt->tugas as $tugas)
                     <tr>
                         <td>Jenis Tugas</td>
                         <td>{{$tugas->jenis_tugas  }} </td>
@@ -339,7 +339,6 @@
                         <td>Tanggal Praktek</td>
                         <td>{{ $dt->tanggal_praktek }} </td>
                     </tr>
-
                 </table>
                 <form id="tugas" action="/praktikan/uploadjawabantugas" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -347,6 +346,7 @@
                         <div class="col-xl-2"></div>
                         <div class="col-xl-8">
                             <div class="my-5">
+
                                 <div>
                                     <input type="hidden" name="tugas_id" value="{{ $tugas->id_tugas }}">
                                 </div>
@@ -378,6 +378,9 @@
                     </div>
                 </form>
                 @endforeach
+                @if ($dt->tugas->where('is_active', 'Y')->count()==0)
+                  <tr> <td colspan="2" class="text-center">Tugas Belum Tersedia!</td></tr>
+                @endif
 
             </div>
             <div class="modal-footer">

@@ -7,7 +7,7 @@
 
 @if (session()-> has('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{ session('success') }}
+    {!! session('success') !!}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
@@ -40,6 +40,9 @@
          <td>{{ $dt->kelas->dosen->nama_dosen }}</td>
          <td>
              <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $dt->id_modul }}"><span data-feather="eye"></span></a>
+             @if (!$dt->used)
+             <a href="/modul/usemodul/{{ $dt->id_modul }}" class="badge bg-warning"><span data-feather="sunrise" onclick="return confirm('Yakin akan menggunakan modul ini?!!!')"></span></a>
+             @endif
              <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
              <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
          </td>

@@ -67,7 +67,7 @@
                             <div class="input-group">
                                 <select class="selectpicker form-control w-50" name="id_bahan[]" id="bahan" multiple data-live-search="true" data-dropup-auto="false">
                                     @foreach ($bahan as $b )
-                                        <option value="{{ $b->id_bahan }}">{{ $b->nama_bahan }}{{' '.$b->rumus }}</option>
+                                        <option value="{{ $b->id_bahan }}">{{ $b->nama_bahan }}{{' '.$b->rumus }} - Stock Bahan = {{' '.$b->jumlah  }}</option>
                                     @endforeach
                                 </select>
                             </div>

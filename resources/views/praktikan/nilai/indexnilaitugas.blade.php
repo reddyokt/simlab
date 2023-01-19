@@ -57,10 +57,9 @@
                                         @else
                                         <td>Belum dinilai</td>
                                         @endif
-
                                         <td>
                                             <a href="{{URL($dt->file_jawaban)}}" target="_blank" class="badge bg-info"><span data-feather="download"></span></a>
-                                            <a href="#" class="badge bg-danger"><span data-feather="edit" data-bs-toggle="modal" data-bs-target="#Modaldetail-"></span></a>
+                                            <a href="#" class="badge bg-danger"><span data-feather="edit" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $dt->id_jawaban_tugas }}"></span></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -73,7 +72,7 @@
     </div>
     <!-- Modal -->
                 @foreach ($data as $dt )
-                <div class="modal fade" id="Modaldetail-" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="Modaldetail-{{ $dt->id_jawaban_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -91,7 +90,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <input type="hidden" name="mahasiswa_id" value="{{ $dt->mahasiswa->id_mahasiswa }}">
+                                        <input type="hidden" name="id_jawaban_tugas" value="{{ $dt->id_jawaban_tugas }}">
                                         <td>{{ $dt->mahasiswa->nama_mahasiswa}}</td>
                                         <td><input type="text" name="nilaitugas" id="nilaitugas"> </td>
                                 </tbody>

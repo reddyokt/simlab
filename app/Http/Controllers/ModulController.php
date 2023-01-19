@@ -60,19 +60,6 @@ class ModulController extends BaseController
        $modul->praktikum_id=$data['kelas_id'];
        $modul->tanggal_praktek=$data['tanggal_praktek'];
        $modul->save();
-
-    //    if (is_countable($data['alat']) && count($data['alat'])>0) {
-    //     foreach ($data['alat'] as $item =>$value) {
-    //     $data2 = array(
-    //         'modul_id'=>$modul->id_modul,
-    //         'alat_id'=>$data['alat'][$item],
-
-    //     );
-    //     Membermodul::create($data2);
-    //     }
-
-    //     }
-
     foreach ($data['alat'] as $index=>$alat){
         $x = ['modul_id'=>$modul->id_modul,
             'alat_id'=>$data['alat'][$index],
@@ -94,21 +81,6 @@ class ModulController extends BaseController
         return redirect ('/modul')->with('success', 'Data Modul berhasil ditambahkan');
     }
 
-    // public function addItem($id_modul)
-    // {
-    //     $alatA = DB::table('alat')
-    //     ->whereIn('alat.jenis',['c2a'])
-    //     ->get();
-
-    //     $alatB = DB::table('alat')
-    //     ->whereIn('alat.jenis',['c2b'])
-    //     ->get();
-    //     $modul = Modul::find($id_modul);
-    //     //$alat = Alats::all();
-    //     return view('modul.addItem', compact('modul','alatA','alatB'));
-
-    // }
-
     public function storeItem(Request $request)
     {
         //return $request;
@@ -122,6 +94,24 @@ class ModulController extends BaseController
         $item->alat_id =$request->alatc2a;
         $item->alat_id =$request->alatc2b;
         $item->save();
+    }
+
+    public function usemodul(Request $request, $id_modul)
+    {
+        $modul = Modul::find($id_modul);
+        $bahanmember = $modul->membermodul()->where('bahan_id','!=',0)->get();
+        //dd($bahan->toArray());
+        $msg = '';
+        foreach ($bahanmember as $b) {
+            $bahan = Bahan::find($b->bahan_id);
+            $bahan->jumlah = $bahan->jumlah - $b->jumlah_bahan;
+            $msg = $msg."Nama Bahan : {$bahan->nama_bahan} Jumlah Dipakai : {$b->jumlah_bahan} Sisa Bahan : {$bahan->jumlah} <br>\n";
+            $bahan->save();
+        }
+        $modul->used = true;
+        $modul->save();
+
+        return redirect ('/modul')->with('success', $msg);
     }
 
 }

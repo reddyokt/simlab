@@ -163,6 +163,8 @@ Route::post('/modul/createmodul', [ModulController::class, 'storemodul']);
 
 Route::get('/modul/addItem/{id_modul}', [ModulController::class, 'addItem']);
 Route::post('/modul/addItem', [ModulController::class, 'storeItem']);
+Route::get('/modul/usemodul/{id_modul}', [ModulController::class, 'usemodul']);
+
 
 
 //----------------------------------------Mahasiswa-----------------------------//

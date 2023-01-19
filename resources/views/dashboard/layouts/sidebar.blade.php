@@ -1,39 +1,3 @@
-<!--<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-    <div class="position-sticky pt-3">
-      <ul class="nav flex-column">
-        <li class="nav-item"> <a class="nav-link active" aria-current="page" href="/dashboard"> <span data-feather="home"></span> Dashboard </a> </li>
-
-        <li class="nav-item"> <a class="nav-link" href="#"> <span data-feather="shopping-bag"></span> Inventory </a>
-            <ul>
-                <li class="nav-item list-unstyled"> <a class="nav-link" href="/inventory/alat"> <span data-feather="tool"></span> Alat Praktikum </a> </li>
-                <li class="nav-item list-unstyled"> <a class="nav-link" href="/inventory/bahan"> <span data-feather="droplet"></span> Bahan Praktikum </a> </li>
-                <li class="nav-item list-unstyled"> <a class="nav-link" href="/inventory/barang"> <span data-feather="monitor"></span> Barang Umum </a> </li>
-            </ul>
-        </li>
-        <li class="nav-item"> <a class="nav-link" href="#"> <span data-feather="smile"></span> Praktikan </a>
-            <ul>
-                <li class="nav-item list-unstyled"> <a class="nav-link" href="/praktikan/peserta"> <span data-feather="list"></span> Daftar Peserta </a> </li>
-                <li class="nav-item list-unstyled"> <a class="nav-link" href="/praktikan/jadwal"> <span data-feather="calendar"></span> Jadwal </a> </li>
-                <li class="nav-item list-unstyled"> <a class="nav-link" href="/praktikan/absen"> <span data-feather="user-check"></span> Absen </a>
-                <li class="nav-item list-unstyled"> <a class="nav-link" href="/praktikan/tugas"> <span data-feather="activity"></span> Tugas & Nilai </a> </li>
-            </ul>
-        <li class="nav-item"> <a class="nav-link"> <span data-feather="grid"></span> Praktikum </a>
-            <ul>
-                <li class="nav-item list-unstyled"> <a class="nav-link" href="/kelas"> <span data-feather="twitch"></span> Kelas Praktikum </a> </li>
-                <li class="nav-item list-unstyled"> <a class="nav-link" href="/modul"> <span data-feather="book-open"></span> Modul Praktikum </a> </li>
-            </ul>
-        </li>
-        <li class="nav-item"> <a class="nav-link" href="#"> <span data-feather="users"></span> Master Akun </a>
-            <ul>
-                <li class="nav-item list-unstyled"> <a class="nav-link" href="/user"> <span data-feather="tool"></span> Admin </a> </li>
-                <li class="nav-item list-unstyled"> <a class="nav-link" href="/dosen"> <span data-feather="droplet"></span> Dosen </a> </li>
-
-            </ul>
-
-        </li>
-      </ul>
-    </div>
-</nav>-->
 <style>
             .b-example-divider {
             flex-shrink: 0;
@@ -119,6 +83,7 @@
                         Dashboard
                         </button></a>
                     </li>
+                    @if (auth()->user()->role =='Laboran' or auth()->user()->role =="Kepala Lab")
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#inventory-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="shopping-bag"></span> Inventory
@@ -131,6 +96,9 @@
                         </ul>
                         </div>
                     </li>
+                    @endif
+
+                    @if (auth()->user()->role =="Kepala Lab")
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#praktikan-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="slack"></span> Praktikan
@@ -148,6 +116,9 @@
                         </ul>
                         </div>
                     </li>
+                    @endif
+
+                    @if (auth()->user()->role =="Kepala Lab")
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#praktikum-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="book-open"></span> Praktikum
@@ -160,6 +131,9 @@
                         </ul>
                         </div>
                     </li>
+                    @endif
+
+                    @if (auth()->user()->role =="Kepala Lab")
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#akun-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="users"></span> Master Akun
@@ -172,6 +146,9 @@
                         </ul>
                         </div>
                     </li>
+                    @endif
+
+                    @if (auth()->user()->role =='Laboran' or auth()->user()->role =="Kepala Lab")
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#landing-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="layout"></span> Landing Page
@@ -183,6 +160,7 @@
                         </ul>
                         </div>
                     </li>
+                    @endif
                     </ul>
             </div>
         </nav>
