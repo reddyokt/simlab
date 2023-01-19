@@ -366,7 +366,7 @@
                                     <label class="col-4">Upload File Jawaban</label>
                                     <div class="col-8">
                                         <input accept="image/png, image/jpeg, image/jpg, application/pdf"
-                                        class="form-control" type="file" id="dataimport" name="dataimport" placeholder="Hanya Menerima Image file (png,jpeg,jpg) dan PDF File">
+                                        class="form-control" type="file" id="file_jawaban" name="file_jawaban" placeholder="Hanya Menerima Image file (png,jpeg,jpg) dan PDF File">
                                         <p class="text-secondary"><small> Hanya Image file (png,jpeg,jpg) dan PDF File</small></p>
                                     </div>
                                 </div>

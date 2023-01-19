@@ -127,11 +127,11 @@ class LandingController extends Controller
        $validatedData = $request->validate([
             'tugas_id'=>'required',
             'mahasiswa_id'=>'required',
-            'dataimport'=>'required|mimes:png,jpg,pdf|max:2048'
+            'file_jawaban'=>'required|mimes:png,jpg,pdf|max:2048'
         ]);
 
-        if($request->file('dataimport')) {
-            $validatedData['file_jawaban'] = $request->file('dataimport')->store('upload_jawaban');
+        if($request->file('file_jawaban')) {
+            $validatedData['file_jawaban'] = $request->file('file_jawaban')->store('upload_jawaban');
         }
         unset($validatedData['dataimport']);
         JawabanTugas::create($validatedData);
