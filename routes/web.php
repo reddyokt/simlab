@@ -140,6 +140,8 @@ Route::get('/praktikan/createujian', [TugasController::class, 'createujian']);
 Route::post('/praktikan/createtugas', [TugasController::class, 'storetugas']);
 Route::post('/praktikan/createujian', [TugasController::class, 'storeujian']);
 
+
+
 //---------------------------------Praktikum----------------------------------//
 Route::get('/periode', [PeriodeController::class, 'index']);
 Route::get('/periode/create', [PeriodeController::class, 'createperiode']);
@@ -170,4 +172,4 @@ Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 //----------------------------------------Nilai-----------------------------//
 Route::get('/praktikan/nilaitugas', [NilaiController::class, 'indexnilaitugas']);
 Route::get('/praktikan/nilaiakhir', [NilaiController::class, 'indexnilaiakhir']);
-
+Route::post('/praktikan/isinilaitugas', [NilaiController::class, 'isinilaitugas']);

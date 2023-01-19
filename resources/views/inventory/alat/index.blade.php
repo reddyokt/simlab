@@ -26,13 +26,13 @@
         <table id="example1" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Nama Alat</th>
-                    <th>Merk</th>
-                    <th>Ukuran</th>
-                    <th>Jumlah</th>
-                    <th>Lokasi</th>
-                    <th>Action</th>
+                    <th style="font-size:12px">#</th>
+                    <th style="font-size:12px">Nama Alat</th>
+                    <th style="font-size:12px">Merk</th>
+                    <th style="font-size:12px">Ukuran</th>
+                    <th style="font-size:12px">Jumlah</th>
+                    <th style="font-size:12px">Lokasi</th>
+                    <th style="font-size:12px">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,11 +41,11 @@
 
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $a->nama_alat }}</td>
-                <td>{{ $a->merk }}</td>
-                <td>{{ $a->ukuran }}</td>
-                <td>{{ $a->jumlah }}</td>
-                <td> {{ $a->nama_lokasi }}<br>Lemari : {{ $a->nama_lemari }}.{{ $a->baris }}.{{ $a->kolom }}</td>
+                <td style="font-size:12px">{{ $a->nama_alat }}</td>
+                <td style="font-size:12px">{{ $a->merk }}</td>
+                <td style="font-size:12px">{{ $a->ukuran }}</td>
+                <td style="font-size:12px">{{ $a->jumlah }}</td>
+                <td style="font-size:12px"> {{ $a->nama_lokasi }}<br>Lemari : {{ $a->nama_lemari }}.{{ $a->baris }}.{{ $a->kolom }}</td>
                 <td>
                     <a href="" class="badge bg-info"><span data-feather="edit"></span></a>
                     <a href="" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Alat?!!!')"><span data-feather="x-circle"></span></a>
@@ -55,38 +55,6 @@
             @endforeach
             </tbody>
         </table>
-
-        {{--<table id="example1" class="display" style="width:100%">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nama Alat</th>
-                    <th>Merk</th>
-                    <th>Ukuran</th>
-                    <th>Jumlah</th>
-                    <th>Lokasi</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ( $c2a_alat as $alats )
-
-                <tr>
-                    <td>{{ $loop->iteration  }}</td>
-                    <td>{{ $alats->nama_alat_c2a }}</td>
-                    <td>{{ $alats->merk }}</td>
-                    <td>{{ $alats->ukuran }}</td>
-                    <td>{{ $alats->jumlah }}</td>
-                    <td>{{ $alats->lemari->nama_lemari }}.{{ $alats->baris }}.{{ $alats->kolom }}</td>
-                    <td>
-                        <a href="/alatc2a/{{ $alats->id_alat_c2a }}" class="badge bg-info"><span data-feather="edit"></span></a>
-                        <a href="/deletec2a/{{ $alats->id_alat_c2a }}" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Alat?!!!')"><span data-feather="x-circle"></span></a>
-
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>--}}
     </div>
 </div>
 <div class="card ">
@@ -98,25 +66,25 @@
         <table id="example2" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Nama Alat</th>
-                        <th>Merk</th>
-                        <th>Ukuran</th>
-                        <th>Jumlah</th>
-                        <th>Lokasi</th>
-                        <th>Action</th>
+                        <th style="font-size:12px">#</th>
+                        <th style="font-size:12px">Nama Alat</th>
+                        <th style="font-size:12px">Merk</th>
+                        <th style="font-size:12px">Ukuran</th>
+                        <th style="font-size:12px">Jumlah</th>
+                        <th style="font-size:12px">Lokasi</th>
+                        <th style="font-size:12px">Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach ( $c2b as $b )
                     <tr>
-                        <td>{{ $loop->iteration  }}</td>
-                        <td>{{ $b->nama_alat }}</td>
-                        <td>{{ $b->merk }}</td>
-                        <td>{{ $b->ukuran }}</td>
-                        <td>{{ $b->jumlah }}</td>
-                        <td>{{ $b->nama_lokasi }}</td>
+                        <td style="font-size:12px">{{ $loop->iteration  }}</td>
+                        <td style="font-size:12px">{{ $b->nama_alat }}</td>
+                        <td style="font-size:12px">{{ $b->merk }}</td>
+                        <td style="font-size:12px">{{ $b->ukuran }}</td>
+                        <td style="font-size:12px">{{ $b->jumlah }}</td>
+                        <td style="font-size:12px">{{ $b->nama_lokasi }}</td>
                         <td>
                             <a href="" class="badge bg-info"><span data-feather="edit"></span></a>
                             <a href="" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Alat?!!!')" ><span data-feather="x-circle"></span></a>

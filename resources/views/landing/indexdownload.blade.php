@@ -17,13 +17,13 @@
     <a class="btn btn-success my-3 ms-auto" href="/download/create" role="button">Upload SOP/Modul</a>
 </div>
 
-<table id="example" class="display" style="width:100%">
+<table id="example" class="display" style="width:100%; font-size:12px;">
     <thead>
         <tr>
             <th>#</th>
             <th>Judul File</th>
             <th>Uraian File</th>
-            <th>Download File</th>
+            <th class="d-flex justify-content-center">Download File</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -33,7 +33,7 @@
             <td>{{ $loop->iteration  }}</td>
             <td>{{ $d->judul_file }}</td>
             <td>{!! $d->uraian_file !!}</td>
-            <td><a href="{{ $d->pdf }}" target="_blank">Download</a></td>
+            <td class="d-flex justify-content-center"><a href="{{ $d->pdf }}" target="_blank"><span data-feather="file"></a></td>
             <td>
                 <a href="/mhs/" class="badge bg-info"><span data-feather="edit"></span></a>
                 <a href="/delete/" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Mahasiswa?!!!')"><span data-feather="x-circle"></span></a>

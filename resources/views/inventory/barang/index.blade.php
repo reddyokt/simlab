@@ -18,7 +18,7 @@
     <a class="btn btn-success my-3 ms-auto" href="/inventory/barang/create" role="button">Tambah Barang</a>
 </div>
 
-<table id="example" class="display table table-striped" style="width:100%">
+<table id="example" class="display table table-striped" style="width:100% font-size:12px">
     <thead>
         <tr>
             <th>#</th>

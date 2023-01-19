@@ -39,9 +39,14 @@
                 <div class="container slidero" style="height:450px;>
                     <div class="row align-items-center">
                         <div class="col-lg-10 my-5">
+                            @if (session()-> has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            @endif
                             <div class="home-content text-white ">
                                 <h2 class="home-title ">SISTEM INFORMASI <br> MANAJEMEN LAB
-
                                 </h2>
                                 <h4 class="text-white f-29">
                                     PROGRAM STUDI <br>TEKNIK KIMIA<br>FAKULTAS TEKNIK
@@ -356,12 +361,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <!--<div class="form-group row mb-2">
-                                        <label class="col-4">Masukkan Email</label>
-                                        <div class="col-8">
-                                            <input class="form-control" id="email" type="text" name="email" required>
-                                        </div>
-                                </div>-->
                                 <div class="form-group row mb-2">
                                     <label class="col-4">Upload File Jawaban</label>
                                     <div class="col-8">

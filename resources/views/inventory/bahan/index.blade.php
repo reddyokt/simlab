@@ -18,26 +18,26 @@
     <a class="btn btn-success my-3 ms-auto" href="/bahan/create" role="button">Tambah Bahan Kimia</a>
 </div>
 
-<table id="example" class="display" style="width:100%">
+<table id="example" class="display" style="width:100% font-size:12px">
     <thead>
         <tr>
-            <th>#</th>
-            <th>Nama Bahan</th>
-            <th>Rumus Kimia</th>
-            <th>Lokasi</th>
-            <th>Jumlah</th>
-            <th>Action</th>
+            <th style="font-size:12px">#</th>
+            <th style="font-size:12px">Nama Bahan</th>
+            <th style="font-size:12px">Rumus Kimia</th>
+            <th style="font-size:12px">Lokasi</th>
+            <th style="font-size:12px">Jumlah</th>
+            <th style="font-size:12px">Action</th>
         </tr>
     </thead>
     <tbody>
     @foreach ($bahan as $b )
 
     <tr>
-        <td>{{ $loop->iteration }}</td>
-        <td>{{ $b->nama_bahan }}</td>
-        <td>{{ $b->rumus }}</td>
-        <td>{{ $b->lokasi_id }}</td>
-        <td>{{ $b->jumlah }}</td>
+        <td style="font-size:12px">{{ $loop->iteration }}</td>
+        <td style="font-size:12px">{{ $b->nama_bahan }}</td>
+        <td style="font-size:12px">{{ $b->rumus }}</td>
+        <td style="font-size:12px">{{ $b->lokasi_id }}</td>
+        <td style="font-size:12px">{{ $b->jumlah }}</td>
         <td>
             <a href="" class="badge bg-info"><span data-feather="edit"></span></a>
             <a href="" class="badge bg-danger"><span data-feather="x-circle"></span></a>

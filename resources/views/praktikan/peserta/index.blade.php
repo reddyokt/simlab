@@ -12,12 +12,12 @@
 </div>
 @endif
 
-<div class="card mt-3">
+<div class="card mt-3" style="font-size:12px;">
     <div class="card-header bg-primary text-white">Import Data Calon Praktikan</div>
     <div class="card-body">
         <form action="/praktikan/import" method="post" enctype="multipart/form-data">
             @csrf
-            <div class=" form-group mb-1 ">
+            <div class=" form-group mb-1" style="font-size:12px;">
                 <select class="form-control" name="periode_id" id="periode_id" value="{{ old ('periode_id') }}">
                     <option selected disabled>Pilih Periode</option>
                     @foreach ( $periode as $per )
@@ -32,7 +32,7 @@
             </div>
             <div>
             </div>
-            <div class="form-group row mb-3">
+            <div class="form-group row mb-3" style="font-size:12px;">
                 <div class="col">
                     <input accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                     class="form-control" type="file" id="dataimport" name="dataimport">
@@ -45,7 +45,7 @@
 
 <h3 class="title my-3">Daftar Peserta Praktikum</h3>
 <div class="card-body">
-    <table id="example" class="display" style="width:100%">
+    <table id="example" class="display" style="width:100%; font-size:12px">
         <thead>
             <tr>
                 <th>#</th>

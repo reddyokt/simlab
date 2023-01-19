@@ -17,7 +17,7 @@
     <a class="btn btn-success my-3 ms-auto" href="/praktikan/createkelompok" role="button">Buat Kelompok</a>
 </div>
 
-<table id="example" class="display" style="width:100%">
+<table id="example" class="display" style="width:100%; font-size:12px;">
     <thead>
         <tr>
             <th>#</th>

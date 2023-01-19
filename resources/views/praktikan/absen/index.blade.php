@@ -28,7 +28,7 @@
 
                     <div class="row">
                         <div class="table-responsive">
-                            <table id="dtM" class="table table-bordered table-striped table-hover dataTable">
+                            <table id="dtM" class="table table-bordered table-striped table-hover dataTable" style="font-size:12px;">
                                 <thead>
                                     <tr>
                                         <th>#</th>
