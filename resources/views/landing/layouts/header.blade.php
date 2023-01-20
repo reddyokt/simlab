@@ -4,7 +4,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/7c2dd59b38.js"></script>
 
-<nav class="col-lg-12 navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark">
+<nav class="col-lg-12 navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark bg-primary">
     <div class="container">
         <!-- LOGO -->
         <a class="navbar-brand logo text-uppercase" href="index-1.html">
@@ -57,7 +57,7 @@
 
                 @else
                 <div class="navbar-button d-none d-lg-inline-block">
-                    <a href="/login" class="btn btn-sm btn-custom-light btn-rounded btn-round text-white">Login</a>
+                    <a href="/login" class="btn btn-md btn-custom-light btn-rounded btn-round text-white bg-success">Login</a>
                 </div>
 
             @endauth
