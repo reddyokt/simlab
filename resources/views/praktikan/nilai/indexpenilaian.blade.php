@@ -15,10 +15,11 @@
         </div>
         @endif
             <!--begin::Card-->
+
             <div class="card card-custom card-sticky mt-5" id="kt_page_sticky_card">
                 <div class="card-header">
                     <div class="card-title">
-                        <h4 class="card-label float-start">Daftar Praktikan Upload Jawaban</h4>
+                        <h4 class="card-label float-start">Daftar Mahasiswa Modul</h4>
 
                     </div>
 
@@ -31,30 +32,21 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nama Mahasiswa</th>
-                                        <th>Kelas | Modul</th>
-                                        <th>Jenis Tugas</th>
-                                        <th>Nilai Tugas</th>
-                                        <th>Action</th>
+                                        <th>Nama Kelas</th>
+                                        <th>Modul</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $dt )
                                     <tr>
-
                                         <td>{{ $loop->iteration  }}</td>
-                                        <td>{{ $dt->mahasiswa->nama_mahasiswa}}</td>
-                                        <td>{{ $dt->tugas->modul->praktikum->kelas->nama_kelas}} | {{ $dt->tugas->modul->nama_modul}}</td>
-                                        <td>{{ $dt->tugas->jenis_tugas }}</td>
-                                        @if ($dt->nilaitugas !==Null)
-                                        <td>{{ $dt->nilaitugas }}</td>
-                                        @else
-                                        <td>Belum dinilai</td>
-                                        @endif
-                                        <td>
-                                            <a href="{{URL($dt->file_jawaban)}}" target="_blank" class="badge bg-info"><span data-feather="download"></span></a>
-                                            <a href="#" class="badge bg-danger"><span data-feather="edit" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $dt->id_jawaban_tugas }}"></span></a>
+                                        <td>{{ $dt->kelas->nama_kelas}} </td>
+                                        <td>@foreach ( $dt->modul()->get() as $modul )
+                                                <a href="#"><span data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $modul->id_modul }}">{{$modul->nama_modul}}</span></a> <br>
+                                            @endforeach
                                         </td>
+
+
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -66,11 +58,12 @@
     </div>
     <!-- Modal -->
                 @foreach ($data as $dt )
-                <div class="modal fade" id="Modaldetail-{{ $dt->id_jawaban_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                 @foreach ( $dt->modul()->get() as $modul)
+                <div class="modal fade" id="Modaldetail-{{ $modul->id_modul }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"> Isi Nilai {{ $dt->tugas->jenis_tugas }}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel"> List Mahasiswa {{ $modul->nama_modul }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form action="/praktikan/isinilaitugas" method="post">
@@ -80,13 +73,16 @@
                                 <thead>
                                     <tr>
                                         <th>Nama Mahasiswa</th>
-                                        <th>Masukkan Nilai</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <input type="hidden" name="id_jawaban_tugas" value="{{ $dt->id_jawaban_tugas }}">
-                                        <td>{{ $dt->mahasiswa->nama_mahasiswa}}</td>
-                                        <td><input type="text" name="nilaitugas" id="nilaitugas"> </td>
+                                    <td>
+                                    @foreach ( $modul->praktikum->mahasiswa()->get() as $mhs)
+                                    <a href="{{ route('isinilai',['mahasiswa_id'=>$mhs->id_mahasiswa,
+                                    'modul_id'=>$modul->id_modul]) }}">{{ $mhs->nama_mahasiswa }}</a><br>
+                                    @endforeach
+                                </td>
+
                                 </tbody>
                             </table>
                         </div>
@@ -97,6 +93,7 @@
                     </div>
                     </div>
                 </div>
+                @endforeach
                 @endforeach
 
 

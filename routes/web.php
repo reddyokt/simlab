@@ -172,6 +172,8 @@ Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 
 
 //----------------------------------------Nilai-----------------------------//
-Route::get('/praktikan/nilaitugas', [NilaiController::class, 'indexnilaitugas']);
+Route::get('/praktikan/penilaian', [NilaiController::class, 'indexpenilaian']);
 Route::get('/praktikan/nilaiakhir', [NilaiController::class, 'indexnilaiakhir']);
-Route::post('/praktikan/isinilaitugas', [NilaiController::class, 'isinilaitugas']);
+Route::get('/praktikan/nilaisubjektif', [NilaiController::class, 'indexnilailaporan']);
+Route::get('/praktikan/isinilai', [NilaiController::class, 'isinilaimahasiswa'])->name('isinilai');
+Route::post('/praktikan/isinilai1', [NilaiController::class, 'storenilai1']);

@@ -6,54 +6,64 @@
     <h1 class="h2">Assalamu'alaikum {{ auth()->user()->username }}</h1>
 </div>
 
-<div class="card">
-    <div class="card-header">
-      Daftar Praktikan Menunggu Persetujuan
-    </div>
-    <div class="card-body">
-        <table id="example" class="table table-borderless" style="width:100%">
-            <thead class="thead-light">
-                <tr>
-                    <th>#</th>
-                    <th>Nama Mahasiswa</th>
-                    <th>NIM</th>
-                    <th>Praktikum Dipilih</th>
-                    <th class="dblock text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($dataMhs as $key=>$d)
+  <div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
 
-                <tr>
-                    <td>{{ $loop->iteration  }}</td>
-                    <td>{{ $d->nama_mahasiswa}}</td>
-                    <td>{{ $d->nim }}</td>
-                    <td>{{ $d->nama_kelas }}</td>
-                    <td class="dblock text-center">
-                        <div class="row text-center">
-                            <form action="/setuju/{{ $d->id_pendaftaran }}" method="POST" class="row text-center mx-auto">
-                                @csrf
-                                <div class="col-md-7">
-                                    <select class="form-control" name="status" id="status" required value="{{ old ('status') }}" style="font-size:12px;">
-                                        <option selected disabled>Belum divalidasi</option>
-                                        <option select value ="Diterima">Diterima</option>
-                                        <option select value ="Ditolak">Ditolak</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-1">
-                                    <button class="btn btn-md btn-primary" type="submit">SIMPAN</button>
-                                </div>
-                            </form>
-
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-primary text-white mb-4">
+                        <div class="card-body">Primary Card</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
-                    </td>
-                </tr>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-warning text-white mb-4">
+                        <div class="card-body">Warning Card</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">Success Card</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-danger text-white mb-4">
+                        <div class="card-body">Danger Card</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-  </div>
+        </div>
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
 
 @endsection
 

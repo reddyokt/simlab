@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTugasTable extends Migration
+class CreatePenilaianTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateTugasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tugas', function (Blueprint $table) {
-            $table->id('id_tugas');
+        Schema::create('penilaian', function (Blueprint $table) {
+            $table->id('id_penilaian');
             $table->foreignId('modul_id');
-            $table->enum('jenis_tugas',['pretest','posttest','laporan']);
-            $table->string('uraian_tugas')->nullable();
-            $table->enum('is_active',['Y','N'])->default('N');
-            $table->enum('is_validated',['Y','N'])->default('N');
+            $table->foreignId('mahasiswa_id');
+            $table->foreignId('user_id');
+            $table->enum('jenis_penilaian',['laporan','subjektif']);
+            $table->integer('nilai');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateTugasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tugas');
+        Schema::dropIfExists('penilaian');
     }
 }

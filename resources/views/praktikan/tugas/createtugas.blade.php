@@ -45,6 +45,7 @@
                                             <option selected disabled>Pilih Jenis Test</option>
                                             <option value="pretest">Pre Test</option>
                                             <option value="posttest">Post Test</option>
+                                            <option value="laporan">Laporan</option>
                                         </select>
                                     </div>
                             </div>
