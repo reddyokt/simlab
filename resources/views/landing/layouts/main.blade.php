@@ -123,26 +123,6 @@
     </section>
     <!-- END CTA -->
 
-    <!-- START CTA -->
-    <!--<section class="section bg-cta" id="cta">
-        <div class="bg-overlay-3"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="cta-content text-white text-center">
-
-                        <div class="text-white">
-                            <h2 class="title">Pengumuman</h2>
-                            <div class="mt-2">
-                                <a href="/daftarPraktikum" class="btn btn-primary">Klik Disini</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>-->
-    <!-- END CTA -->
         <!--START SCREENSHOT-->
         <section class="section bg-cta" id="pengumuman">
             <div class="container">
@@ -157,7 +137,7 @@
                                         <img src="{{URL($p->image)}}" class="card-img-top" alt="...">
                                         <div class="card-body">
                                         <h5 class="card-title">{{ $p->judul_pengumuman }}</h5>
-                                        <p class="card-text text-justify">{!!$p->uraian_pengumuman !!}</p>
+                                        <p class="card-text d-inline-block text-justify">{!!$p->uraian_pengumuman !!}</p>
                                         <p class="card-text"><small class="text-muted">{{ \Carbon\Carbon::parse($p->created_at)->isoFormat('Do MMMM YYYY' )}}</small></p>
                                         </div>
                                     </div>
@@ -196,13 +176,13 @@
                             <div class="text-dark" style="font-weight:100;">
                                 <h2 class="title text-white">Download</h2>
                                 <div class="mt-4">
-                                    <div class="container d-block mx-auto align-item-center">
+                                    <div class="container d-block mx-auto align-item-center" >
                                         <div class="row">
                                             @foreach ( $download as $d)
                                             <div class="col-sm-3">
                                                 <div class="card mb-3">
                                                     <img src="{{asset('img/pdf.png')}}" class="card-img-top mx-auto d-block mt-1" alt="..." style="width:60%">
-                                                    <div class="card-body">
+                                                    <div class="card-body" style="height:150px;">
                                                     {{--<h5 class="card-title">{{ $d->judul_file }}</h5>--}}
                                                     <a href="{{ $d->pdf }}" target="_blank"> <p class="card-text">{!!$d->uraian_file !!}</p></a>
                                                     <p class="card-text"><small class="text-muted">{{ \Carbon\Carbon::parse($d->created_at)->isoFormat('Do MMMM YYYY' )}}</small></p>
