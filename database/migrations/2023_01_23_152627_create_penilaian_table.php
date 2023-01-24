@@ -18,7 +18,6 @@ class CreatePenilaianTable extends Migration
             $table->foreignId('modul_id');
             $table->foreignId('mahasiswa_id');
             $table->foreignId('user_id');
-            $table->enum('jenis_penilaian',['laporan','subjektif']);
             $table->integer('nilai');
             $table->timestamps();
         });

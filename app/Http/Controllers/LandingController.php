@@ -123,7 +123,7 @@ class LandingController extends Controller
         if($request->file('file_jawaban')) {
             $validatedData['file_jawaban'] = $request->file('file_jawaban')->store('upload_jawaban');
         }
-        unset($validatedData['dataimport']);
+        //unset($validatedData['dataimport']);
         JawabanTugas::create($validatedData);
 
         return redirect ('/')->with('success', 'Jawaban Tugas berhasil diupload');

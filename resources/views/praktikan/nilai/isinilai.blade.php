@@ -44,9 +44,9 @@
                             @endif
 
                         </div>
-                        <div class="form-group row mb-3" style="font-size:12px;">
+                        <div class="form-group row mb-3" style="font-size:12px;" >
 
-                            <input type="text" name="nilai">
+                            <input type="text" name="nilai" value="{{ $jwbpretest->nilaitugas }}">
 
                         </div>
                         <button class="btn btn-sm btn-success float-start " role="button">Simpan</button>
@@ -62,6 +62,8 @@
 
                         </div>
                         <div>
+                            <input type="hidden" value="{{ $mhs_id }}" name="mahasiswa_id">
+                            <input type="hidden" value="{{ $posttest->id_tugas }}" name="tugas_id">
 
                             @if ($jwbposttest)
                             <a href="{{URL($jwbposttest->file_jawaban) }}" target="_blank">File Jawaban</a>
@@ -72,7 +74,7 @@
                         </div>
                         <div class="form-group row mb-3" style="font-size:12px;">
 
-                            <input type="text" name="nilai">
+                            <input type="text" name="nilai" value="{{ $jwbposttest->nilaitugas }}">
 
                         </div>
                         <button class="btn btn-sm btn-success float-start " role="button">Simpan</button>
@@ -88,6 +90,8 @@
 
                         </div>
                         <div>
+                            <input type="hidden" value="{{ $mhs_id }}" name="mahasiswa_id">
+                            <input type="hidden" value="{{ $laporan->id_tugas }}" name="tugas_id">
 
                             @if ($jwblaporan)
                             <a href="{{URL($jwblaporan->file_jawaban) }}" target="_blank">File Jawaban</a>
@@ -98,7 +102,7 @@
                         </div>
                         <div class="form-group row mb-3" style="font-size:12px;">
 
-                            <input type="text" name="nilai">
+                            <input type="text" name="nilai" value="{{ $jwblaporan->nilaitugas }}">
 
                         </div>
                         <button class="btn btn-sm btn-success float-start " role="button">Simpan</button>
@@ -108,7 +112,7 @@
             <div class="card mt-3" style="font-size:12px;">
                 <div class="card-header bg-primary text-white">Isi Nilai Subjektif</div>
                 <div class="card-body">
-                    <form action="/praktikan/import" method="post" enctype="multipart/form-data">
+                    <form action="/praktikan/isinilai2" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class=" form-group mb-1" style="font-size:12px;">
 
@@ -121,7 +125,7 @@
                         </div>
                         <div class="form-group row mb-3" style="font-size:12px;">
 
-                            <input type="text" name="nilai_pretest">
+                            <input type="text" name="nilai" value="{{$subjektif->nilai }}">
 
                         </div>
                         <button class="btn btn-sm btn-success float-start " role="button">Simpan</button>

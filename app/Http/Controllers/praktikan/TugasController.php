@@ -38,8 +38,12 @@ class TugasController extends Controller
 
     public function indexujian()
     {
-        $ujian = Ujian::all();
-        //dd($ujian->all());
+        $ujian = Ujian::whereHas('praktikum', function($q){
+            $q->whereHas('periode', function($q1){
+                $q1->where('status_periode','Aktif');
+            });
+        })->get();
+        //dd($ujian->toArray());
         return view ('praktikan.tugas.indexujian', compact ('ujian'));
     }
 
@@ -73,13 +77,11 @@ class TugasController extends Controller
 
     public function createujian()
     {
-        $praktikum=DB::table('praktikum')
-        ->leftJoin('kelas','praktikum.kelas_id', '=' ,'kelas.id_kelas')
-        ->where('praktikum.is_active','Y')
-        ->get();
-
-        //dd($praktikum->toArray());
-        return view ('praktikan.tugas.createujian', compact ('praktikum'));
+       $data = Praktikum::whereHas('periode', function ($q){
+        $q->where('status_periode','Aktif');
+       })
+       ->get();
+        return view ('praktikan.tugas.createujian', compact ('data'));
     }
 
 
@@ -105,14 +107,17 @@ class TugasController extends Controller
         //dd ($request->toArray());
         $ujian =  $request->validate([
             'praktikum_id'  => 'required',
-            'uraian_ujian' => 'required'
+            'jenis_ujian' =>'required|in:Ujian Awal,Ujian Akhir',
+            'uraian_ujian' => 'required',
+            'soal_ujian' => 'nullable|mimes:png,jpg,pdf|max:2048'
        ]);
-       $ujian = new Ujian();
-       $ujian->praktikum_id= $request->praktikum_id;
-       $ujian->uraian_ujian= $request->uraian_ujian;
+       if($request->file('soal_ujian')) {
+            $ujian['soal_ujian'] = $request->file('soal_ujian')->store('soal_ujian');
+        }
+        $ujian['user_id'] = auth()->id();
+        Ujian::create($ujian);
 
-       $ujian->save();
-       return redirect('/praktikan/ujian');
+        return redirect('/praktikan/ujian');
     }
 
     public function showtugas($id_tugas)

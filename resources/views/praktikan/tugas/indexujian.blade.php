@@ -46,7 +46,6 @@
                                 <tbody>
                                     @foreach ($ujian as $uj )
                                     <tr>
-
                                         <td>{{ $loop->iteration  }}</td>
                                         <td>{{ $uj->praktikum->kelas->nama_kelas }}</td>
                                         <td>{{ $uj->is_active }}</td>

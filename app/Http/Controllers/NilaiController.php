@@ -9,6 +9,7 @@ use App\Models\Nilai;
 use App\Models\PraktikumMahasiswa;
 use App\Models\Praktikum;
 use App\Models\Mahasiswa;
+use App\Models\PenilaianSubjektif;
 use Illuminate\Http\Request;
 
 class NilaiController extends Controller
@@ -35,10 +36,11 @@ class NilaiController extends Controller
         $jwbpretest = JawabanTugas::where('tugas_id',$pretest->id_tugas)->where('mahasiswa_id',$mhs->id_mahasiswa)->first();
         $jwbposttest = JawabanTugas::where('tugas_id',$posttest->id_tugas)->where('mahasiswa_id',$mhs->id_mahasiswa)->first();
         $jwblaporan = JawabanTugas::where('tugas_id',$laporan->id_tugas)->where('mahasiswa_id',$mhs->id_mahasiswa)->first();
+        $subjektif = PenilaianSubjektif::where('modul_id', $mdl->id_modul)->where('mahasiswa_id',$mhs->id_mahasiswa)->first();
         $mhs_id = $request->mahasiswa_id;
         $modul_id = $request->modul_id;
         //dd ($pretest->toArray());
-        return view ('praktikan.nilai.isinilai', compact('mhs','mdl', 'pretest','posttest', 'laporan','jwbpretest','jwbposttest','jwblaporan','mhs_id','modul_id'));
+        return view ('praktikan.nilai.isinilai', compact('mhs','mdl', 'pretest','posttest', 'laporan','jwbpretest','jwbposttest','jwblaporan','mhs_id','modul_id','subjektif'));
     }
     public function storenilai1(Request $request)
     {
@@ -47,9 +49,20 @@ class NilaiController extends Controller
         ->where('mahasiswa_id',$request->mahasiswa_id)
         ->update(['nilaitugas'=>$request->nilai]);
 
-        return redirect()->route('isinilai');
+        return redirect()->back();
 
 
+    }
+    public function storenilai2(Request $request)
+    {
+         //dd($request->all());
+        $nilai = PenilaianSubjektif::updateOrCreate(
+            ['mahasiswa_id'=>$request->mahasiswa_id, 'modul_id'=>$request->modul_id],
+            ['nilai'=>$request->nilai, 'user_id'=>auth()->id()]
+        );
+
+
+        return redirect()->back();
     }
     public function indexnilaitugas()
     {
@@ -69,7 +82,6 @@ class NilaiController extends Controller
     public function isinilaitugas(Request $request)
     {
         //dd($request->all());
-
         $jawaban = JawabanTugas::find($request->id_jawaban_tugas);
         $jawaban->nilaitugas=$request->nilaitugas;
         $jawaban->save();
