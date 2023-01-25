@@ -109,12 +109,12 @@
                             <li><a href="/praktikan/kelompok" class="link-dark rounded">Kelompok</a></li>
                             <li><a href="/praktikan/absen" class="link-dark rounded">Absen</a></li>
                             <li><a href="/praktikan/tugas" class="link-dark rounded">Tugas</a></li>
-                            <li><a href="/praktikan/validasi" class="link-dark rounded">Validasi Tugas</a></li>
+                            <li><a href="/praktikan/validasitugas" class="link-dark rounded">Validasi Tugas</a></li>
                             <li><a href="/praktikan/ujian" class="link-dark rounded">Ujian</a></li>
-                            <li><a href="/praktikan/validasi" class="link-dark rounded">Validasi Ujian</a></li>
-                            <li><a href="/praktikan/penilaian" class="link-dark rounded">Nilai Tugas</a></li>
+                            <li><a href="/praktikan/validasiujian" class="link-dark rounded">Validasi Ujian</a></li>
+                            <li><a href="/praktikan/penilaiantugas" class="link-dark rounded">Nilai Tugas</a></li>
                             <li><a href="/praktikan/nilaisubjektif" class="link-dark rounded">Nilai Subjektif</a></li>
-                            <li><a href="/praktikan/nilaiakhir" class="link-dark rounded">Nilai Akhir</a></li>
+                            <li><a href="/praktikan/penilaianakhir" class="link-dark rounded">Nilai Akhir</a></li>
                         </ul>
                         </div>
                     </li>

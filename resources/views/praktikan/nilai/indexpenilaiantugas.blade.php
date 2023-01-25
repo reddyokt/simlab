@@ -78,7 +78,7 @@
                                 <tbody>
                                     <td>
                                     @foreach ( $modul->praktikum->mahasiswa()->get() as $mhs)
-                                    <a href="{{ route('isinilai',['mahasiswa_id'=>$mhs->id_mahasiswa,
+                                    <a href="{{ route('isinilaitugas',['mahasiswa_id'=>$mhs->id_mahasiswa,
                                     'modul_id'=>$modul->id_modul]) }}">{{ $mhs->nama_mahasiswa }}</a><br>
                                     @endforeach
                                 </td>

@@ -20,6 +20,7 @@ class CreateUjianTable extends Migration
             $table->string('soal_ujian');
             $table->enum('jenis_ujian',['Ujian Awal', 'Ujian Akhir']);
             $table->enum('is_active', ['Y','N'])->default('N');
+            $table->enum('is_validated', ['Y','N'])->default('N');
             $table->foreignId('user_id');
             $table->timestamps();
         });

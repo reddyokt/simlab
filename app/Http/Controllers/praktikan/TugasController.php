@@ -47,13 +47,22 @@ class TugasController extends Controller
         return view ('praktikan.tugas.indexujian', compact ('ujian'));
     }
 
-    public function validasi()
+    public function showvalidasitugas()
     {
         $modul=Modul::all();
         $tugas=DB::table('tugas')
         ->leftJoin('modul','modul.id_modul', '=' ,'tugas.modul_id')
         ->get();
-        return view ('praktikan.tugas.validasi', compact ('tugas','modul'));
+        return view ('praktikan.tugas.validasitugas', compact ('tugas','modul'));
+    }
+    public function showvalidasiujian()
+    {
+        $data = Ujian::whereHas('praktikum', function($q){
+            $q->whereHas('periode',function($q1){
+                $q1->where('status_periode', 'Aktif');
+            });
+        })->get();
+        return view ('praktikan.tugas.validasiujian', compact ('data'));
     }
     public function validasitugas($id_tugas)
     {
@@ -62,7 +71,17 @@ class TugasController extends Controller
         $validasitugas->update(['is_validated'=>'Y']);
         //$validasitugas->updated_by = Auth::user()->id;
 
-        return redirect ('/praktikan/validasi')->with('success', 'Tugas berhasil divalidasi');
+        return redirect ('/praktikan/validasitugas')->with('success', 'Tugas berhasil divalidasi');
+    }
+
+    public function validasiujian($id_ujian)
+    {
+        //dd($id_tugas);
+        $validasiujian = Ujian::find($id_ujian);
+        $validasiujian->update(['is_validated'=>'Y']);
+        //$validasitugas->updated_by = Auth::user()->id;
+
+        return redirect ('/praktikan/validasiujian')->with('success', 'Tugas berhasil divalidasi');
     }
 
 

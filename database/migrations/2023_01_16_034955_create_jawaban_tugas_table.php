@@ -18,9 +18,8 @@ class CreateJawabanTugasTable extends Migration
             $table->foreignId('tugas_id');
             $table->foreignId('mahasiswa_id');
             $table->string('file_jawaban');
-            $table->integer('nilaitugaspretest')->nullable();
-            $table->integer('nilaitugaspostest')->nullable();
-            $table->integer('nilailaporan')->nullable();
+            $table->integer('nilaitugas')->nullable();
+            $table->foreignId('user_id')->nullable();
             $table->timestamps();
         });
     }

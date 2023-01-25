@@ -127,8 +127,11 @@ Route::get('/praktikan/showujian/{id_ujian}', [TugasController::class, 'showujia
 Route::get('/praktikan/hideujian/{id_ujian}', [TugasController::class, 'hideujian']);
 
 Route::get('/praktikan/ujian', [TugasController::class, 'indexujian']);
-Route::get('/praktikan/validasi', [TugasController::class, 'validasi']);
-Route::get('/praktikan/validasi/{id_tugas}', [TugasController::class, 'validasitugas']);
+Route::get('/praktikan/validasitugas', [TugasController::class, 'showvalidasitugas']);
+Route::get('/praktikan/validasitugas/{id_tugas}', [TugasController::class, 'validasitugas']);
+Route::get('/praktikan/validasiujian', [TugasController::class, 'showvalidasiujian']);
+Route::get('/praktikan/validasiujian/{id_ujian}', [TugasController::class, 'validasiujian']);
+
 Route::get('/praktikan/createtugas', [TugasController::class, 'createtugas']);
 Route::get('/praktikan/createujian', [TugasController::class, 'createujian']);
 Route::post('/praktikan/createtugas', [TugasController::class, 'storetugas']);
@@ -166,9 +169,10 @@ Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 
 
 //----------------------------------------Nilai-----------------------------//
-Route::get('/praktikan/penilaian', [NilaiController::class, 'indexpenilaian']);
-Route::get('/praktikan/nilaiakhir', [NilaiController::class, 'indexnilaiakhir']);
+Route::get('/praktikan/penilaiantugas', [NilaiController::class, 'indexpenilaiantugas']);
+Route::get('/praktikan/penilaianakhir', [NilaiController::class, 'indexpenilaianakhir']);
 Route::get('/praktikan/nilaisubjektif', [NilaiController::class, 'indexnilailaporan']);
-Route::get('/praktikan/isinilai', [NilaiController::class, 'isinilaimahasiswa'])->name('isinilai');
+Route::get('/praktikan/isinilaitugas', [NilaiController::class, 'isinilaitugasmahasiswa'])->name('isinilaitugas');
 Route::post('/praktikan/isinilai1', [NilaiController::class, 'storenilai1']);
 Route::post('/praktikan/isinilai2', [NilaiController::class, 'storenilai2']);
+Route::get('/praktikan/isinilaiakhir', [NilaiController::class, 'isinilaiakhirmahasiswa'])->name('isinilaiakhir');

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Download;
 use App\Models\JawabanTugas;
+use App\Models\Ujian;
 
 class LandingController extends Controller
 {
@@ -23,16 +24,22 @@ class LandingController extends Controller
         $download = DB::table('download')
         ->get();
 
+
         $kelas = Praktikum::all();
         $now = Carbon::now()->toDateString();
-        $data = Modul::whereHas('praktikum',function ($q){
+        $data2 = Modul::whereHas('praktikum',function ($q){
+            $q->whereHas('periode', function ($q2){
+                $q2->where('status_periode','Aktif');
+            });
+        }) ->get();
+        $data1 = Ujian::whereHas('praktikum',function ($q){
             $q->whereHas('periode', function ($q2){
                 $q2->where('status_periode','Aktif');
             });
         }) ->get();
 
         //dd($data->toArray());
-        return view ('landing.layouts.main',compact('data','kelas','pengumuman','download'));
+        return view ('landing.layouts.main',compact('data1','data2','kelas','pengumuman','download'));
     }
 
     function changeFormat($date, $reverse = false){

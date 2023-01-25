@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 
 class NilaiController extends Controller
 {
-    public function indexpenilaian()
+    public function indexpenilaiantugas()
     {
         $data = Praktikum::whereHas('periode', function ($q1) {
             $q1->where('status_periode', 'Aktif');
@@ -22,10 +22,10 @@ class NilaiController extends Controller
         })
         ->get();
 
-        return view('praktikan.nilai.indexpenilaian', compact('data'));
+        return view('praktikan.nilai.indexpenilaiantugas', compact('data'));
     }
 
-    public function isinilaimahasiswa(Request $request)
+    public function isinilaitugasmahasiswa(Request $request)
     {
         //dd($request->toArray());
         $mhs = Mahasiswa::find($request->mahasiswa_id);
@@ -40,17 +40,18 @@ class NilaiController extends Controller
         $mhs_id = $request->mahasiswa_id;
         $modul_id = $request->modul_id;
         //dd ($pretest->toArray());
-        return view ('praktikan.nilai.isinilai', compact('mhs','mdl', 'pretest','posttest', 'laporan','jwbpretest','jwbposttest','jwblaporan','mhs_id','modul_id','subjektif'));
+        return view ('praktikan.nilai.isinilaitugas',
+        compact('mhs','mdl', 'pretest','posttest', 'laporan','jwbpretest','jwbposttest','jwblaporan','mhs_id','modul_id','subjektif'));
     }
     public function storenilai1(Request $request)
     {
-        //dd($request->all());
+        dd($request->all());
         $nilai = JawabanTugas::where('tugas_id',$request->tugas_id)
-        ->where('mahasiswa_id',$request->mahasiswa_id)
-        ->update(['nilaitugas'=>$request->nilai]);
+            ->where('mahasiswa_id',$request->mahasiswa_id)
+            ->update(['nilaitugas'=>$request->nilai, 'user_id'=>auth()->id()]
+        );
 
         return redirect()->back();
-
 
     }
     public function storenilai2(Request $request)
@@ -64,21 +65,7 @@ class NilaiController extends Controller
 
         return redirect()->back();
     }
-    public function indexnilaitugas()
-    {
-        // $data = JawabanTugas::whereHas('tugas', function ($q) {
-        //     $q->whereHas('modul', function ($q2) {
-        //         $q2->whereHas('praktikum', function ($q3) {
-        //             $q3->whereHas('periode', function ($q4) {
-        //                 $q4->where('status_periode', 'Aktif');
-        //             });
-        //         });
-        //     });
-        // }) ->get();
-        // //dd($data->toArray());
-        // return view('praktikan.nilai.indexnilaitugas', compact('data'));
 
-    }
     public function isinilaitugas(Request $request)
     {
         //dd($request->all());
@@ -90,17 +77,15 @@ class NilaiController extends Controller
 
     }
 
-    public function indexnilaiakhir()
+    public function indexpenilaianakhir()
     {
-        $data = JawabanUjian::whereHas('praktikum', function ($q) {
-            $q->whereHas('periode', function ($q2) {
-                $q2->whereHas('periode', function ($q3) {
-                    $q3->where('status_periode', 'Aktif');
-                    });
-                });
-            })->get();
-        //dd($data->toArray());
-        return view('praktikan.nilai.indexnilaiujian', compact('data'));
+        $data = Praktikum::whereHas('periode', function ($q1) {
+            $q1->where('status_periode', 'Aktif');
+
+        })
+        ->get();
+
+        return view('praktikan.nilai.indexpenilaianakhir', compact('data'));
     }
 
     public function indexnilaisubjektif()

@@ -75,7 +75,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="cta-content text-white text-center">
-                    @if(count($data)>0)
+                    @if(count($data2)>0)
                     <div class="text-center text-white">
                         <h2 class="title">Daftar Jadwal Praktikum</h2>
                             <div class="card text-dark">
@@ -92,7 +92,7 @@
                                           </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($data as $d)
+                                        @foreach ($data2 as $d)
                                           <tr>
                                             <th>{{ $loop->iteration  }} </th>
                                             <td>{{$d->praktikum->kelas->nama_kelas}}</td>
@@ -257,7 +257,7 @@
     <!-- END FOOTER -->
 
     <!-- Modal1 -->
-    @foreach ( $data as $dt )
+    @foreach ( $data2 as $dt )
 
     <div class="modal fade " id="Modaldetail-{{ $dt->id_modul }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -300,7 +300,7 @@
     @endforeach
 
     <!-- Modal2 -->
-    @foreach ( $data as $dt )
+    @foreach ( $data2 as $dt )
     <div class="modal fade " id="Modaldetail2-{{ $dt->id_modul }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
