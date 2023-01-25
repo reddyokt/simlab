@@ -75,6 +75,37 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="cta-content text-white text-center">
+                        @if ($data1->count()>0)
+                        <h2 class="title">Ujian</h2>
+                            <div class="card text-dark">
+                                <div class="card-body">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nama Kelas</th>
+                                            <th scope="col">Dosen Pengampu</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach ($data1 as $d)
+                                        <tr>
+                                            <th>{{ $loop->iteration  }} </th>
+                                            <td>{{$d->praktikum->kelas->nama_kelas}}</td>
+                                            <td>{{ $d->praktikum->dosen->nama_dosen}}</td>
+                                            <td><a href="#" class="badge bg-success"
+                                                data-bs-toggle="modal" data-bs-target="#Modaldetail3-{{ $d->id_ujian }}"><i class="fa fa-eye"></i></a>
+                                                <a href="#" class="badge bg-danger"
+                                                data-bs-toggle="modal" data-bs-target="#Modaldetail4-{{ $d->id_ujian }}"><i class="fa fa-upload"></i></a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        @endif
                     @if(count($data2)>0)
                     <div class="text-center text-white">
                         <h2 class="title">Daftar Jadwal Praktikum</h2>
@@ -370,6 +401,92 @@
         </div>
       </div>
     @endforeach
+
+    <!-- Modal3 -->
+    @foreach ( $data1 as $dt )
+
+    <div class="modal fade " id="Modaldetail3-{{ $dt->id_ujian }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Kelas {{ $dt->praktikum->kelas->nama_kelas }} {{ $dt->jenis_ujian }} </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="dtM" class="table table-bordered table-striped table-hover dataTable">
+
+                    <tr>
+                        <td>Uraian Ujian</td>
+                        <td>{!! $dt->uraian_ujian !!} </td>
+                    </tr>
+                  <tr><td colspan="2" class="text-center"><a href="{{ $dt->soal_ujian }}" target="_blank">FILE UJIAN</a></td></tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    @endforeach
+
+    <!-- Modal4 -->
+
+    <div class="modal fade " id="Modaldetail4-{{ $dt->id_ujian }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Kelas {{ $dt->praktikum->kelas->nama_kelas }} - {{ $dt->jenis_ujian }} </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @foreach ( $data1 as $dt)
+                <form id="tugas" action="/praktikan/uploadjawabanujian" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-xl-2"></div>
+                        <div class="col-xl-8">
+                            <div class="my-5">
+
+                                <div>
+                                    <input type="hidden" name="ujian_id" value="{{ $dt->id_ujian }}">
+                                </div>
+                                <div class="form-group row mb-1">
+                                    <label class="col-4">NIM</label>
+                                    <div class="col-8">
+                                        <select class="form-control" name="mahasiswa_id" required>
+                                            <option selected >Pilih NIM</option>
+                                            @foreach ($dt->praktikum->mahasiswa as $mhs)
+                                                <option value="{{ $mhs->id_mahasiswa }}">{{ $mhs->nim }} - {{ $mhs->nama_mahasiswa}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label class="col-4">Upload File Jawaban</label>
+                                    <div class="col-8">
+                                        <input accept="image/png, image/jpeg, image/jpg, application/pdf"
+                                        class="form-control" type="file" id="file_jawaban" name="file_jawaban" placeholder="Hanya Menerima Image file (png,jpeg,jpg) dan PDF File">
+                                        <p class="text-secondary"><small> Hanya Image file (png,jpeg,jpg) dan PDF File</small></p>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button class="btn btn-primary" type="submit">Kirim Jawaban Ujian</button>
+                                </div>
+                                </div>
+                            </div>
+                    </div>
+                </form>
+                @endforeach
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
 
     <!-- javascript -->

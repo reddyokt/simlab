@@ -23,7 +23,7 @@
     </div>
     <div class="card-body">
 
-        <table id="example1" class="display" style="width:100%">
+        <table id="example1" class="display" style="width:100%; font-size:12px;">
             <thead>
                 <tr>
                     <th style="font-size:12px">#</th>

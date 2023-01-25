@@ -113,7 +113,7 @@
                             <li><a href="/praktikan/ujian" class="link-dark rounded">Ujian</a></li>
                             <li><a href="/praktikan/validasiujian" class="link-dark rounded">Validasi Ujian</a></li>
                             <li><a href="/praktikan/penilaiantugas" class="link-dark rounded">Nilai Tugas</a></li>
-                            <li><a href="/praktikan/nilaisubjektif" class="link-dark rounded">Nilai Subjektif</a></li>
+                            <li><a href="/praktikan/penilaianujian" class="link-dark rounded">Nilai Ujian</a></li>
                             <li><a href="/praktikan/penilaianakhir" class="link-dark rounded">Nilai Akhir</a></li>
                         </ul>
                         </div>

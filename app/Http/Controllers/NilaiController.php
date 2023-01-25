@@ -9,7 +9,9 @@ use App\Models\Nilai;
 use App\Models\PraktikumMahasiswa;
 use App\Models\Praktikum;
 use App\Models\Mahasiswa;
+use App\Models\PenilaianLisan;
 use App\Models\PenilaianSubjektif;
+use App\Models\Ujian;
 use Illuminate\Http\Request;
 
 class NilaiController extends Controller
@@ -43,9 +45,31 @@ class NilaiController extends Controller
         return view ('praktikan.nilai.isinilaitugas',
         compact('mhs','mdl', 'pretest','posttest', 'laporan','jwbpretest','jwbposttest','jwblaporan','mhs_id','modul_id','subjektif'));
     }
+    public function isinilaiujianmahasiswa(Request $request)
+    {
+        //dd($request->toArray());
+        $mhs = Mahasiswa::find($request->mahasiswa_id);
+        $praktikum = Praktikum::find($request->praktikum_id);
+        $ujianawal = $praktikum->ujian->where('jenis_ujian','Ujian Awal')->first();
+        $ujianakhir = $praktikum->ujian->where('jenis_ujian','Ujian Akhir')->first();
+        $jwbujianawal = JawabanUjian::where('ujian_id',$ujianawal->id_ujian)->where('mahasiswa_id',$mhs->id_mahasiswa)->first();
+        $jwbujianakhir = JawabanUjian::where('ujian_id',$ujianakhir->id_ujian)->where('mahasiswa_id',$mhs->id_mahasiswa)->first();
+        $lisan = PenilaianLisan::where('praktikum_id', $praktikum->id_praktikum)->where('mahasiswa_id',$mhs->id_mahasiswa)->first();
+        $mhs_id = $request->mahasiswa_id;
+        $praktikum_id = $request->praktikum_id;
+
+        return view ('praktikan.nilai.isinilaiujian',
+        compact('mhs','praktikum','ujianawal', 'ujianakhir', 'jwbujianawal', 'jwbujianakhir', 'lisan', 'mhs_id', 'praktikum_id'));
+    }
     public function storenilai1(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
+        $request->validate([
+            'nilai' => 'required|max:100|integer'],
+        ['nilai.max'=>"Nilai Tidak Boleh Lebih Dari 100",
+            'nilai.integer'=>"Nilai harus angka",
+            'nilai.required'=>"Nilai harus diisi"
+        ]);
         $nilai = JawabanTugas::where('tugas_id',$request->tugas_id)
             ->where('mahasiswa_id',$request->mahasiswa_id)
             ->update(['nilaitugas'=>$request->nilai, 'user_id'=>auth()->id()]
@@ -54,15 +78,53 @@ class NilaiController extends Controller
         return redirect()->back();
 
     }
-    public function storenilai2(Request $request)
+
+    public function storenilaiujian1(Request $request)
     {
-         //dd($request->all());
-        $nilai = PenilaianSubjektif::updateOrCreate(
-            ['mahasiswa_id'=>$request->mahasiswa_id, 'modul_id'=>$request->modul_id],
-            ['nilai'=>$request->nilai, 'user_id'=>auth()->id()]
+        //dd($request->all());
+        $request->validate([
+            'nilai' => 'required|max:100|integer'],
+        ['nilai.max'=>"Nilai Tidak Boleh Lebih Dari 100",
+            'nilai.integer'=>"Nilai harus angka",
+            'nilai.required'=>"Nilai harus diisi"
+        ]);
+        $nilai = JawabanUjian::where('ujian_id',$request->ujian_id)
+            ->where('mahasiswa_id',$request->mahasiswa_id)
+            ->update(['nilai_ujian'=>$request->nilai, 'user_id'=>auth()->id()]
         );
 
+        return redirect()->back();
+    }
 
+    public function storenilai2(Request $request)
+    {
+         dd($request->all());
+         $request->validate([
+            'nilai' => 'required|max:100|integer'],
+        ['nilai.max'=>"Nilai Tidak Boleh Lebih Dari 100",
+            'nilai.integer'=>"Nilai harus angka",
+            'nilai.required'=>"Nilai harus diisi"
+        ]);
+        $nilai = PenilaianSubjektif::updateOrCreate(
+            ['mahasiswa_id'=>$request->mahasiswa_id, 'modul_id'=>$request->modul_id],
+            ['nilaisubjektif'=>$request->nilai, 'user_id'=>auth()->id()]
+        );
+        return redirect()->back();
+    }
+
+    public function storenilaiujian2(Request $request)
+    {
+         //dd($request->all());
+         $request->validate([
+            'nilai' => 'required|max:100|integer'],
+        ['nilai.max'=>"Nilai Tidak Boleh Lebih Dari 100",
+            'nilai.integer'=>"Nilai harus angka",
+            'nilai.required'=>"Nilai harus diisi"
+        ]);
+        $nilai = PenilaianLisan::updateOrCreate(
+            ['mahasiswa_id'=>$request->mahasiswa_id, 'praktikum_id'=>$request->praktikum_id],
+            ['nilai_ujian_lisan'=>$request->nilai, 'user_id'=>auth()->id()]
+        );
         return redirect()->back();
     }
 
@@ -75,6 +137,16 @@ class NilaiController extends Controller
 
         return redirect ('/praktikan/nilaitugas')->with('success', 'Nilai berhasil ditambahkan');
 
+    }
+
+    public function indexpenilaianujian()
+    {
+        $data = Praktikum::whereHas('periode', function ($q1) {
+            $q1->where('status_periode', 'Aktif');
+
+        })
+        ->get();
+        return view('praktikan.nilai.indexpenilaianujian', compact('data'));
     }
 
     public function indexpenilaianakhir()

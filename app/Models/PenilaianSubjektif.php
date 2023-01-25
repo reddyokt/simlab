@@ -9,7 +9,7 @@ class PenilaianSubjektif extends Model
 {
     use HasFactory;
 
-    protected $table = 'penilaian';
+    protected $table = 'penilaian_subjektif';
     protected $primaryKey = 'id_penilaian';
     protected $guarded = [];
 

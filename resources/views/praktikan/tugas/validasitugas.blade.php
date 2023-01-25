@@ -60,8 +60,8 @@
                                         <td>
                                             <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $tg->id_tugas }}"><span data-feather="eye"></span></a>
                                             <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
-                                            @if ($tg->is_validated !='Sudah divalidasi')
-                                            <a href="/praktikan/validasi/{{ $tg->id_tugas }}" class="badge bg-warning"><span data-feather="check-circle"></span></a>
+                                            @if ($tg->is_validated !='Y')
+                                            <a href="/praktikan/validasitugas/{{ $tg->id_tugas }}" class="badge bg-warning"><span data-feather="check-circle"></span></a>
                                             @endif
                                             <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
                                         </td>

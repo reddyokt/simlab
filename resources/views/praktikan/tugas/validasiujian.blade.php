@@ -60,12 +60,12 @@
                                         <td>
                                             <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $dt->id_ujian }}"><span data-feather="eye"></span></a>
                                             <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
-                                            @if ($dt->is_validated !='Sudah divalidasi')
-                                            <a href="/praktikan/validasiujian/{{ $dt->id_ujian }}" class="badge bg-warning"><span data-feather="check-circle"></span></a>
+                                            @if ($dt->is_validated !='Y')
+                                                <a href="/praktikan/validasiujian/{{ $dt->id_ujian }}" class="badge bg-warning"><span data-feather="check-circle"></span></a>
+                                            @else
                                             @endif
                                             <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
                                         </td>
-
                                     </tr>
                                     @endforeach
                                 </tbody>

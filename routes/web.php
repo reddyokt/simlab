@@ -44,6 +44,7 @@ Route::get('/download/create', [LandingController::class, 'createdownload']);
 Route::post('/download/create', [LandingController::class, 'storedownload']);
 
 Route::post('/praktikan/uploadjawabantugas',[LandingController::class, 'uploadjawabantugas']);
+Route::post('/praktikan/uploadjawabanujian',[LandingController::class, 'uploadjawabanujian']);
 
 //-----------------------------------Pendaftaran--------------------------------//
 Route::get('/daftarPraktikum', [DaftarController::class, 'daftar']);
@@ -170,9 +171,12 @@ Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 
 //----------------------------------------Nilai-----------------------------//
 Route::get('/praktikan/penilaiantugas', [NilaiController::class, 'indexpenilaiantugas']);
+Route::get('/praktikan/penilaianujian', [NilaiController::class, 'indexpenilaianujian']);
 Route::get('/praktikan/penilaianakhir', [NilaiController::class, 'indexpenilaianakhir']);
 Route::get('/praktikan/nilaisubjektif', [NilaiController::class, 'indexnilailaporan']);
 Route::get('/praktikan/isinilaitugas', [NilaiController::class, 'isinilaitugasmahasiswa'])->name('isinilaitugas');
 Route::post('/praktikan/isinilai1', [NilaiController::class, 'storenilai1']);
 Route::post('/praktikan/isinilai2', [NilaiController::class, 'storenilai2']);
-Route::get('/praktikan/isinilaiakhir', [NilaiController::class, 'isinilaiakhirmahasiswa'])->name('isinilaiakhir');
+Route::post('/praktikan/isinilaiujian1', [NilaiController::class, 'storenilaiujian1']);
+Route::post('/praktikan/isinilaiujian2', [NilaiController::class, 'storenilaiujian2']);
+Route::get('/praktikan/isinilaiujian', [NilaiController::class, 'isinilaiujianmahasiswa'])->name('isinilaiujian');

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Download;
 use App\Models\JawabanTugas;
+use App\Models\JawabanUjian;
 use App\Models\Ujian;
 
 class LandingController extends Controller
@@ -36,7 +37,8 @@ class LandingController extends Controller
             $q->whereHas('periode', function ($q2){
                 $q2->where('status_periode','Aktif');
             });
-        }) ->get();
+        })->where('is_active','Y')
+        ->get();
 
         //dd($data->toArray());
         return view ('landing.layouts.main',compact('data1','data2','kelas','pengumuman','download'));
@@ -134,6 +136,25 @@ class LandingController extends Controller
         JawabanTugas::create($validatedData);
 
         return redirect ('/')->with('success', 'Jawaban Tugas berhasil diupload');
+
+    }
+
+    public function uploadjawabanujian(Request $request)
+    {
+        //dd($request->all());
+       $validatedData = $request->validate([
+            'ujian_id'=>'required',
+            'mahasiswa_id'=>'required',
+            'file_jawaban'=>'required|mimes:png,jpg,pdf|max:2048'
+        ]);
+
+        if($request->file('file_jawaban')) {
+            $validatedData['file_jawaban'] = $request->file('file_jawaban')->store('upload_jawaban_ujian');
+        }
+        //unset($validatedData['dataimport']);
+        JawabanUjian::create($validatedData);
+
+        return redirect ('/')->with('success', 'Jawaban Ujian berhasil diupload');
 
     }
 

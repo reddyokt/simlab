@@ -15,10 +15,11 @@ class CreateJawabanUjianTable extends Migration
     {
         Schema::create('jawaban_ujian', function (Blueprint $table) {
             $table->id('id_jawaban_ujian');
-            $table->foreignId('praktikum_id');
             $table->foreignId ('mahasiswa_id');
             $table->foreignId('ujian_id');
-            $table->integer('nilai_ujian_lisan');
+            $table->string('file_jawaban');
+            $table->integer('nilai_ujian')->nullable();
+            $table->foreignId('user_id')->nullable();
             $table->timestamps();
         });
     }

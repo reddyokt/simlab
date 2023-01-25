@@ -42,7 +42,7 @@
                                         <td>{{ $loop->iteration  }}</td>
                                         <td>{{ $dt->kelas->nama_kelas}} </td>
                                         <td>@foreach ( $dt->modul()->get() as $modul )
-                                                <a href="#"><span data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $modul->id_modul }}">{{$modul->nama_modul}}</span></a> <br>
+                                                <a href="#"><span data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $modul->id_modul }}">{{ $loop->iteration  }} - {{$modul->nama_modul}}</span></a> <br>
                                             @endforeach
                                         </td>
 

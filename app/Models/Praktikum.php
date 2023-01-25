@@ -37,5 +37,10 @@ class Praktikum extends Model
     {
         return $this->hasMany(Modul::class, 'praktikum_id','id_praktikum');
     }
+
+    public function ujian()
+    {
+        return $this->hasMany(Ujian::class, 'praktikum_id','id_praktikum');
+    }
 }
 
