@@ -19,7 +19,9 @@ class PraktikumController extends Controller
     public function index()
     {
         return view ('praktikum.index', [
-            'praktikums'=>Praktikum::all()
+            'praktikums'=>Praktikum::whereHas('periode', function($q){
+                $q->where('status_periode', 'Aktif');
+            })->get()
         ]);
     }
 

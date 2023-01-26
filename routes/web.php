@@ -180,3 +180,7 @@ Route::post('/praktikan/isinilai2', [NilaiController::class, 'storenilai2']);
 Route::post('/praktikan/isinilaiujian1', [NilaiController::class, 'storenilaiujian1']);
 Route::post('/praktikan/isinilaiujian2', [NilaiController::class, 'storenilaiujian2']);
 Route::get('/praktikan/isinilaiujian', [NilaiController::class, 'isinilaiujianmahasiswa'])->name('isinilaiujian');
+
+
+//-----------------------------Report------------------------------------------------//
+Route::post('/export/nilaiakhir', [NilaiController::class, 'indexpenilaianakhir' ]);
