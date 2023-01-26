@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -18,9 +19,9 @@ class UserController extends Controller
     public function index()
     {
 
-        return view ('user.index', [
-            'users'=>User::all()
-        ]);
+        $data = User::all();
+        //dd($data->all());
+        return view ('user.index', compact('data'));
     }
 
      /**
@@ -30,7 +31,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view ('user.create');
+        $data = Role::all();
+        return view ('user.create',compact('data'));
     }
 
     /**

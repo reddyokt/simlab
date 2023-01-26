@@ -83,22 +83,23 @@
                         Dashboard
                         </button></a>
                     </li>
-                    @if (auth()->user()->role =='Laboran' or auth()->user()->role =="Kepala Lab")
+
+                    @if (auth()->user()->role_id =="1")
                     <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#inventory-collapse" aria-expanded="false">
-                            <span class="mx-3" data-feather="shopping-bag"></span> Inventory
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#praktikum-collapse" aria-expanded="false">
+                            <span class="mx-3" data-feather="book-open"></span> Praktikum
                         </button>
-                        <div class="collapse" id="inventory-collapse">
+                        <div class="collapse" id="praktikum-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 big mt-2">
-                            <li><a href="/alat" class="link-dark rounded">Alat Praktikum</a></li>
-                            <li><a href="/inventory/bahan" class="link-dark rounded">Bahan Praktikum</a></li>
-                            <li><a href="/inventory/barang" class="link-dark rounded">Barang Umum</a></li>
+                            <li><a href="/periode" class="link-dark rounded">Periode</a></li>
+                            <li><a href="/kelas" class="link-dark rounded">Kelas Praktikum</a></li>
+                            <li><a href="/modul" class="link-dark rounded">Modul Praktikum</a></li>
                         </ul>
                         </div>
                     </li>
                     @endif
 
-                    @if (auth()->user()->role =="Kepala Lab")
+                    @if (auth()->user()->role_id =="1")
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#praktikan-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="slack"></span> Praktikan
@@ -120,22 +121,22 @@
                     </li>
                     @endif
 
-                    @if (auth()->user()->role =="Kepala Lab")
+                    @if (auth()->user()->role_id =='3' or auth()->user()->role_id =="1")
                     <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#praktikum-collapse" aria-expanded="false">
-                            <span class="mx-3" data-feather="book-open"></span> Praktikum
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#inventory-collapse" aria-expanded="false">
+                            <span class="mx-3" data-feather="shopping-bag"></span> Inventory
                         </button>
-                        <div class="collapse" id="praktikum-collapse">
+                        <div class="collapse" id="inventory-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 big mt-2">
-                            <li><a href="/periode" class="link-dark rounded">Periode</a></li>
-                            <li><a href="/kelas" class="link-dark rounded">Kelas Praktikum</a></li>
-                            <li><a href="/modul" class="link-dark rounded">Modul Praktikum</a></li>
+                            <li><a href="/alat" class="link-dark rounded">Alat Praktikum</a></li>
+                            <li><a href="/inventory/bahan" class="link-dark rounded">Bahan Praktikum</a></li>
+                            <li><a href="/inventory/barang" class="link-dark rounded">Barang Umum</a></li>
                         </ul>
                         </div>
                     </li>
                     @endif
 
-                    @if (auth()->user()->role =="Kepala Lab")
+                    @if (auth()->user()->role_id =="1")
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#akun-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="users"></span> Master Akun
@@ -150,7 +151,7 @@
                     </li>
                     @endif
 
-                    @if (auth()->user()->role =='Laboran' or auth()->user()->role =="Kepala Lab")
+                    @if (auth()->user()->role_id =='3' or auth()->user()->role_id =="1")
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#landing-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="layout"></span> Landing Page

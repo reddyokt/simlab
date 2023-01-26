@@ -19,7 +19,7 @@ class AlatsController extends Controller
     {
         $c2a = DB::table('alat')
             ->join('lemari','lemari.id_lemari','=','alat.lemari_id')
-            ->join('lokasi', 'lokasi.id_lokasi', '=', 'lemari.id_lokasi')
+            ->join('lokasi', 'lokasi.id_lokasi', '=', 'lemari.lokasi_id')
             ->whereIn('alat.jenis',['c2a'])
             ->get();
 

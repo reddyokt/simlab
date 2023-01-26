@@ -13,13 +13,10 @@ class DashboardController extends BaseController
 {
     public function index ()
     {
-            // $dataMhs = DB::table('mahasiswa')
-            // ->join('pendaftaran','pendaftaran.mahasiswa_id','=','mahasiswa.id_mahasiswa')
-            // ->join('praktikum','praktikum.id_praktikum','=','pendaftaran.kelas_id')
-            // ->whereIn('pendaftaran.status',['Belum divalidasi'])
-            // ->get();
+            $data = Praktikum::whereHas('periode', function($q){
+                $q->where('status_periode','Aktif');
+            })->get();
 
-
-            return view ('dashboard.index');
+            return view ('/dashboard.index', compact ('data'));
     }
 }

@@ -431,7 +431,7 @@
     @endforeach
 
     <!-- Modal4 -->
-
+    @foreach ( $data1 as $dt)
     <div class="modal fade " id="Modaldetail4-{{ $dt->id_ujian }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -440,7 +440,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                @foreach ( $data1 as $dt)
+                
                 <form id="tugas" action="/praktikan/uploadjawabanujian" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">

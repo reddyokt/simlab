@@ -24,22 +24,18 @@
             <th>#</th>
             <th>Nama</th>
             <th>Role</th>
-            <th>Phone Number</th>
-            <th>Email</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ( $users as $user )
+        @foreach ( $data as $dt )
         <tr>
             <td>{{ $loop->iteration  }}</td>
-            <td>{{ $user->username }}</td>
-            <td>{{ $user->role }}</td>
-            <td>{{ $user->phone }}</td>
-            <td>{{ $user->email }}</td>
+            <td>{{ $dt->username }}</td>
+            <td>{{ $dt->role->role_name }}</td>
             <td>
-                <a href="/user/{{ $user->id}}" class="badge bg-info"><span data-feather="edit"></span></a>
-                <a href="/delete/{{ $user->id }}" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data User?!!!')"><span data-feather="x-circle"></span></a>
+                <a href="/user/{{ $dt->id}}" class="badge bg-info"><span data-feather="edit"></span></a>
+                <a href="/delete/{{ $dt->id }}" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data User?!!!')"><span data-feather="x-circle"></span></a>
 
             </td>
         </tr>

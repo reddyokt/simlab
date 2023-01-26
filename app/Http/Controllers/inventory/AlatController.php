@@ -31,10 +31,10 @@ class AlatController extends Controller
 
     public function storelemari(Request $request)
     {
-        //return $request;
+            return $request;
         $validatedData =  $request->validate([
-            'nama_lemari' => 'required|max:255',
-            'id_lokasi'=>'required'
+            'nama_lemari' => 'required|max:50',
+            'lokasi_id'=>'required'
 
        ]);
 
@@ -47,7 +47,7 @@ class AlatController extends Controller
     {
         //return $request;
         $validatedData =  $request->validate([
-            'nama_lokasi' => 'required|max:255'
+            'nama_lokasi' => 'required|max:50'
        ]);
 
        Lokasi::create($validatedData);
