@@ -151,13 +151,120 @@ class NilaiController extends Controller
 
     public function indexpenilaianakhir()
     {
-        $data = Praktikum::whereHas('periode', function ($q1) {
-            $q1->where('status_periode', 'Aktif');
+        $praktikum = Praktikum::whereHas('periode', function($q){
+                    $q->where('status_periode', 'Aktif');
+        })->get();
 
-        })
-        ->get();
+        $data = PraktikumMahasiswa::with(["mahasiswa","praktikum.kelas"])
+                ->whereHas('praktikum', function($q){
+                    $q->whereHas('periode', function ($q1){
+                        $q1->where('status_periode', 'Aktif');
+                });
+        })->get();
 
-        return view('praktikan.nilai.indexpenilaianakhir', compact('data'));
+        $data = json_encode($data->toArray());
+        $data = json_decode($data);
+
+        foreach ($data as $index=>$praktikum_mahasiswa){
+            $mahasiswa_id = $praktikum_mahasiswa->mahasiswa_id;
+            $praktikum_id = $praktikum_mahasiswa->praktikum_id;
+            $jumlah_modul = $praktikum_mahasiswa->praktikum->jumlah_modul;
+
+            $ujian_awal = JawabanUjian::whereHas('ujian', function ($q) use($praktikum_mahasiswa){
+                            $q->where('praktikum_id',$praktikum_mahasiswa->praktikum_id)
+                            ->where('jenis_ujian', 'Ujian Awal');
+                        })
+                        ->where('mahasiswa_id', $praktikum_mahasiswa->mahasiswa_id)
+                        ->first();
+
+            $ujian_akhir = JawabanUjian::whereHas('ujian', function ($q) use($praktikum_mahasiswa){
+                            $q->where('praktikum_id',$praktikum_mahasiswa->praktikum_id)
+                            ->where('jenis_ujian', 'Ujian Akhir');
+                        })
+                        ->where('mahasiswa_id', $praktikum_mahasiswa->mahasiswa_id)
+                        ->first();
+
+            $ujian_lisan = PenilaianLisan::where('praktikum_id',$praktikum_mahasiswa->praktikum_id)
+                        ->where('mahasiswa_id', $praktikum_mahasiswa->mahasiswa_id)
+                        ->first();
+
+            $pretest = JawabanTugas::where('mahasiswa_id', $mahasiswa_id)
+                        ->whereHas('tugas',function ($q) use($praktikum_id){
+                            $q->whereHas('modul', function ($q1) use($praktikum_id){
+                                $q1->where('praktikum_id', $praktikum_id);
+                            });
+                        })->get();
+
+            $posttest = JawabanTugas::where('mahasiswa_id', $mahasiswa_id)
+                        ->whereHas('tugas',function ($q) use($praktikum_id){
+                            $q->whereHas('modul', function ($q1) use($praktikum_id){
+                                $q1->where('praktikum_id', $praktikum_id);
+                            });
+                        })->get();
+
+            $laporan = JawabanTugas::where('mahasiswa_id', $mahasiswa_id)
+                        ->whereHas('tugas',function ($q) use($praktikum_id){
+                            $q->whereHas('modul', function ($q1) use($praktikum_id){
+                                $q1->where('praktikum_id', $praktikum_id);
+                            });
+                        })->get();
+
+            $subjektif = PenilaianSubjektif::where('mahasiswa_id', $mahasiswa_id)
+                        ->whereHas('modul', function ($q1) use($praktikum_id){
+                            $q1->where('praktikum_id', $praktikum_id);
+                        })->get();
+
+            $data[$index]->ujian_awal = $ujian_awal;
+            $data[$index]->ujian_akhir = $ujian_akhir;
+            $data[$index]->ujian_lisan = $ujian_lisan;
+            $data[$index]->pretest = $pretest;
+            $data[$index]->posttest = $posttest;
+            $data[$index]->laporan = $laporan;
+            $data[$index]->subjektif = $subjektif;
+
+
+            $totalujianawal = $ujian_awal->nilai_ujian ?? 0;
+            $totalujianakhir = $ujian_akhir->nilai_ujian ?? 0;
+            $totalujianlisan = $ujian_lisan->nilai_ujian_lisan ?? 0;
+
+            $totalpretest = 0;
+            $totalposttest = 0;
+            $totalsubjektif = 0;
+            $totallaporan = 0;
+
+            foreach ($pretest as $x){
+                $totalpretest = $totalpretest + $x->nilaitugas;
+            }
+
+            foreach ($posttest as $x){
+                $totalposttest = $totalposttest + $x->nilaitugas;
+            }
+
+            foreach ($subjektif as $x){
+                $totalsubjektif = $totalsubjektif + $x->nilaisubjektif;
+            }
+
+            foreach ($laporan as $x){
+                $totallaporan = $totallaporan + $x->nilaitugas;
+            }
+
+            $pembagi = $jumlah_modul * 100;
+            $nilaiakhir = (
+                ($totalujianawal * 10/100) +
+                ($totalujianakhir * 10/100) +
+                ($totalujianlisan * 10/100) +
+                ($totalpretest/$pembagi * 5) +
+                ($totalposttest/$pembagi * 5) +
+                ($totalsubjektif/$pembagi * 40) +
+                ($totallaporan/$pembagi *20)
+            );
+
+            $data[$index]->nilaiakhir = $nilaiakhir;
+
+        }
+
+        //dd($data);
+        return view('praktikan.nilai.indexpenilaianakhir', compact('data','praktikum'));
     }
 
     public function indexnilaisubjektif()

@@ -19,13 +19,27 @@
                 <div class="card-header">
                     <div class="card-title">
                         <h4 class="card-label float-start">Daftar Nilai AKhir Mahasiswa</h4>
-
                     </div>
-
                 </div>
 
                     <div class="col-xl-2"></div>
+                    <form action="/export/nilaiakhir" method="POST">
+                        @csrf
+                        <div class="row p-3">
+                            <div class="col">
+                                <select class="form-select form-select-sm dflex" name="id_praktikum" aria-label="id_praktikum">
+                                    <option selected>Pilih Kelas</option>
+                                @foreach ($praktikum as $p )
+                                    <option value="{{ $p->praktikum_id }}">{{ $p->kelas->nama_kelas }}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                            <div class="col">
+                                <button class="dflex btn btn-sm btn-primary" role="button">Export Nilai Akhir</button>
+                            </div>
+                        </div>
 
+                    </form>
                     <div class="row">
                         <div class="table-responsive p-3">
                             <table id="example1" class="display " style="width:100%; font-size:12px;">
@@ -35,28 +49,22 @@
                                         <th>Nama Mahasiswa</th>
                                         <th>Kelas </th>
                                         <th>Nilai Akhir</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{--  @foreach ($data as $dt )
+                                    @foreach ($data as $dt )
                                     <tr>
 
                                         <td>{{ $loop->iteration  }}</td>
                                         <td>{{ $dt->mahasiswa->nama_mahasiswa}}</td>
-                                        <td>{{ $dt->tugas->modul->praktikum->kelas->nama_kelas}} | {{ $dt->tugas->modul->nama_modul}}</td>
-                                        <td>{{ $dt->tugas->jenis_tugas }}</td>
-                                        @if ($dt->nilaitugas !==Null)
-                                        <td>{{ $dt->nilaitugas }}</td>
-                                        @else
-                                        <td>Belum dinilai</td>
-                                        @endif
-
+                                        <td>{{ $dt->praktikum->kelas->nama_kelas}} </td>
+                                        <td>{{ $dt->nilaiakhir }}</td>
                                         <td>
-                                            <a href="{{URL($dt->file_jawaban)}}" target="_blank" class="badge bg-info"><span data-feather="download"></span></a>
-                                            <a href="#" class="badge bg-danger"><span data-feather="edit" data-bs-toggle="modal" data-bs-target="#Modaldetail-"></span></a>
+                                            <a href="#" class="badge bg-danger"><span data-feather="eye" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $dt->id_praktikum_mahasiswa }}"></span></a>
                                         </td>
                                     </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -65,7 +73,7 @@
             </div>
     </div>
     <!-- Modal -->
-               {{-- @foreach ($data as $dt )
+                @foreach ($data as $dt )
                 <div class="modal fade" id="Modaldetail-" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
@@ -97,7 +105,7 @@
                     </div>
                     </div>
                 </div>
-                @endforeach--}}
+                @endforeach
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
