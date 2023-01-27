@@ -3,7 +3,7 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Assalamu'alaikum {{ auth()->user()->username }}</h1>
+    <h1 class="h2">Assalamu'alaikum {{ auth()->user()->nama_lengkap }}</h1>
 </div>
 
   <div id="layoutSidenav_content">
@@ -17,7 +17,7 @@
                             @foreach ($data as $dt)
                             @if ( $dt->periode->status_periode=='Aktif')
                             <h4>Periode Aktif</h4>
-                            <p>Kelas Aktif = {{$dt->kelas->nama_kelas}}</p>
+                            <p>Kelas Aktif : {{$dt->kelas->nama_kelas}}</p>
                                 @else  
                                 <h4>Tidak Ada Periode Aktif</h4>
                             @endif

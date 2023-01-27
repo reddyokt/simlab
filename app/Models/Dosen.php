@@ -10,6 +10,6 @@ class Dosen extends Model
     protected $guarded = ['id_dosen'];
 
     protected $table = 'dosen';
-    protected $fillable =['id_dosen','nama_dosen','nidn','phone','email'];
+    protected $fillable =['id_dosen','user_id','nama_dosen','nidn'];
     protected $primaryKey = 'id_dosen';
 }

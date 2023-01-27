@@ -11,12 +11,12 @@ class Lemari extends Model
     use HasFactory;
    // protected $guarded = ['id_lemari'];
     protected $table = 'lemari';
-    protected $fillable =['id_lemari','nama_lemari','id_lokasi'];
+    protected $fillable =['id_lemari','nama_lemari','lokasi_id'];
     protected $primaryKey = 'id_lemari';
 
 
     public function lokasi()
     {
-        return $this->belongsTo(Lokasi::class, 'id_lokasi', 'id_lokasi');
+        return $this->belongsTo(Lokasi::class, 'lokasi_id', 'id_lokasi');
     }
 }

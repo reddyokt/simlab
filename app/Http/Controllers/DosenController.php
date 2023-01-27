@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dosen;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DosenController extends Controller
 {
@@ -38,16 +40,31 @@ class DosenController extends Controller
     public function store(Request $request)
     {
         //return $request;
-        $validatedData =  $request->validate([
-            'nama_dosen' => 'required|max:255',
-            'nidn' => 'required|unique:dosen',
-            'phone' => 'required|numeric|min:10',
-            'email'=> 'required|email:dns|unique:dosen'
+        $user = User::create([
+            'username' => $request->nidn,
+            'nama_lengkap' => $request->nama_lengkap,
+            'role_id' => $request->role_id,
+            'password' => Hash::make('qwerty')
+        ]);
+        
+        
+        $dosen = Dosen::create([
+            'user_id' => $user->id,
+            'nidn'=> $request->nidn,
+            'nama_dosen'=> $request->nama_lengkap
 
-       ]);
-       Dosen::create($validatedData);
-       return redirect ('/dosen')->with('success', 'Data Dosen berhasil ditambahkan');
+        ]);
+        return redirect ('/dosen')->with('success', 'Data Dosen berhasil ditambahkan');
+        
+
     }
+    //     $validatedData =  $request->validate([
+    //         'nama_lengkap' => 'required|max:50',
+    //         'nidn' => 'required|unique:dosen',
+    //    ]);
+    //    Dosen::create($validatedData);
+    //    return redirect ('/dosen')->with('success', 'Data Dosen berhasil ditambahkan');
+    // }
 
     /**
      * Display the specified resource.

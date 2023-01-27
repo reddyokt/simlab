@@ -46,9 +46,7 @@ class UserController extends Controller
         //return $request;
        $validatedData =  $request->validate([
             'username' => 'required|max:255',
-            'role' => 'required',
-            'phone' => 'required|numeric|min:10',
-            'email'=> 'required|email:dns|unique:users'
+            'role_id' => 'required'
        ]);
        $validatedData['password'] = Hash::make('qwerty');
 

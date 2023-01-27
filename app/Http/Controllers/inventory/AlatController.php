@@ -31,7 +31,7 @@ class AlatController extends Controller
 
     public function storelemari(Request $request)
     {
-            return $request;
+            //return $request;
         $validatedData =  $request->validate([
             'nama_lemari' => 'required|max:50',
             'lokasi_id'=>'required'
@@ -39,7 +39,7 @@ class AlatController extends Controller
        ]);
 
        Lemari::create($validatedData);
-       return redirect  ('/alat')->with('success', 'Data Lemari berhasil ditambahkan');
+       return Redirect()->back()->with('success', 'Data Lemari berhasil ditambahkan');
 
     }
 
@@ -52,7 +52,7 @@ class AlatController extends Controller
 
        Lokasi::create($validatedData);
 
-       return  redirect  ('/alat')->with('success', 'Data Lokasi berhasil ditambahkan');
+       return Redirect()->back()->with('success', 'Data Lokasi berhasil ditambahkan');
 
     }
     //---------------------------------------------------c2a---------------------------------------//

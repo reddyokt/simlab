@@ -27,14 +27,14 @@
                 @enderror
             </div>
             <div class=" form-floating mb-1 ">
-                <select class="form-control" name="lokasi_id" id="id_lokasi" required value="{{ old ('lokasi_id') }}" >
+                <select class="form-control" name="lokasi_id" id="lokasi_id" required value="{{ old ('lokasi_id') }}" >
                     <option selected disabled>Pilih Lokasi</option>
                 @foreach ( $location as $locs )
                     <option value="{{ $locs->id_lokasi}}">{{ $locs->nama_lokasi }}</option>
                 @endforeach
                 </select>
 
-                  @error('id_lokasi')
+                  @error('lokasi_id')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>

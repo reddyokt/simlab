@@ -98,10 +98,11 @@
                         </div>
                     </li>
                     @endif
-
-                    @if (auth()->user()->role_id =="1")
+                    @dd (auth()->user())
+                    {{--@if (auth()->user()->role_id =="1" or auth()->user()->role_id =="2")--}}
                     <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#praktikan-collapse" aria-expanded="false">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" 
+                        data-bs-toggle="collapse" data-bs-target="#praktikan-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="slack"></span> Praktikan
                         </button>
                         <div class="collapse" id="praktikan-collapse">
@@ -110,16 +111,20 @@
                             <li><a href="/praktikan/kelompok" class="link-dark rounded">Kelompok</a></li>
                             <li><a href="/praktikan/absen" class="link-dark rounded">Absen</a></li>
                             <li><a href="/praktikan/tugas" class="link-dark rounded">Tugas</a></li>
+                            @if (auth()->user()->role_id =="2")
                             <li><a href="/praktikan/validasitugas" class="link-dark rounded">Validasi Tugas</a></li>
+                            @endif
                             <li><a href="/praktikan/ujian" class="link-dark rounded">Ujian</a></li>
+                            @if (auth()->user()->role_id =="2")
                             <li><a href="/praktikan/validasiujian" class="link-dark rounded">Validasi Ujian</a></li>
+                            @endif
                             <li><a href="/praktikan/penilaiantugas" class="link-dark rounded">Nilai Tugas</a></li>
                             <li><a href="/praktikan/penilaianujian" class="link-dark rounded">Nilai Ujian</a></li>
                             <li><a href="/praktikan/penilaianakhir" class="link-dark rounded">Nilai Akhir</a></li>
                         </ul>
                         </div>
                     </li>
-                    @endif
+                    {{--@endif--}}
 
                     @if (auth()->user()->role_id =='3' or auth()->user()->role_id =="1")
                     <li class="mb-1">

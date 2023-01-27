@@ -24,8 +24,6 @@
             <th>#</th>
             <th>Nama</th>
             <th>NIDN</th>
-            <th>Phone Number</th>
-            <th>Email</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -35,8 +33,6 @@
             <td>{{ $loop->iteration  }}</td>
             <td>{{ $dosen->nama_dosen }}</td>
             <td>{{ $dosen->nidn }}</td>
-            <td>{{ $dosen->phone }}</td>
-            <td>{{ $dosen->email }}</td>
             <td>
                 <a href="/dosen/{{ $dosen->id_dosen}}" class="badge bg-info"><span data-feather="edit"></span></a>
                 <!--<a href="/delete/{{ $dosen->id_dosen }}" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Dosen?!!!')"><span data-feather="x-circle"></span></a>-->
