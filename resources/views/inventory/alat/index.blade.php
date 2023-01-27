@@ -4,6 +4,7 @@
 
 <!-- Custom styles for this datatables -->
 <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 @if (session()-> has('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -16,6 +17,21 @@
     <a class="btn btn-success my-3 ms-auto" href="/alat/createalatc2b" role="button">Tambah Alat C2B</a>
     <a class="btn btn-success my-3 ms-auto" href="/inventory/alat/createlemari" role="button">Tambah Lemari/Lokasi</a>
 </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <form action="/export/alatc2a" method="post">
+                @csrf
+                <button class="btn btn-sm btn-primary" role="button"><i class="fa fa-file-pdf-o"></i> export data Alat C2A</button>
+            </form>
+        </div>
+        <div class="col-md-2">
+            <form action="/export/alatc2b" method="post">
+                @csrf
+                <button class="btn btn-sm btn-primary" role="button"><i class="fa fa-file-pdf-o"></i> export data Alat C2B</button>
+            </form>
+        </div>
+    </div>
 
 <div class="card mt-2">
     <div class="card-header bg-warning">

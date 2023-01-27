@@ -7,6 +7,7 @@ use App\Models\Lemari;
 use App\Models\Lokasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AlatsController extends Controller
 {
@@ -19,7 +20,7 @@ class AlatsController extends Controller
     {
         $c2a = DB::table('alat')
             ->join('lemari','lemari.id_lemari','=','alat.lemari_id')
-            ->join('lokasi', 'lokasi.id_lokasi', '=', 'lemari.lokasi_id')
+            ->join('lokasi', 'lokasi.id_lokasi', '=', 'lemari.id_lokasi')
             ->whereIn('alat.jenis',['c2a'])
             ->get();
 
@@ -106,6 +107,34 @@ class AlatsController extends Controller
 
         return redirect ('/alat')->with('success', 'Data Alat berhasil ditambahkan');
 
+    }
+
+    public function exportalatc2a()
+    {
+
+        $c2a = DB::table('alat')
+            ->join('lemari','lemari.id_lemari','=','alat.lemari_id')
+            ->join('lokasi', 'lokasi.id_lokasi', '=', 'lemari.id_lokasi')
+            ->whereIn('alat.jenis',['c2a'])
+            ->get();
+
+            $pdf = Pdf::loadView('pdf.exportalatc2a', compact ('c2a'));
+        return $pdf->stream();
+
+
+
+    }
+
+    public function exportalatc2b()
+    {
+        $c2b = DB::table('lokasi')
+            ->join('alat','alat.lokasi_id','=','lokasi.id_lokasi')
+            ->whereIn('alat.jenis',['c2b'])
+            ->get();
+
+
+            $pdf = Pdf::loadView('pdf.exportalatc2b', compact ('c2b'));
+        return $pdf->stream();
     }
 
 }

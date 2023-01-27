@@ -183,4 +183,6 @@ Route::get('/praktikan/isinilaiujian', [NilaiController::class, 'isinilaiujianma
 
 
 //-----------------------------Report------------------------------------------------//
-Route::post('/export/nilaiakhir', [NilaiController::class, 'indexpenilaianakhir' ]);
+Route::post('/export/nilaiakhir', [NilaiController::class, 'exportnilaiakhir' ]);
+Route::post('/export/alatc2a', [AlatsController::class, 'exportalatc2a' ]);
+Route::post('/export/alatc2b', [AlatsController::class, 'exportalatc2b' ]);

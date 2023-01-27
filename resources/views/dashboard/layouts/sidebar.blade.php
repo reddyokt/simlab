@@ -84,24 +84,25 @@
                         </button></a>
                     </li>
 
-                    @if (auth()->user()->role_id =="1")
+                    @if (auth()->user()->role_id =="1" or auth()->user()->role_id =="2" or auth()->user()->role_id =="4")
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#praktikum-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="book-open"></span> Praktikum
                         </button>
                         <div class="collapse" id="praktikum-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 big mt-2">
+                            @if (auth()->user()->role_id =="1")
                             <li><a href="/periode" class="link-dark rounded">Periode</a></li>
                             <li><a href="/kelas" class="link-dark rounded">Kelas Praktikum</a></li>
+                            @endif
                             <li><a href="/modul" class="link-dark rounded">Modul Praktikum</a></li>
                         </ul>
                         </div>
                     </li>
-                    @endif
-                    @dd (auth()->user())
-                    {{--@if (auth()->user()->role_id =="1" or auth()->user()->role_id =="2")--}}
+
+
                     <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" 
+                        <button class="btn btn-toggle align-items-center rounded collapsed"
                         data-bs-toggle="collapse" data-bs-target="#praktikan-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="slack"></span> Praktikan
                         </button>
@@ -111,11 +112,9 @@
                             <li><a href="/praktikan/kelompok" class="link-dark rounded">Kelompok</a></li>
                             <li><a href="/praktikan/absen" class="link-dark rounded">Absen</a></li>
                             <li><a href="/praktikan/tugas" class="link-dark rounded">Tugas</a></li>
-                            @if (auth()->user()->role_id =="2")
-                            <li><a href="/praktikan/validasitugas" class="link-dark rounded">Validasi Tugas</a></li>
-                            @endif
                             <li><a href="/praktikan/ujian" class="link-dark rounded">Ujian</a></li>
                             @if (auth()->user()->role_id =="2")
+                            <li><a href="/praktikan/validasitugas" class="link-dark rounded">Validasi Tugas</a></li>
                             <li><a href="/praktikan/validasiujian" class="link-dark rounded">Validasi Ujian</a></li>
                             @endif
                             <li><a href="/praktikan/penilaiantugas" class="link-dark rounded">Nilai Tugas</a></li>
@@ -124,7 +123,7 @@
                         </ul>
                         </div>
                     </li>
-                    {{--@endif--}}
+                    @endif
 
                     @if (auth()->user()->role_id =='3' or auth()->user()->role_id =="1")
                     <li class="mb-1">
@@ -156,7 +155,7 @@
                     </li>
                     @endif
 
-                    @if (auth()->user()->role_id =='3' or auth()->user()->role_id =="1")
+                    @if (auth()->user()->role_id =='3' or auth()->user()->role_id =="1" or auth()->user()->role_id =="4")
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#landing-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="layout"></span> Landing Page

@@ -33,6 +33,8 @@
                     </ul>
                 </div>
             @endif
+
+
             <div class="d-flex justify-content-center gap-4">
                 <form action="/praktikan/isinilaiujian1" method="post">
                     @csrf
@@ -91,6 +93,8 @@
                 </div>
             </form>
 
+
+            @if (auth()->user()->role_id =="2" )
             <form action="/praktikan/isinilaiujian2" method="post">
                 @csrf
                 <div class="col-md-3">
@@ -114,6 +118,7 @@
                 </div>
             </div>
         </form>
+        @endif
 
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
