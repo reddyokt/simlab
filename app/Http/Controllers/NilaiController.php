@@ -34,9 +34,9 @@ class NilaiController extends Controller
         //dd($request->toArray());
         $mhs = Mahasiswa::find($request->mahasiswa_id);
         $mdl = Modul::find($request->modul_id);
-        $pretest = $mdl->tugas->where('jenis_tugas','pretest')->first();
-        $posttest = $mdl->tugas->where('jenis_tugas','posttest')->first();
-        $laporan = $mdl->tugas->where('jenis_tugas','laporan')->first();
+        $pretest = $mdl->tugas->where('jenis_tugas','Pre Test')->first();
+        $posttest = $mdl->tugas->where('jenis_tugas','Post Test')->first();
+        $laporan = $mdl->tugas->where('jenis_tugas','Laporan')->first();
         $jwbpretest = JawabanTugas::where('tugas_id',$pretest->id_tugas)->where('mahasiswa_id',$mhs->id_mahasiswa)->first();
         $jwbposttest = JawabanTugas::where('tugas_id',$posttest->id_tugas)->where('mahasiswa_id',$mhs->id_mahasiswa)->first();
         $jwblaporan = JawabanTugas::where('tugas_id',$laporan->id_tugas)->where('mahasiswa_id',$mhs->id_mahasiswa)->first();

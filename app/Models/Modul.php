@@ -29,12 +29,12 @@ class Modul extends Model
 
     public function alat()
     {
-        return $this->belongsToMany(Alats::class, 'membermodul','modul_id', 'alat_id');
+        return $this->belongsToMany(Alats::class, 'membermodul','modul_id', 'alat_id')->where('alat_id','!=',0);
     }
 
     public function bahan()
     {
-        return $this->belongsToMany(Bahan::class, 'membermodul','modul_id', 'bahan_id');
+        return $this->belongsToMany(Bahan::class, 'membermodul','modul_id', 'bahan_id')->where('bahan_id','!=',0)->withPivot("jumlah_bahan");
     }
 
     public function praktikum()
@@ -45,6 +45,11 @@ class Modul extends Model
     public function tugas()
     {
         return $this->hasMany(Tugas::class, 'modul_id', 'id_modul');
+    }
+
+    public function catatan()
+    {
+        return $this->hasOne(CatatanModul::class, 'modul_id', 'id_modul');
     }
 
 

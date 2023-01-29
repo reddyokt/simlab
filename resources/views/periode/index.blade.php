@@ -23,7 +23,7 @@
         <tr class="text-center">
             <th>#</th>
             <th>Tahun Ajaran/Semester</th>
-
+            <th>Waktu Pelaksanaan</th>
             <th>Status Periode</th>
             <th>Action</th>
         </tr>
@@ -34,12 +34,10 @@
         <tr>
             <td>{{ $loop->iteration  }}</td>
             <td>{{ $per->tahun_ajaran }} | {{ $per->semester }}</td>
-
+            <td>{{ \Carbon\Carbon::parse($per->start_periode)->isoFormat('Do MMMM YYYY' )}} ~ {{ \Carbon\Carbon::parse($per->end_periode)->isoFormat('Do MMMM YYYY' )}}</td>
             <td>{{ $per->status_periode}} </td>
             <td>
-                <a href="/editperiode/{id_periode}" class="badge bg-info"><span data-feather="edit"></span></a>
-                <a href="/deleteperiode/{id_periode}" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Periode?!!!')"><span data-feather="x-circle"></span></a>
-
+                <a href="/editperiode/{{ $per->id_periode }}" class="badge bg-info"><span data-feather="edit"></span></a>
             </td>
         </tr>
     @endforeach

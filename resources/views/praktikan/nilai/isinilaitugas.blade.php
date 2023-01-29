@@ -15,12 +15,11 @@
         </div>
         @endif
             <!--begin::Card-->
-
             <div class="card card-custom card-sticky mt-5" id="kt_page_sticky_card">
                 <div class="card-header d-flex justify-content-center bg-primary">
                     <div class="card-title text-white ">
-                        <h5 class="card-label float-start">{{ $mdl->nama_modul }} - {{ $mhs->nama_mahasiswa }} - {{ $mhs->nim }}</h5>
-
+                        <h5 class="card-label text-center">{{ $mhs->nama_mahasiswa }} - {{ $mhs->nim }}</h5>
+                        <h6>{{ $mdl->praktikum->kelas->nama_kelas }} - {{ $mdl->nama_modul }}</h6>
                     </div>
                 </div>
             </div>

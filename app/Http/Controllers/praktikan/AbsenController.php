@@ -47,8 +47,7 @@ class AbsenController extends Controller
                 'modul_id'=>$request->modul_id
             ]);
         }
-
-        return redirect ('/praktikan/absen');
+        return redirect()->back()->with('success', 'Absen berhasil dibuat');
     }
 
     /**

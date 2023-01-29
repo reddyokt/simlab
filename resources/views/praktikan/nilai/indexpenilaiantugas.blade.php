@@ -66,8 +66,6 @@
                         <h5 class="modal-title" id="exampleModalLabel"> List Mahasiswa {{ $modul->nama_modul }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="/praktikan/isinilaitugas" method="post">
-                            @csrf
                         <div class="modal-body">
                             <table id="dtM" class="table table-bordered table-striped table-hover dataTable" style="font-size:12px;">
                                 <thead>
@@ -87,9 +85,8 @@
                             </table>
                         </div>
                         <div class="modal-footer">
-                        <button  type="submit"  class="btn btn-success" >Simpan Nilai</button>
-                        </div>
-                        </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          </div>
                     </div>
                     </div>
                 </div>

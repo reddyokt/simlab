@@ -12,6 +12,9 @@ use App\Models\Ujian;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Expr\AssignOp\Mod;
 use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
+use Carbon\Carbon;
+
+use function PHPUnit\Framework\isNull;
 
 class TugasController extends Controller
 {
@@ -30,7 +33,7 @@ class TugasController extends Controller
                     $q3->where('status_periode', 'Aktif');
                 });
             });
-        })
+        })->whereNull('delete_at')
         ->get();
         //dd($data->toArray());
         return view ('praktikan.tugas.indextugas', compact ('data'));
@@ -174,5 +177,33 @@ class TugasController extends Controller
 
         return redirect ('/praktikan/ujian')->with('success', 'Ujian berhasil disembunyikan di landing page');
     }
+
+    public function showedittugas($id_tugas)
+    {
+        //dd($id_tugas);
+        $showtugas = Tugas::find($id_tugas);
+        //dd($showtugas->all());
+        return view ('/praktikan/tugas/edittugas', compact ('showtugas'));
+    }
+
+    public function storeedittugas(Request $request, $id_tugas)
+    {
+         //dd($request->all());
+        $showtugas = Tugas::find($id_tugas);
+        //dd($showtugas->all());
+        $showtugas->update($request->all());
+        return redirect ('/praktikan/tugas')->with('success', 'Tugas berhasil diubah');
+    }
+
+    public function deletetugas($id_tugas)
+    {
+        $deletetugas = Tugas::find($id_tugas);
+        $deletetugas->update(array('delete_at'=>Carbon::now()));
+
+        //dd($deletetugas->all());
+
+        return redirect ('/praktikan/tugas')->with('success', 'Tugas berhasil dihapus');
+    }
+
 
 }

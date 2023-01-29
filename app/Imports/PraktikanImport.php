@@ -8,7 +8,9 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use App\Models\Mahasiswa;
 use App\Models\PraktikumMahasiswa;
 use App\Models\Kelas;
+use App\Models\NewMahasiswa;
 use App\Models\Praktikum;
+use App\Models\User;
 
 class PraktikanImport implements ToCollection,WithHeadingRow
 {
@@ -21,12 +23,38 @@ class PraktikanImport implements ToCollection,WithHeadingRow
 
     public function collection(Collection $collection)
     {
-        //dd($collection->toArray());
+        //dd($collection->toArray(), $this->periode_id);
         foreach($collection as $row) {
 
+            $user = User::updateOrcreate(
+                [
+                    'username'=>$row['nim']
+                ],
+                [
+                    'nama_lengkap'=>$row['nama_mahasiswa'],
+                    'role_id'=>'5',
+                    'password'=>bcrypt('qwerty')
+                ]
+            );
+
+
             $mhs = Mahasiswa::updateOrcreate(
-                ['nim'=>$row['nim']],
-                ['nama_mahasiswa'=>$row['nama_mahasiswa']]
+                [
+                    'nim'=>$row['nim']
+                ],
+                [
+                    'nama_mahasiswa'=>$row['nama_mahasiswa']
+                ]
+            );
+
+            $newmhs = NewMahasiswa::updateOrcreate(
+                [
+                    'nim'=>$row['nim']
+                ],
+                [
+                    'nama_mahasiswa'=>$row['nama_mahasiswa'],
+                    'user_id'=>$user->id
+                ]
             );
 
             $praktikum = Praktikum::with(['kelas','periode'])
@@ -35,11 +63,13 @@ class PraktikanImport implements ToCollection,WithHeadingRow
                 })
             ->where('periode_id',$this->periode_id)
             ->first();
-           //dd($praktikum);
+           //dump($praktikum);
             PraktikumMahasiswa::create([
                 'mahasiswa_id'=> $mhs->id_mahasiswa,
                 'praktikum_id'=> $praktikum->id_praktikum
             ]);
+
+
         }
 
     }

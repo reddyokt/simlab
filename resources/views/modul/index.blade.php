@@ -1,6 +1,8 @@
 @extends('dashboard.layouts.main')
 
 @section('container')
+<link rel="stylesheet" type="text/css" href="/css/trix.css">
+<script type="text/javascript" src="/js/trix.js"></script>
 
 <!-- Custom styles for this datatables -->
 <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -36,15 +38,21 @@
          <td>{{ $loop->iteration  }}</td>
          <td>{{ $dt->kelas->kelas->nama_kelas }}</td>
          <td>{{ $dt->nama_modul }}</td>
-         <td>{{ $dt->tanggal_praktek }}</td>
+         <td>{{\Carbon\Carbon::parse($dt->tanggal_praktek)->isoFormat('Do MMMM YYYY' )}}</td>
          <td>{{ $dt->kelas->dosen->nama_dosen }}</td>
          <td>
              <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $dt->id_modul }}"><span data-feather="eye"></span></a>
              @if (!$dt->used)
-             <a href="/modul/usemodul/{{ $dt->id_modul }}" class="badge bg-warning"><span data-feather="sunrise" onclick="return confirm('Yakin akan menggunakan modul ini?!!!')"></span></a>
+                <a href="/modul/usemodul/{{ $dt->id_modul }}" class="badge bg-warning"><span data-feather="sunrise" onclick="return confirm('Yakin akan menggunakan modul ini?!!!')"></span></a>
+                <a href="/modul/editmodul/{{ $dt->id_modul }}" class="badge bg-info"><span data-feather="edit"></span></a>
+                <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
+             @else
+                @if (!$dt->catatan)
+                    <a href="/modul/catatan/{{ $dt->id_modul }}" class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#Modaldetail2-{{ $dt->id_modul }}"><span data-feather="pen-tool"></span></a>
+                @endif
              @endif
-             <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
-             <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
+
+
          </td>
      </tr>
         @endforeach
@@ -105,6 +113,36 @@
       </div>
     </div>
   </div>
+@endforeach
+
+<!-- Modal2 -->
+@foreach ($dataModul as $dt )
+<form action="/modul/catatan/{{ $dt->id_modul }}" method="POST" class="col-md d-block align-item-center mx-auto">
+    @csrf
+<div class="modal fade bd-example-modal-lg " id="Modaldetail2-{{ $dt->id_modul }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Catatan Kegiatan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" value="{{ $dt->id_modul }}" name="modul_id">
+            <div class="form-group row mb-3">
+                <div class="col-12">
+                    <input class="form-control" id="isi_catatan" type="hidden" name="isi_catatan" required>
+                    <trix-editor input="isi_catatan"></trix-editor>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-md btn-primary d-flex justify-content-end" type="submit">Buat Catatan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
 @endforeach
 
 @endsection

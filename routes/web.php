@@ -22,6 +22,8 @@ use App\Http\Controllers\inventory\BarangController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\praktikan\JadwalController;
 use App\Http\Controllers\praktikan\PesertaController;
+use App\Http\Controllers\TransaksiController;
+use App\Models\Transaksi;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +52,9 @@ Route::post('/praktikan/uploadjawabanujian',[LandingController::class, 'uploadja
 Route::get('/daftarPraktikum', [DaftarController::class, 'daftar']);
 Route::post('/daftarPraktikum', [DaftarController::class, 'store']);
 Route::post('/setuju/{id_pendaftaran}', [DaftarController::class, 'setuju']);
+Route::get('/profile', [UserController::class, 'profile']);
+Route::post('/profile', [UserController::class, 'profileedit']);
+Route::post('/profile/password', [UserController::class, 'passwordubah']);
 
 Route::get('/findnamamhs', 'DaftarController@findnamamhs');
 Route::get('/findNim', 'DaftarController@findNim');
@@ -108,6 +113,8 @@ Route::get('/barang/{id_alat}', [BarangController::class, 'showbarang']);
 Route::post('/editbarang/{id_alat}', [BarangController::class, 'editbarang']);
 Route::get('/deletebarang/{id_alat}', [BarangController::class, 'deletebarang']);
 
+Route::get('/inventory/transaksi', [TransaksiController::class, 'transaksi']);
+
 //---------------------------------Praktikan----------------------------------//
 Route::get('/praktikan/peserta', [PesertaController::class,'index']);
 Route::post('/praktikan/import', [PesertaController::class,'import']);
@@ -137,6 +144,10 @@ Route::get('/praktikan/createtugas', [TugasController::class, 'createtugas']);
 Route::get('/praktikan/createujian', [TugasController::class, 'createujian']);
 Route::post('/praktikan/createtugas', [TugasController::class, 'storetugas']);
 Route::post('/praktikan/createujian', [TugasController::class, 'storeujian']);
+Route::get('/praktikan/edittugas/{id_tugas}', [TugasController::class, 'showedittugas']);
+Route::post('/praktikan/edittugas/{id_tugas}', [TugasController::class, 'storeedittugas']);
+Route::get('/praktikan/deletetugas/{id_tugas}', [TugasController::class, 'deletetugas']);
+
 
 
 
@@ -162,6 +173,9 @@ Route::post('/modul/createmodul', [ModulController::class, 'storemodul']);
 Route::get('/modul/addItem/{id_modul}', [ModulController::class, 'addItem']);
 Route::post('/modul/addItem', [ModulController::class, 'storeItem']);
 Route::get('/modul/usemodul/{id_modul}', [ModulController::class, 'usemodul']);
+Route::get('/modul/editmodul/{id_modul}', [ModulController::class, 'showmodul']);
+Route::post('/modul/editmodul/{id_modul}', [ModulController::class, 'editmodul']);
+Route::post('/modul/catatan/{id_modul}', [ModulController::class, 'catatanmodul']);
 
 
 
@@ -186,3 +200,4 @@ Route::get('/praktikan/isinilaiujian', [NilaiController::class, 'isinilaiujianma
 Route::post('/export/nilaiakhir', [NilaiController::class, 'exportnilaiakhir' ]);
 Route::post('/export/alatc2a', [AlatsController::class, 'exportalatc2a' ]);
 Route::post('/export/alatc2b', [AlatsController::class, 'exportalatc2b' ]);
+Route::post('/export/transaksi', [TransaksiController::class, 'exporttransaksi' ]);

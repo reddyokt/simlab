@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 
@@ -77,5 +79,46 @@ class UserController extends Controller
         $user->delete();
 
         return redirect ('/user')->with('success', 'Data User berhasil dihapus');
+    }
+
+    public function profile()
+    {
+        $data = User::where('id', auth()->id())
+        ->get();
+        return view ('/user/profile', compact ('data'));
+    }
+
+    public function profileedit(Request $request)
+    {
+        //dd($request->all());
+        $user = User::find(auth()->id());
+        $user->update($request->all());
+        return redirect()->back();
+    }
+
+    public function passwordubah(Request $request)
+    {
+        //dd($request->all());
+        $user = $request->validate([
+            'old_password'=> 'required',
+            'new_password'=> 'required|confirmed|min:7|string'
+        ]);
+        $auth = Auth::user();
+
+        //matched old password//
+        if(!Hash::check($request->get('old_password'), $auth->password))
+        {
+            return back()->with('error', 'old password salah');
+        }
+        //matched new_password//
+        if(strcmp($request->get('old_password'), $request->new_password) ==0)
+        {
+            return redirect()->back()->with("error", "Password lama dan password baru tidak boleh sama");
+        }
+
+        $user = User::find($auth->id);
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        return redirect()->back()->with('success', 'Password berhasil diubah');
     }
 }

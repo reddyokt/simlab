@@ -17,6 +17,12 @@ class PraktikumMahasiswa extends Model
     public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id','id_mahasiswa');
+
+    }
+
+    public function newmahasiswa()
+    {
+        return $this->belongsTo(NewMahasiswa::class, 'mahasiswa_id','id_mahasiswa');
     }
 
     public function praktikum()

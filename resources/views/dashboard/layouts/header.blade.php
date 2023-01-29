@@ -5,12 +5,27 @@
     </button>
     <input class="form-control form-control-dark " type="text" placeholder disabled="true" style="background-color:rgba(24, 23, 23, 0.627);">
     <div class="navbar-nav">
-      <div class="nav-item text-nowrap">
-        <form action="/logout" method="post">
-            @csrf
-            <button type="submit" class="bg-dark text-light">Logout
-                <span data-feather="log-out"></span> </button>
-        </form>
+    @auth
+      <div class="nav-item text-nowrap mx-auto">
+        <ul style="list-style-type:none;">
+            <li class="nav-item dropdown  mt-1">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Welcome Back, {{ auth()->user()->nama_lengkap }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/">Landing Page</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                    <li>
+                        <form action="/logout" method="post">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
       </div>
+      @endauth
     </div>
 </header>

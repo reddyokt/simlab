@@ -132,8 +132,10 @@
                                             <td>{{ $d->praktikum->dosen->nama_dosen}}</td>
                                             <td><a href="#" class="badge bg-success"
                                                 data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $d->id_modul }}"><i class="fa fa-eye"></i></a>
+                                                @if(Auth::check())
                                                 <a href="#" class="badge bg-danger"
                                                 data-bs-toggle="modal" data-bs-target="#Modaldetail2-{{ $d->id_modul }}"><i class="fa fa-upload"></i></a>
+                                                @endif
                                             </td>
                                           </tr>
                                         @endforeach
@@ -362,14 +364,8 @@
                                     <input type="hidden" name="tugas_id" value="{{ $tugas->id_tugas }}">
                                 </div>
                                 <div class="form-group row mb-1">
-                                    <label class="col-4">NIM</label>
                                     <div class="col-8">
-                                        <select class="form-control" name="mahasiswa_id" required>
-                                            <option selected >Pilih NIM</option>
-                                            @foreach ($tugas->modul->praktikum->mahasiswa as $mhs)
-                                                <option value="{{ $mhs->id_mahasiswa }}">{{ $mhs->nim }} - {{ $mhs->nama_mahasiswa}}</option>
-                                            @endforeach
-                                        </select>
+                                            <input type="hidden" value="{{ $jwbtugas ? $jwbtugas->id_mahasiswa : "" }}" name="mahasiswa_id">
                                     </div>
                                 </div>
                                 <div class="form-group row mb-2">
@@ -440,7 +436,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                
+
                 <form id="tugas" action="/praktikan/uploadjawabanujian" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">

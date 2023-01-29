@@ -15,8 +15,9 @@
       </style>
 </head>
 <body>
-    <h5 class="text-center">Nilai Akhir {{ $praktikum->kelas->nama_kelas }} {{ $praktikum->periode->tahun_ajaran }}</h5>
-    <table class="table">
+    <img class="text-center" src="{{asset('img/simlab.png')}}" alt="" width="20%">
+    <h5 class="text-center mt-2">Nilai Akhir {{ $praktikum->kelas->nama_kelas }} {{ $praktikum->periode->tahun_ajaran }}</h5>
+    <table class="table table-striped table-fixed" >
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>

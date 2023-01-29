@@ -8,6 +8,7 @@ use App\Models\Modul;
 use App\Models\Periode;
 use App\Models\c2a_alat;
 use App\Models\c2b_alat;
+use App\Models\CatatanModul;
 use App\Models\Dosen;
 use App\Models\Kelas;
 use App\Models\Praktikum;
@@ -27,7 +28,8 @@ class ModulController extends BaseController
     {
 
         $dataModul = Modul::all();
-           return view ('modul.index', compact('dataModul'));
+        $catatan = CatatanModul::all();
+           return view ('modul.index', compact('dataModul','catatan'));
 
     }
 
@@ -44,7 +46,6 @@ class ModulController extends BaseController
         $kelas = Kelas::all();
         $praktik = Praktikum::all();
 
-
         return view ('modul.createmodul', compact('alat','kelas', 'bahan', 'praktik'));
 
     }
@@ -60,23 +61,24 @@ class ModulController extends BaseController
        $modul->praktikum_id=$data['kelas_id'];
        $modul->tanggal_praktek=$data['tanggal_praktek'];
        $modul->save();
-    foreach ($data['alat'] as $index=>$alat){
-        $x = ['modul_id'=>$modul->id_modul,
-            'alat_id'=>$data['alat'][$index],
-            'bahan_id'=>0,
-            'jumlah_bahan'=>0,
-    ];
-        Membermodul::create($x);
-    }
 
-    foreach ($data['id_bahan'] as $index=>$bahan){
-        $x = ['modul_id'=>$modul->id_modul,
-             'bahan_id'=>$bahan,
-             'alat_id'=>0,
-             'jumlah_bahan'=>$data['jumlah_bahan'][$index],
-    ];
-        Membermodul::create($x);
-    }
+        foreach ($data['alat'] as $index=>$alat){
+            $x = ['modul_id'=>$modul->id_modul,
+                'alat_id'=>$data['alat'][$index],
+                'bahan_id'=>0,
+                'jumlah_bahan'=>0,
+                ];
+            Membermodul::create($x);
+        }
+
+        foreach ($data['id_bahan'] as $index=>$bahan){
+            $x = ['modul_id'=>$modul->id_modul,
+                'bahan_id'=>$bahan,
+                'alat_id'=>0,
+                'jumlah_bahan'=>$data['jumlah_bahan'][$index],
+                ];
+            Membermodul::create($x);
+        }
 
         return redirect ('/modul')->with('success', 'Data Modul berhasil ditambahkan');
     }
@@ -112,6 +114,65 @@ class ModulController extends BaseController
         $modul->save();
 
         return redirect ('/modul')->with('success', $msg);
+    }
+
+    public function showmodul($id_modul)
+    {
+        $modul = Modul::find($id_modul);
+        $bahanmember = $modul->membermodul()->where('bahan_id','!=',0)->get();
+        $alat = Alats::all();
+        $bahan = Bahan::all();
+        $kelas = Kelas::all();
+        $praktik = Praktikum::all();
+
+        //dd($alat->toArray(), $modul->alat->toArray());
+        return view ('modul.editmodul', compact('modul', 'bahanmember','alat','kelas', 'bahan', 'praktik'));
+    }
+
+    public function editmodul(Request $request, $id_modul)
+    {
+        //dd($request->all());
+        $membermodul = Membermodul::where('modul_id',$id_modul)->delete();
+
+        $data = $request->all();
+
+        $modul = Modul::find($id_modul);
+        $modul->nama_modul=$data['nama_modul'];
+        $modul->praktikum_id=$data['kelas_id'];
+        $modul->tanggal_praktek=$data['tanggal_praktek'];
+        $modul->save();
+
+         foreach ($data['alat'] as $index=>$alat){
+             $x = ['modul_id'=>$modul->id_modul,
+                 'alat_id'=>$data['alat'][$index],
+                 'bahan_id'=>0,
+                 'jumlah_bahan'=>0,
+                 ];
+             Membermodul::create($x);
+         }
+
+         foreach ($data['id_bahan'] as $index=>$bahan){
+             $x = ['modul_id'=>$modul->id_modul,
+                 'bahan_id'=>$bahan,
+                 'alat_id'=>0,
+                 'jumlah_bahan'=>$data['jumlah_bahan'][$index],
+                 ];
+             Membermodul::create($x);
+         }
+
+         return redirect ('/modul')->with('success', 'Data Modul berhasil diubah');
+    }
+
+    public function catatanmodul(Request $request, $id)
+    {
+        //dd($request->all());
+        $data = Modul::find($id);
+        $data =CatatanModul::create([
+            'modul_id' => $id,
+            'isi_catatan'=> $request->isi_catatan,
+            'user_id' => auth()->id()
+        ]);
+        return redirect ('/modul')->with('success', 'Catatan berhasil dibuat');
     }
 
 }

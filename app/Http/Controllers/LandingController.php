@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Models\Download;
 use App\Models\JawabanTugas;
 use App\Models\JawabanUjian;
+use App\Models\NewMahasiswa;
 use App\Models\Ujian;
 
 class LandingController extends Controller
@@ -32,7 +33,10 @@ class LandingController extends Controller
             $q->whereHas('periode', function ($q2){
                 $q2->where('status_periode','Aktif');
             });
-        }) ->get();
+        })->whereHas('tugas', function($r){
+            $r->where('is_active', 'Y');
+        })
+        ->get();
         $data1 = Ujian::whereHas('praktikum',function ($q){
             $q->whereHas('periode', function ($q2){
                 $q2->where('status_periode','Aktif');
@@ -40,8 +44,11 @@ class LandingController extends Controller
         })->where('is_active','Y')
         ->get();
 
-        //dd($data->toArray());
-        return view ('landing.layouts.main',compact('data1','data2','kelas','pengumuman','download'));
+        $jwbtugas= NewMahasiswa::where('user_id',auth()->id())
+        ->first();
+
+        //dd($jwbtugas->toArray());
+        return view ('landing.layouts.main',compact('data1','data2','kelas','pengumuman','download','jwbtugas'));
     }
 
     function changeFormat($date, $reverse = false){

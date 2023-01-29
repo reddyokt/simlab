@@ -12,74 +12,34 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
-<div>
-    <a class="btn btn-success my-3 ms-auto" href="/alat/createalatc2a" role="button">Tambah Alat C2A</a>
-    <a class="btn btn-success my-3 ms-auto" href="/alat/createalatc2b" role="button">Tambah Alat C2B</a>
-    <a class="btn btn-success my-3 ms-auto" href="/inventory/alat/createlemari" role="button">Tambah Lemari/Lokasi</a>
-</div>
+    <div>
+        <a class="btn btn-success my-3 ms-auto" href="/alat/createalatc2a" role="button">Tambah Alat C2A</a>
+        <a class="btn btn-success my-3 ms-auto" href="/alat/createalatc2b" role="button">Tambah Alat C2B</a>
+        <a class="btn btn-success my-3 ms-auto" href="/inventory/alat/createlemari" role="button">Tambah Lemari/Lokasi</a>
+    </div>
 
     <div class="row">
-        <div class="col-md-2">
-            <form action="/export/alatc2a" method="post">
-                @csrf
-                <button class="btn btn-sm btn-primary" role="button"><i class="fa fa-file-pdf-o"></i> export data Alat C2A</button>
-            </form>
+            <div class="col-md-2">
+                <form action="/export/alatc2a" method="post">
+                    @csrf
+                    <button class="btn btn-sm btn-primary" role="button"><i class="fa fa-file-pdf-o"></i> export data Alat C2A</button>
+                </form>
+            </div>
+            <div class="col-md-2">
+                <form action="/export/alatc2b" method="post">
+                    @csrf
+                    <button class="btn btn-sm btn-primary" role="button"><i class="fa fa-file-pdf-o"></i> export data Alat C2B</button>
+                </form>
+            </div>
         </div>
-        <div class="col-md-2">
-            <form action="/export/alatc2b" method="post">
-                @csrf
-                <button class="btn btn-sm btn-primary" role="button"><i class="fa fa-file-pdf-o"></i> export data Alat C2B</button>
-            </form>
+
+    <div class="card mt-2 mb-10">
+        <div class="card-header bg-warning">
+        <h5 class="card-title"> Daftar Alat C2A</h5>
         </div>
-    </div>
+        <div class="card-body">
 
-<div class="card mt-2">
-    <div class="card-header bg-warning">
-      <h5 class="card-title"> Daftar Alat C2A</h5>
-    </div>
-    <div class="card-body">
-
-        <table id="example1" class="display" style="width:100%; font-size:12px;">
-            <thead>
-                <tr>
-                    <th style="font-size:12px">#</th>
-                    <th style="font-size:12px">Nama Alat</th>
-                    <th style="font-size:12px">Merk</th>
-                    <th style="font-size:12px">Ukuran</th>
-                    <th style="font-size:12px">Jumlah</th>
-                    <th style="font-size:12px">Lokasi</th>
-                    <th style="font-size:12px">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-
-            @foreach ($c2a as $a )
-
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td style="font-size:12px">{{ $a->nama_alat }}</td>
-                <td style="font-size:12px">{{ $a->merk }}</td>
-                <td style="font-size:12px">{{ $a->ukuran }}</td>
-                <td style="font-size:12px">{{ $a->jumlah }}</td>
-                <td style="font-size:12px"> {{ $a->nama_lokasi }}<br>Lemari : {{ $a->nama_lemari }}.{{ $a->baris }}.{{ $a->kolom }}</td>
-                <td>
-                    <a href="" class="badge bg-info"><span data-feather="edit"></span></a>
-                    <a href="" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Alat?!!!')"><span data-feather="x-circle"></span></a>
-
-                </td>
-            </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="card ">
-    <div class="card-header bg-info">
-      <h5 class="card-title"> Daftar Alat C2B</h5>
-    </div>
-    <div class="card-body ">
-
-        <table id="example2" class="display" style="width:100%">
+            <table id="example1" class="display" style="width:100%; font-size:12px;">
                 <thead>
                     <tr>
                         <th style="font-size:12px">#</th>
@@ -91,28 +51,65 @@
                         <th style="font-size:12px">Action</th>
                     </tr>
                 </thead>
-
                 <tbody>
-                    @foreach ( $c2b as $b )
-                    <tr>
-                        <td style="font-size:12px">{{ $loop->iteration  }}</td>
-                        <td style="font-size:12px">{{ $b->nama_alat }}</td>
-                        <td style="font-size:12px">{{ $b->merk }}</td>
-                        <td style="font-size:12px">{{ $b->ukuran }}</td>
-                        <td style="font-size:12px">{{ $b->jumlah }}</td>
-                        <td style="font-size:12px">{{ $b->nama_lokasi }}</td>
-                        <td>
-                            <a href="" class="badge bg-info"><span data-feather="edit"></span></a>
-                            <a href="" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Alat?!!!')" ><span data-feather="x-circle"></span></a>
-
-                        </td>
-                    </tr>
-                    @endforeach
+                @foreach ($c2a as $a )
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td style="font-size:12px">{{ $a->nama_alat }}</td>
+                    <td style="font-size:12px">{{ $a->merk }}</td>
+                    <td style="font-size:12px">{{ $a->ukuran }}</td>
+                    <td style="font-size:12px">{{ $a->jumlah }}</td>
+                    <td style="font-size:12px"> {{ $a->nama_lokasi }}<br>Lemari : {{ $a->nama_lemari }}.{{ $a->baris }}.{{ $a->kolom }}</td>
+                    <td>
+                        <a href="" class="badge bg-info"><span data-feather="edit"></span></a>
+                        <a href="" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Alat?!!!')"><span data-feather="x-circle"></span></a>
+                    </td>
+                </tr>
+                @endforeach
                 </tbody>
             </table>
-
+        </div>
     </div>
-</div>
+    <div class="card mb-10">
+        <div class="card-header bg-info">
+        <h5 class="card-title"> Daftar Alat C2B</h5>
+        </div>
+        <div class="card-body ">
+
+            <table id="example2" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th style="font-size:12px">#</th>
+                            <th style="font-size:12px">Nama Alat</th>
+                            <th style="font-size:12px">Merk</th>
+                            <th style="font-size:12px">Ukuran</th>
+                            <th style="font-size:12px">Jumlah</th>
+                            <th style="font-size:12px">Lokasi</th>
+                            <th style="font-size:12px">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach ( $c2b as $b )
+                        <tr>
+                            <td style="font-size:12px">{{ $loop->iteration  }}</td>
+                            <td style="font-size:12px">{{ $b->nama_alat }}</td>
+                            <td style="font-size:12px">{{ $b->merk }}</td>
+                            <td style="font-size:12px">{{ $b->ukuran }}</td>
+                            <td style="font-size:12px">{{ $b->jumlah }}</td>
+                            <td style="font-size:12px">{{ $b->nama_lokasi }}</td>
+                            <td>
+                                <a href="" class="badge bg-info"><span data-feather="edit"></span></a>
+                                <a href="" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Alat?!!!')" ><span data-feather="x-circle"></span></a>
+
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+        </div>
+    </div>
+
 
 
 

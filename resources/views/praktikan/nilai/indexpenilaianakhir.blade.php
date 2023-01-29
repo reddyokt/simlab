@@ -28,7 +28,7 @@
                         <div class="row p-3">
                             <div class="col">
                                 <select class="form-select form-select-sm dflex" name="praktikum_id" aria-label="id_praktikum">
-                                    <option selected>Pilih Kelas</option>
+
                                 @foreach ($praktikum as $p )
                                     <option value="{{ $p->id_praktikum }}">{{ $p->kelas->nama_kelas }}</option>
                                 @endforeach

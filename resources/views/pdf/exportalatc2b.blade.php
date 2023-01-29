@@ -13,8 +13,9 @@
       </style>
 </head>
 <body>
-    <h5 class="text-center mx-auto">Data Alat Praktikum C2B</h5>
-    <table id="example2" class="display" style="width:100%; font-size:12px;" >
+    <img class="text-center" src="{{asset('img/simlab.png')}}" alt="" width="20%">
+    <h5 class="text-center mx-auto mt-2">Data Alat Praktikum C2B</h5>
+    <table id="example2" class="table table-striped table-fixed" style="width:100%; font-size:12px;" >
         <thead>
             <tr>
                 <th style="font-size:12px">#</th>

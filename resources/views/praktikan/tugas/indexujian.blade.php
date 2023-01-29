@@ -60,9 +60,14 @@
                                         <td>
                                             <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-"{{$uj->id_ujian}}"><span data-feather="eye"></span></a>
                                             <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
-                                            @if ($uj->is_validated=='Y')
-                                                <a href="/praktikan/showujian/{{$uj->id_ujian}}" class="badge bg-warning" onclick="return confirm('Yakin akan mengirimkan Ujian ini?!!!')"><span data-feather="sunrise"></span></a>
-                                            @else
+                                            @if ($uj->is_validated !='N')
+                                                @if ($uj->is_active =='N')
+                                                <a href="/praktikan/showujian/{{ $uj->id_ujian }}" class="badge bg-warning" onclick="return confirm('Yakin akan mengirimkan Tugas ini?!!!')">
+                                                    <span data-feather="sunrise"></span></a>
+                                                    @else
+                                                    <a href="/praktikan/hideujian/{{ $uj->id_ujian }}" class="badge bg-danger" onclick="return confirm('Yakin akan menyembunyikan Tugas ini?!!!')">
+                                                    <span data-feather="sunset"></span></a>
+                                                @endif
                                             @endif
                                             <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
                                         </td>

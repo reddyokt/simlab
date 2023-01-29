@@ -63,7 +63,7 @@
                                             @if ($tg->is_validated !='Y')
                                             <a href="/praktikan/validasitugas/{{ $tg->id_tugas }}" class="badge bg-warning"><span data-feather="check-circle"></span></a>
                                             @endif
-                                            <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
+                                            {{-- <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a> --}}
                                         </td>
 
                                     </tr>

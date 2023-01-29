@@ -26,24 +26,22 @@
             <th>Tahun Ajaran</th>
             <th>Jumlah Modul</th>
             <th>Dosen Pengampu</th>
-            <th >Kelas Aktif?</th>
+            {{-- <th >Kelas Aktif?</th> --}}
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
     @foreach ($praktikums as $praktik )
-
         <tr>
             <td>{{ $loop->iteration  }}</td>
             <td>{{ $praktik->kelas->nama_kelas }}</td>
             <td>{{ $praktik->periode->semester}} | {{ $praktik->periode->tahun_ajaran}}</td>
             <td>{{ $praktik->jumlah_modul }}</td>
             <td>{{ $praktik->dosen->nama_dosen}} <br> {{ $praktik->dosen->nidn}}  </td>
-            <td class="text-center">{{ $praktik->is_active }}</td>
+            {{-- <td>{{ $praktik->is_active=='Y'?"Aktif" : "Tidak Aktif" }}</td> --}}
             <td>
                 <a href="/praktikum/editekelas/{{ $praktik->id_praktikum }}" class="badge bg-info"><span data-feather="edit"></span></a>
                 <a href="/praktikum/deletekelas/{{ $praktik->id_praktikum }}" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Kelas?!!!')"><span data-feather="x-circle"></span></a>
-
             </td>
         </tr>
     @endforeach

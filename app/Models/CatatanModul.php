@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tugas extends Model
+class CatatanModul extends Model
 {
     use HasFactory;
-    protected $table = 'tugas';
-    protected $fillable =  ['id_tugas','modul_id','jenis_tugas','uraian_tugas','is_active','is_validated','delete_at'];
-    protected $primaryKey = 'id_tugas';
 
+    protected $table = 'catatan_modul';
+    protected $primaryKey = 'id_catatan_modul';
+    protected $guarded = [];
 
     public function modul()
     {

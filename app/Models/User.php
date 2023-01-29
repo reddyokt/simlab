@@ -43,4 +43,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_id','id_role');
     }
+
+    public function mahasiswa()
+    {
+        return $this->belongsTo(NewMahasiswa::class, 'user_id', 'id');
+    }
+
 }

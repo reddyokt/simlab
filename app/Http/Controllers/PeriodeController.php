@@ -56,48 +56,66 @@ class PeriodeController extends Controller
         return redirect ('/periode')->with('success', 'Data Periode berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Periode  $periode
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Periode $periode)
+    public function showperiode($id)
     {
-        //
+        //dd($id);
+        $periode = Periode::find($id);
+        //dd($periode);
+        return view ('periode.edit', compact('periode'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Periode  $periode
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Periode $periode)
+
+    public function editperiode(Request $request, $id)
     {
-        //
+        //dd($request->all());
+        $periode = Periode::find($id);
+        $periode->update($request->all());
+
+        return redirect ('/periode')->with('success', 'Data Periode berhasil diubah');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Periode  $periode
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Periode $periode)
-    {
-        //
-    }
+    function changeFormat($date, $reverse = false){
+        $format = null;
+        if($reverse){
+            $arr_month = [
+                '01'=>'January',
+                '02'=>'February',
+                '03'=>'March',
+                '04'=>'April',
+                '05'=>'May',
+                '06'=>'June',
+                '07'=>'July',
+                '08'=>'August',
+                '09'=>'September',
+                '10'=>'October',
+                '11'=>'November',
+                '12'=>'December'
+            ];
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Periode  $periode
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Periode $periode)
-    {
-        //
+            $exp = explode("-",$date);
+
+            $format = $exp[2].' '.$arr_month[$exp[1]].' '.$exp[0];
+        }else{
+            $arr_month = [
+                'January'=>'01',
+                'February'=>'02',
+                'March'=>'03',
+                'April'=>'04',
+                'May'=>'05',
+                'June'=>'06',
+                'July'=>'07',
+                'August'=>'08',
+                'September'=>'09',
+                'October'=>'10',
+                'November'=>'11',
+                'December'=>'12'
+            ];
+
+            $exp = explode(" ",$date);
+
+            $format = $exp[2].'-'.$arr_month[$exp[1]].'-'.$exp[0];
+        }
+
+        return $format;
     }
 }

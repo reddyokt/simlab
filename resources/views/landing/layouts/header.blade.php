@@ -40,11 +40,13 @@
             <ul style="list-style-type:none;">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Welcome Back, {{ auth()->user()->username }}
+                    Welcome Back, {{ auth()->user()->nama_lengkap }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @if (auth()->user()->role_id !='5')
                         <li><a class="dropdown-item" href="/dashboard">My Dashboard</a></li>
                         <li><hr class="dropdown-divider"></li>
+                        @endif
                         <li>
                             <form action="/logout" method="post">
                                 @csrf
@@ -59,9 +61,7 @@
                 <div class="navbar-button d-none d-lg-inline-block">
                     <a href="/login" class="btn btn-md btn-custom-light btn-rounded btn-round text-white bg-success">Login</a>
                 </div>
-
             @endauth
-
         </div>
     </div>
 </nav>

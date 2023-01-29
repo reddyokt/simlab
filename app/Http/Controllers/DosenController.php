@@ -46,8 +46,8 @@ class DosenController extends Controller
             'role_id' => $request->role_id,
             'password' => Hash::make('qwerty')
         ]);
-        
-        
+
+
         $dosen = Dosen::create([
             'user_id' => $user->id,
             'nidn'=> $request->nidn,
@@ -55,7 +55,7 @@ class DosenController extends Controller
 
         ]);
         return redirect ('/dosen')->with('success', 'Data Dosen berhasil ditambahkan');
-        
+
 
     }
     //     $validatedData =  $request->validate([

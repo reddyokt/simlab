@@ -13,6 +13,12 @@
     <!--begin::Container-->
     <div class="container">
         <!--begin::Form-->
+        @if (session()-> has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
 
             <!--begin::Card-->
             <div class="card card-custom card-sticky mt-5" id="kt_page_sticky_card">
@@ -48,9 +54,9 @@
 
                                         <td>
                                             <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{$dt->id_modul}}"><span data-feather="eye"></span></a>
-                                            <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
+                                            {{-- <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
                                             <a href="#" class="badge bg-warning"><span data-feather="check-circle"></span></a>
-                                            <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
+                                            <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a> --}}
                                         </td>
 
                                     </tr>

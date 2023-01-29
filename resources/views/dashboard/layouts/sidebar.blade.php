@@ -71,7 +71,7 @@
             .lh-tight { line-height: 1.25; }
 
 </style>
-
+@auth
 <div class="container-fluid">
   <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -113,7 +113,7 @@
                             <li><a href="/praktikan/absen" class="link-dark rounded">Absen</a></li>
                             <li><a href="/praktikan/tugas" class="link-dark rounded">Tugas</a></li>
                             <li><a href="/praktikan/ujian" class="link-dark rounded">Ujian</a></li>
-                            @if (auth()->user()->role_id =="2")
+                            @if (auth()->user()->role_id =="2" or auth()->user()->role_id =="1")
                             <li><a href="/praktikan/validasitugas" class="link-dark rounded">Validasi Tugas</a></li>
                             <li><a href="/praktikan/validasiujian" class="link-dark rounded">Validasi Ujian</a></li>
                             @endif
@@ -135,6 +135,7 @@
                             <li><a href="/alat" class="link-dark rounded">Alat Praktikum</a></li>
                             <li><a href="/inventory/bahan" class="link-dark rounded">Bahan Praktikum</a></li>
                             <li><a href="/inventory/barang" class="link-dark rounded">Barang Umum</a></li>
+                            <li><a href="/inventory/transaksi" class="link-dark rounded">Transaksi</a></li>
                         </ul>
                         </div>
                     </li>
@@ -172,4 +173,5 @@
             </div>
         </nav>
   </div>
+@endauth
 </div>

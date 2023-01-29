@@ -33,6 +33,11 @@ class Praktikum extends Model
         return $this->belongsToMany(Mahasiswa::class, 'praktikum_mahasiswa', 'praktikum_id','mahasiswa_id','id_praktikum', 'id_mahasiswa');
     }
 
+    public function newmahasiswa()
+    {
+        return $this->belongsToMany(NewMahasiswa::class, 'praktikum_mahasiswa', 'praktikum_id','mahasiswa_id','id_praktikum', 'id_mahasiswa');
+    }
+
     public function modul()
     {
         return $this->hasMany(Modul::class, 'praktikum_id','id_praktikum');

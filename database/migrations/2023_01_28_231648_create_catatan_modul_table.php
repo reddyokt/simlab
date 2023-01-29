@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMahasiswaTable extends Migration
+class CreateCatatanModulTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateMahasiswaTable extends Migration
      */
     public function up()
     {
-        Schema::create('mahasiswa', function (Blueprint $table) {
-            $table->id('id_mahasiswa');
+        Schema::create('catatan_modul', function (Blueprint $table) {
+            $table->id('id_catatan_modul');
+            $table->foreignId('modul_id');
             $table->foreignId('user_id');
-            $table->string('nama_mahasiswa');
-            $table->integer('nim');
+            $table->text("isi_catatan");
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateMahasiswaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mahasiswa');
+        Schema::dropIfExists('catatan_modul');
     }
 }

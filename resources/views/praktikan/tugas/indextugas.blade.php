@@ -19,8 +19,9 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
+
             <!--begin::Card-->
-            <div class="card card-custom card-sticky mt-5" id="kt_page_sticky_card">
+            <div class="card card-custom card-sticky mt-4" id="kt_page_sticky_card">
                 <div class="card-header">
                     <div class="card-title">
                         <h4 class="card-label float-start">Daftar Tugas</h4> <a class="btn btn-success float-end " href="/praktikan/createtugas" role="button">Buat Tugas</a>
@@ -59,7 +60,7 @@
                                         <td>
                                             <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $dt->id_tugas }}">
                                             <span data-feather="eye"></span></a>
-                                            <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
+                                            <a href="/praktikan/edittugas/{{ $dt->id_tugas }}" class="badge bg-info"><span data-feather="edit"></span></a>
                                             @if ($dt->is_validated !='N')
                                                 @if ($dt->is_active =='N')
                                                 <a href="/praktikan/showtugas/{{ $dt->id_tugas }}" class="badge bg-warning" onclick="return confirm('Yakin akan mengirimkan Tugas ini?!!!')">
@@ -69,7 +70,7 @@
                                                     <span data-feather="sunset"></span></a>
                                                 @endif
                                             @endif
-                                            <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a>
+                                            <a href="/praktikan/deletetugas/{{ $dt->id_tugas }}" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Tugas?!!!')"><span data-feather="x-circle"></span></a>
                                         </td>
 
                                     </tr>
@@ -79,7 +80,29 @@
                         </div>
                     </div>
                 </div>
+
+            <div class="container mt-5">
+                <div class="row">
+                    <h5>Keterangan</h5>
+                    <div class="col-2">
+                        <p> <button class="badge bg-success"><span data-feather="eye"></span></button> Lihat Tugas </p>
+                    </div>
+                    <div class="col-2">
+                        <p> <button class="badge bg-info"><span data-feather="edit"></span></button> Edit Tugas</p>
+                    </div>
+                    <div class="col-2">
+                        <p> <button class="badge bg-warning"><span data-feather="sunrise"></span></button> Launching Tugas</p>
+                    </div>
+                    <div class="col-2">
+                        <p> <button class="badge bg-danger"><span data-feather="sunset"></span></button> Hide Tugas</p>
+                    </div>
+                    <div class="col-2">
+                        <p> <button class="badge bg-danger"><span data-feather="x-circle"></span></button> Delete Tugas</p>
+                    </div>
+                </div>
             </div>
+            </div>
+
             <!--end::Card-->
 
         <!--end::Form-->

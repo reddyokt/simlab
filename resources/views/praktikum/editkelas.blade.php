@@ -8,27 +8,12 @@
             <input type="text" name="nama_kelas" class="form-control @error('nama_kelas') is-invalid @enderror"
             id="nama_kelas" placeholder="Nama Kelas" required value="{{ $praktikum->kelas->nama_kelas }}" disabled >
             <label for="name">Nama Kelas</label>
-            @error('nama_kelas')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
         </div>
 
-        <div class=" form-floating mb-1 ">
-            <select class="form-control" name="tahun_ajaran" id="tahun_ajaran" value="{{ $praktikum->tahun_ajaran  }}">
-                <?php
-                $year = date('2022')+10;
-                ?>
-                @for($i=date('2022');$i<=$year;$i++)
-                    <option value="{{$i}} - {{$i+1}}">{{$i}} / {{$i+1}}</option>
-                @endfor
-            </select>
-            @error('tahun_ajaran')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-             @enderror
+        <div class=" form-floating mb-1">
+            <input type="text" name="nama_kelas" class="form-control @error('nama_kelas') is-invalid @enderror"
+            id="nama_kelas" placeholder="Nama Kelas" required value="{{ $praktikum->periode->tahun_ajaran }}" disabled >
+            <label for="name">Tahun Ajaran</label>
         </div>
 
         <div class=" form-floating mb-1 ">
@@ -58,19 +43,11 @@
             @enderror
         </div>
 
-        <div class="form-floating">
-            <select class="form-control" id="is_active" name="is_active" aria-label="Floating label select example">
-              <option selected>{{ $praktikum->is_active }}</option>
-              <option value="YA"> YA </option>
-              <option value="TIDAK"> TIDAK </option>
-            </select>
-            <label for="is_active">Kelas Aktif?</label>
-            @error('is_active')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-          </div>
+        <div class=" form-floating mb-1">
+            <input type="text" name="nama_kelas" class="form-control @error('nama_kelas') is-invalid @enderror"
+            id="nama_kelas" placeholder="Nama Kelas" required value="{{ $praktikum->is_active=='Y'?"Aktif": "Tidak Aktif"}}" disabled >
+            <label for="name">Status Kelas Aktif?</label>
+        </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Edit Kelas</button>
     </form>
 @endsection

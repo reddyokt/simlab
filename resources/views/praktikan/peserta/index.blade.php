@@ -18,6 +18,7 @@
         <form action="/praktikan/import" method="post" enctype="multipart/form-data">
             @csrf
             <div class=" form-group mb-1" style="font-size:12px;">
+                <input type="hidden" value="5" name="role_id">
                 <select class="form-control" name="periode_id" id="periode_id" value="{{ old ('periode_id') }}">
                     <option selected disabled>Pilih Periode</option>
                     @foreach ( $periode as $per )
