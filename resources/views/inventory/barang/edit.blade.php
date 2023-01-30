@@ -72,9 +72,8 @@
 
         <div class=" form-floating mb-1 ">
             <select class="form-control @error('lokasi_id') is-invalid @enderror" name="lokasi_id" id="lokasi_id" placeholder="Pilih lokasi" required >
-                <option selected value ="{{ $barang->lokasi_id }}">{{ $barang->lokasi->nama_lokasi }}</option>
-                @foreach ( $lokasi as $loc )
-                <option value="{{ $loc->id_lokasi }}"> {{ $loc->nama_lokasi }}</option>
+            @foreach ( $lokasi as $loc )
+                <option {{ $barang->lokasi_id == $loc->id_lokasi ? 'selected' : ""}} value="{{ $loc->id_lokasi }}"> {{ $loc->nama_lokasi }}</option>
             @endforeach
               </select>
               @error('lokasi_id')

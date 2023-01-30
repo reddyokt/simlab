@@ -19,6 +19,22 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
+        <form action="/export/absen" target="_blank" method="post">
+            @csrf
+            <div class="row mt-5">
+            
+                <div class="col-3">
+                    <select class="form-control" name="id_praktikum">
+                        @foreach ($kelas as $kel)
+                        <option value="{{$kel->id_praktikum}}">{{$kel->kelas->nama_kelas}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-2">
+                    <button type="submit" class="btn btn-sm btn-primary" role="button"> Export Data Absen</button>
+                </div>
+            </div>
+        </form>
 
             <!--begin::Card-->
             <div class="card card-custom card-sticky mt-5" id="kt_page_sticky_card">

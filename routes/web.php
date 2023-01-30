@@ -214,3 +214,4 @@ Route::post('/export/peserta', [PesertaController::class, 'exportpeserta' ]);
 Route::post('/export/kelompok', [PesertaController::class, 'exportkelompok' ]);
 Route::post('/export/tugas', [TugasController::class, 'exporttugas' ]);
 Route::post('/export/ujian', [TugasController::class, 'exportujian' ]);
+Route::post('/export/absen', [AbsenController::class, 'exportabsen' ]);

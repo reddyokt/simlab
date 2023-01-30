@@ -68,9 +68,9 @@ class BahanController extends Controller
 
     public function showedit($id_bahan)
     {
-        $data = Bahan::find($id_bahan)
-        ->first();
-        return view ('inventory.bahan.edit', compact('data'));
+        $lokasi = Lokasi::all();
+        $data = Bahan::find($id_bahan);
+        return view ('inventory.bahan.edit', compact('data', 'lokasi'));
     }
 
     public function storeedit(Request $request, $id_bahan)

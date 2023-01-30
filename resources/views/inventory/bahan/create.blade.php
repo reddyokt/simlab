@@ -41,8 +41,8 @@
             <select class="form-control @error('lokasi_id') is-invalid @enderror" name="lokasi_id" id="lokasi_id" placeholder="Pilih lokasi" required value="{{ old ('lokasi_id') }}" >
                 <option selected disabled>Pilih Lokasi</option>
                 @foreach ( $lokasi as $loc )
-                <option value="{{ $loc->id_lokasi }}"> {{ $loc->nama_lokasi }}</option>
-            @endforeach
+                    <option value="{{ $loc->id_lokasi }}"> {{ $loc->nama_lokasi }}</option>
+                @endforeach
               </select>
               @error('lokasi_id')
                 <div class="invalid-feedback">

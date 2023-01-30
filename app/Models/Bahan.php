@@ -21,7 +21,7 @@ class Bahan extends Model
 
     public function lokasi()
     {
-        return $this->belongsTo(Lokasi::class,'id_lokasi', 'lokasi_id');
+        return $this->belongsTo(Lokasi::class,'lokasi_id', 'id_lokasi');
     }
 
 }

@@ -58,11 +58,11 @@
                 </div>
             @enderror
         </div>
-{{--
+
         <div class=" form-floating mb-1 ">
             <select class="form-control @error('lemari') is-invalid @enderror" name="lemari_id" id="lemari_id" placeholder="Pilih Lemari" required value="{{ old ('lemari_id') }}" >
-                @foreach ( $c2a_alat as $c2a )
-                    <option value="{{ $c2a->lemari->id_lemari }}">{{ $c2a->lemari->nama_lemari }}</option>
+                @foreach ( $lemari as $l )
+                    <option {{ $c2a_alat->lemari_id == $l->id_lemari ? 'selected' : "" }} value={{$l->id_lemari}}>{{ $l->nama_lemari }}</option>
                 @endforeach
               </select>
               @error('lemari')
@@ -70,7 +70,7 @@
                     {{ $message }}
                 </div>
              @enderror
-        </div> --}}
+        </div>
 
         <div class=" form-floating mb-1">
             <input type="text" name="baris" class="form-control @error('baris') is-invalid @enderror"

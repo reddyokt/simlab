@@ -13,8 +13,14 @@ class Absen extends Model
     protected $primaryKey = 'id_absen';
     protected $guarded = [];
 
-    public function absen ()
+    public function mahasiswa ()
     {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id', 'id_mahasiswa');
     }
+
+    public function modul ()
+    {
+        return $this->belongsTo(Modul::class, 'modul_id' , 'id_modul');
+    }
+
 }

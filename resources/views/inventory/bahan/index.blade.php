@@ -49,7 +49,7 @@
         <td style="font-size:12px">{{ $loop->iteration }}</td>
         <td style="font-size:12px">{{ $b->nama_bahan }}</td>
         <td style="font-size:12px">{{ $b->rumus }}</td>
-        <td style="font-size:12px">{{ $b->lokasi_id }}</td>
+        <td style="font-size:12px">{{ $b->lokasi->nama_lokasi}}</td>
         <td style="font-size:12px">{{ $b->jumlah }}</td>
         <td>
             <a href="/bahan/edit/{{ $b->id_bahan }}" class="badge bg-info"><span data-feather="edit"></span></a>

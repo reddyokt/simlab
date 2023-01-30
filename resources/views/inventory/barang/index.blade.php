@@ -20,7 +20,7 @@
     </div>
     <div class="row ">
         <div class="col-sm-2">
-            <a class="btn  btn-sm btn-success my-3 ms-auto" href="/bahan/create" role="button">Tambah Barang</a>
+            <a class="btn  btn-sm btn-success my-3 ms-auto" href="/inventory/barang/create" role="button">Tambah Barang</a>
         </div>
         <div class="col-sm-2 mt-3">
         <form action="/export/barang" target="_blank" method="post">

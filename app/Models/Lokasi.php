@@ -13,4 +13,8 @@ class Lokasi extends Model
     protected $fillable = ['id_lokasi', 'nama_lokasi'];
     protected $guarded ='id_lokasi';
 
+    public function bahan()
+    {
+        return $this->hasMany(Bahan::class, 'id_lokasi', 'lokasi_id');
+    }
 }

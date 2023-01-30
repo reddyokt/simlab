@@ -36,16 +36,19 @@
                 </div>
             @enderror
         </div>
-        {{-- <div class=" form-floating mb-1">
-            <input type="text" name="lokasi_id" class="form-control @error('lokasi_id') is-invalid @enderror"
-            id="jumlah" placeholder="Nama Lokasi" required value="{{ $data->lokasi->nama_lokasi }}" >
-            <label for="lokasi_id">Jumlah(Dalam satuan gr/ml)</label>
-            @error('lokasi_id')
+        <div class=" form-floating mb-1 ">
+            {{-- @dd($data->toArray()) --}}
+            <select class="form-control @error('lokasi_id') is-invalid @enderror" name="lokasi_id" id="lokasi_id" placeholder="Pilih lokasi" required value="{{ old ('lokasi_id') }}" >
+                @foreach ( $lokasi as $lok ) 
+                    <option {{$data->lokasi_id == $lok->id_lokasi ? 'selected' : ""}} value={{$lok->id_lokasi}}> {{ $lok->nama_lokasi }}</option>
+                @endforeach
+              </select>
+              @error('lokasi_id')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
-            @enderror
-        </div> --}}
+             @enderror
+        </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Buat Data Bahan Kimia</button>
     </form>
 @endsection

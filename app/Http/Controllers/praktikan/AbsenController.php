@@ -5,8 +5,11 @@ namespace App\Http\Controllers\praktikan;
 use App\Http\Controllers\Controller;
 use App\Models\Absen;
 use App\Models\Modul;
+use App\Models\Praktikum;
+use App\Models\PraktikumMahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AbsenController extends Controller
 {
@@ -17,13 +20,16 @@ class AbsenController extends Controller
      */
     public function index()
     {
+        $kelas = Praktikum::whereHas('periode', function ($q){
+            $q->where('status_periode', 'Aktif');
+        })->get();
         $data = Modul::whereHas('praktikum',function ($q){
             $q->whereHas('periode', function ($q2){
                 $q2->where('status_periode','Aktif');
             });
         }) ->get();
 
-        return view ('praktikan.absen.index', compact ('data'));
+        return view ('praktikan.absen.index', compact ('data','kelas'));
     }
 
     public function create()
@@ -93,5 +99,21 @@ class AbsenController extends Controller
     public function destroy(Absen $absen)
     {
         //
+    }
+
+    public function exportabsen(Request $request)
+    {
+        $praktikum = Praktikum::find($request->id_praktikum);
+        $praktikumMhs = PraktikumMahasiswa::where('praktikum_id', $request->id_praktikum)->get();
+        $data = Absen::whereHas('modul', function ($q) use($praktikum){
+            $q->whereHas('praktikum', function ($q1) use($praktikum){
+                $q1->whereHas('periode', function ($q2){
+                    $q2->where('status_periode', 'aktif');
+                })->where('id_praktikum',$praktikum->id_praktikum);
+            });
+        })->get();
+        //dd($praktikumMhs->toArray());
+        $pdf = Pdf::loadView('pdf.exportabsen', compact ('data','praktikum','praktikumMhs'));
+        return $pdf->stream();
     }
 }

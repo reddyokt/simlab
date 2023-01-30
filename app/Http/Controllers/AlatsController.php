@@ -147,8 +147,9 @@ class AlatsController extends Controller
 
     public function showeditc2a($id_alat)
     {
+        $lemari = Lemari::all();
         $c2a_alat = Alats::find($id_alat);
-        return view ('inventory.alat.editalatc2a', compact('c2a_alat'));
+        return view ('inventory.alat.editalatc2a', compact('c2a_alat','lemari'));
     }
 
     public function storeeditc2a(Request $request, $id_alat)

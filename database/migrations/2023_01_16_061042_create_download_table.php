@@ -16,7 +16,7 @@ class CreateDownloadTable extends Migration
         Schema::create('download', function (Blueprint $table) {
             $table->id('id_download');
             $table->string('judul_file');
-            $table->string('uraian_file');
+            $table->text('uraian_file');
             $table->string('pdf');
             $table->timestamps();
         });
