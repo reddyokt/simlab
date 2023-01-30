@@ -81,7 +81,7 @@ Route::post('/edit/{id}', [DosenController::class, 'edit']);
 Route::get('/delete/{id}', [DosenController::class, 'delete']);
 
 //---------------------------------Inventory----------------------------------//
-Route::get('/inventory/alat', [AlatController::class, 'index']);
+// Route::get('/inventory/alat', [AlatController::class, 'index']);
 Route::get('/inventory/alat/createlemari', [AlatController::class, 'createlemari']);
 Route::post('/inventory/alat/createlemari', [AlatController::class, 'storelemari']);
 Route::post('/inventory/alat/createlokasi', [AlatController::class, 'storelokasi']);
@@ -96,6 +96,8 @@ Route::get('/deletec2a/{id_alat}', [AlatsController::class, 'deletec2a']);
 Route::get('/deletec2b/{id_alat}', [AlatsController::class, 'deletec2b']);
 Route::get('/editc2a/{id_alat}', [AlatsController::class, 'showeditc2a']);
 Route::get('/editc2b/{id_alat}', [AlatsController::class, 'showeditc2b']);
+Route::post('/editc2a/{id_alat}', [AlatsController::class, 'storeeditc2a']);
+Route::post('/editc2b/{id_alat}', [AlatsController::class, 'storeeditc2b']);
 
 Route::get('/alat/createalatc2b', [AlatsController::class, 'createalatc2b']);
 Route::post('/alat/createalatc2b', [AlatsController::class, 'storealatc2b']);

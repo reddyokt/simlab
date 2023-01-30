@@ -145,5 +145,33 @@ class AlatsController extends Controller
         return redirect ('/alat')->with('success', 'Data Alat C2B berhasil didelete');
     }
 
+    public function showeditc2a($id_alat)
+    {
+        $c2a_alat = Alats::find($id_alat);
+        return view ('inventory.alat.editalatc2a', compact('c2a_alat'));
+    }
+
+    public function storeeditc2a(Request $request, $id_alat)
+    {
+        //dd($request);
+        $c2b_alat = Alats::find($id_alat);
+        $c2b_alat->update($request->all());
+        return redirect ('/alat')->with('success', 'Data Alat C2A berhasil diubah');
+    }
+
+    public function showeditc2b($id_alat)
+    {
+        $c2b_alat = Alats::find($id_alat);
+        return view ('inventory.alat.editalatc2b', compact('c2b_alat'));
+    }
+
+    public function storeeditc2b(Request $request, $id_alat)
+    {
+        //dd($request);
+        $c2b_alat = Alats::find($id_alat);
+        $c2b_alat->update($request->all());
+        return redirect ('/alat')->with('successs', 'Data Alat C2B berhasil diubah');
+    }
+
 
 }

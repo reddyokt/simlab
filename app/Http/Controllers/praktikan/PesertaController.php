@@ -20,11 +20,6 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class PesertaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function import(Request $request)
     {
         //dd($request->all());

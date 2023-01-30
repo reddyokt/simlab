@@ -17,7 +17,12 @@ class Alats extends Model
 
     public function lemari()
     {
-        return $this->belongsTo(Lemari::class, 'lemari_id');
+        return $this->belongsTo(Lemari::class,'id_lemari', 'lemari_id');
+    }
+
+    public function lokasi()
+    {
+        return $this->belongsTo(Lokasi::class, 'lokasi_id', 'id_lokasi');
     }
 
     public function memberalat()

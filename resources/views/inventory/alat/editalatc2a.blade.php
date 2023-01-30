@@ -6,7 +6,7 @@
         @csrf
         <div class=" form-floating mb-1">
             <input type="text" name="nama_alat" class="form-control @error('nama_alat') is-invalid @enderror"
-            id="nama_alat" placeholder="Nama Alat" required value="{{ $c2a_alat->nama_alat }}" >
+            id="nama_alat" placeholder="Nama Alat"  value="{{ $c2a_alat->nama_alat }}" >
             <label for="nama_alat">Nama Alat</label>
             @error('nama_alat')
                 <div class="invalid-feedback">
@@ -17,7 +17,7 @@
 
         <div class=" form-floating mb-1">
             <input type="text" name="merk" class="form-control @error('merk') is-invalid @enderror"
-            id="merk" placeholder="Merk Alat" required value="{{ $c2a_alat->merk}}" >
+            id="merk" placeholder="Merk Alat"  value="{{ $c2a_alat->merk}}" >
             <label for="merk">Merk Alat</label>
             @error('merk')
                 <div class="invalid-feedback">
@@ -28,7 +28,7 @@
 
         <div class=" form-floating mb-1">
             <input type="text" name="ukuran" class="form-control @error('ukuran') is-invalid @enderror"
-            id="ukuran" placeholder="Ukuran Alat" required value="{{ $c2a_alat->ukuran }}" >
+            id="ukuran" placeholder="Ukuran Alat"  value="{{ $c2a_alat->ukuran }}" >
             <label for="ukuran">Ukuran Alat</label>
             @error('ukuran')
                 <div class="invalid-feedback">
@@ -39,7 +39,7 @@
 
         <div class=" form-floating mb-1">
             <input type="text" name="jumlah" class="form-control @error('jumlah') is-invalid @enderror"
-            id="jumlah" placeholder="Jumlah Alat" required value="{{ $c2a_alat->jumlah}}" >
+            id="jumlah" placeholder="Jumlah Alat"  value="{{ $c2a_alat->jumlah}}" >
             <label for="jumlah">Jumlah Alat</label>
             @error('jumlah')
                 <div class="invalid-feedback">
@@ -50,7 +50,7 @@
 
         <div class=" form-floating mb-1">
             <input type="text" name="rusak" class="form-control @error('rusak') is-invalid @enderror"
-            id="rusak" placeholder="Rusak Alat" required value="{{ $c2a_alat->rusak }}" >
+            id="rusak" placeholder="Rusak Alat"  value="{{ $c2a_alat->rusak }}" >
             <label for="rusak">Rusak Alat</label>
             @error('rusak')
                 <div class="invalid-feedback">
@@ -58,13 +58,11 @@
                 </div>
             @enderror
         </div>
-
+{{--
         <div class=" form-floating mb-1 ">
             <select class="form-control @error('lemari') is-invalid @enderror" name="lemari_id" id="lemari_id" placeholder="Pilih Lemari" required value="{{ old ('lemari_id') }}" >
-                <option selected disabled>{{ $c2a_alat->lemari->nama_lemari}}</option>
-
-                @foreach ( $lemaris as $lemari )
-                    <option value="{{ $lemari->id_lemari }}">{{ $lemari->nama_lemari }}</option>
+                @foreach ( $c2a_alat as $c2a )
+                    <option value="{{ $c2a->lemari->id_lemari }}">{{ $c2a->lemari->nama_lemari }}</option>
                 @endforeach
               </select>
               @error('lemari')
@@ -72,7 +70,7 @@
                     {{ $message }}
                 </div>
              @enderror
-        </div>
+        </div> --}}
 
         <div class=" form-floating mb-1">
             <input type="text" name="baris" class="form-control @error('baris') is-invalid @enderror"

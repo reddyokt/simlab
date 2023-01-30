@@ -40,6 +40,7 @@
                 </div>
             </div>
             <button class="btn btn-sm btn-success float-start " role="button">Import Data</button>
+            <a href="{{asset('template/template_import_peserta_praktikum.xlsx')}}" class="btn btn-sm btn-warning float-end " role="button">Template Excel</a>
         </form>
     </div>
 </div>

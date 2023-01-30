@@ -70,6 +70,12 @@
             </table>
         </div>
     </div>
+    @if (session()-> has('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('successs') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <div class="card mb-10">
         <div class="card-header bg-info">
         <h5 class="card-title"> Daftar Alat C2B</h5>

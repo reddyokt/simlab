@@ -91,11 +91,11 @@
                         <td>{{ $loop->iteration  }}</td>
                         <td>{{ $ls->nama_lemari }}</td>
                         <td>{{ $ls->lokasi->nama_lokasi }}</td>
-                        <td>
+                        {{-- <td>
                             <a href="" class="badge bg-info"><span data-feather="edit"></span></a>
                             <a href="" class="badge bg-danger"><span data-feather="x-circle"></span></a>
 
-                        </td>
+                        </td> --}}
                     </tr>
                     @endforeach
                 </tbody>
@@ -120,10 +120,10 @@
                     <tr>
                         <td>{{ $loop->iteration  }}</td>
                         <td>{{ $loc->nama_lokasi }}</td>
-                        <td>
+                        {{-- <td>
                             <a href="" class="badge bg-info"><span data-feather="edit"></span></a>
                             <a href="" class="badge bg-danger"><span data-feather="x-circle"></span></a>
-                        </td>
+                        </td> --}}
                     </tr>
                     @endforeach
                 </tbody>
