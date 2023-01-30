@@ -4,6 +4,7 @@
 <link href="/css/datatables.bundle.css" rel="stylesheet" type="text/css" />
 @stop
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="/css/trix.css">
 <script type="text/javascript" src="/js/trix.js"></script>
 
@@ -24,8 +25,14 @@
             <div class="card card-custom card-sticky mt-4" id="kt_page_sticky_card">
                 <div class="card-header">
                     <div class="card-title">
-                        <h4 class="card-label float-start">Daftar Tugas</h4> <a class="btn btn-success float-end " href="/praktikan/createtugas" role="button">Buat Tugas</a>
-
+                        <h4 class="card-label float-start">Daftar Tugas</h4>
+                        <a class="btn btn-sm btn-success float-end " href="/praktikan/createtugas" role="button">Buat Tugas</a>
+                        <div class="col-md-2 float-end">
+                            <form action="/export/tugas" target="_blank" method="post">
+                                @csrf
+                                <button class="btn btn-sm btn-primary" role="button"><i class="fa fa-file-pdf-o"></i> export Tugas</button>
+                            </form>
+                        </div>
                     </div>
 
                 </div>

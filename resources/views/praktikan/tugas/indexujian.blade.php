@@ -24,14 +24,19 @@
             <div class="card card-custom card-sticky mt-5" id="kt_page_sticky_card">
                 <div class="card-header">
                     <div class="card-title">
-                        <h4 class="card-label float-start">Daftar Soal Ujian</h4> <a class="btn btn-success float-end " href="/praktikan/createujian" role="button">Buat Soal Ujian</a>
-
+                        <h5 class="card-label float-start">Daftar Soal Ujian</h5>
+                        <a class="btn btn-sm btn-success float-end " href="/praktikan/createujian" role="button">Buat Soal Ujian</a>
+                        <div class="col-md-2 float-end">
+                            <form action="/export/ujian" target="_blank" method="post">
+                                @csrf
+                                <button class="btn btn-sm btn-primary" role="button"><i class="fa fa-file-pdf-o"></i> export Ujian</button>
+                            </form>
+                        </div>
                     </div>
 
                 </div>
 
                     <div class="col-xl-2"></div>
-
                     <div class="row">
                         <div class="table-responsive">
                             <table id="dtM" class="table table-bordered table-striped table-hover dataTable" style="font-size:12px;">

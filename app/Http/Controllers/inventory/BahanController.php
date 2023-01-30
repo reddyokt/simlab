@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bahan;
 use App\Models\Lokasi;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BahanController extends Controller
 {
@@ -58,48 +59,28 @@ class BahanController extends Controller
        return redirect('/inventory/bahan')->with('success', 'Data Bahan berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Bahan  $bahan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Bahan $bahan)
+    public function exportbahan()
     {
-        //
+        $bahan = Bahan::all();
+        $pdf = Pdf::loadView('pdf.exportbahan', compact ('bahan'));
+        return $pdf->stream();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Bahan  $bahan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Bahan $bahan)
+    public function showedit($id_bahan)
     {
-        //
+        $data = Bahan::find($id_bahan)
+        ->first();
+        return view ('inventory.bahan.edit', compact('data'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bahan  $bahan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Bahan $bahan)
+    public function storeedit(Request $request, $id_bahan)
     {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Bahan  $bahan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Bahan $bahan)
-    {
-        //
+        //dd($request);
+        $data = Bahan::find($id_bahan);
+        $data->update($request->all());
+
+
+        return redirect('/inventory/bahan')->with('success', 'Data Bahan berhasil diubah');
     }
 }

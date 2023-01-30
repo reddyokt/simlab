@@ -14,7 +14,7 @@
 @endif
     <div class="row mt-5">
             <div class="col-md-2">
-                <form action="/export/transaksi" method="post">
+                <form action="/export/transaksi" target="_blank" method="post">
                     @csrf
                     <button class="btn btn-sm btn-primary" role="button"><i class="fa fa-file-pdf-o"></i> export data</button>
                 </form>
@@ -52,10 +52,7 @@
                     </td>
                     {{-- @dd($dt->catatan->toArray()) --}}
                     <td style="font-size:12px">
-                        @foreach ( $dt->catatan as $catatan)
-                        {!! $catatan->isi_catatan  !!}
-                        @endforeach
-
+                         {!! $dt->catatan->isi_catatan !!}
                     </td>
                 @endforeach
                 </tbody>

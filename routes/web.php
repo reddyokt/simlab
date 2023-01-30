@@ -90,21 +90,26 @@ Route::get('/alat', [AlatsController::class, 'index']);
 Route::get('/alat/createalatc2a', [AlatsController::class, 'createalatc2a']);
 Route::post('/alat/createalatc2a', [AlatsController::class, 'storealatc2a']);
 //Route::post('/inventory/alat/createalatc2a', [AlatController::class, 'storealatc2a']);
-Route::get('/alatc2a/{id_alat}', [AlatController::class, 'showc2a']);
-Route::post('/editc2a/{id_alat}', [AlatController::class, 'editalatc2a']);
-Route::get('/deletec2a/{id_alat}', [AlatController::class, 'deletec2a']);
-
+// Route::get('/alatc2a/{id_alat}', [AlatController::class, 'showc2a']);
+// Route::post('/editc2a/{id_alat}', [AlatController::class, 'editalatc2a']);
+Route::get('/deletec2a/{id_alat}', [AlatsController::class, 'deletec2a']);
+Route::get('/deletec2b/{id_alat}', [AlatsController::class, 'deletec2b']);
+Route::get('/editc2a/{id_alat}', [AlatsController::class, 'showeditc2a']);
+Route::get('/editc2b/{id_alat}', [AlatsController::class, 'showeditc2b']);
 
 Route::get('/alat/createalatc2b', [AlatsController::class, 'createalatc2b']);
 Route::post('/alat/createalatc2b', [AlatsController::class, 'storealatc2b']);
-//Route::post('/inventory/alat/createalatc2b', [AlatController::class, 'storealatc2b']);
-Route::get('/alatc2b/{id_alat}', [AlatController::class, 'showc2b']);
-Route::post('/editc2b/{id_alat}', [AlatController::class, 'editalatc2b']);
-Route::get('/deletec2b/{id_alat}', [AlatController::class, 'deletec2b']);
+// Route::post('/inventory/alat/createalatc2b', [AlatController::class, 'storealatc2b']);
+// Route::get('/alatc2b/{id_alat}', [AlatController::class, 'showc2b']);
+Route::post('/editc2b/{id_alat}', [AlatsController::class, 'editalatc2b']);
+// Route::get('/deletec2b/{id_alat}', [AlatsController::class, 'deletec2b']);
 
 Route::get('/inventory/bahan', [BahanController::class, 'index']);
 Route::get('/bahan/create', [BahanController::class, 'create']);
 Route::post('/bahan/create', [BahanController::class, 'store']);
+Route::get('/bahan/edit/{id_bahan}', [BahanController::class, 'showedit']);
+Route::post('/bahan/edit/{id_bahan}', [BahanController::class, 'storeedit']);
+Route::get('/bahan/delete/{id_bahan}', [BahanController::class, 'delete']);
 
 Route::get('/inventory/barang', [BarangController::class, 'index']);
 Route::get('/inventory/barang/create', [BarangController::class, 'create']);
@@ -200,4 +205,10 @@ Route::get('/praktikan/isinilaiujian', [NilaiController::class, 'isinilaiujianma
 Route::post('/export/nilaiakhir', [NilaiController::class, 'exportnilaiakhir' ]);
 Route::post('/export/alatc2a', [AlatsController::class, 'exportalatc2a' ]);
 Route::post('/export/alatc2b', [AlatsController::class, 'exportalatc2b' ]);
+Route::post('/export/bahan', [BahanController::class, 'exportbahan' ]);
+Route::post('/export/barang', [BarangController::class, 'exportbarang' ]);
 Route::post('/export/transaksi', [TransaksiController::class, 'exporttransaksi' ]);
+Route::post('/export/peserta', [PesertaController::class, 'exportpeserta' ]);
+Route::post('/export/kelompok', [PesertaController::class, 'exportkelompok' ]);
+Route::post('/export/tugas', [TugasController::class, 'exporttugas' ]);
+Route::post('/export/ujian', [TugasController::class, 'exportujian' ]);

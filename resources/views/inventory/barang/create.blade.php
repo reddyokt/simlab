@@ -38,10 +38,10 @@
         </div>
 
         <div class=" form-floating mb-1">
-            <input type="text" name="pabrikan_barang" class="form-control @error('pabrikan_barang') is-invalid @enderror"
-            id="pabrikan_barang" placeholder="Pabrikan Barang"  value="{{ old ('pabrikan_barang') }}" >
-            <label for="pabrikan_barang">Pabrikan Barang</label>
-            @error('pabrikan_barang')
+            <input type="text" name="pabrik_barang" class="form-control @error('pabrik_barang') is-invalid @enderror"
+            id="pabrik_barang" placeholder="Pabrikan Barang"  value="{{ old ('pabrik_barang') }}" >
+            <label for="pabrik_barang">Pabrikan Barang</label>
+            @error('pabrik_barang')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>

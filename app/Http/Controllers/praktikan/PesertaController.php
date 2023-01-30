@@ -16,6 +16,7 @@ use App\Imports\PraktikanImport;
 use App\Models\PraktikumMahasiswa;
 use Dotenv\Validator;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PesertaController extends Controller
 {
@@ -132,6 +133,36 @@ class PesertaController extends Controller
        ->update(['kelompok_id'=>$request->kelompok_id]);
 
        return redirect('/praktikan/kelompok')->with('success', 'Data Kelompok berhasil diubah');
+    }
+
+    public function exportpeserta()
+    {
+        $periode = Periode::where('status_periode','Aktif')
+        ->first();
+        $dataMhs = PraktikumMahasiswa::with([
+            'mahasiswa','praktikum','praktikum.periode','praktikum.kelas'
+        ])
+        ->get();
+
+        $pdf = Pdf::loadView('pdf.exportpeserta', compact ('periode','dataMhs'));
+        return $pdf->stream();
+    }
+    public function exportkelompok()
+    {
+        $periode = Periode::where('status_periode','Aktif')
+        ->first();
+        $datakelompok = PraktikumMahasiswa::
+        whereHas('kelompok', function ($q){
+            $q->whereHas('praktikum', function ($q2){
+                $q2->whereHas('periode',function ($q3){
+                    $q3->where('status_periode', 'Aktif');
+                });
+            });
+        })
+        ->get();
+
+        $pdf = Pdf::loadView('pdf.exportkelompok', compact ('datakelompok','periode'));
+        return $pdf->stream();
     }
 
 }

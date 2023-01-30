@@ -23,12 +23,11 @@
                 </div>
 
                     <div class="col-xl-2"></div>
-                    <form action="/export/nilaiakhir" method="POST">
+                    <form action="/export/nilaiakhir" target="_blank" method="POST">
                         @csrf
                         <div class="row p-3">
                             <div class="col">
                                 <select class="form-select form-select-sm dflex" name="praktikum_id" aria-label="id_praktikum">
-
                                 @foreach ($praktikum as $p )
                                     <option value="{{ $p->id_praktikum }}">{{ $p->kelas->nama_kelas }}</option>
                                 @endforeach
@@ -38,8 +37,8 @@
                                 <button class="dflex btn btn-sm btn-primary" role="button">Export Nilai Akhir</button>
                             </div>
                         </div>
-
                     </form>
+
                     <div class="row">
                         <div class="table-responsive p-3">
                             <table id="example1" class="display " style="width:100%; font-size:12px;">

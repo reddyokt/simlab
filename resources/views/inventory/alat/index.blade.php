@@ -20,13 +20,13 @@
 
     <div class="row">
             <div class="col-md-2">
-                <form action="/export/alatc2a" method="post">
+                <form action="/export/alatc2a" target="_blank" method="post">
                     @csrf
                     <button class="btn btn-sm btn-primary" role="button"><i class="fa fa-file-pdf-o"></i> export data Alat C2A</button>
                 </form>
             </div>
             <div class="col-md-2">
-                <form action="/export/alatc2b" method="post">
+                <form action="/export/alatc2b" target="_blank" method="post">
                     @csrf
                     <button class="btn btn-sm btn-primary" role="button"><i class="fa fa-file-pdf-o"></i> export data Alat C2B</button>
                 </form>
@@ -61,8 +61,8 @@
                     <td style="font-size:12px">{{ $a->jumlah }}</td>
                     <td style="font-size:12px"> {{ $a->nama_lokasi }}<br>Lemari : {{ $a->nama_lemari }}.{{ $a->baris }}.{{ $a->kolom }}</td>
                     <td>
-                        <a href="" class="badge bg-info"><span data-feather="edit"></span></a>
-                        <a href="" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Alat?!!!')"><span data-feather="x-circle"></span></a>
+                        <a href="/editc2a/{{ $a->id_alat }}" class="badge bg-info"><span data-feather="edit"></span></a>
+                        <a href="/deletec2a/{{ $a->id_alat }}" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Alat?!!!')"><span data-feather="x-circle"></span></a>
                     </td>
                 </tr>
                 @endforeach
@@ -99,8 +99,8 @@
                             <td style="font-size:12px">{{ $b->jumlah }}</td>
                             <td style="font-size:12px">{{ $b->nama_lokasi }}</td>
                             <td>
-                                <a href="" class="badge bg-info"><span data-feather="edit"></span></a>
-                                <a href="" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Alat?!!!')" ><span data-feather="x-circle"></span></a>
+                                <a href="/editc2b/{{ $b->id_alat }}" class="badge bg-info"><span data-feather="edit"></span></a>
+                                <a href="/deletec2b/{{ $b->id_alat }}" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Alat?!!!')" ><span data-feather="x-circle"></span></a>
 
                             </td>
                         </tr>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\Lokasi;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BarangController extends Controller
 {
@@ -79,5 +80,12 @@ class BarangController extends Controller
         $barang->delete();
 
         return redirect ('/inventory/barang')->with('success', 'Data Barang berhasil dihapus');
+    }
+
+    public function exportbarang()
+    {
+        $barang = Barang::all();
+        $pdf = Pdf::loadView('pdf.exportbarang', compact ('barang'));
+        return $pdf->stream();
     }
 }

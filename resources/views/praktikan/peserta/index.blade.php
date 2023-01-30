@@ -4,6 +4,7 @@
 
 <!-- Custom styles for this datatables -->
 <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 @if (session()-> has('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -19,8 +20,7 @@
             @csrf
             <div class=" form-group mb-1" style="font-size:12px;">
                 <input type="hidden" value="5" name="role_id">
-                <select class="form-control" name="periode_id" id="periode_id" value="{{ old ('periode_id') }}">
-                    <option selected disabled>Pilih Periode</option>
+                <select class="form-control" name="periode_id" id="periode_id" value="{{ old ('periode_id') }}" required>
                     @foreach ( $periode as $per )
                     <option value="{{ $per->id_periode }}">{{ $per->tahun_ajaran }} | {{ $per->semester }}</option>
                     @endforeach
@@ -36,12 +36,19 @@
             <div class="form-group row mb-3" style="font-size:12px;">
                 <div class="col">
                     <input accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                    class="form-control" type="file" id="dataimport" name="dataimport">
+                    class="form-control" type="file" id="dataimport" name="dataimport" required>
                 </div>
             </div>
             <button class="btn btn-sm btn-success float-start " role="button">Import Data</button>
         </form>
     </div>
+</div>
+
+<div class="col-md-2 mt-2">
+    <form action="/export/peserta" target="_blank" method="post">
+        @csrf
+        <button class="btn btn-sm btn-primary" role="button"><i class="fa fa-file-pdf-o"></i> export peserta</button>
+    </form>
 </div>
 
 <h3 class="title my-3">Daftar Peserta Praktikum</h3>

@@ -45,10 +45,7 @@
             </td>
             {{-- @dd($dt->catatan->toArray()) --}}
             <td style="font-size:12px">
-                @foreach ( $dt->catatan as $catatan)
-                {!! $catatan->isi_catatan  !!}
-                @endforeach
-
+                {!! $dt->catatan->isi_catatan  !!}
             </td>
         @endforeach
         </tbody>

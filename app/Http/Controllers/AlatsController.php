@@ -69,9 +69,7 @@ class AlatsController extends Controller
        $c2a->save();
 
         return redirect ('/alat')->with('success', 'Data Alat berhasil ditambahkan');
-
     }
-
     public function createalatc2b()
     {
         $lokasi = Lokasi::all();
@@ -106,9 +104,7 @@ class AlatsController extends Controller
        $c2b->save();
 
         return redirect ('/alat')->with('success', 'Data Alat berhasil ditambahkan');
-
     }
-
     public function exportalatc2a()
     {
 
@@ -120,8 +116,6 @@ class AlatsController extends Controller
 
             $pdf = Pdf::loadView('pdf.exportalatc2a', compact ('c2a'));
         return $pdf->stream();
-
-
 
     }
 
@@ -136,5 +130,20 @@ class AlatsController extends Controller
             $pdf = Pdf::loadView('pdf.exportalatc2b', compact ('c2b'));
         return $pdf->stream();
     }
+
+    public function deletec2a(Request $request, $id_alat)
+    {
+        $c2a = Alats::find($id_alat);
+        $c2a->delete();
+        return redirect ('/alat')->with('success', 'Data Alat C2A berhasil didelete');
+    }
+
+    public function deletec2b(Request $request, $id_alat)
+    {
+        $c2b = Alats::find($id_alat);
+        $c2b->delete();
+        return redirect ('/alat')->with('success', 'Data Alat C2B berhasil didelete');
+    }
+
 
 }

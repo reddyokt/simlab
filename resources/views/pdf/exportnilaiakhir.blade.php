@@ -23,6 +23,11 @@
                 <th scope="col">#</th>
                 <th scope="col">Nama Mahasiswa</th>
                 <th scope="col">Kelas Praktikum</th>
+                {{-- <th scope="col">Nilai Praktikum (50%)</th>
+                <th scope="col">Nilai Laporan (20%)</th>
+                <th scope="col">Nilai Ujian Awal (10%)</th>
+                <th scope="col">Nilai Ujian Akhir (10%)</th>
+                <th scope="col">Nilai Ujian Lisan (10%)</th> --}}
                 <th scope="col">Nilai Akhir</th>
             </tr>
         </thead>

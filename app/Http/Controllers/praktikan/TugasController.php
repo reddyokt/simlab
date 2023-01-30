@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Expr\AssignOp\Mod;
 use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 use Carbon\Carbon;
-
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Periode;
 use function PHPUnit\Framework\isNull;
 
 class TugasController extends Controller
@@ -205,5 +206,36 @@ class TugasController extends Controller
         return redirect ('/praktikan/tugas')->with('success', 'Tugas berhasil dihapus');
     }
 
+    public function exporttugas()
+    {
+        $periode = Periode::where('status_periode','Aktif')
+        ->first();
+        $data = Tugas::whereHas('modul', function ($q){
+            $q->whereHas('praktikum', function ($q2){
+                $q2->whereHas('periode',function ($q3){
+                    $q3->where('status_periode', 'Aktif');
+                });
+            });
+        })->whereNull('delete_at')
+        ->get();
+
+
+        $pdf = Pdf::loadView('pdf.exporttugas', compact ('data','periode'));
+        return $pdf->stream();
+    }
+
+    public function exportujian()
+    {
+        $periode = Periode::where('status_periode','Aktif')
+        ->first();
+        $ujian = Ujian::whereHas('praktikum', function($q){
+            $q->whereHas('periode', function($q1){
+                $q1->where('status_periode','Aktif');
+            });
+        })->get();
+        //dd($ujian->toArray());
+        $pdf = Pdf::loadView('pdf.exportujian', compact ('ujian','periode'));
+        return $pdf->stream();
+    }
 
 }

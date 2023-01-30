@@ -19,5 +19,10 @@ class Bahan extends Model
         return $this->belongsTo(Membermodul::class, 'id_bahan', 'bahan_id');
     }
 
+    public function lokasi()
+    {
+        return $this->belongsTo(Lokasi::class,'id_lokasi', 'lokasi_id');
+    }
+
 }
 
