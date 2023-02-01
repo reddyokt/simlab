@@ -62,11 +62,11 @@ class ModulController extends BaseController
        $modul->tanggal_praktek=$data['tanggal_praktek'];
        $modul->save();
 
-        foreach ($data['alat'] as $index=>$alat){
+        foreach ($data['id_alat'] as $index=>$alat){
             $x = ['modul_id'=>$modul->id_modul,
-                'alat_id'=>$data['alat'][$index],
+                'alat_id'=>$alat,
                 'bahan_id'=>0,
-                'jumlah_bahan'=>0,
+                'jumlah_bahan'=>$data['jumlah_alat'][$index],
                 ];
             Membermodul::create($x);
         }
@@ -165,11 +165,11 @@ class ModulController extends BaseController
 
     public function catatanmodul(Request $request, $id)
     {
-        //dd($request->all());
+        dd($request->all());
         $data = Modul::find($id);
         $data =CatatanModul::create([
             'modul_id' => $id,
-            'isi_catatan'=> $request->isi_catatan,
+            'isi_catatan'=> $request->catatan,
             'user_id' => auth()->id()
         ]);
         return redirect ('/modul')->with('success', 'Catatan berhasil dibuat');

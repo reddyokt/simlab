@@ -47,7 +47,7 @@
                     </div>
         </div>
 
-        <div class="form-group mb-1">
+        {{-- <div class="form-group mb-1">
             <label for="nama_modul">Tambah Alat</label>
             <div class="input-group">
                 <select class="selectpicker form-control w-100" name="alat[]" id="alat" multiple data-live-search="true">
@@ -56,11 +56,37 @@
                     @endforeach
                 </select>
             </div>
+        </div> --}}
+        <div class="listalat">
+            <div class="col form-group mb-1">
+                <label for="tambah">Tambah Alat</label>
+            <button class="w-100 btn btn-md btn-primary " id="add_button_alat" type="button">+ alat +</button>
+            </div>
+            <div class="clonealat row align-items-start">
+                <div class="col-8 form-group mb-1">
+                    <label for="nama_modul">Pilih Alat</label>
+                    <div class="alat_wrapper">
+                        <div class="clone_alat">
+                            <div class="input-group">
+                                <select class="form-control w-50" name="id_alat[]" id="alat" data-live-search="true" data-dropup-auto="false">
+                                    @foreach ($alat as $a )
+                                        <option value="{{ $a->id_alat }}">{{ $a->nama_alat }} - Stock Alat = {{' '.$a->jumlah  }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 form-group mb-1">
+                    <label for="jumlah_bahan">Jumlah Alat</label>
+                    <input type="number" name="jumlah_alat[]" class="form-control" placeholder="Masukkan Jumlah Alat">
+                </div>
+            </div>
         </div>
         <div class="listbahan">
             <div class="col form-group mb-1">
-                <label for="tambah">Tambah</label>
-            <button class="w-100 btn btn-md btn-warning " id="add_button" type="button">+ bahan +</button>
+                <label for="tambah">Tambah Bahan</label>
+            <button class="w-100 btn btn-md btn-warning " id="add_button_bahan" type="button">+ bahan +</button>
             </div>
             <div class="clonebahan row align-items-start">
                 <div class="col-8 form-group mb-1">
@@ -68,7 +94,7 @@
                     <div class="bahan_wrapper">
                         <div class="clone_bahan">
                             <div class="input-group">
-                                <select class="selectpicker form-control w-50" name="id_bahan[]" id="bahan" data-live-search="true" data-dropup-auto="false">
+                                <select class="form-control w-50" name="id_bahan[]" id="bahan" data-live-search="true" data-dropup-auto="false">
                                     @foreach ($bahan as $b )
                                         <option value="{{ $b->id_bahan }}">{{ $b->nama_bahan }}{{' '.$b->rumus }} - Stock Bahan = {{' '.$b->jumlah  }}</option>
                                     @endforeach
@@ -115,12 +141,22 @@
         );
 
         // add bahan when
-        $('#add_button').on('click', function() {
+        $('#add_button_bahan').on('click', function() {
             let bahanPicker = $('.clonebahan').first().clone()
             console.log(bahanPicker)
             let wrapper = $('.listbahan')
             console.log('wrapper' ,wrapper)
             $('.listbahan').append(bahanPicker)
+        })
+
+
+        // add bahan when
+        $('#add_button_alat').on('click', function() {
+            let alatPicker = $('.clonealat').first().clone()
+            console.log(alatPicker)
+            let wrapper = $('.listalat')
+            console.log('wrapper' ,wrapper)
+            $('.listalat').append(alatPicker)
         })
     });
 </script>

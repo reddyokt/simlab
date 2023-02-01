@@ -19,10 +19,12 @@ use App\Http\Controllers\inventory\BahanController;
 use App\Http\Controllers\praktikan\AbsenController;
 use App\Http\Controllers\praktikan\TugasController;
 use App\Http\Controllers\inventory\BarangController;
+use App\Http\Controllers\MasterdataController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\praktikan\JadwalController;
 use App\Http\Controllers\praktikan\PesertaController;
 use App\Http\Controllers\TransaksiController;
+use App\Models\Masterdata;
 use App\Models\Transaksi;
 
 /*
@@ -172,6 +174,7 @@ Route::post('/praktikum/createkelas', [PraktikumController::class, 'storekelas']
 Route::get('/praktikum/editekelas/{id_praktikum}', [PraktikumController::class, 'showkelas']);
 Route::post('/praktikum/editekelas/{id_praktikum}', [PraktikumController::class, 'editkelas']);
 Route::get('/praktikum/deletekelas/{id_praktikum}', [PraktikumController::class, 'deletekelas']);
+Route::post('/praktikum/aslab', [PraktikumController::class, 'aslab']);
 
 Route::get('/modul', [ModulController::class, 'index']);
 Route::get('/modul/createmodul', [ModulController::class, 'create']);
@@ -215,3 +218,14 @@ Route::post('/export/kelompok', [PesertaController::class, 'exportkelompok' ]);
 Route::post('/export/tugas', [TugasController::class, 'exporttugas' ]);
 Route::post('/export/ujian', [TugasController::class, 'exportujian' ]);
 Route::post('/export/absen', [AbsenController::class, 'exportabsen' ]);
+
+//-------------------------------------master data------------------------------------//
+Route::get('/masterdata/indexpraktikum', [MasterdataController::class, 'indexpraktikum']);
+Route::get('/masterdata/createnamapraktikum', [MasterdataController::class, 'createpraktikum']);
+Route::post('/masterdata/createnamapraktikum', [MasterdataController::class, 'storepraktikum']);
+Route::get('/masterdata/editnamapraktikum/{id_kelas}', [MasterdataController::class, 'editpraktikum']);
+Route::post('/masterdata/editnamapraktikum/{id_kelas}', [MasterdataController::class, 'storeeditpraktikum']);
+
+
+Route::get('/masterdata/indexkategorialat', [MasterdataController::class, 'indexkategorialat']);
+Route::get('/masterdata/createkategorialat', [MasterdataController::class, 'createkategorialat']);

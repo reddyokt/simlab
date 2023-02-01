@@ -65,14 +65,10 @@
                 </div>
             </form>
         </div>
-
-
 @stop
-
 @section('page-script')
 <script src="/js/datatables.bundle.js"></script>
 <script src="/js/creategroupmanual.js"></script>
-
 @stop
 
 

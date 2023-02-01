@@ -42,21 +42,29 @@ class PeriodeController extends Controller
     public function storeperiode(Request $request)
     {
 
+        $data = Periode::where('status_periode', 'Aktif')->first();
+        if($data){
+            return redirect()->back()->withErrors('Masih ada periode aktif');
+        }
 
-
-        dd ($request->all());
-
+        //dd ($data);
         $periode =  $request->validate([
             'semester' => 'required',
             'tahun_ajaran'=>'required',
             'startdate' => 'required|date',
             'enddate' => 'required|date'
        ]);
+       $startdate = \DateTime::createFromFormat('m/d/Y', $request->startdate);
+       $newstartdate = $startdate->format('Y-m-d');
+       $enddate = \DateTime::createFromFormat('m/d/Y', $request->enddate);
+       $newenddate = $enddate->format('Y-m-d');
+
+
        $periode = new Periode();
        $periode->tahun_ajaran= $request->tahun_ajaran;
        $periode->semester= $request->semester;
-       $periode->start_periode = $request->startdate;
-       $periode->end_periode = $request->enddate;
+       $periode->start_periode = $newstartdate;
+       $periode->end_periode = $newenddate;
        $periode->save();
 
         return redirect ('/periode')->with('success', 'Data Periode berhasil ditambahkan');

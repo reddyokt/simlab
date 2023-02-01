@@ -3,7 +3,6 @@
 @section('container')
 <link rel="stylesheet" type="text/css" href="/css/trix.css">
 <script type="text/javascript" src="/js/trix.js"></script>
-
 <!-- Custom styles for this datatables -->
 <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
 
@@ -36,7 +35,7 @@
 
         <tr>
          <td>{{ $loop->iteration  }}</td>
-         <td>{{ $dt->kelas->kelas->nama_kelas }}</td>
+         <td>{{ $dt->praktikum->nama_kelas }} - {{ $dt->kelas->kelas->nama_kelas }}</td>
          <td>{{ $dt->nama_modul }}</td>
          <td>{{\Carbon\Carbon::parse($dt->tanggal_praktek)->isoFormat('Do MMMM YYYY' )}}</td>
          <td>{{ $dt->kelas->dosen->nama_dosen }}</td>
@@ -98,7 +97,6 @@
               <tbody>
                     {{-- dd($dt->alat()) --}}
                     @foreach ($dt->membermodul()->where('bahan_id',"!=",0)->get() as $y)
-
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{ $y->bahan->nama_bahan}} = {{ $y->jumlah_bahan }}</td>
@@ -117,8 +115,6 @@
 
 <!-- Modal2 -->
 @foreach ($dataModul as $dt )
-<form action="/modul/catatan/{{ $dt->id_modul }}" method="POST" class="col-md d-block align-item-center mx-auto">
-    @csrf
 <div class="modal fade bd-example-modal-lg " id="Modaldetail2-{{ $dt->id_modul }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg ">
       <div class="modal-content">
@@ -126,15 +122,16 @@
           <h5 class="modal-title" id="exampleModalLabel">Catatan Kegiatan</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <form action="/modul/catatan/{{ $dt->id_modul }}" method="POST" class="col-md d-block align-item-center mx-auto">
+            @csrf
         <div class="modal-body">
             <input type="hidden" value="{{ $dt->id_modul }}" name="modul_id">
             <div class="form-group row mb-3">
                 <div class="col-12">
-                    <input class="form-control" id="isi_catatan" type="hidden" name="isi_catatan" required>
-                    <trix-editor input="isi_catatan"></trix-editor>
+                    <input class="form-control" id="{{ $dt->id_modul }}" type="hidden" name="catatan" required>
+                    <trix-editor input="{{ $dt->id_modul }}"></trix-editor>
                 </div>
             </div>
-
         </div>
         <div class="modal-footer">
             <button class="btn btn-md btn-primary d-flex justify-content-end" type="submit">Buat Catatan</button>
@@ -146,6 +143,7 @@
 @endforeach
 
 @endsection
+
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">

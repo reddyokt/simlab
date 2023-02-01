@@ -15,9 +15,11 @@ class CreatePraktikumTable extends Migration
     {
         Schema::create('praktikum', function (Blueprint $table) {
             $table->id('id_praktikum');
+            $table->string('nama_kelas');
             $table->foreignId('periode_id');
             $table->foreignId('dosen_id');
             $table->foreignId('kelas_id');
+            $table->foreignId('asisten_id');
             $table->string('jumlah_modul');
             $table->enum('is_active',['Y','N']);
             $table->timestamps();

@@ -7,6 +7,7 @@ use App\Models\Praktikum;
 use App\Models\Dosen;
 use App\Models\Kelas;
 use App\Models\Periode;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PraktikumController extends Controller
@@ -17,12 +18,15 @@ class PraktikumController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
-        return view ('praktikum.index', [
-            'praktikums'=>Praktikum::whereHas('periode', function($q){
-                $q->where('status_periode', 'Aktif');
-            })->get()
-        ]);
+        $aslab = User::where('role_id','4')->get();
+        //dd($aslab);
+        $praktikums = Praktikum::whereHas('periode', function($q){
+            $q->where('status_periode', 'Aktif');
+        })->get();
+
+        return view ('praktikum.index', compact ('aslab','praktikums'));
     }
 
     /**
@@ -48,19 +52,18 @@ class PraktikumController extends Controller
     {
         //dd($request->all());
         $praktikum =  $request->validate([
-            'nama_kelas' => 'required|max:255',
+            'nama_praktikum' => 'required|max:255',
             'periode'=>'required',
             'dosen_id' => 'required',
-            'jumlah_modul' => 'required|integer'
+            'nama_kelas' => 'required|string|max:50'
 
        ]);
 
        $praktikum = new Praktikum;
-       $praktikum->kelas_id = $request->nama_kelas;
+       $praktikum->kelas_id = $request->nama_praktikum;
        $praktikum->periode_id= $request->periode;
        $praktikum->dosen_id= $request->dosen_id;
-       $praktikum->jumlah_modul = $request->jumlah_modul;
-
+       $praktikum->nama_kelas= $request->nama_kelas;
        $praktikum->save();
 
         return redirect ('/kelas')->with('success', 'Data Kelas berhasil ditambahkan');
@@ -101,5 +104,15 @@ class PraktikumController extends Controller
         $praktikum->delete();
 
         return redirect ('/kelas')->with('success', 'Data Kelas berhasil dihapus');
+    }
+
+    public function aslab (Request $request)
+    {
+        //dd($request->all());
+        $praktikum = Praktikum::findOrFail($request->id_praktikum);
+        $praktikum->update([
+            "asisten_id" => $request->asisten_id
+        ]);
+        return redirect ('/kelas')->with('success', 'Asisten Lab berhasil ditambahkan');
     }
 }

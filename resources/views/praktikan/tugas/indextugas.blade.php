@@ -116,7 +116,6 @@
     </div>
     <!-- Modal -->
 @foreach ($data as $dt )
-
 <div class="modal fade" id="Modaldetail-{{ $dt->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
