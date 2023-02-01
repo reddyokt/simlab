@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.main')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"> --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @section('container')
     <h3 class="h5 my-3 fw-normal text-center">Buat Periode</h3>
@@ -10,11 +10,9 @@
             <select class="form-control" name="tahun_ajaran" id="tahun_ajaran" >
                 <option selected value="{{ old ('tahun_ajaran') }}" disabled>Tahun Ajaran</option>
                 <?php
-                $year = date('2022')+10;
+                $year = now()->year;
                 ?>
-                @for($i=date('2022');$i<=$year;$i++)
-                    <option value="{{$i}} - {{$i+1}}">{{$i}} / {{$i+1}}</option>
-                @endfor
+                    <option value="{{$year-1}} - {{$year}}">{{$year-1}} / {{$year}}</option>
             </select>
             @error('tahun_ajaran')
                 <div class="invalid-feedback">
@@ -38,41 +36,42 @@
 
         <div class="form-group mb-1">
             <label for="date" class="col-sm-12 col-form-label text-start">Start Periode</label>
-            <div class="col-sm-12">
-                <div class="input-group date" id="startdate" name="startdate"  required>
-                    <input type="text" class="form-control" name="startdate" value="{{ old ('startdate') }}">
-                    <span class="input-group-append ">
-                        <span class="input-group-text bg-white ">
-                            <i class="fa fa-calendar mx-auto"></i>
-                        </span>
-                    </span>
-                </div>
+            <div >
+                    <input class="form-control col-sm-12" type="text" id="txtFrom" name="startdate"/>
             </div>
         </div>
         <div class="form-group mb-1">
             <label for="date" class="col-sm-12 col-form-label text-start">End Periode</label>
-            <div class="col-sm-12">
-                <div class="input-group date" id="enddate" name="enddate"  required>
-                    <input type="text" class="form-control" name="enddate" value="{{ old ('enddate') }}">
-                    <span class="input-group-append ">
-                        <span class="input-group-text bg-white ">
-                            <i class="fa fa-calendar mx-auto"></i>
-                        </span>
-                    </span>
-                </div>
+            <div >
+                    <input class="form-control col-sm-12" type="text" id="txtTo" name="enddate"/>
             </div>
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Tambah Periode</button>
     </form>
 @endsection
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
+type="text/javascript"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
+rel="Stylesheet"type="text/css"/>
 <script type="text/javascript">
-    $(function() {
-        $('#startdate',).datepicker({format:'yyyy-mm-dd'});
-        $('#enddate',).datepicker({format:'yyyy-mm-dd'});
-
+$(function () {
+    $("#txtFrom").datepicker({
+        numberOfMonths: 1,
+        onSelect: function (selected) {
+            var dt = new Date(selected);
+            dt.setDate(dt.getDate() + 1);
+            $("#txtTo").datepicker("option", "minDate", dt);
+        }
     });
+    $("#txtTo").datepicker({
+        numberOfMonths: 1,
+        onSelect: function (selected) {
+            var dt = new Date(selected);
+            dt.setDate(dt.getDate() - 1);
+            $("#txtFrom").datepicker("option", "maxDate", dt);
+        }
+    });
+});
 </script>

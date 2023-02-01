@@ -11,7 +11,7 @@ class Periode extends Model
     protected $table = 'periode';
     protected $primaryKey = 'id_periode';
     protected $fillable = ['id_periode', 'tahun_ajaran', 'semester',
-     'start_periode', 'end_periode', 'status_periode', 'is_active'];
+     'start_periode', 'end_periode', 'status_periode'];
 
 
 }

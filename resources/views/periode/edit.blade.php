@@ -9,14 +9,14 @@
         <div class="form-group mb-1">
             <label for="date" class="col-sm-12 col-form-label text-start">Tahun Ajaran</label>
             <div class="col-sm-12">
-                    <input type="text" class="form-control" name="startdate" value="{{ $periode->tahun_ajaran }}" disabled>
+                    <input type="text" class="form-control" name="tahun_ajaran" value="{{ $periode->tahun_ajaran }}" disabled>
             </div>
         </div>
 
         <div class="form-group mb-1">
             <label for="date" class="col-sm-12 col-form-label text-start">Semester</label>
             <div class="col-sm-12">
-                    <input type="text" class="form-control" name="startdate" value="{{ $periode->semester }}" disabled>
+                    <input type="text" class="form-control" name="semeseter" value="{{ $periode->semester }}" disabled>
             </div>
         </div>
 
@@ -43,6 +43,18 @@
                             <i class="fa fa-calendar mx-auto"></i>
                         </span>
                     </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mb-1">
+            <label for="status_periode" class="col-sm-12 col-form-label text-start">Status Periode</label>
+            <div class="col-sm-12">
+                <div class="input-group" id="status_periode" name="status_periode"  required>
+                    <select class="form-control" name="semester" id="semester" required  >
+                        <option {{ $periode->status_periode == $periode->periode ? 'selected' : '' }} value="{{ $periode->status_periode }}">{{ $periode->status_periode }}</option>
+                        <option value="Tidak Aktif">Tidak Aktif</option>
+                    </select>
+
                 </div>
             </div>
         </div>

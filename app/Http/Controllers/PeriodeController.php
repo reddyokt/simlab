@@ -6,6 +6,8 @@ use App\Models\Periode;
 use Faker\Provider\ar_EG\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+
 
 class PeriodeController extends Controller
 {
@@ -39,7 +41,11 @@ class PeriodeController extends Controller
      */
     public function storeperiode(Request $request)
     {
-        //return $request;
+
+
+
+        dd ($request->all());
+
         $periode =  $request->validate([
             'semester' => 'required',
             'tahun_ajaran'=>'required',

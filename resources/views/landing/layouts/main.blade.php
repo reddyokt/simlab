@@ -94,10 +94,14 @@
                                             <th>{{ $loop->iteration  }} </th>
                                             <td>{{$d->praktikum->kelas->nama_kelas}}</td>
                                             <td>{{ $d->praktikum->dosen->nama_dosen}}</td>
-                                            <td><a href="#" class="badge bg-success"
+                                            <td>@if(Auth::check())
+                                                <a href="#" class="badge bg-success"
                                                 data-bs-toggle="modal" data-bs-target="#Modaldetail3-{{ $d->id_ujian }}"><i class="fa fa-eye"></i></a>
                                                 <a href="#" class="badge bg-danger"
                                                 data-bs-toggle="modal" data-bs-target="#Modaldetail4-{{ $d->id_ujian }}"><i class="fa fa-upload"></i></a>
+                                                @else
+                                                <p class="text-danger"><small>"Login untuk <br> lihat Ujian"</small></p>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach
@@ -130,11 +134,13 @@
                                             <td>{{$d->nama_modul}}</td>
                                             <td>{{ \Carbon\Carbon::parse($d->tanggal_praktek)->isoFormat('Do MMMM YYYY')}}</td>
                                             <td>{{ $d->praktikum->dosen->nama_dosen}}</td>
-                                            <td><a href="#" class="badge bg-success"
+                                            <td>@if(Auth::check())
+                                                <a href="#" class="badge bg-success"
                                                 data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $d->id_modul }}"><i class="fa fa-eye"></i></a>
-                                                @if(Auth::check())
                                                 <a href="#" class="badge bg-danger"
                                                 data-bs-toggle="modal" data-bs-target="#Modaldetail2-{{ $d->id_modul }}"><i class="fa fa-upload"></i></a>
+                                                @else
+                                                <p class="text-danger"><small>"Login untuk <br> lihat tugas"</small></p>
                                                 @endif
                                             </td>
                                           </tr>

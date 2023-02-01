@@ -141,7 +141,7 @@
                     </li>
                     @endif
 
-                    @if (auth()->user()->role_id =="1")
+                    @if (auth()->user()->role_id =="3")
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#akun-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="users"></span> Master Akun
@@ -165,6 +165,20 @@
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 big mt-2">
                             <li><a href="/pengumuman" class="link-dark rounded">Pengumuman</a></li>
                             <li><a href="/download" class="link-dark rounded">Download</a></li>
+                        </ul>
+                        </div>
+                    </li>
+                    @endif
+                    @if (auth()->user()->role_id =='1')
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#data-collapse" aria-expanded="false">
+                            <span class="mx-3" data-feather="file"></span> Master Data
+                        </button>
+                        <div class="collapse" id="data-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 big mt-2">
+                            <li><a href="/pengumuman" class="link-dark rounded">Data Kelas Praktikum</a></li>
+                            <li><a href="/download" class="link-dark rounded">Komposisi Nilai</a></li>
+                            <li><a href="/download" class="link-dark rounded">Kategori Alat</a></li>
                         </ul>
                         </div>
                     </li>
