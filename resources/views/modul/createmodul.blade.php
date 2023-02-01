@@ -60,7 +60,7 @@
         <div class="listbahan">
             <div class="col form-group mb-1">
                 <label for="tambah">Tambah</label>
-            <button class="w-100 btn btn-md btn-warning " id="add_button" type="button">+</button>
+            <button class="w-100 btn btn-md btn-warning " id="add_button" type="button">+ bahan +</button>
             </div>
             <div class="clonebahan row align-items-start">
                 <div class="col-8 form-group mb-1">

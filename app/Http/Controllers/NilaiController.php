@@ -195,24 +195,30 @@ class NilaiController extends Controller
 
             $pretest = JawabanTugas::where('mahasiswa_id', $mahasiswa_id)
                         ->whereHas('tugas',function ($q) use($praktikum_id){
-                            $q->whereHas('modul', function ($q1) use($praktikum_id){
+                            $q->where('jenis_tugas','Pre Test' )
+                            ->whereHas('modul', function ($q1) use($praktikum_id){
                                 $q1->where('praktikum_id', $praktikum_id);
                             });
-                        })->get();
+                        })
+                        ->get();
 
             $posttest = JawabanTugas::where('mahasiswa_id', $mahasiswa_id)
                         ->whereHas('tugas',function ($q) use($praktikum_id){
-                            $q->whereHas('modul', function ($q1) use($praktikum_id){
+                            $q->where('jenis_tugas','Post Test' )
+                            ->whereHas('modul', function ($q1) use($praktikum_id){
                                 $q1->where('praktikum_id', $praktikum_id);
                             });
-                        })->get();
+                        })
+                        ->get();
 
             $laporan = JawabanTugas::where('mahasiswa_id', $mahasiswa_id)
                         ->whereHas('tugas',function ($q) use($praktikum_id){
-                            $q->whereHas('modul', function ($q1) use($praktikum_id){
+                            $q->where('jenis_tugas','Laporan' )
+                            ->whereHas('modul', function ($q1) use($praktikum_id){
                                 $q1->where('praktikum_id', $praktikum_id);
                             });
-                        })->get();
+                        })
+                        ->get();
 
             $subjektif = PenilaianSubjektif::where('mahasiswa_id', $mahasiswa_id)
                         ->whereHas('modul', function ($q1) use($praktikum_id){
@@ -261,7 +267,7 @@ class NilaiController extends Controller
                 ($totalpretest/$pembagi * 5) +
                 ($totalposttest/$pembagi * 5) +
                 ($totalsubjektif/$pembagi * 40) +
-                ($totallaporan/$pembagi *20)
+                ($totallaporan/$pembagi * 20)
             );
 
             $data[$index]->nilaiakhir = $nilaiakhir;

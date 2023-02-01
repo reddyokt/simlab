@@ -56,9 +56,14 @@
                                 <input type="hidden" value="{{ $mhs_id }}" name="mahasiswa_id">
                                 <input type="hidden" value="{{ $pretest->id_tugas }}" name="tugas_id">
 
-                                <input type="text" name="nilai" class="form-control" placeholder="1-100" aria-label="1-100" aria-describedby="basic-addon1" value="{{ $jwbpretest?$jwbpretest->nilaitugas : "" }}">
+                                <input  type="text" name="nilai" class="form-control" placeholder="1-100" aria-label="1-100" aria-describedby="basic-addon1" value="{{ $jwbpretest?$jwbpretest->nilaitugas : "" }}">
                               </div>
-                              <button role="button" class="btn btn-sm btn-warning">Simpan</button>
+                              {{-- @if ($jwbpretest->nilaitugas !=0)
+                              <button role="button" class="btn btn-sm btn-warning">edit</button>  --}}
+                              {{-- @else --}}
+                              <button role="button" class="btn btn-sm btn-success">Simpan</button> 
+                              {{-- @endif --}}
+                              
                         </div>
                       </div>
                 </div>
@@ -86,7 +91,7 @@
                                 <input type="hidden" value="{{ $posttest->id_tugas }}" name="tugas_id">
                                 <input type="text" class="form-control" placeholder="1-100" aria-label="1-100" aria-describedby="basic-addon1" name="nilai" value="{{ $jwbposttest?$jwbposttest->nilaitugas : "" }}">
                               </div>
-                              <button role="button" class="btn btn-sm btn-warning">Simpan</button>
+                              <button role="button" class="btn btn-sm btn-success">Simpan</button>
                         </div>
                       </div>
                 </div>
@@ -114,7 +119,7 @@
                                 <input type="hidden" value="{{ $laporan->id_tugas }}" name="tugas_id">
                                 <input type="text" class="form-control" placeholder="1-100" aria-label="1-100" aria-describedby="basic-addon1" name="nilai" value="{{ $jwblaporan?$jwblaporan->nilaitugas : ""}}">
                               </div>
-                              <button role="button" class="btn btn-sm btn-warning">Simpan</button>
+                              <button role="button" class="btn btn-sm btn-success">Simpan</button>
                         </div>
                       </div>
                 </div>
@@ -137,7 +142,7 @@
                                 <input type="hidden" value="{{ $modul_id }}" name="modul_id">
                                 <input type="text" class="form-control" placeholder="1-100" aria-label="1-100" aria-describedby="basic-addon1" name="nilai" value="{{$subjektif?$subjektif->nilaisubjektif : ""}}">
                               </div>
-                              <button role="button" class="btn btn-sm btn-warning">Simpan</button>
+                              <button role="button" class="btn btn-sm btn-success">Simpan</button>
                         </div>
                       </div>
                 </div>
