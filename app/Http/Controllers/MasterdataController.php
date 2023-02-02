@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategorialat;
 use App\Models\Kelas;
+use App\Models\Komposisinilai;
 use App\Models\Masterdata;
 use Illuminate\Http\Request;
 
@@ -68,5 +69,26 @@ class MasterdataController extends Controller
     }
     //-------------------------------End Master Data Kategori Alat-------------------------------------//
 
+     //-------------------------------Master Data Komposisi Nilai-------------------------------------//
+
+    public function indexkomposisinilai()
+    {
+        $data = Komposisinilai::all();
+        return view ('masterdata.indexkomposisinilai', compact ('data'));
+    }
+
+    public function storekomposisinilai(Request $request)
+    {
+        //dd($request->toArray());
+        $komposisi = Komposisinilai::find($request->id_komposisi_nilai)->first();
+        $komposisi->update([
+            "nilai_komponen"=> $request->nilai_komponen
+        ]);
+        return redirect('/masterdata/indexkomposisinilai')->with('success', 'Nilai Komponen berhasil diubah');
+    }
+
+
+
+     //-------------------------------End Master Data Komposisi Nilai-------------------------------------//
 
 }

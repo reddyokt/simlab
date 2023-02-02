@@ -20,7 +20,6 @@ class CreatePraktikumTable extends Migration
             $table->foreignId('dosen_id');
             $table->foreignId('kelas_id');
             $table->foreignId('asisten_id');
-            $table->string('jumlah_modul');
             $table->enum('is_active',['Y','N']);
             $table->timestamps();
         });

@@ -229,3 +229,10 @@ Route::post('/masterdata/editnamapraktikum/{id_kelas}', [MasterdataController::c
 
 Route::get('/masterdata/indexkategorialat', [MasterdataController::class, 'indexkategorialat']);
 Route::get('/masterdata/createkategorialat', [MasterdataController::class, 'createkategorialat']);
+Route::post('/masterdata/createkategorialat', [MasterdataController::class, 'storekategorialat']);
+Route::get('/masterdata/editkategori/{id_kategori_alat}', [MasterdataController::class, 'editkategorialat']);
+Route::post('/masterdata/editkategori/{id_kategori_alat}', [MasterdataController::class, 'storeeditkategorialat']);
+
+
+Route::get('/masterdata/indexkomposisinilai', [MasterdataController::class, 'indexkomposisinilai']);
+Route::post('/masterdata/storekomposisinilai', [MasterdataController::class, 'storekomposisinilai']);

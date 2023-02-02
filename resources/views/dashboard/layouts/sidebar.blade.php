@@ -177,7 +177,7 @@
                         <div class="collapse" id="data-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 big mt-2">
                             <li><a href="/masterdata/indexpraktikum" class="link-dark rounded">Data Nama Praktikum</a></li>
-                            <li><a href="/masterdata/komposisinilai" class="link-dark rounded">Komposisi Nilai</a></li>
+                            <li><a href="/masterdata/indexkomposisinilai" class="link-dark rounded">Komposisi Nilai</a></li>
                             <li><a href="/masterdata/indexkategorialat" class="link-dark rounded">Kategori Alat</a></li>
                         </ul>
                         </div>
