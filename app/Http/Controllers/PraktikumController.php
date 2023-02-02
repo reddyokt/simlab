@@ -20,11 +20,24 @@ class PraktikumController extends Controller
     public function index()
 
     {
-        $aslab = User::where('role_id','4')->get();
-        //dd($aslab);
+
+        $role = auth()->user()->role->role_name;
+        //dd($role);
         $praktikums = Praktikum::whereHas('periode', function($q){
             $q->where('status_periode', 'Aktif');
-        })->get();
+        });
+
+        if($role == 'Kepala Lab')
+            $praktikums = $praktikums->get();
+
+        if($role == 'Ka Unit') {
+            $dosen = Dosen::where("user_id", auth()->id())->first();
+            $praktikums = $praktikums->where("dosen_id", $dosen->id_dosen)->get();
+        }
+
+        $aslab = User::where('role_id','4')->get();
+        //dd($aslab);
+
 
         return view ('praktikum.index', compact ('aslab','praktikums'));
     }

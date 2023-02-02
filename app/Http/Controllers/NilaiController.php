@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JawabanTugas;
 use App\Models\JawabanUjian;
+use App\Models\Komposisinilai;
 use App\Models\Modul;
 use App\Models\Nilai;
 use App\Models\PraktikumMahasiswa;
@@ -20,8 +21,15 @@ class NilaiController extends Controller
 {
     public function indexpenilaiantugas()
     {
-        $data = Praktikum::whereHas('periode', function ($q1) {
-            $q1->where('status_periode', 'Aktif');
+        $role = auth()->user()->role->role_name;
+        $data = Praktikum::whereHas('periode', function ($q) use ($role) {
+            if($role == 'Ka Unit'){
+                $q = $q->where('dosen_id', auth()->user()->dosen->id_dosen);
+            }
+            if($role == 'Asisten Lab'){
+                $q = $q->where('asisten_id', auth()->user()->id);
+            }
+            $q->where('status_periode', 'Aktif');
 
         })
         ->get();
@@ -146,8 +154,16 @@ class NilaiController extends Controller
 
     public function indexpenilaianujian()
     {
-        $data = Praktikum::whereHas('periode', function ($q1) {
-            $q1->where('status_periode', 'Aktif');
+        $role = auth()->user()->role->role_name;
+
+        $data = Praktikum::whereHas('periode', function ($q) use($role) {
+            if($role == 'Ka Unit'){
+                $q = $q->where('dosen_id', auth()->user()->dosen->id_dosen);
+            }
+            if($role == 'Asisten Lab'){
+                $q = $q->where('asisten_id', auth()->user()->id);
+            }
+            $q->where('status_periode', 'Aktif');
 
         })
         ->get();
@@ -156,12 +172,34 @@ class NilaiController extends Controller
 
     public function indexpenilaianakhir()
     {
-        $praktikum = Praktikum::whereHas('periode', function($q){
+        $komPretest = Komposisinilai::where('nama_komponen', 'Nilai Pre Test')->first()->nilai_komponen;
+        $komPosttest = Komposisinilai::where('nama_komponen', 'Nilai Post Test')->first()->nilai_komponen;
+        $komSubjektif = Komposisinilai::where('nama_komponen', 'Nilai Subjektif')->first()->nilai_komponen;
+        $komLaporan = Komposisinilai::where('nama_komponen', 'Nilai Laporan')->first()->nilai_komponen;
+        $komUjiawal = Komposisinilai::where('nama_komponen', 'Nilai Ujian Awal')->first()->nilai_komponen;
+        $komUjiakhir = Komposisinilai::where('nama_komponen', 'Nilai Ujian Akhir')->first()->nilai_komponen;
+        $komUjilisan = Komposisinilai::where('nama_komponen', 'Nilai Ujian Lisan')->first()->nilai_komponen;
+
+
+        $role = auth()->user()->role->role_name;
+        $praktikum = Praktikum::whereHas('periode', function($q) use($role) {
+            if($role == 'Ka Unit'){
+                $q = $q->where('dosen_id', auth()->user()->dosen->id_dosen);
+            }
+            if($role == 'Asisten Lab'){
+                $q = $q->where('asisten_id', auth()->user()->id);
+            }
                     $q->where('status_periode', 'Aktif');
         })->get();
 
         $data = PraktikumMahasiswa::with(["mahasiswa","praktikum.kelas"])
-                ->whereHas('praktikum', function($q){
+                ->whereHas('praktikum', function($q) use($role) {
+                    if($role == 'Ka Unit'){
+                        $q = $q->where('dosen_id', auth()->user()->dosen->id_dosen);
+                    }
+                    if($role == 'Asisten Lab'){
+                        $q = $q->where('asisten_id', auth()->user()->id);
+                    }
                     $q->whereHas('periode', function ($q1){
                         $q1->where('status_periode', 'Aktif');
                 });
@@ -173,7 +211,7 @@ class NilaiController extends Controller
         foreach ($data as $index=>$praktikum_mahasiswa){
             $mahasiswa_id = $praktikum_mahasiswa->mahasiswa_id;
             $praktikum_id = $praktikum_mahasiswa->praktikum_id;
-            $jumlah_modul = $praktikum_mahasiswa->praktikum->jumlah_modul;
+            $jumlah_modul = $praktikum_mahasiswa->praktikum->kelas->jumlah_modul;
 
             $ujian_awal = JawabanUjian::whereHas('ujian', function ($q) use($praktikum_mahasiswa){
                             $q->where('praktikum_id',$praktikum_mahasiswa->praktikum_id)
@@ -261,13 +299,13 @@ class NilaiController extends Controller
 
             $pembagi = $jumlah_modul * 100;
             $nilaiakhir = (
-                ($totalujianawal * 10/100) +
-                ($totalujianakhir * 10/100) +
-                ($totalujianlisan * 10/100) +
-                ($totalpretest/$pembagi * 5) +
-                ($totalposttest/$pembagi * 5) +
-                ($totalsubjektif/$pembagi * 40) +
-                ($totallaporan/$pembagi * 20)
+                ($totalujianawal * $komUjiawal/100) +
+                ($totalujianakhir * $komUjiakhir/100) +
+                ($totalujianlisan * $komUjilisan/100) +
+                ($totalpretest/$pembagi * $komPretest) +
+                ($totalposttest/$pembagi * $komPosttest) +
+                ($totalsubjektif/$pembagi * $komSubjektif) +
+                ($totallaporan/$pembagi * $komLaporan)
             );
 
             $data[$index]->nilaiakhir = $nilaiakhir;

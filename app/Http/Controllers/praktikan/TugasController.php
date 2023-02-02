@@ -26,10 +26,16 @@ class TugasController extends Controller
      */
     public function indextugas()
     {
+        $role = auth()->user()->role->role_name;
 
-
-        $data = Tugas::whereHas('modul', function ($q){
-            $q->whereHas('praktikum', function ($q2){
+        $data = Tugas::whereHas('modul', function ($q) use($role) {
+            $q->whereHas('praktikum', function ($q2) use($role) {
+                if($role == 'Ka Unit'){
+                    $q2 = $q2->where('dosen_id', auth()->user()->dosen->id_dosen);
+                }
+                if($role == 'Asisten Lab'){
+                    $q2 = $q2->where('asisten_id', auth()->user()->id);
+                }
                 $q2->whereHas('periode',function ($q3){
                     $q3->where('status_periode', 'Aktif');
                 });
@@ -42,7 +48,15 @@ class TugasController extends Controller
 
     public function indexujian()
     {
-        $ujian = Ujian::whereHas('praktikum', function($q){
+        $role = auth()->user()->role->role_name;
+
+        $ujian = Ujian::whereHas('praktikum', function($q) use ($role){
+            if($role == 'Ka Unit'){
+                $q = $q->where('dosen_id', auth()->user()->dosen->id_dosen);
+            }
+            if($role == 'Asisten Lab'){
+                $q = $q->where('asisten_id', auth()->user()->id);
+            }
             $q->whereHas('periode', function($q1){
                 $q1->where('status_periode','Aktif');
             });

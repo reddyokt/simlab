@@ -64,7 +64,7 @@ class PraktikanImport implements ToCollection,WithHeadingRow
             ->where('periode_id',$this->periode_id)
             ->first();
            //dump($praktikum);
-            PraktikumMahasiswa::create([
+            PraktikumMahasiswa::updateOrcreate([
                 'mahasiswa_id'=> $mhs->id_mahasiswa,
                 'praktikum_id'=> $praktikum->id_praktikum
             ]);

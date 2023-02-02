@@ -19,15 +19,26 @@ class AbsenController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
         $kelas = Praktikum::whereHas('periode', function ($q){
             $q->where('status_periode', 'Aktif');
         })->get();
-        $data = Modul::whereHas('praktikum',function ($q){
+
+
+        $role = auth()->user()->role->role_name;
+
+        $data = Modul::whereHas('praktikum',function ($q) use($role) {
+            if($role == 'Ka Unit'){
+                $q = $q->where('dosen_id', auth()->user()->dosen->id_dosen);
+            }
+            if($role == 'Asisten Lab'){
+                $q = $q->where('asisten_id', auth()->user()->id);
+            }
             $q->whereHas('periode', function ($q2){
                 $q2->where('status_periode','Aktif');
             });
-        }) ->get();
+        })->get();
 
         return view ('praktikan.absen.index', compact ('data','kelas'));
     }

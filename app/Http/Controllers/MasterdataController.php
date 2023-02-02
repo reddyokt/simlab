@@ -14,6 +14,7 @@ class MasterdataController extends Controller
 
     public function indexpraktikum ()
     {
+
         $data = Kelas::all();
         return view ('masterdata.indexnamapraktikum', compact ('data'));
     }
@@ -73,14 +74,20 @@ class MasterdataController extends Controller
 
     public function indexkomposisinilai()
     {
+        $jumlah = Komposisinilai::sum('nilai_komponen');
         $data = Komposisinilai::all();
-        return view ('masterdata.indexkomposisinilai', compact ('data'));
+        return view ('masterdata.indexkomposisinilai', compact ('data','jumlah'));
     }
 
     public function storekomposisinilai(Request $request)
     {
         //dd($request->toArray());
-        $komposisi = Komposisinilai::find($request->id_komposisi_nilai)->first();
+        $else = Komposisinilai::where('id_komposisi_nilai', '!=' , $request->id_komposisi_nilai)->sum("nilai_komponen");
+        $check = $else + $request->nilai_komponen;
+
+        if ($check > 100)
+        return redirect()->back()->withErrors('Jumlah Total Nilai Komponen Tidak Boleh Lebih dari 100!');
+        $komposisi = Komposisinilai::find($request->id_komposisi_nilai);
         $komposisi->update([
             "nilai_komponen"=> $request->nilai_komponen
         ]);

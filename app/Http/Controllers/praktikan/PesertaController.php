@@ -44,11 +44,19 @@ class PesertaController extends Controller
 
     public function indexkelompok()
     {
+        $role = auth()->user()->role->role_name;
+
         $datakelompok = PraktikumMahasiswa::
-        whereHas('kelompok', function ($q){
-            $q->whereHas('praktikum', function ($q2){
-                $q2->whereHas('periode',function ($q3){
-                    $q3->where('status_periode', 'Aktif');
+        whereHas('kelompok', function ($q) use($role) {
+            $q->whereHas('praktikum', function ($q1) use($role) {
+                if($role == 'Ka Unit'){
+                    $q1 = $q1->where('dosen_id', auth()->user()->dosen->id_dosen);
+                }
+                if($role == 'Asisten Lab'){
+                    $q1 = $q1->where('asisten_id', auth()->user()->id);
+                }
+                $q1->whereHas('periode',function ($q2){
+                    $q2->where('status_periode', 'Aktif');
                 });
             });
         })
@@ -59,12 +67,19 @@ class PesertaController extends Controller
 
     public function createkelompok()
     {
+        $role = auth()->user()->role->role_name;
         $dataMhs = PraktikumMahasiswa::with([
             'mahasiswa', 'praktikum.kelas', 'praktikum.periode'
             ])
-            ->whereHas('praktikum', function ($q){
-                $q->whereHas('periode', function ($q2){
-                    $q2->where('status_periode','Aktif');
+            ->whereHas('praktikum', function ($q) use($role) {
+                if($role == 'Ka Unit'){
+                    $q = $q->where('dosen_id', auth()->user()->dosen->id_dosen);
+                }
+                if($role == 'Asisten Lab'){
+                    $q = $q->where('asisten_id', auth()->user()->id);
+                }
+                $q->whereHas('periode', function ($q1){
+                    $q1->where('status_periode','Aktif');
                 });
             })->whereNull('kelompok_id')
             ->get();

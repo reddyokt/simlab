@@ -13,6 +13,16 @@
 </div>
 @endif
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error )
+        <li> {{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 <div>
     <h3 class="title my-3">List Komponen Nilai</h3>
 </div>
@@ -42,7 +52,7 @@
             @endforeach
             <tr>
                 <td class="text-center" colspan="2"> Total : </td>
-                {{-- <td > {{ count($data,nilai_komponen) }} </td> --}}
+                <td class="{{ $jumlah < 100 ? "bg-warning" : "bg-success" }}"> {{ $jumlah }} % </td>
             </tr>
         </tbody>
 </table>

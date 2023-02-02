@@ -93,9 +93,11 @@
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 big mt-2">
                             @if (auth()->user()->role_id =="1")
                             <li><a href="/periode" class="link-dark rounded">Periode</a></li>
-                            <li><a href="/kelas" class="link-dark rounded">Kelas Praktikum</a></li>
                             @endif
+                            @if (auth()->user()->role_id =="1" or auth()->user()->role_id =="2")
+                            <li><a href="/kelas" class="link-dark rounded">Kelas Praktikum</a></li>
                             <li><a href="/modul" class="link-dark rounded">Modul Praktikum</a></li>
+                            @endif
                         </ul>
                         </div>
                     </li>

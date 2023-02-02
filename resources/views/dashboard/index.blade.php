@@ -15,7 +15,7 @@
                     @foreach ( $data as $dt )
                     Kelas Aktif : {{$dt->kelas->nama_kelas}} <br>
                     @endforeach
-                </p>
+                  </p>
                 </div>
               </div>
             </div>
@@ -27,6 +27,63 @@
                 </div>
               </div>
             </div>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="text-center">Nama Kelas - Nama Modul</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        <div class="col">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title text-center bg-secondary text-white">Tugas Pre Test</h5>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p> <button class="badge bg-warning"><span data-feather="eye"></span></button> Lihat Tugas </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p> <button class="badge bg-info"><span data-feather="edit"></span></button> Upload Tugas</p>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title text-center bg-secondary text-white">Tugas Post Test</h5>
+                              <div class="row">
+                                <div class="col-6">
+                                    <p> <button class="badge bg-warning"><span data-feather="eye"></span></button> Lihat Tugas </p>
+                                </div>
+                                <div class="col-6">
+                                    <p> <button class="badge bg-info"><span data-feather="edit"></span></button> Upload Tugas</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="card">
+                            <div class="card-body ">
+                              <h5 class="card-title text-center bg-secondary text-white">Laporan</h5>
+                              <div class="row">
+                                <div class="col-6">
+                                    <p> <button class="badge bg-warning"><span data-feather="eye"></span></button> Lihat Tugas </p>
+                                </div>
+                                <div class="col-6">
+                                    <p> <button class="badge bg-info"><span data-feather="edit"></span></button> Upload Tugas</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+
 @endsection
 
 
