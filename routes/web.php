@@ -236,3 +236,8 @@ Route::post('/masterdata/editkategori/{id_kategori_alat}', [MasterdataController
 
 Route::get('/masterdata/indexkomposisinilai', [MasterdataController::class, 'indexkomposisinilai']);
 Route::post('/masterdata/storekomposisinilai', [MasterdataController::class, 'storekomposisinilai']);
+
+
+//-------------------------------------mahasiswa------------------------------------//
+Route::get('/mahasiswa/absensi', [MahasiswaController::class, 'absenmhs']);
+Route::get('/mahasiswa/nilaidetail', [MahasiswaController::class, 'nilaimhs']);

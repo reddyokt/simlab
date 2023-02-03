@@ -185,6 +185,19 @@
                         </div>
                     </li>
                     @endif
+                    @if (auth()->user()->role_id =='5')
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#mahasiswa-collapse" aria-expanded="false">
+                            <span class="mx-3" data-feather="users"></span> Mahasiswa
+                        </button>
+                        <div class="collapse" id="mahasiswa-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 big mt-2">
+                            <li><a href="/mahasiswa/absensi" class="link-dark rounded">Absensi</a></li>
+                            <li><a href="/mahasiswa/nilaidetail" class="link-dark rounded">Nilai</a></li>
+                        </ul>
+                        </div>
+                    </li>
+                    @endif
                     </ul>
             </div>
         </nav>
