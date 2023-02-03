@@ -27,7 +27,11 @@ class ModulController extends BaseController
     public function index()
     {
 
-        $dataModul = Modul::all();
+        $dataModul = Modul::whereHas('praktikum', function ($q){
+            $q->whereHas('periode', function ($q1){
+                $q1->where('status_periode', 'Aktif');
+            });
+        })->get();
         $catatan = CatatanModul::all();
            return view ('modul.index', compact('dataModul','catatan'));
 

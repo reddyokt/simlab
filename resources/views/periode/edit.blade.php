@@ -50,9 +50,10 @@
             <label for="status_periode" class="col-sm-12 col-form-label text-start">Status Periode</label>
             <div class="col-sm-12">
                 <div class="input-group" id="status_periode" name="status_periode"  required>
-                    <select class="form-control" name="semester" id="semester" required  >
+                    <select class="form-control" name="status_periode" id="status_periode" required  >
                         <option {{ $periode->status_periode == $periode->periode ? 'selected' : '' }} value="{{ $periode->status_periode }}">{{ $periode->status_periode }}</option>
                         <option value="Tidak Aktif">Tidak Aktif</option>
+                        <option value="Aktif">Aktif</option>
                     </select>
 
                 </div>

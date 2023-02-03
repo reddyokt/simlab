@@ -48,7 +48,10 @@
              @else
                 @if (!$dt->catatan)
                     <a href="/modul/catatan/{{ $dt->id_modul }}" class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#Modaldetail2-{{ $dt->id_modul }}"><span data-feather="pen-tool"></span></a>
+                    @else
+                    <a href="/modul/catatan/{{ $dt->id_modul }}" class="badge bg-WARNING" data-bs-toggle="modal" data-bs-target="#Modaldetail2-{{ $dt->id_modul }}"><span data-feather="pen-tool"></span></a>
                 @endif
+
              @endif
 
 
