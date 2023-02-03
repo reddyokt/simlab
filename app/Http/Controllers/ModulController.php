@@ -179,4 +179,17 @@ class ModulController extends BaseController
         return redirect ('/modul')->with('success', 'Catatan berhasil dibuat');
     }
 
+    public function editcatatanmodul(Request $request, $id)
+    {
+        //dd($request->all());
+        $data = CatatanModul::find($id);
+        $data->update([
+            'modul_id' => $id,
+            'isi_catatan'=> $request->catatan,
+            'user_id' => auth()->id()
+        ]);
+        return redirect ('/modul')->with('success', 'Catatan berhasil diubah');
+    }
+
+
 }

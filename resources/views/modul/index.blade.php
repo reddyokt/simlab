@@ -49,7 +49,7 @@
                 @if (!$dt->catatan)
                     <a href="/modul/catatan/{{ $dt->id_modul }}" class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#Modaldetail2-{{ $dt->id_modul }}"><span data-feather="pen-tool"></span></a>
                     @else
-                    <a href="/modul/catatan/{{ $dt->id_modul }}" class="badge bg-WARNING" data-bs-toggle="modal" data-bs-target="#Modaldetail2-{{ $dt->id_modul }}"><span data-feather="pen-tool"></span></a>
+                    <a href="/modul/editcatatan/{{ $dt->id_modul }}" class="badge bg-WARNING" data-bs-toggle="modal" data-bs-target="#Modaldetail3-{{ $dt->id_modul }}"><span data-feather="pen-tool"></span></a>
                 @endif
 
              @endif
@@ -64,7 +64,7 @@
 <!-- Modal -->
 @foreach ($dataModul as $dt )
 
-<div class="modal fade" id="Modaldetail-{{ $dt->id_modul }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Modaldetail-{{ $dt->id_ }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -133,6 +133,37 @@
                 <div class="col-12">
                     <input class="form-control" id="{{ $dt->id_modul }}" type="hidden" name="catatan" required>
                     <trix-editor input="{{ $dt->id_modul }}"></trix-editor>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-md btn-primary d-flex justify-content-end" type="submit">Buat Catatan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+@endforeach
+
+<!-- Modal2 -->
+@foreach ($dataModul as $dt )
+@dump ($dt)
+<div class="modal fade bd-example-modal-lg " id="Modaldetail3-{{ $dt->id_modul }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Catatan Kegiatan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="/modul/catatan/{{ $dt->id_modul }}" method="POST" class="col-md d-block align-item-center mx-auto">
+            @csrf
+        <div class="modal-body">
+            <input type="hidden" value="{{ $dt->id_modul }}" name="modul_id">
+            <div class="form-group row mb-3">
+                <div class="col-12">
+                    <input class="form-control" id="{{ $dt->id_modul }}" type="hidden" name="catatan" required >
+                    <trix-editor input="{{ $dt->id_modul }}" value="">
+                    </trix-editor>
                 </div>
             </div>
         </div>

@@ -186,6 +186,7 @@ Route::get('/modul/usemodul/{id_modul}', [ModulController::class, 'usemodul']);
 Route::get('/modul/editmodul/{id_modul}', [ModulController::class, 'showmodul']);
 Route::post('/modul/editmodul/{id_modul}', [ModulController::class, 'editmodul']);
 Route::post('/modul/catatan/{id_modul}', [ModulController::class, 'catatanmodul']);
+Route::post('/modul/editcatatan/{id_modul}', [ModulController::class, 'editcatatanmodul']);
 
 
 
