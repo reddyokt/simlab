@@ -5,6 +5,24 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Assalamu'alaikum {{ auth()->user()->nama_lengkap }}</h1>
 </div>
+
+@if (session()-> has('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {!! session('success') !!}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error )
+        <li> {{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
         @if (auth()->user()->role_id !='5')
           <div class="row  g-4">
             <div class="col">
@@ -29,6 +47,43 @@
               </div>
             </div>
         @endif
+
+        <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Absensi</h5>
+                  <form action="/absensimhs" method="post">
+                    @csrf
+                    <select class="form-control mb-1" name="praktikum_id">
+                        <option selected>Pilih Kelas Praktikum</option>
+                        @foreach ( $data as $dt )
+                        <option value="{{ $dt->id_praktikum }}">{{ $dt->nama_kelas }} {{ $dt->kelas->nama_kelas }} </option>
+                        @endforeach
+                    </select>
+                    <button class="btn btn-sm btn-primary" type="submit">Lihat Data</button>
+                    </form>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Daftar Nilai</h5>
+                  <form action="/nilaimhs" method="post">
+                    @csrf
+                    <select class="form-control mb-1" name="praktikum_id">
+                        <option selected>Pilih Kelas Praktikum</option>
+                        @foreach ( $data as $dt )
+                        <option value="{{ $dt->id_praktikum }}">{{ $dt->nama_kelas }} - {{ $dt->kelas->nama_kelas }} </option>
+                        @endforeach
+                    </select>
+                    <button class="btn btn-sm btn-primary" type="submit">Lihat Data</button>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
 
             @foreach ( $tugas as $tg )
             <div class="card mb-3 border-primary">

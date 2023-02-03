@@ -26,8 +26,8 @@ class LoginController extends Controller
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
 
-            if(auth()->user()->role_id == '5')
-                return redirect()->intended('/');
+            // if(auth()->user()->role_id == '5')
+            //     return redirect()->intended('/');
 
             return redirect()->intended('/dashboard');
         }

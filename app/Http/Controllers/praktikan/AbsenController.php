@@ -10,6 +10,7 @@ use App\Models\PraktikumMahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions\F;
 
 class AbsenController extends Controller
 {
@@ -125,6 +126,22 @@ class AbsenController extends Controller
         })->get();
         //dd($praktikumMhs->toArray());
         $pdf = Pdf::loadView('pdf.exportabsen', compact ('data','praktikum','praktikumMhs'));
+        return $pdf->stream();
+    }
+
+    public function exportrekapabsen($id_praktikum_mahasiswa)
+    {
+
+        $data = PraktikumMahasiswa::find($id_praktikum_mahasiswa);
+        $praktikum = Praktikum::find($data->praktikum_id);
+        $absen = Absen::whereHas('modul', function ($q) use($data) {
+            $q->whereHas('praktikum', function ($q1) use($data){
+                $q1->where('id_praktikum', $data->praktikum_id);
+            });
+        })->where('mahasiswa_id', $data->mahasiswa_id)->get();
+
+       // dd($absen);
+        $pdf = Pdf::loadView('pdf.exportrekapabsen', compact ('data','absen','praktikum'));
         return $pdf->stream();
     }
 }

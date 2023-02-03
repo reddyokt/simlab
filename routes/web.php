@@ -219,6 +219,10 @@ Route::post('/export/kelompok', [PesertaController::class, 'exportkelompok' ]);
 Route::post('/export/tugas', [TugasController::class, 'exporttugas' ]);
 Route::post('/export/ujian', [TugasController::class, 'exportujian' ]);
 Route::post('/export/absen', [AbsenController::class, 'exportabsen' ]);
+Route::get('/export/rekapabsen/{id_praktikum_mahasiswa}', [AbsenController::class, 'exportrekapabsen' ]);
+Route::post('/absensimhs', [DashboardController::class, 'absensimhs']);
+Route::post('/nilaimhs', [DashboardController::class, 'nilaimhs']);
+
 
 //-------------------------------------master data------------------------------------//
 Route::get('/masterdata/indexpraktikum', [MasterdataController::class, 'indexpraktikum']);

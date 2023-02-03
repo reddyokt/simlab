@@ -147,7 +147,7 @@
 
 <!-- Modal2 -->
 @foreach ($dataModul as $dt )
-@dump ($dt)
+{{-- @dump ($dt) --}}
 <div class="modal fade bd-example-modal-lg " id="Modaldetail3-{{ $dt->id_modul }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg ">
       <div class="modal-content">
@@ -160,15 +160,17 @@
         <div class="modal-body">
             <input type="hidden" value="{{ $dt->id_modul }}" name="modul_id">
             <div class="form-group row mb-3">
-                <div class="col-12">
+                <div class="col-12"></div>
                     <input class="form-control" id="{{ $dt->id_modul }}" type="hidden" name="catatan" required >
-                    <trix-editor input="{{ $dt->id_modul }}" value="">
-                    </trix-editor>
+                    {{-- @dd($dt->catatan) --}}
+                    {{-- @foreach ($dt->catatan as $catatan)
+                    <trix-editor input="{{ $dt->id_modul }}"> {{ $catatan->isi_catatan }} </trix-editor>
+                    @endforeach --}}
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-md btn-primary d-flex justify-content-end" type="submit">Buat Catatan</button>
+            <button class="btn btn-md btn-primary d-flex justify-content-end" type="submit">Edit Catatan</button>
         </div>
       </div>
     </div>

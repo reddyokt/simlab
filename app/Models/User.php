@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function mahasiswa()
     {
-        return $this->belongsTo(NewMahasiswa::class, 'user_id', 'id');
+        return $this->hasOne(NewMahasiswa::class, 'user_id', 'id');
     }
 
     public function dosen()

@@ -62,6 +62,7 @@
                 <th>NIM</th>
                 <th>Nama Mahasiswa</th>
                 <th>Praktikum Dipilih</th>
+                <th>Action</th>
 
             </tr>
         </thead>
@@ -75,7 +76,9 @@
                 <td>{{ $d->mahasiswa->nim }}</td>
                 <td>{{ $d->mahasiswa->nama_mahasiswa}}</td>
                 <td>{{ $d->praktikum->kelas->nama_kelas }}</td>
-
+                <td>
+                    <a href="/export/rekapabsen/{{ $d->id_praktikum_mahasiswa }}" class="badge bg-success"><span data-feather="file"></span></a>
+                </td>
             </tr>
 
             @endforeach

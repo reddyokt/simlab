@@ -16,6 +16,7 @@ use App\Models\Membermodul;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller as BaseController;
+use Svg\Tag\Rect;
 
 class ModulController extends BaseController
 {
@@ -32,8 +33,9 @@ class ModulController extends BaseController
                 $q1->where('status_periode', 'Aktif');
             });
         })->get();
+        //dd($dataModul);
         $catatan = CatatanModul::all();
-           return view ('modul.index', compact('dataModul','catatan'));
+        return view ('modul.index', compact('dataModul','catatan'));
 
     }
 
@@ -179,12 +181,11 @@ class ModulController extends BaseController
         return redirect ('/modul')->with('success', 'Catatan berhasil dibuat');
     }
 
-    public function editcatatanmodul(Request $request, $id)
+    public function editcatatanmodul(Request $request)
     {
         //dd($request->all());
-        $data = CatatanModul::find($id);
+        $data = CatatanModul::where('modul_id', $request->modul_id)->get();
         $data->update([
-            'modul_id' => $id,
             'isi_catatan'=> $request->catatan,
             'user_id' => auth()->id()
         ]);
