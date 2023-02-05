@@ -6,7 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 @section('container')
-    <h3 class="h5 my-3 fw-normal text-center">Tambah Modul Praktikum</h3>
+    <h3 class="h5 my-3 fw-normal text-center">Kebutuhan Modul Praktikum</h3>
     <form action="/modul/createmodul" method="POST" class="col-md d-block align-item-center mx-auto">
         @csrf
         <div class="form-group mb-1">
@@ -38,7 +38,7 @@
         <div class="form-group mb-1">
                 <label for="nama_modul">Tanggal Praktek</label>
                     <div class="input-group date" id="tanggal_praktek" name="tanggal_praktek"  required>
-                        <input type="text" class="form-control" name="tanggal_praktek" value="{{ old ('tanggal_praktek') }}">
+                        <input id="tanggal_praktek" type="text" class="form-control datepicker" name="tanggal_praktek" value="{{ old ('tanggal_praktek') }}">
                         <span class="input-group-append ">
                             <span class="input-group-text bg-white ">
                                 <i class="fa fa-calendar mx-auto"></i>
@@ -136,9 +136,13 @@
 
 <script type="text/javascript">
     $(function() {
-        $('#tanggal_praktek',).datepicker(
-            {format:'yyyy-mm-dd'}
-        );
+        // $('#tanggal_praktek',).datepicker(
+        //     {format:'yyyy-mm-dd'}
+        // );
+
+        $('.datepicker').datepicker({
+        startDate: new Date()
+        });;
 
         // add bahan when
         $('#add_button_bahan').on('click', function() {

@@ -27,6 +27,7 @@
                 <th>Nama Praktikum</th>
                 <th>Kode Mata Kuliah</th>
                 <th>Jumlah Modul</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -38,9 +39,14 @@
             <td>{{ $dt->nama_kelas }}</td>
             <td>{{ $dt->kode_kelas }}</td>
             <td>{{ $dt->jumlah_modul }}</td>
+            <td>{{ $dt->is_active == 'N' ? "Tidak Aktif" : "Aktif" }}</td>
             <td>
                     <a href="/masterdata/editnamapraktikum/{{ $dt->id_kelas }}" class="badge bg-info"><span data-feather="edit"></span></a>
-                    {{-- <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a> --}}
+                    @if ($dt->is_active == 'Y')
+                    <a href="/masterdata/deactivated/{{ $dt->id_kelas }}" class="badge bg-danger"><span data-feather="minus" onclick="return confirm('Yakin akan menon-aktifkan Praktikum ini?!!!')"></span></a>
+                    @else
+                    <a href="/masterdata/activated/{{ $dt->id_kelas }}" class="badge bg-success"><span data-feather="activity" onclick="return confirm('Yakin akan meng-aktifkan Praktikum ini?!!!')"></span></a>
+                    @endif
             </td>
         </tr>
             @endforeach

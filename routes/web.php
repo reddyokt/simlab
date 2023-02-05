@@ -230,6 +230,8 @@ Route::get('/masterdata/createnamapraktikum', [MasterdataController::class, 'cre
 Route::post('/masterdata/createnamapraktikum', [MasterdataController::class, 'storepraktikum']);
 Route::get('/masterdata/editnamapraktikum/{id_kelas}', [MasterdataController::class, 'editpraktikum']);
 Route::post('/masterdata/editnamapraktikum/{id_kelas}', [MasterdataController::class, 'storeeditpraktikum']);
+Route::get('/masterdata/activated/{id_kelas}', [MasterdataController::class, 'activated']);
+Route::get('/masterdata/deactivated/{id_kelas}', [MasterdataController::class, 'deactivated']);
 
 
 Route::get('/masterdata/indexkategorialat', [MasterdataController::class, 'indexkategorialat']);

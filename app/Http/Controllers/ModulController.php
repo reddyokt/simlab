@@ -34,8 +34,7 @@ class ModulController extends BaseController
             });
         })->get();
         //dd($dataModul);
-        $catatan = CatatanModul::all();
-        return view ('modul.index', compact('dataModul','catatan'));
+        return view ('modul.index', compact('dataModul'));
 
     }
 

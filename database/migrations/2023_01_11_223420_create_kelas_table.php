@@ -18,6 +18,7 @@ class CreateKelasTable extends Migration
             $table->string('kode_kelas');
             $table->string('nama_kelas');
             $table->integer('jumlah_modul');
+            $table->enum('is_active',['Y','N'])->default('N');
             $table->timestamps();
         });
     }

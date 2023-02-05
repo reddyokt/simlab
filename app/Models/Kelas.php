@@ -10,7 +10,7 @@ class Kelas extends Model
     use HasFactory;
     protected $table = 'kelas';
     protected $primaryKey = 'id_kelas';
-    protected $fillable = ['nama_kelas', 'kode_kelas'];
+    protected $fillable = ['nama_kelas', 'kode_kelas','is_active','jumlah_modul'];
 
     public function praktikum()
     {

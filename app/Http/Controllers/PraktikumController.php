@@ -51,7 +51,7 @@ class PraktikumController extends Controller
     {
         $dosens = Dosen::all();
         $periode= Periode::all();
-        $kelas=Kelas::all();
+        $kelas=Kelas::where('is_active', 'Y')->get();
         return view ('praktikum.createkelas', compact('dosens','periode','kelas'));
     }
 

@@ -17,4 +17,9 @@ class Tugas extends Model
     {
         return $this->belongsTo(Modul::class,'modul_id', 'id_modul' );
     }
+
+    public function jawabantugas()
+    {
+        return $this->hasMany(JawabanTugas::class, 'tugas_id', 'id_tugas');
+    }
 }

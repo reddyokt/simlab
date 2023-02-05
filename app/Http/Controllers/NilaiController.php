@@ -319,7 +319,7 @@ class NilaiController extends Controller
     public function exportnilaiakhir(Request $request)
     {
         //dd ($request->all());
-        $praktikum = Praktikum::find($request->praktikum_id);
+       $praktikum = Praktikum::find($request->praktikum_id);
        $data = PraktikumMahasiswa::where('praktikum_id', $request->praktikum_id)
                 ->with(["mahasiswa","praktikum.kelas"])
                 ->whereHas('praktikum', function($q){

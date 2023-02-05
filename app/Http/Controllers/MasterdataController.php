@@ -38,7 +38,7 @@ class MasterdataController extends Controller
         $kelas->jumlah_modul = $request->jumlah_modul;
 
         $kelas->save();
-        return redirect('/masterdata/indexpraktikum');
+        return redirect('/masterdata/indexpraktikum')->with('success', 'Praktikum berhasil ditambah');
     }
 
     public function editpraktikum ($id_kelas)
@@ -51,7 +51,22 @@ class MasterdataController extends Controller
     {
         $kelas = Kelas::find($id_kelas);
         $kelas->update($request->all());
-        return redirect('/masterdata/indexpraktikum');
+        return redirect('/masterdata/indexpraktikum')->with('success', 'Praktikum berhasil diubah');
+    }
+    public function activated($id_kelas)
+    {
+        $activated = Kelas::find($id_kelas);
+        $activated->update(['is_active'=>'Y']);
+
+        return redirect('/masterdata/indexpraktikum')->with('success', 'Praktikum berhasil diaktifkan');
+    }
+
+    public function deactivated($id_kelas)
+    {
+        $activated = Kelas::find($id_kelas);
+        $activated->update(['is_active'=>'N']);
+
+        return redirect('/masterdata/indexpraktikum')->with('success', 'Praktikum berhasil dinon-aktifkan');
     }
 
     //-------------------------------End Master Data Nama Praktikum--------------------------------//

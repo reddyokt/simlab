@@ -161,11 +161,14 @@
             <input type="hidden" value="{{ $dt->id_modul }}" name="modul_id">
             <div class="form-group row mb-3">
                 <div class="col-12"></div>
-                    <input class="form-control" id="{{ $dt->id_modul }}" type="hidden" name="catatan" required >
-                    {{-- @dd($dt->catatan) --}}
-                    {{-- @foreach ($dt->catatan as $catatan)
-                    <trix-editor input="{{ $dt->id_modul }}"> {{ $catatan->isi_catatan }} </trix-editor>
-                    @endforeach --}}
+                    <input class="form-control" id="{{ $dt->id_modul }}" type="hidden" name="catatan" required value="">
+                    {{-- @dd($dt->catatan)
+                   @foreach ($dt->catatan as $catatan) --}}
+
+                    <trix-editor input="{{ $dt->id_modul }}">
+                        {!! $dt->catatan ? $dt->catatan->isi_catatan  : "" !!}
+                    </trix-editor>
+                    {{-- @endforeach --}}
                 </div>
             </div>
         </div>
