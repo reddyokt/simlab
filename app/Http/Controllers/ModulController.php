@@ -20,19 +20,20 @@ use Svg\Tag\Rect;
 
 class ModulController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
 
-        $dataModul = Modul::whereHas('praktikum', function ($q){
-            $q->whereHas('periode', function ($q1){
+        $role = auth()->user()->role->role_name;
+
+        $dataModul = Modul::whereHas('praktikum', function ($q) use($role){
+            if($role == 'Ka Unit'){
+                $q = $q->where('dosen_id', auth()->user()->dosen->id_dosen);
+            }
+            $q->whereHas('periode', function ($q1) use($role){
                 $q1->where('status_periode', 'Aktif');
             });
         })->get();
+
         //dd($dataModul);
         return view ('modul.index', compact('dataModul'));
 
@@ -58,13 +59,27 @@ class ModulController extends BaseController
 
     public function storemodul(Request $request)
     {
+        //dd($request);
+       $else = Modul::where('praktikum_id', $request->praktikum_id)->count('praktikum_id');
+       //dd ($else);
+       $prk = Praktikum::where('id_praktikum', $request->praktikum_id)->first();
+       $kls = Kelas::where('id_kelas', $prk->kelas_id)->sum('jumlah_modul');
+        //dd($kls);
+        if($else >= $kls){
+            return redirect()->back()->withErrors('Tidak bisa membuat lagi, Jumlah Modul Pada kelas ini Sudah Mencukupi');
+        }
+    //    $jmlmodul = Kelas::where('id_kelas', $request->kelas_id->kelas_id)->sum('jumlah_modul');
+    //    dd($jmlmodul);
+
        $data = $request->all();
        //dd($data);
+       $tanggal = \DateTime::createFromFormat('m/d/Y', $request->tanggal_praktek);
+       $newtanggal = $tanggal->format('Y-m-d');
 
        $modul = new Modul;
        $modul->nama_modul=$data['nama_modul'];
-       $modul->praktikum_id=$data['kelas_id'];
-       $modul->tanggal_praktek=$data['tanggal_praktek'];
+       $modul->praktikum_id=$data['praktikum_id'];
+       $modul->tanggal_praktek=$newtanggal;
        $modul->save();
 
         foreach ($data['id_alat'] as $index=>$alat){
@@ -140,11 +155,14 @@ class ModulController extends BaseController
         $membermodul = Membermodul::where('modul_id',$id_modul)->delete();
 
         $data = $request->all();
+        $tanggal = \DateTime::createFromFormat('m/d/Y', $request->tanggal_praktek);
+        $newtanggal = $tanggal->format('Y-m-d');
+
 
         $modul = Modul::find($id_modul);
         $modul->nama_modul=$data['nama_modul'];
         $modul->praktikum_id=$data['kelas_id'];
-        $modul->tanggal_praktek=$data['tanggal_praktek'];
+        $modul->tanggal_praktek=$newtanggal;
         $modul->save();
 
          foreach ($data['alat'] as $index=>$alat){
@@ -170,7 +188,7 @@ class ModulController extends BaseController
 
     public function catatanmodul(Request $request, $id)
     {
-        dd($request->all());
+        //dd($request->all());
         $data = Modul::find($id);
         $data =CatatanModul::create([
             'modul_id' => $id,
@@ -183,9 +201,9 @@ class ModulController extends BaseController
     public function editcatatanmodul(Request $request)
     {
         //dd($request->all());
-        $data = CatatanModul::where('modul_id', $request->modul_id)->get();
+        $data = CatatanModul::where('modul_id', $request->modul_id)->first();
         $data->update([
-            'isi_catatan'=> $request->catatan,
+            'isi_catatan'=> $request->editcatatan,
             'user_id' => auth()->id()
         ]);
         return redirect ('/modul')->with('success', 'Catatan berhasil diubah');

@@ -6,6 +6,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 @section('container')
+@if (session()-> has('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {!! session('success') !!}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error )
+        <li> {{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
     <h3 class="h5 my-3 fw-normal text-center">Kebutuhan Modul Praktikum</h3>
     <form action="/modul/createmodul" method="POST" class="col-md d-block align-item-center mx-auto">
         @csrf
@@ -22,10 +38,10 @@
 
         <div class="form-group mb-1">
             <label for="nama_modul">Pilih Kelas</label>
-            <select class="form-control" name="kelas_id" id="kelas_id" required >
+            <select class="form-control" name="praktikum_id" id="kelas_id" required >
                 <option selected disabled>Pilih Kelas</option>
             @foreach ( $praktik as $dt )
-                <option value="{{ $dt->id_praktikum }}">{{ $dt->kelas->nama_kelas }}</option>
+                <option value="{{ $dt->id_praktikum }}">{{ $dt->nama_kelas }} - {{ $dt->kelas->nama_kelas }}</option>
             @endforeach
             </select>
               @error('kelas_id')
@@ -68,7 +84,7 @@
                     <div class="alat_wrapper">
                         <div class="clone_alat">
                             <div class="input-group">
-                                <select class="form-control w-50" name="id_alat[]" id="alat" data-live-search="true" data-dropup-auto="false">
+                                <select class="form-control w-50" name="id_alat[]" id="alat" data-live-search="true" data-dropup-auto="false" required>
                                     @foreach ($alat as $a )
                                         <option value="{{ $a->id_alat }}">{{ $a->nama_alat }} - Stock Alat = {{' '.$a->jumlah  }}</option>
                                     @endforeach
@@ -79,7 +95,7 @@
                 </div>
                 <div class="col-3 form-group mb-1">
                     <label for="jumlah_bahan">Jumlah Alat</label>
-                    <input type="number" name="jumlah_alat[]" class="form-control" placeholder="Masukkan Jumlah Alat">
+                    <input type="number" name="jumlah_alat[]" class="form-control" placeholder="Masukkan Jumlah Alat" required>
                 </div>
             </div>
         </div>
@@ -94,7 +110,7 @@
                     <div class="bahan_wrapper">
                         <div class="clone_bahan">
                             <div class="input-group">
-                                <select class="form-control w-50" name="id_bahan[]" id="bahan" data-live-search="true" data-dropup-auto="false">
+                                <select class="form-control w-50" name="id_bahan[]" id="bahan" data-live-search="true" data-dropup-auto="false" required>
                                     @foreach ($bahan as $b )
                                         <option value="{{ $b->id_bahan }}">{{ $b->nama_bahan }}{{' '.$b->rumus }} - Stock Bahan = {{' '.$b->jumlah  }}</option>
                                     @endforeach
@@ -105,7 +121,7 @@
                 </div>
                 <div class="col-3 form-group mb-1">
                     <label for="jumlah_bahan">Jumlah Bahan</label>
-                    <input type="number" name="jumlah_bahan[]" class="form-control" placeholder="Masukkan Jumlah Bahan">
+                    <input type="number" name="jumlah_bahan[]" class="form-control" placeholder="Masukkan Jumlah Bahan" required>
                 </div>
             </div>
         </div>

@@ -75,7 +75,7 @@
 <div class="container-fluid">
   <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="position-sticky pt-3">
+            <div class="position-sticky pt-3 mt-2">
                     <ul class="list-unstyled ps-0">
                     <li class="mb-1">
                         <a href="/dashboard">
@@ -185,7 +185,7 @@
                         </div>
                     </li>
                     @endif
-                    @if (auth()->user()->role_id =='5')
+                    {{-- @if (auth()->user()->role_id =='5')
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#mahasiswa-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="users"></span> Mahasiswa
@@ -197,7 +197,7 @@
                         </ul>
                         </div>
                     </li>
-                    @endif
+                    @endif --}}
                     </ul>
             </div>
         </nav>

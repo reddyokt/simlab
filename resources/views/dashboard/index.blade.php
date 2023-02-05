@@ -48,12 +48,13 @@
             </div>
         @endif
 
+        @if (auth()->user()->role_id =='5')
         <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
             <div class="col">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Absensi</h5>
-                  <form action="/absensimhs" method="post">
+                  <form action="/absensimhs" target="_blank" method="post">
                     @csrf
                     <select class="form-control mb-1" name="praktikum_id">
                         <option selected>Pilih Kelas Praktikum</option>
@@ -70,7 +71,7 @@
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Daftar Nilai</h5>
-                  <form action="/nilaimhs" method="post">
+                  <form action="/nilaimhs" target="_blank" method="post">
                     @csrf
                     <select class="form-control mb-1" name="praktikum_id">
                         <option selected>Pilih Kelas Praktikum</option>
@@ -84,11 +85,15 @@
               </div>
             </div>
           </div>
+          @endif
 
+          @if (auth()->user()->role_id =='5')
             @foreach ( $tugas as $tg )
+            @foreach ($tg->praktikum->modul as $modul )
+            {{-- @dd($tg->praktikum->modul) --}}
             <div class="card mb-3 border-primary">
                 <div class="card-header">
-                    <h5 class="text-center">{{ $tg->praktikum->nama_kelas }} - {{ $tg->praktikum->kelas->nama_kelas }} - {{ $tg->nama_modul }}</h5>
+                    <h5 class="text-center">{{ $tg->praktikum->nama_kelas }} - {{ $tg->praktikum->kelas->nama_kelas }} - {{ $modul->nama_modul}}</h5>
                 </div>
                 <div class="card-body">
                     <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -109,6 +114,7 @@
                             </div>
                           </div>
                         </div>
+
                         <div class="col">
                           <div class="card">
                             <div class="card-body">
@@ -144,9 +150,13 @@
                 </div>
               </div>
               @endforeach
+              @endforeach
+              @endif
+
 
               <!-- Modal -->
-@foreach ($tugas as $tg )
+{{-- @foreach ($tugas as $tg )
+
 <div class="modal fade" id="Modaldetail1-{{ $tg->id_tugas }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -155,14 +165,16 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-
+            {{ $tg->praktikum->modul->tugas->uraian_tugas }}
         <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
-  @endforeach
+  @endforeach --}}
+
+
 @endsection
 
 

@@ -4,31 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Detail Nilai Praktikum {{ auth()->user()->mahasiswa->nama_mahasiswa }}</title>
+
+    <style>
+        table, tr, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+    </style>
+
+</head>
+
 </head>
 <body>
     <div>
-        <h3 class="title my-3">Data Nilai {{ auth()->user()->mahasiswa->nama_mahasiswa }}</h3>
+        <img class="text-align: center;" src="{{asset('img/simlab.png')}}" alt="" width="20%">
+        <h5 class="mt-2 text-center">Data Nilai {{ auth()->user()->mahasiswa->nama_mahasiswa }}</h5>
     </div>
     <div class="mt-5">
-        <table id="example" class="display table table-bordered" style="width:100%; border: 1px solid black;">
+        <table id="example" class="table">
             <thead>
                 <tr>
-                    <td style="text-align: center;" colspan="10"><b>Nilai Praktikum Kelas A<b></td>
+                    <td style="text-align: center; borde:1px;" colspan="6"><b>{{ $praktikum->nama_kelas }} - {{ $praktikum->kelas->nama_kelas }} <b></td>
                 </tr>
                 <tr>
-                    <th>#</th>
+                    <th style="text-align: center;">#</th>
                     <th>Nama Modul</th>
-                    <th>Pre Test</th>
-                    <th>Post Test</th>
-                    <th>Subjektif</th>
-                    <th>Laporan</th>
+                    <th style="text-align: center;">Pre Test</th>
+                    <th style="text-align: center;">Post Test</th>
+                    <th style="text-align: center;">Subjektif</th>
+                    <th style="text-align: center;">Laporan</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ( $praktikum->modul as $modul )
                 @php
                     $nilaipretest=null;
+
 
                     $x = $modul->tugas->where("jenis_tugas", 'Pre Test')->first();
                     if($x){
@@ -38,6 +51,7 @@
                     if($nilaipretest){
                         $nilaipretest = $nilaipretest->nilaitugas;
                     }
+
 
                     $nilaiposttest=null;
 
@@ -70,33 +84,29 @@
                 @endphp
 
                 <tr>
-                    <td>{{ $loop->iteration  }}</td>
+                    <td style="text-align: center;">{{ $loop->iteration  }}</td>
                     <td>{{ $modul->nama_modul }}</td>
-                    <td>{{ $nilaipretest }}</td>
-                    <td>{{ $nilaiposttest }}</td>
-                    <td>{{ $nilaisub }}</td>
-                    <td>{{ $nilailaporan }}</td>
+                    <td style="text-align: center;">{{ $nilaipretest ? "$nilaipretest" : "Belum dinilai" }}</td>
+                    <td style="text-align: center;">{{ $nilaiposttest ? "$nilaiposttest" : "Belum dinilai" }}</td>
+                    <td style="text-align: center;">{{ $nilaisub ? "$nilaisub" : "Belum dinilai" }}</td>
+                    <td style="text-align: center;">{{ $nilailaporan ? "$nilailaporan" : "Belum dinilai" }}</td>
                 </tr>
                 @endforeach
-            </tbody>
-        </table>
-        <table id="example" class="display table table-bordered" style="width:100%; border: 1px solid black;">
-            <tbody>
                 <tr>
-                    <th>#</th>
-                    <th>Ujian Awal</th>
-                    <th>Ujian Akhir</th>
-                    <th>Ujian Lisan</th>
+                    <th rowspan="2"></th>
+                    <th style="text-align: center;">Ujian Awal</th>
+                    <th colspan="2" style="text-align: center;">Ujian Akhir</th>
+                    <th colspan="2" style="text-align: center;">Ujian Lisan</th>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td>{{ $ujianawal }}</td>
-                    <td>{{ $ujiakhir }}</td>
-                    <td>{{ $ujianlisan }}</td>
+
+                    <td style="text-align: center;">{{ $ujianawal ? "$ujianawal" : "Belum dinilai"  }}</td>
+                    <td colspan="2" style="text-align: center;">{{ $ujiakhir ? "$ujiakhir" : "Belum dinilai"  }}</td>
+                    <td colspan="2" style="text-align: center;">{{ $ujianlisan ? "$ujianlisan" : "Belum dinilai" }}</td>
                 </tr>
                 <tr>
-                    <td style="text-align: end;" colspan="9"><b>Nilai Akhir<b></td>
-                    <td style="text-align:center;"><b>{{ $nilaiakhir }}<b></td>
+                    <td style="text-align: right; padding: 0 10 0 0;" colspan="5"><b>Nilai Akhir<b></td>
+                    <td style="text-align: center;"><b>{{ $nilaiakhir ? "$nilaiakhir" : "Belum dinilai" }}<b></td>
                 </tr>
             </tbody>
         </table>

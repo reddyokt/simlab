@@ -48,7 +48,7 @@
                                         <th>Nama Mahasiswa</th>
                                         <th>Kelas </th>
                                         <th>Nilai Akhir</th>
-                                        <th>Action</th>
+                                        {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,9 +59,9 @@
                                         <td>{{ $dt->mahasiswa->nama_mahasiswa}}</td>
                                         <td>{{ $dt->praktikum->kelas->nama_kelas}} </td>
                                         <td>{{ $dt->nilaiakhir }}</td>
-                                        <td>
+                                        {{-- <td>
                                             <a href="#" class="badge bg-danger"><span data-feather="eye" data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $dt->id_praktikum_mahasiswa }}"></span></a>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>

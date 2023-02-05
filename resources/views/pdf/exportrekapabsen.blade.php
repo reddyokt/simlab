@@ -28,22 +28,23 @@
                     <th colspan="3" style="text-align: center">{{ $data->mahasiswa->nama_mahasiswa }}</th>
                 </tr>
                 <tr>
-                    <th>#</th>
-                    <th>Nama Modul</th>
-                    <th>Absen</th>
+                    <th width="10" style="text-align: center">#</th>
+                    <th width="70">Nama Modul</th>
+                    <th width="20" style="text-align: center">Absen</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ( $praktikum->modul as $modul )
                          <tr>
-                            <td>{{ $loop->iteration  }}</td>
-                            <td>{{ $modul->nama_modul }}</td>
-                            <td>{{ $absen->contains("modul_id", $modul->id_modul) ? "Hadir" : "Tidak Hadir"}}</td>
+                            <td width="10" style="text-align: center">{{ $loop->iteration  }}</td>
+                            <td width="70">{{ $modul->nama_modul }}</td>
+                            <td width="20" style="text-align: center;">{{ $absen->contains("modul_id", $modul->id_modul) ? "Hadir" : "Tidak Hadir"}}</td>
                         </tr>
 
                 @endforeach
                         <tr>
-                            <td colspan="3" style="text-align: right"> Total Hadir : {{ $absen->count() }}</td>
+                            <td colspan="2" style="text-align: right; padding: 0 10 0 0;">Total hadir</td>
+                            <td style="text-align: center">  {{ $absen->count() }}</td>
                         </tr>
             </tbody>
         </table>

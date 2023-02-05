@@ -48,20 +48,34 @@ class DashboardController extends BaseController
             });
         })->where('is_active','Y')
         ->get();
-        $tugas = Modul::whereHas('praktikum',function ($q){
-            $q->whereHas('periode', function ($q2){
-                $q2->where('status_periode','Aktif');
-            });
-        })->whereHas('tugas', function($r){
-            $r->where('is_active', 'Y');
-        })
-        ->get();
+
+        // $tugas = Tugas::whereHas('modul', function ($q){
+        //     $q->whereHas('praktikum', function ($q1){
+        //         $q1->whereHas('periode', function ($q2){
+        //             $q2->where('status_periode', 'Aktif');
+        //         });
+        //     });
+        // })->where('is_active', 'Y')->first();
 
 
         $jwbtugas= NewMahasiswa::where('user_id',auth()->id())
         ->first();
         //dd($jwbtugas->toArray());
-        return view ('dashboard.index',compact('data','datamhs','periode', 'ujian','tugas','kelas','jwbtugas'));
+
+        $role=auth()->user()->role->role_name;
+
+        $tugas = PraktikumMahasiswa::whereHas('praktikum', function ($q) use($role){
+            if($role=='Mahasiswa'){
+                {
+                    $q = $q->where('mahasiswa_id', auth()->user()->mahasiswa->id_mahasiswa);
+                }
+            }
+            $q->whereHas('periode', function ($q1) use($role){
+                $q1->where('status_periode', 'Aktif');
+            });
+        })->get();
+
+        return view ('dashboard.index',compact('data','datamhs','periode', 'ujian','kelas','jwbtugas','tugas'));
     }
 
     public function absensimhs(Request $request)
@@ -146,6 +160,8 @@ class DashboardController extends BaseController
             $mahasiswa_id = $praktikum_mahasiswa->mahasiswa_id;
             $praktikum_id = $praktikum_mahasiswa->praktikum_id;
             $jumlah_modul = $praktikum_mahasiswa->praktikum->kelas->jumlah_modul;
+
+            dd($jumlah_modul);
 
             $ujian_awal = JawabanUjian::whereHas('ujian', function ($q) use($praktikum_mahasiswa){
                             $q->where('praktikum_id',$praktikum_mahasiswa->praktikum_id)

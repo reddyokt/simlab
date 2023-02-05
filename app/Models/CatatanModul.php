@@ -11,7 +11,7 @@ class CatatanModul extends Model
 
     protected $table = 'catatan_modul';
     protected $primaryKey = 'id_catatan_modul';
-    protected $guarded = [];
+    protected $fillable = ['modul_id','isi_catatan', 'user_id'];
 
     public function modul()
     {

@@ -13,6 +13,16 @@
 </div>
 @endif
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error )
+        <li> {{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 
 <div>
     <h3 class="title my-3">List Modul</h3>
@@ -155,30 +165,27 @@
           <h5 class="modal-title" id="exampleModalLabel">Catatan Kegiatan</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="/modul/catatan/{{ $dt->id_modul }}" method="POST" class="col-md d-block align-item-center mx-auto">
+        <form action="/modul/editcatatan/{{ $dt->id_modul }}" method="POST" class="col-md d-block align-item-center mx-auto">
             @csrf
         <div class="modal-body">
             <input type="hidden" value="{{ $dt->id_modul }}" name="modul_id">
             <div class="form-group row mb-3">
-                <div class="col-12"></div>
-                    <input class="form-control" id="{{ $dt->id_modul }}" type="hidden" name="catatan" required value="">
-                    {{-- @dd($dt->catatan)
-                   @foreach ($dt->catatan as $catatan) --}}
-
-                    <trix-editor input="{{ $dt->id_modul }}">
+                <div class="col-12">
+                    <input class="form-control" id="edit/{{ $dt->id_modul }}" type="hidden" name="editcatatan" required>
+                    <trix-editor input="edit/{{ $dt->id_modul }}">
                         {!! $dt->catatan ? $dt->catatan->isi_catatan  : "" !!}
                     </trix-editor>
-                    {{-- @endforeach --}}
                 </div>
             </div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-md btn-primary d-flex justify-content-end" type="submit">Edit Catatan</button>
         </div>
+    </form>
       </div>
     </div>
   </div>
-</form>
+
 @endforeach
 
 @endsection
