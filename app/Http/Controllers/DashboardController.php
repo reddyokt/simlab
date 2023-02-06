@@ -161,7 +161,7 @@ class DashboardController extends BaseController
             $praktikum_id = $praktikum_mahasiswa->praktikum_id;
             $jumlah_modul = $praktikum_mahasiswa->praktikum->kelas->jumlah_modul;
 
-            dd($jumlah_modul);
+            //dd($jumlah_modul);
 
             $ujian_awal = JawabanUjian::whereHas('ujian', function ($q) use($praktikum_mahasiswa){
                             $q->where('praktikum_id',$praktikum_mahasiswa->praktikum_id)
@@ -170,6 +170,7 @@ class DashboardController extends BaseController
                         ->where('mahasiswa_id', $praktikum_mahasiswa->mahasiswa_id)
                         ->first();
 
+
             $ujian_akhir = JawabanUjian::whereHas('ujian', function ($q) use($praktikum_mahasiswa){
                             $q->where('praktikum_id',$praktikum_mahasiswa->praktikum_id)
                             ->where('jenis_ujian', 'Ujian Akhir');
@@ -177,27 +178,31 @@ class DashboardController extends BaseController
                         ->where('mahasiswa_id', $praktikum_mahasiswa->mahasiswa_id)
                         ->first();
 
+
             $ujian_lisan = PenilaianLisan::where('praktikum_id',$praktikum_mahasiswa->praktikum_id)
                         ->where('mahasiswa_id', $praktikum_mahasiswa->mahasiswa_id)
                         ->first();
 
             $pretest = JawabanTugas::where('mahasiswa_id', $mahasiswa_id)
                         ->whereHas('tugas',function ($q) use($praktikum_id){
-                            $q->whereHas('modul', function ($q1) use($praktikum_id){
+                            $q->where('jenis_tugas','Pre Test' )
+                            ->whereHas('modul', function ($q1) use($praktikum_id){
                                 $q1->where('praktikum_id', $praktikum_id);
                             });
                         })->get();
 
             $posttest = JawabanTugas::where('mahasiswa_id', $mahasiswa_id)
                         ->whereHas('tugas',function ($q) use($praktikum_id){
-                            $q->whereHas('modul', function ($q1) use($praktikum_id){
+                            $q->where('jenis_tugas','Post Test' )
+                            ->whereHas('modul', function ($q1) use($praktikum_id){
                                 $q1->where('praktikum_id', $praktikum_id);
                             });
                         })->get();
 
             $laporan = JawabanTugas::where('mahasiswa_id', $mahasiswa_id)
                         ->whereHas('tugas',function ($q) use($praktikum_id){
-                            $q->whereHas('modul', function ($q1) use($praktikum_id){
+                            $q->where('jenis_tugas','Laporan' )
+                            ->whereHas('modul', function ($q1) use($praktikum_id){
                                 $q1->where('praktikum_id', $praktikum_id);
                             });
                         })->get();
@@ -242,6 +247,7 @@ class DashboardController extends BaseController
             }
 
             $pembagi = $jumlah_modul * 100;
+
             $nilaiakhir = (
                 ($totalujianawal * 10/100) +
                 ($totalujianakhir * 10/100) +
@@ -255,6 +261,7 @@ class DashboardController extends BaseController
             $data1[$index]->nilaiakhir = $nilaiakhir;
         }
         $nilaiakhir = $data1[0]->nilaiakhir;
+
 
         $pdf = Pdf::loadView('pdf.exportnilaimhs', compact ('data','praktikum','ujiakhir','ujianawal','ujianlisan','nilaiakhir'));
         return $pdf->stream();

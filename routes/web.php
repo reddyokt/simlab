@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlatPraktikumController;
 use Illuminate\Support\Facades\App;
 
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,7 @@ use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\praktikan\JadwalController;
 use App\Http\Controllers\praktikan\PesertaController;
 use App\Http\Controllers\TransaksiController;
+use App\Models\AlatPraktikum;
 use App\Models\Masterdata;
 use App\Models\Transaksi;
 
@@ -91,9 +93,7 @@ Route::post('/inventory/alat/createlokasi', [AlatController::class, 'storelokasi
 Route::get('/alat', [AlatsController::class, 'index']);
 Route::get('/alat/createalatc2a', [AlatsController::class, 'createalatc2a']);
 Route::post('/alat/createalatc2a', [AlatsController::class, 'storealatc2a']);
-//Route::post('/inventory/alat/createalatc2a', [AlatController::class, 'storealatc2a']);
-// Route::get('/alatc2a/{id_alat}', [AlatController::class, 'showc2a']);
-// Route::post('/editc2a/{id_alat}', [AlatController::class, 'editalatc2a']);
+
 Route::get('/deletec2a/{id_alat}', [AlatsController::class, 'deletec2a']);
 Route::get('/deletec2b/{id_alat}', [AlatsController::class, 'deletec2b']);
 Route::get('/editc2a/{id_alat}', [AlatsController::class, 'showeditc2a']);
@@ -240,8 +240,8 @@ Route::get('/masterdata/deactivated/{id_kelas}', [MasterdataController::class, '
 Route::get('/masterdata/indexkategorialat', [MasterdataController::class, 'indexkategorialat']);
 Route::get('/masterdata/createkategorialat', [MasterdataController::class, 'createkategorialat']);
 Route::post('/masterdata/createkategorialat', [MasterdataController::class, 'storekategorialat']);
-Route::get('/masterdata/editkategori/{id_kategori_alat}', [MasterdataController::class, 'editkategorialat']);
-Route::post('/masterdata/editkategori/{id_kategori_alat}', [MasterdataController::class, 'storeeditkategorialat']);
+Route::get('/masterdata/editkategorialat/{id_kategori_alat}', [MasterdataController::class, 'editkategorialat']);
+Route::post('/masterdata/editkategorialat/{id_kategori_alat}', [MasterdataController::class, 'storeeditkategorialat']);
 
 
 Route::get('/masterdata/indexkomposisinilai', [MasterdataController::class, 'indexkomposisinilai']);
@@ -251,3 +251,10 @@ Route::post('/masterdata/storekomposisinilai', [MasterdataController::class, 'st
 //-------------------------------------mahasiswa------------------------------------//
 Route::get('/mahasiswa/absensi', [MahasiswaController::class, 'absenmhs']);
 Route::get('/mahasiswa/nilaidetail', [MahasiswaController::class, 'nilaimhs']);
+
+
+//--------------------------------------Alat Praktikum------------------------------//
+Route::get('/indexalat', [AlatPraktikumController::class, 'index']);
+Route::get('/createalat', [AlatPraktikumController::class, 'createalat']);
+Route::post('/createalat', [AlatPraktikumController::class, 'storealat']);
+

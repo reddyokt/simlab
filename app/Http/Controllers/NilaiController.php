@@ -334,7 +334,7 @@ class NilaiController extends Controller
         foreach ($data as $index=>$praktikum_mahasiswa){
             $mahasiswa_id = $praktikum_mahasiswa->mahasiswa_id;
             $praktikum_id = $praktikum_mahasiswa->praktikum_id;
-            $jumlah_modul = $praktikum_mahasiswa->praktikum->jumlah_modul;
+            $jumlah_modul = $praktikum_mahasiswa->praktikum->kelas->jumlah_modul;
 
             $ujian_awal = JawabanUjian::whereHas('ujian', function ($q) use($praktikum_mahasiswa){
                             $q->where('praktikum_id',$praktikum_mahasiswa->praktikum_id)
@@ -356,21 +356,24 @@ class NilaiController extends Controller
 
             $pretest = JawabanTugas::where('mahasiswa_id', $mahasiswa_id)
                         ->whereHas('tugas',function ($q) use($praktikum_id){
-                            $q->whereHas('modul', function ($q1) use($praktikum_id){
+                            $q->where('jenis_tugas','Pre Test' )
+                                ->whereHas('modul', function ($q1) use($praktikum_id){
                                 $q1->where('praktikum_id', $praktikum_id);
                             });
                         })->get();
 
             $posttest = JawabanTugas::where('mahasiswa_id', $mahasiswa_id)
                         ->whereHas('tugas',function ($q) use($praktikum_id){
-                            $q->whereHas('modul', function ($q1) use($praktikum_id){
+                            $q->where('jenis_tugas','Post Test' )
+                                ->whereHas('modul', function ($q1) use($praktikum_id){
                                 $q1->where('praktikum_id', $praktikum_id);
                             });
                         })->get();
 
             $laporan = JawabanTugas::where('mahasiswa_id', $mahasiswa_id)
                         ->whereHas('tugas',function ($q) use($praktikum_id){
-                            $q->whereHas('modul', function ($q1) use($praktikum_id){
+                            $q->where('jenis_tugas','Laporan' )
+                                ->whereHas('modul', function ($q1) use($praktikum_id){
                                 $q1->where('praktikum_id', $praktikum_id);
                             });
                         })->get();

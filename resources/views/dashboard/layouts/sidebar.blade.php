@@ -136,6 +136,7 @@
                         <div class="collapse" id="inventory-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 big mt-2">
                             <li><a href="/alat" class="link-dark rounded">Alat Praktikum</a></li>
+                            <li><a href="/indexalat" class="link-dark rounded">Alat Praktikum</a></li>
                             <li><a href="/inventory/bahan" class="link-dark rounded">Bahan Praktikum</a></li>
                             <li><a href="/inventory/barang" class="link-dark rounded">Barang Umum</a></li>
                             <li><a href="/inventory/transaksi" class="link-dark rounded">Transaksi</a></li>

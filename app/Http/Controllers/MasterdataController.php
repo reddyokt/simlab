@@ -83,6 +83,40 @@ class MasterdataController extends Controller
     {
         return view ('masterdata.createkategorialat');
     }
+
+    public function storekategorialat(Request $request)
+    {
+        //dd($request->toArray());
+        $kategorialat = $request->validate([
+            'nama_kategori' => 'required|max:50|unique:kategori_alat,nama_kategori',
+            'keterangan' => 'max:256'
+        ]);
+        $kategorialat = new Kategorialat();
+        $kategorialat->nama_kategori = $request->nama_kategori;
+        $kategorialat->keterangan = $request->keterangan;
+
+        $kategorialat->save();
+        return redirect('/masterdata/indexkategorialat')->with('success', 'Kategori Alat berhasil ditambah');
+    }
+
+    public function editkategorialat(Request $request, $id_kategori_alat)
+    {
+        //dd($request->toArray());
+        $kategorialat = Kategorialat::find($id_kategori_alat);
+        //dd($kategorialat);
+
+        return view('masterdata.editkategorialat', compact('kategorialat'));
+    }
+
+    public function storeeditkategorialat(Request $request, $id_kategori_alat)
+    {
+        $kategorialat = Kategorialat::find($id_kategori_alat);
+        $kategorialat->update([
+            'nama_kategori' => $request->nama_kategori,
+            'keterangan' => $request->keterangan
+        ]);
+        return redirect('/masterdata/indexkategorialat')->with('success', 'Kategori Alat berhasil diubah');
+    }
     //-------------------------------End Master Data Kategori Alat-------------------------------------//
 
      //-------------------------------Master Data Komposisi Nilai-------------------------------------//

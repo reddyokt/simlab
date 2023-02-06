@@ -37,7 +37,7 @@
             <td>{{ $dt->nama_kategori }}</td>
             <td>{{ $dt->keterangan }}</td>
             <td>
-                    <a href="/masterdata/editkategorialat/{{ $dt->id_kategorialat }}" class="badge bg-info"><span data-feather="edit"></span></a>
+                    <a href="/masterdata/editkategorialat/{{ $dt->id_kategori_alat }}" class="badge bg-info"><span data-feather="edit"></span></a>
                     {{-- <a href="#" class="badge bg-danger"><span data-feather="x-circle"></span></a> --}}
             </td>
         </tr>

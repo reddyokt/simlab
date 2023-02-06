@@ -10,4 +10,6 @@ class Kategorialat extends Model
     use HasFactory;
 
     protected $table = 'kategori_alat';
+    protected $primaryKey = 'id_kategori_alat';
+    protected $guarded = [];
 }
