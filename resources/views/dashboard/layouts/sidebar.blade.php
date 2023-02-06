@@ -84,7 +84,7 @@
                         </button></a>
                     </li>
 
-                    @if (auth()->user()->role_id =="1" or auth()->user()->role_id =="2" or auth()->user()->role_id =="4")
+                    @if (auth()->user()->role_id =="1" or auth()->user()->role_id =="2")
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#praktikum-collapse" aria-expanded="false">
                             <span class="mx-3" data-feather="book-open"></span> Praktikum
@@ -101,8 +101,9 @@
                         </ul>
                         </div>
                     </li>
+                    @endif
 
-
+                    @if (auth()->user()->role_id =="1" or auth()->user()->role_id =="2" or auth()->user()->role_id =="4")
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed"
                         data-bs-toggle="collapse" data-bs-target="#praktikan-collapse" aria-expanded="false">

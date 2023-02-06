@@ -10,7 +10,7 @@ class Ujian extends Model
     use HasFactory;
     protected $table = 'ujian';
     protected $primaryKey = 'id_ujian';
-    protected $guarded =[];
+    protected $fillable = ['praktikum_id', 'uraian_ujian', 'soal_ujian', 'jenis_ujian', 'is_active', 'is_valdiated', 'user_id'];
 
     public function praktikum()
     {

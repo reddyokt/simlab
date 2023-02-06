@@ -64,7 +64,7 @@
 
                                         <td>
                                             <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#Modaldetail-"{{$uj->id_ujian}}"><span data-feather="eye"></span></a>
-                                            <a href="#" class="badge bg-info"><span data-feather="edit"></span></a>
+                                            <a href="/praktikan/editujian/{{ $uj->id_ujian }}" class="badge bg-info"><span data-feather="edit"></span></a>
                                             @if ($uj->is_validated !='N')
                                                 @if ($uj->is_active =='N')
                                                 <a href="/praktikan/showujian/{{ $uj->id_ujian }}" class="badge bg-warning" onclick="return confirm('Yakin akan mengirimkan Tugas ini?!!!')">

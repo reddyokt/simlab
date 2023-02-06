@@ -15,6 +15,8 @@ use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Periode;
+use Illuminate\Support\Facades\Storage;
+
 use function PHPUnit\Framework\isNull;
 
 class TugasController extends Controller
@@ -125,6 +127,10 @@ class TugasController extends Controller
     public function storetugas(Request $request)
     {
         //return $request;
+        $else = Tugas::where('modul_id', $request->id_modul)->where('jenis_tugas', $request->jenis_tugas)->count('jenis_tugas');
+        if($else>=1){
+            return redirect()->back()->withErrors('Tidak bisa membuat Soal Tugas lagi, Soal Tugas sudah ada, 1 modul 1 Jenis tugas ');
+        }
         $tugas =  $request->validate([
             'id_modul'  => 'required',
             'jenis_tugas' => 'required',
@@ -141,6 +147,10 @@ class TugasController extends Controller
 
     public function storeujian(Request $request)
     {
+        $else = Ujian::where('praktikum_id', $request->praktikum_id)->where('jenis_ujian', $request->jenis_ujian)->count('jenis_ujian');
+        if($else>=1){
+            return redirect()->back()->withErrors('Tidak bisa membuat Soal Ujian lagi, Soal Ujian sudah ada, 1 Praktikum 1 Jenis Ujian ');
+        }
         //dd ($request->toArray());
         $ujian =  $request->validate([
             'praktikum_id'  => 'required',
@@ -201,6 +211,12 @@ class TugasController extends Controller
         return view ('/praktikan/tugas/edittugas', compact ('showtugas'));
     }
 
+    public function showeditujian($id_ujian)
+    {
+        $showujian = Ujian::find($id_ujian);
+        return view ('/praktikan/tugas/editujian', compact ('showujian'));
+    }
+
     public function storeedittugas(Request $request, $id_tugas)
     {
          //dd($request->all());
@@ -208,6 +224,28 @@ class TugasController extends Controller
         //dd($showtugas->all());
         $showtugas->update($request->all());
         return redirect ('/praktikan/tugas')->with('success', 'Tugas berhasil diubah');
+    }
+
+    public function storeeditujian(Request $request, $id_ujian)
+    {
+         //dd($request->all());
+        $showujian = Ujian::find($id_ujian);
+
+        if($request->file('soal_ujian')) {
+            if($request->oldFile){
+            Storage::delete($request->oldFile);
+            }
+            $showujian['soal_ujian'] = $request->file('soal_ujian')->store('soal_ujian');
+        }
+
+        $showujian['user_id'] = auth()->user()->id;
+
+        $showujian->update([
+            "uraian_ujian" => $request->uraian_ujian,
+            "jenis_ujian" => $request->jenis_ujian
+        ]);
+
+        return redirect ('/praktikan/ujian')->with('success', 'Ujian berhasil diubah');
     }
 
     public function deletetugas($id_tugas)
@@ -219,6 +257,7 @@ class TugasController extends Controller
 
         return redirect ('/praktikan/tugas')->with('success', 'Tugas berhasil dihapus');
     }
+
 
     public function exporttugas()
     {

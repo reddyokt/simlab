@@ -156,6 +156,9 @@ Route::post('/praktikan/createujian', [TugasController::class, 'storeujian']);
 Route::get('/praktikan/edittugas/{id_tugas}', [TugasController::class, 'showedittugas']);
 Route::post('/praktikan/edittugas/{id_tugas}', [TugasController::class, 'storeedittugas']);
 Route::get('/praktikan/deletetugas/{id_tugas}', [TugasController::class, 'deletetugas']);
+Route::get('/praktikan/editujian/{id_ujian}', [TugasController::class, 'showeditujian']);
+Route::post('/praktikan/editujian/{id_ujian}', [TugasController::class, 'storeeditujian']);
+Route::get('/praktikan/deleteujian/{id_ujian}', [TugasController::class, 'deleteujian']);
 
 
 

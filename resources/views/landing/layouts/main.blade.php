@@ -75,7 +75,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="cta-content text-white text-center">
-                        @if ($data1->count()>0)
+                        {{-- @if ($data1->count()>0)
                         <h2 class="title">Ujian</h2>
                             <div class="card text-dark">
                                 <div class="card-body">
@@ -109,7 +109,7 @@
                                     </table>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
                     @if(count($data2)>0)
                     <div class="text-center text-white">
                         <h2 class="title">Daftar Jadwal Praktikum</h2>
@@ -123,7 +123,7 @@
                                             <th scope="col">Nama Modul</th>
                                             <th scope="col">Tanggal Praktek</th>
                                             <th scope="col">Dosen Pengampu</th>
-                                            <th scope="col">Action</th>
+                                            {{-- <th scope="col">Action</th> --}}
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -134,7 +134,7 @@
                                             <td>{{$d->nama_modul}}</td>
                                             <td>{{ \Carbon\Carbon::parse($d->tanggal_praktek)->isoFormat('Do MMMM YYYY')}}</td>
                                             <td>{{ $d->praktikum->dosen->nama_dosen}}</td>
-                                            <td>@if(Auth::check())
+                                            {{-- <td>@if(Auth::check())
                                                 <a href="#" class="badge bg-success"
                                                 data-bs-toggle="modal" data-bs-target="#Modaldetail-{{ $d->id_modul }}"><i class="fa fa-eye"></i></a>
                                                 <a href="#" class="badge bg-danger"
@@ -142,7 +142,7 @@
                                                 @else
                                                 <p class="text-danger"><small>"Login untuk <br> lihat tugas"</small></p>
                                                 @endif
-                                            </td>
+                                            </td> --}}
                                           </tr>
                                         @endforeach
                                         </tbody>
