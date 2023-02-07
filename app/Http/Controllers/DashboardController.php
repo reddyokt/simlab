@@ -32,29 +32,76 @@ class DashboardController extends BaseController
         $data = Praktikum::whereHas('periode', function($q){
             $q->where('status_periode','Aktif');
         })->get();
+
+          $datamhs = PraktikumMahasiswa::whereHas('praktikum', function($q){
+            $q->whereHas('periode', function($q1){
+                $q1->where('status_periode', 'Aktif');
+            });
+        })->count();
+
         $role = auth()->user()->role->role_name;
 
         $mahasiswa = NewMahasiswa::where('user_id', auth()->user()->id)->first();
-        
-        $pretest = PraktikumMahasiswa::where('mahasiswa_id', $mahasiswa->id_mahasiswa)
-        ->whereHas('praktikum', function ($q){
-            $q->where('id_praktikum', 'praktikummhs.praktikum_id')
-                ->whereHas('modul', function($q1){
-                    $q1->whereHas('tugas', function($q2){
-                        $q2->where('jenis_tugas', 'Pre Test');
-                    });
+        if ($role == 'Mahasiswa'){
+            $praktikum = PraktikumMahasiswa::where('mahasiswa_id', $mahasiswa->id_mahasiswa)
+            ->whereHas('praktikum', function ($q){
+                $q->whereHas('periode', function  ($q1){
+                    $q1->where('status_periode', 'Aktif');
                 });
-            })
-            ->first();
+            })->get();
 
-        dd($pretest);
+        }
+        else {
+            $praktikum =[];
+        }
 
-        // $datamhs = PraktikumMahasiswa::whereHas('praktikum', function($q){
-        //     $q->where('ujian', )
-        //     ->whereHas('periode', function($q1){
-        //         $q1->where('status_periode', 'Aktif');
-        //     });
-        // })->get();
+            return view ('dashboard.index',compact('data','periode', 'praktikum', 'datamhs'));
+    }
+
+    public function uploadjawabantugas(Request $request)
+    {
+        //dd ($request->toArray());
+        $else = JawabanTugas:: where('mahasiswa_id', auth()->user()->mahasiswa->id_mahasiswa)->where('tugas_id', $request->tugas_id)->count();
+
+        //dd($else);
+        if ($else > 0){
+            return redirect()->back()->withErrors('Tidak bisa Upload Jawaban lagi, Kamu sudah upload jawaban untuk tugas ini sebelumnya');
+        }
+
+        $jawabantugas = $request->validate([
+            'file_jawaban'=>'required|mimes:png,jpg,pdf|max:2048'
+        ]);
+
+        if($request->file('file_jawaban')) {
+            $x= $request->file('file_jawaban')->store('upload_jawaban');
+        }
+
+        $jwbtugas = new JawabanTugas();
+        $jwbtugas->create([
+            'file_jawaban' => $x,
+            'mahasiswa_id' => auth()->user()->mahasiswa->id_mahasiswa,
+            'tugas_id' => $request->tugas_id
+
+        ]);
+
+        return redirect('/dashboard')->with('success', 'Jawaban Tugas berhasil diupload');;
+    }
+
+
+        // $pretest = PraktikumMahasiswa::where('mahasiswa_id', $mahasiswa->id_mahasiswa)
+        // ->whereHas('praktikum', function ($q){
+        //     $q->where('id_praktikum', 'praktikummhs.praktikum_id')
+        //         ->whereHas('modul', function($q1){
+        //             $q1->whereHas('tugas', function($q2){
+        //                 $q2->where('jenis_tugas', 'Pre Test');
+        //             });
+        //         });
+        //     })
+        //     ->get();
+
+        //dd($pretest);
+
+
 
         // if($role=='Mahasiswa')
         // $mahasiswa = NewMahasiswa::where('user_id', auth()->id())->first();
@@ -79,25 +126,25 @@ class DashboardController extends BaseController
         // // })->where('is_active', 'Y')->first();
 
 
-        $jwbtugas= NewMahasiswa::where('user_id',auth()->id())
-        ->first();
-        //dd($jwbtugas->toArray());
+        // $jwbtugas= NewMahasiswa::where('user_id',auth()->id())
+        // ->first();
+        // //dd($jwbtugas->toArray());
 
-        $role=auth()->user()->role->role_name;
+        // $role=auth()->user()->role->role_name;
 
-        $tugas = PraktikumMahasiswa::whereHas('praktikum', function ($q) use($role){
-            if($role=='Mahasiswa'){
-                {
-                    $q = $q->where('mahasiswa_id', auth()->user()->mahasiswa->id_mahasiswa);
-                }
-            }
-            $q->whereHas('periode', function ($q1) use($role){
-                $q1->where('status_periode', 'Aktif');
-            });
-        })->get();
+        // $tugas = PraktikumMahasiswa::whereHas('praktikum', function ($q) use($role){
+        //     if($role=='Mahasiswa'){
+        //         {
+        //             $q = $q->where('mahasiswa_id', auth()->user()->mahasiswa->id_mahasiswa);
+        //         }
+        //     }
+        //     $q->whereHas('periode', function ($q1) use($role){
+        //         $q1->where('status_periode', 'Aktif');
+        //     });
+        // })->get();
 
-        return view ('dashboard.index',compact('data','datamhs','periode', 'ujian','kelas','jwbtugas','tugas'));
-    }
+
+
 
     public function absensimhs(Request $request)
     {

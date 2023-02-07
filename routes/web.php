@@ -68,6 +68,7 @@ Route::get('/login',[LoginController::class, 'index'])->name('login')->middlewar
 Route::post('/login',[LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::post('/uploadjawaban', [DashboardController::class, 'uploadjawabantugas']);
 
 //----------------------------------User-------------------------------------//
 Route::get('/user', [UserController::class, 'index']);
