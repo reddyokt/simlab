@@ -74,7 +74,7 @@
 <!-- Modal -->
 @foreach ($dataModul as $dt )
 
-<div class="modal fade" id="Modaldetail-{{ $dt->id_ }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Modaldetail-{{ $dt->id_modul}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -92,10 +92,10 @@
                 </thead>
                 <tbody>
                     {{-- dd($dt->alat()) --}}
-                    @foreach ($dt->alat as $x  )
+                    @foreach ($dt->membermodul()->where('alat_id',"!=",0)->get() as $x)
                     <tr>
                       <th scope="row">{{$loop->iteration}}</th>
-                      <td>{{ $x->nama_alat}}-{{ $x->ukuran}}</td>
+                      <td>{{ $x->alat->nama_alat}}-{{ $x->alat->ukuran}} = {{ $x->jumlah_bahan }}</td>
                     </tr>
                     @endforeach
                 </tbody>

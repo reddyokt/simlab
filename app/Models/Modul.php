@@ -29,7 +29,7 @@ class Modul extends Model
 
     public function alat()
     {
-        return $this->belongsToMany(Alats::class, 'membermodul','modul_id', 'alat_id')->where('alat_id','!=',0);
+        return $this->belongsToMany(AlatPraktikum::class, 'membermodul','modul_id', 'alat_id')->where('alat_id','!=',0)->withPivot("jumlah_bahan");
     }
 
     public function bahan()

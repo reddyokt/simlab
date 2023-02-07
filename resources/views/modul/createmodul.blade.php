@@ -86,7 +86,7 @@
                             <div class="input-group">
                                 <select class="form-control w-50" name="id_alat[]" id="alat" data-live-search="true" data-dropup-auto="false" required>
                                     @foreach ($alat as $a )
-                                        <option value="{{ $a->id_alat }}">{{ $a->nama_alat }} - Stock Alat = {{' '.$a->jumlah  }}</option>
+                                        <option value="{{ $a->id_alat_praktikum }}">{{ $a->nama_alat }} - Stock Alat = {{' '.$a->jumlah  }}</option>
                                     @endforeach
                                 </select>
                             </div>

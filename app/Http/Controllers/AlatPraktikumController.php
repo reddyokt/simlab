@@ -49,7 +49,7 @@ class AlatPraktikumController extends Controller
        $alat->nama_alat = $request->nama_alat;
        $alat->merk= $request->merk;
        $alat->ukuran= $request->ukuran;
-       $alat->jumlah= $request->jumlah;
+       $alat->jumlah= $request->jumlah_alat;
        $alat->lokasi_id=$request->lokasi_id;
        $alat->lemari_id = $request->lemari_id;
        $alat->baris = $request->baris;

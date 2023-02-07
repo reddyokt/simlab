@@ -15,7 +15,21 @@ class AlatPraktikum extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(Kategorialat::class, 'id_kategori_alat', 'kategori_alat_id');
+        return $this->hasMany(Kategorialat::class, 'id_kategori_alat', 'kategori_alat_id');
     }
 
+    public function lemari()
+    {
+        return $this->belongsTo(Lemari::class,'id_lemari', 'lemari_id');
+    }
+
+    public function lokasi()
+    {
+        return $this->belongsTo(Lokasi::class, 'lokasi_id', 'id_lokasi');
+    }
+
+    public function memberalat()
+    {
+        return $this->belongsTo(Membermodul::class, 'id_alat_praktikum', 'alat_id');
+    }
 }

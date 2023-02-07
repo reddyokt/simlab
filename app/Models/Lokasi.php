@@ -15,6 +15,11 @@ class Lokasi extends Model
 
     public function bahan()
     {
-        return $this->hasMany(Bahan::class, 'id_lokasi', 'lokasi_id');
+        return $this->hasMany(Bahan::class, 'lokasi_id', 'id_lokasi');
+    }
+
+    public function lemari()
+    {
+        return $this->hasMany(Lemari::class,'id_lokasi', 'id_lokasi');
     }
 }

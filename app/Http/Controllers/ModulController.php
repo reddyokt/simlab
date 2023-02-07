@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlatPraktikum;
 use App\Models\Alats;
 use App\Models\Bahan;
 use App\Models\Modul;
@@ -47,7 +48,7 @@ class ModulController extends BaseController
    public function create()
     {
 
-        $alat = Alats::all();
+        $alat = AlatPraktikum::all();
         $bahan = Bahan::all();
         $kelas = Kelas::all();
         $praktik = Praktikum::all();

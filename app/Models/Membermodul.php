@@ -19,11 +19,16 @@ class Membermodul extends Model
 
     public function alatmember()
     {
-        return $this->belongsTo(Alats::class, 'alat_id','id_alat');
+        return $this->belongsTo(AlatPraktikum::class, 'alat_id','id_alat_praktikum');
     }
 
        public function bahan()
     {
         return $this->belongsTo(Bahan::class,'bahan_id', 'id_bahan');
+    }
+
+    public function alat()
+    {
+        return $this->belongsTo(AlatPraktikum::class,'alat_id', 'id_alat_praktikum');
     }
 }

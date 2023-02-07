@@ -41,7 +41,9 @@ class DashboardController extends BaseController
 
         $role = auth()->user()->role->role_name;
 
+
         $mahasiswa = NewMahasiswa::where('user_id', auth()->user()->id)->first();
+
         if ($role == 'Mahasiswa'){
             $praktikum = PraktikumMahasiswa::where('mahasiswa_id', $mahasiswa->id_mahasiswa)
             ->whereHas('praktikum', function ($q){

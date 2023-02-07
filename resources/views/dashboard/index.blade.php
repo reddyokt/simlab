@@ -88,14 +88,13 @@
           </div>
           @endif
 
-          @if (auth()->user()->role_id =='5')
+            @if (auth()->user()->role_id =='5')
 
-            @foreach ($praktikum as $p )
+            @foreach ($praktikum as $p)
             <div class="card mb-3 border-primary">
                 <div class="card-header">
                     <h5 class="text-center"> {{$p->praktikum->nama_kelas }} - {{ $p->praktikum->kelas->nama_kelas }}</h5>
                     <br>
-
                 </div>
 
                     @foreach ($p->praktikum->modul  as $modul)
@@ -113,8 +112,8 @@
                                          </a> Lihat Tugas </p>
                                     </div>
                                     <div class="col-6">
-                                        <p> <button class="badge bg-info" data-bs-toggle="modal"
-                                            data-bs-target="#Modaldetail4-{{ $modul->id_modul }}"><span data-feather="edit"></span></button> Upload Tugas</p>
+                                        <p> <button type="button" {{ $modul->tugas->where('jenis_tugas', 'Pre Test')->where('is_active', 'N') ? "disabled" : "" }} class="badge bg-info" data-bs-toggle="modal"
+                                            data-bs-target="#Modaldetail4-{{ $modul->id_modul }}" ><span data-feather="edit"></span></button> Upload Jawaban</p>
                                     </div>
                                 </div>
                             </div>
@@ -131,8 +130,8 @@
                                         data-bs-target="#Modaldetail2-{{ $modul->id_modul }}"><span data-feather="eye"></span></button> Lihat Tugas </p>
                                 </div>
                                 <div class="col-6">
-                                    <p> <button class="badge bg-info" data-bs-toggle="modal"
-                                        data-bs-target="#Modaldetail5-{{ $modul->id_modul }}"><span data-feather="edit"></span></button> Upload Tugas</p>
+                                    <p> <button type="button" {{ $modul->tugas->where('jenis_tugas', 'Post Test')->where('is_active', 'N') ? "disabled" : "" }}  class="badge bg-info" data-bs-toggle="modal"
+                                        data-bs-target="#Modaldetail5-{{ $modul->id_modul }}"><span data-feather="edit"></span></button> Upload Jawaban</p>
                                 </div>
                               </div>
                             </div>
@@ -149,22 +148,24 @@
                                         data-bs-target="#Modaldetail3-{{ $modul->id_modul }}"><span data-feather="eye"></span></button> Lihat Tugas </p>
                                 </div>
                                 <div class="col-6">
-                                    <p> <button class="badge bg-info" data-bs-toggle="modal"
-                                        data-bs-target="#Modaldetail6-{{ $modul->id_modul }}"><span data-feather="edit"></span></button> Upload Tugas</p>
+
+                                    <p> <button type="button" {{ $modul->tugas->where('jenis_tugas', 'Laporan')->where('is_active', 'N') ? "disabled" : "" }}  class="badge bg-info" data-bs-toggle="modal"
+                                        data-bs-target="#Modaldetail6-{{ $modul->id_modul }}"><span data-feather="edit"></span></button> Upload Jawaban</p>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-
                       </div>
-
                     <hr>
                     @endforeach
                 </div>
               </div>
               @endforeach
               @endif
+
+
+
 
 
               <!-- Modal -->
@@ -178,7 +179,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            {!! $modul->tugas->where('is_active', 'Y')->where('jenis_tugas', 'Pre Test')->first() ? $modul->tugas->where('jenis_tugas', 'Pre Test')->first()->uraian_tugas : "belum ada tugas" !!}
+            {!! $modul->tugas->where('jenis_tugas', 'Pre Test')->where('is_active', 'Y')->first() ? $modul->tugas->where('jenis_tugas', 'Pre Test')->first()->uraian_tugas : "belum ada tugas" !!}
         <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
@@ -198,7 +199,7 @@
             @csrf
         <div class="modal-body">
             <input type="hidden" name="tugas_id" value="{{ $modul->tugas->where('is_active', 'Y')->where('jenis_tugas', 'Pre Test')->first() ? $modul->tugas->where('is_active', 'Y')->where('jenis_tugas', 'Pre Test')->first()->id_tugas : "" }}">
-            <input {{ $modul->tugas->where('is_active', 'N')->where('jenis_tugas', 'Post Test')->first() ? "disabled"  : "" }} accept="image/png, image/jpeg, image/jpg, application/pdf"
+            <input {{ $modul->tugas->where('is_active', 'N')->where('jenis_tugas', 'Post Test')->first() ? "disabled"  : "enable" }} accept="image/png, image/jpeg, image/jpg, application/pdf"
             class="form-control" type="file" id="file_jawaban" name="file_jawaban"
             placeholder="Hanya Menerima Image file (png,jpeg,jpg) dan PDF File">
         <div class="modal-footer">
@@ -243,7 +244,7 @@
         <div class="modal-body">
             <input type="hidden" name="tugas_id" value="{{ $modul->tugas->where('is_active', 'Y')->where('jenis_tugas', 'Post Test')->first() ? $modul->tugas->where('is_active', 'Y')->where('jenis_tugas', 'Post Test')->first()->id_tugas : "" }}">
 
-            <input {{ $modul->tugas->where('is_active', 'N')->where('jenis_tugas', 'Post Test')->first() ? "disabled"  : "" }} accept="image/png, image/jpeg, image/jpg, application/pdf"
+            <input {{ $modul->tugas->where('is_active', 'N')->where('jenis_tugas', 'Post Test')->first() ? "disabled"  : "enable" }} accept="image/png, image/jpeg, image/jpg, application/pdf"
             class="form-control" type="file" id="file_jawaban" name="file_jawaban"
             placeholder="Hanya Menerima Image file (png,jpeg,jpg) dan PDF File">
 
@@ -289,7 +290,7 @@
         <div class="modal-body">
             <input type="hidden" name="tugas_id" value="{{ $modul->tugas->where('is_active', 'Y')->where('jenis_tugas', 'Laporan')->first() ? $modul->tugas->where('is_active', 'Y')->where('jenis_tugas', 'Laporan')->first()->id_tugas : "" }}">
 
-            <input {{ $modul->tugas->where('is_active', 'N')->where('jenis_tugas', 'Laporan')->first() ? "disabled"  : "" }} accept="image/png, image/jpeg, image/jpg, application/pdf"
+            <input {{ $modul->tugas->where('is_active', 'N')->where('jenis_tugas', 'Post Test')->first() ? "disabled"  : "enable" }} accept="image/png, image/jpeg, image/jpg, application/pdf"
             class="form-control" type="file" id="file_jawaban" name="file_jawaban"
             placeholder="Hanya Menerima Image file (png,jpeg,jpg) dan PDF File">
 
