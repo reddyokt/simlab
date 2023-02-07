@@ -32,30 +32,51 @@ class DashboardController extends BaseController
         $data = Praktikum::whereHas('periode', function($q){
             $q->where('status_periode','Aktif');
         })->get();
+        $role = auth()->user()->role->role_name;
 
-        $datamhs = PraktikumMahasiswa::whereHas('praktikum', function($q){
-            $q->whereHas('periode', function($q1){
-                $q1->where('status_periode', 'Aktif');
-            });
-        })->count();
+        $mahasiswa = NewMahasiswa::where('user_id', auth()->user()->id)->first();
+        
+        $pretest = PraktikumMahasiswa::where('mahasiswa_id', $mahasiswa->id_mahasiswa)
+        ->whereHas('praktikum', function ($q){
+            $q->where('id_praktikum', 'praktikummhs.praktikum_id')
+                ->whereHas('modul', function($q1){
+                    $q1->whereHas('tugas', function($q2){
+                        $q2->where('jenis_tugas', 'Pre Test');
+                    });
+                });
+            })
+            ->first();
 
-        $kelas = Praktikum::all();
-        $now = Carbon::now()->toDateString();
+        dd($pretest);
 
-        $ujian = Ujian::whereHas('praktikum',function ($q){
-            $q->whereHas('periode', function ($q2){
-                $q2->where('status_periode','Aktif');
-            });
-        })->where('is_active','Y')
-        ->get();
-
-        // $tugas = Tugas::whereHas('modul', function ($q){
-        //     $q->whereHas('praktikum', function ($q1){
-        //         $q1->whereHas('periode', function ($q2){
-        //             $q2->where('status_periode', 'Aktif');
-        //         });
+        // $datamhs = PraktikumMahasiswa::whereHas('praktikum', function($q){
+        //     $q->where('ujian', )
+        //     ->whereHas('periode', function($q1){
+        //         $q1->where('status_periode', 'Aktif');
         //     });
-        // })->where('is_active', 'Y')->first();
+        // })->get();
+
+        // if($role=='Mahasiswa')
+        // $mahasiswa = NewMahasiswa::where('user_id', auth()->id())->first();
+        // $datamhs = Tugas::where('');
+
+        // $kelas = Praktikum::all();
+        // $now = Carbon::now()->toDateString();
+
+        // $ujian = Ujian::whereHas('praktikum',function ($q){
+        //     $q->whereHas('periode', function ($q2){
+        //         $q2->where('status_periode','Aktif');
+        //     });
+        // })->where('is_active','Y')
+        // ->get();
+
+        // // $tugas = Tugas::whereHas('modul', function ($q){
+        // //     $q->whereHas('praktikum', function ($q1){
+        // //         $q1->whereHas('periode', function ($q2){
+        // //             $q2->where('status_periode', 'Aktif');
+        // //         });
+        // //     });
+        // // })->where('is_active', 'Y')->first();
 
 
         $jwbtugas= NewMahasiswa::where('user_id',auth()->id())

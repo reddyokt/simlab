@@ -52,5 +52,10 @@ class Praktikum extends Model
     {
         return $this->belongsTo(User::class, 'asisten_id' , 'id');
     }
+
+    public function praktikummhs()
+    {
+        return $this->hasMany(PraktikumMahasiswa::class, 'praktikum_id' , 'id_praktikum');
+    }
 }
 
