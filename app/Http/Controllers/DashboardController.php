@@ -41,7 +41,6 @@ class DashboardController extends BaseController
 
         $role = auth()->user()->role->role_name;
 
-
         $mahasiswa = NewMahasiswa::where('user_id', auth()->user()->id)->first();
 
         if ($role == 'Mahasiswa'){
@@ -88,6 +87,44 @@ class DashboardController extends BaseController
 
         return redirect('/dashboard')->with('success', 'Jawaban Tugas berhasil diupload');;
     }
+
+    public function uploadjawabanujian(Request $request)
+    {
+        //dd ($request->toArray());
+        $else = JawabanUjian:: where('mahasiswa_id', auth()->user()->mahasiswa->id_mahasiswa)->where('ujian_id', $request->ujian_id)->count();
+
+        //dd($else);
+        if ($else > 0){
+            return redirect()->back()->withErrors('Tidak bisa Upload Jawaban lagi, Kamu sudah upload jawaban untuk ujian ini sebelumnya');
+        }
+
+        $jawabanujian = $request->validate([
+            'file_jawaban'=>'required|mimes:png,jpg,pdf|max:2048'
+        ]);
+
+        if($request->file('file_jawaban')) {
+            $x= $request->file('file_jawaban')->store('upload_jawaban');
+        }
+
+        $jwbujian= new JawabanUjian();
+        $jwbujian->create([
+            'file_jawaban' => $x,
+            'mahasiswa_id' => auth()->user()->mahasiswa->id_mahasiswa,
+            'ujian_id' => $request->ujian_id
+
+        ]);
+
+        return redirect('/dashboard')->with('success', 'Jawaban Ujian berhasil diupload');;
+    }
+
+    public function hapusjawabanujian (Request $request, $id_jawaban_ujian)
+    {
+        $hapus = JawabanUjian::find($id_jawaban_ujian);
+        $hapus->delete();
+
+        return redirect('/dashboard')->with('success', 'Jawaban Ujian berhasil dihapus');;
+    }
+
 
 
         // $pretest = PraktikumMahasiswa::where('mahasiswa_id', $mahasiswa->id_mahasiswa)

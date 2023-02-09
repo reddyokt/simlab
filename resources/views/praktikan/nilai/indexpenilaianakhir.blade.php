@@ -27,6 +27,12 @@
                         @csrf
                         <div class="row p-3">
                             <div class="col">
+                                <select class="form-select form-select-sm dflex" name="periode_id" aria-label="id_periode">
+                                @foreach ($periode as $per )
+                                    <option value="{{ $per->id_periode }}">{{ $per->tahun_ajaran }} - {{ $per->semester }}</option>
+                                @endforeach
+                                </select>
+                            <div class="col">
                                 <select class="form-select form-select-sm dflex" name="praktikum_id" aria-label="id_praktikum">
                                 @foreach ($praktikum as $p )
                                     <option value="{{ $p->id_praktikum }}">{{ $p->kelas->nama_kelas }}</option>

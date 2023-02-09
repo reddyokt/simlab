@@ -16,4 +16,9 @@ class Ujian extends Model
     {
         return $this->belongsTo(Praktikum::class, 'praktikum_id','id_praktikum');
     }
+
+    public function jawabanujian()
+    {
+        return $this->hasOne(JawabanUjian::class, 'ujian_id', 'id_ujian');
+    }
 }

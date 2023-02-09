@@ -59,7 +59,7 @@ class PraktikanImport implements ToCollection,WithHeadingRow
 
             $praktikum = Praktikum::with(['kelas','periode'])
             ->whereHas('kelas',function($q)use($row){
-                $q->where('kode_kelas',$row['kode_kelas']);
+                $q->where('kode_kelas',$row['kode_mata_kuliah']);
                 })
             ->where('periode_id',$this->periode_id)
             ->first();

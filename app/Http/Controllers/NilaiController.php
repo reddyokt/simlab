@@ -16,6 +16,7 @@ use App\Models\Ujian;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf as WriterPdf;
+use App\Models\Periode;
 
 class NilaiController extends Controller
 {
@@ -182,6 +183,7 @@ class NilaiController extends Controller
 
 
         $role = auth()->user()->role->role_name;
+        $periode = Periode::all();
         $praktikum = Praktikum::whereHas('periode', function($q) use($role) {
             if($role == 'Ka Unit'){
                 $q = $q->where('dosen_id', auth()->user()->dosen->id_dosen);
@@ -313,12 +315,13 @@ class NilaiController extends Controller
         }
 
         //dd($data);
-        return view('praktikan.nilai.indexpenilaianakhir', compact('data','praktikum'));
+        return view('praktikan.nilai.indexpenilaianakhir', compact('data','praktikum','periode'));
     }
 
     public function exportnilaiakhir(Request $request)
     {
         //dd ($request->all());
+       $periode = Periode::find($request->periode_id);
        $praktikum = Praktikum::find($request->praktikum_id);
        $data = PraktikumMahasiswa::where('praktikum_id', $request->praktikum_id)
                 ->with(["mahasiswa","praktikum.kelas"])

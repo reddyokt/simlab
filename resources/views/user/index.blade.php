@@ -31,7 +31,7 @@
         @foreach ( $data as $dt )
         <tr>
             <td>{{ $loop->iteration  }}</td>
-            <td>{{ $dt->username }}</td>
+            <td>{{ $dt->nama_lengkap }}</td>
             <td>{{ $dt->role->role_name }}</td>
             <td>
                 <a href="/user/{{ $dt->id}}" class="badge bg-info"><span data-feather="edit"></span></a>

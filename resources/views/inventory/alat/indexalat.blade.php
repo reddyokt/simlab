@@ -53,21 +53,21 @@
                 </thead>
                 <tbody>
                 @foreach ($alat as $a )
-                @foreach ($a->kategori as $kategori )
+                    {{-- @dd ($a->lemari) --}}
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td style="font-size:12px">{{ $a->nama_alat }}</td>
-                    <td style="font-size:12px">{{ $kategori->nama_kategori}}</td>
+                    <td style="font-size:12px">{{ $a->kategori->nama_kategori}}</td>
                     <td style="font-size:12px">{{ $a->merk }}</td>
                     <td style="font-size:12px">{{ $a->ukuran }}</td>
                     <td style="font-size:12px">{{ $a->jumlah }}</td>
-                    <td style="font-size:12px"> {{ $a->lokasi->nama_lokasi }}<br>Lemari : {{ $a->lemari}}.{{ $a->baris }}.{{ $a->kolom }}</td>
+                    <td style="font-size:12px"> {{ $a->lokasi->nama_lokasi }}<br>Lemari : {{ $a->lemari ?  $a->lemari->nama_lemari  : 'tidak di lemari'}}. {{ $a->baris }}. {{ $a->kolom }}</td>
                     <td>
-                        <a href="/editalat/{{ $a->id_alat }}" class="badge bg-info"><span data-feather="edit"></span></a>
-                        <a href="/deletealat/{{ $a->id_alat }}" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Alat?!!!')"><span data-feather="x-circle"></span></a>
+                        <a href="/editalat/{{ $a->id_alat_praktikum }}" class="badge bg-info"><span data-feather="edit"></span></a>
+                        {{-- <a href="/deletealat/{{ $a->id_alat_praktikum }}" class="badge bg-danger" onclick="return confirm('Yakin akan menghapus data Alat?!!!')"><span data-feather="x-circle"></span></a> --}}
                     </td>
                 </tr>
-                @endforeach
+
                 @endforeach
                 </tbody>
             </table>

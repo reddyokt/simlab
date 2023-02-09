@@ -15,12 +15,12 @@ class AlatPraktikum extends Model
 
     public function kategori()
     {
-        return $this->hasMany(Kategorialat::class, 'id_kategori_alat', 'kategori_alat_id');
+        return $this->hasOne(Kategorialat::class, 'id_kategori_alat', 'kategori_alat_id');
     }
 
     public function lemari()
     {
-        return $this->belongsTo(Lemari::class,'id_lemari', 'lemari_id');
+        return $this->belongsTo(Lemari::class,'lemari_id', 'id_lemari');
     }
 
     public function lokasi()

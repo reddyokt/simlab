@@ -60,4 +60,24 @@ class AlatPraktikumController extends Controller
 
         return redirect ('/indexalat')->with('success', 'Data Alat berhasil ditambahkan');
     }
+
+    public function editalat($id_alat_praktikum)
+    {
+        //dd($request->toArray());
+        $data = AlatPraktikum::find($id_alat_praktikum);
+        $lokasi = Lokasi::all();
+        $lemari = Lemari::all();
+        $kategori = Kategorialat::all();
+
+       return view('inventory.alat.editalat', compact ('data','lokasi','lemari', 'kategori'));
+    }
+
+    public function storeeditalat(Request $request, $id_alat_praktikum)
+    {
+        //dd($request->toArray());
+        $data_alat = AlatPraktikum::find($id_alat_praktikum);
+        $data_alat->update($request->all());
+
+        return redirect ('/indexalat')->with('success', 'Data Alat berhasil dirubah');
+    }
 }

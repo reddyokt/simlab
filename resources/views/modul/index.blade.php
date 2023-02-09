@@ -26,7 +26,7 @@
 
 <div>
     <h3 class="title my-3">List Modul</h3>
-    <a class="btn btn-success my-3 ms-auto" href="/modul/createmodul" role="button">Tambah Modul</a>
+    <a class="btn btn-success my-3 ms-auto" href="/modul/createmodul" role="button">Tambah Kebutuhan Modul</a>
 </div>
 
 <table id="example" class="display" style="width:100%">
@@ -83,11 +83,13 @@
         </div>
         <div class="modal-body">
 
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nama Alat</th>
+                    <th scope="col">Ukuran Alat</th>
+                    <th scope="col">Jumlah Dipakai</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -95,16 +97,20 @@
                     @foreach ($dt->membermodul()->where('alat_id',"!=",0)->get() as $x)
                     <tr>
                       <th scope="row">{{$loop->iteration}}</th>
-                      <td>{{ $x->alat->nama_alat}}-{{ $x->alat->ukuran}} = {{ $x->jumlah_bahan }}</td>
+                      <td>{{ $x->alat->nama_alat}}</td>
+                      <td>{{ $x->alat->ukuran}}</td>
+                      <td>{{ $x->jumlah_bahan }}</td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            <table class="table">
+            <table class="table table-bordered">
               <thead>
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Nama Bahan</th>
+                  <th scope="col">Rumus Kimia</th>
+                  <th scope="col">Jumlah Bahan dipakai</th>
                 </tr>
               </thead>
               <tbody>
@@ -113,6 +119,8 @@
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{ $y->bahan->nama_bahan}} = {{ $y->jumlah_bahan }}</td>
+                        <td>{{ $y->bahan->rumus }}</td>
+                        <td>{{ $y->jumlah_bahan }}</td>
                     </tr>
                     @endforeach
               </tbody>

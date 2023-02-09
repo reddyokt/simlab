@@ -173,7 +173,7 @@ class TugasController extends Controller
         $showtugas = Tugas::find($id_tugas);
         $showtugas->update(['is_active'=>'Y']);
 
-        return redirect ('/praktikan/tugas')->with('success', 'Tugas berhasil dimunculkan di landing page');
+        return redirect ('/praktikan/tugas')->with('success', 'Tugas berhasil di publish');
     }
 
     public function hidetugas($id_tugas)
@@ -182,7 +182,7 @@ class TugasController extends Controller
         $hidetugas = Tugas::find($id_tugas);
         $hidetugas->update(['is_active'=>'N']);
 
-        return redirect ('/praktikan/tugas')->with('success', 'Tugas berhasil disembunyikan di landing page');
+        return redirect ('/praktikan/tugas')->with('success', 'Tugas berhasil di unpublish');
     }
 
     public function showujian($id_ujian)
@@ -191,7 +191,7 @@ class TugasController extends Controller
         $showujian = Ujian::find($id_ujian);
         $showujian->update(['is_active'=>'Y']);
 
-        return redirect ('/praktikan/ujian')->with('success', 'Ujian berhasil dimunculkan di landing page');
+        return redirect ('/praktikan/ujian')->with('success', 'Ujian berhasil di publish');
     }
 
     public function hideujian($id_ujian)
@@ -200,7 +200,7 @@ class TugasController extends Controller
         $hideujian = Ujian::find($id_ujian);
         $hideujian->update(['is_active'=>'N']);
 
-        return redirect ('/praktikan/ujian')->with('success', 'Ujian berhasil disembunyikan di landing page');
+        return redirect ('/praktikan/ujian')->with('success', 'Ujian berhasil di unpublish');
     }
 
     public function showedittugas($id_tugas)

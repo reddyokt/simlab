@@ -42,11 +42,11 @@
             <td>{{ $dt->is_active == 'N' ? "Tidak Aktif" : "Aktif" }}</td>
             <td>
                     <a href="/masterdata/editnamapraktikum/{{ $dt->id_kelas }}" class="badge bg-info"><span data-feather="edit"></span></a>
-                    @if ($dt->is_active == 'Y')
+
                     <a href="/masterdata/deactivated/{{ $dt->id_kelas }}" class="badge bg-danger"><span data-feather="minus" onclick="return confirm('Yakin akan menon-aktifkan Praktikum ini?!!!')"></span></a>
-                    @else
+
                     <a href="/masterdata/activated/{{ $dt->id_kelas }}" class="badge bg-success"><span data-feather="activity" onclick="return confirm('Yakin akan meng-aktifkan Praktikum ini?!!!')"></span></a>
-                    @endif
+
             </td>
         </tr>
             @endforeach

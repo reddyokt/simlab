@@ -22,6 +22,7 @@
                 $year = now()->year;
                 ?>
                     <option value="{{$year-1}} - {{$year}}">{{$year-1}} / {{$year}}</option>
+                    <option value="{{$year}} - {{$year+1}}">{{$year}} / {{$year+1}}</option>
             </select>
             @error('tahun_ajaran')
                 <div class="invalid-feedback">

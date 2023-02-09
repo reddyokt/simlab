@@ -108,10 +108,10 @@ class AlatsController extends Controller
     public function exportalatc2a()
     {
 
-        $c2a = DB::table('alat')
-            ->join('lemari','lemari.id_lemari','=','alat.lemari_id')
-            ->join('lokasi', 'lokasi.id_lokasi', '=', 'lemari.id_lokasi')
-            ->whereIn('alat.jenis',['c2a'])
+        $c2a = DB::table('alat_praktikum')
+            ->leftJoin('lemari','lemari.id_lemari','=','alat_praktikum.lemari_id')
+            ->leftJoin('lokasi', 'lokasi.id_lokasi', '=', 'alat_praktikum.lokasi_id')
+            ->whereIn('alat_praktikum.kategori_alat_id', ['1'])
             ->get();
 
             $pdf = Pdf::loadView('pdf.exportalatc2a', compact ('c2a'));
@@ -121,9 +121,10 @@ class AlatsController extends Controller
 
     public function exportalatc2b()
     {
-        $c2b = DB::table('lokasi')
-            ->join('alat','alat.lokasi_id','=','lokasi.id_lokasi')
-            ->whereIn('alat.jenis',['c2b'])
+        $c2b = DB::table('alat_praktikum')
+            ->leftJoin('lemari','lemari.id_lemari','=','alat_praktikum.lemari_id')
+            ->leftJoin('lokasi', 'lokasi.id_lokasi', '=', 'lemari.id_lokasi')
+            ->whereIn('alat_praktikum.kategori_alat_id', ['2'])
             ->get();
 
 

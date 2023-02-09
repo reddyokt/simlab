@@ -141,7 +141,7 @@ class ModulController extends BaseController
     {
         $modul = Modul::find($id_modul);
         $bahanmember = $modul->membermodul()->where('bahan_id','!=',0)->get();
-        $alat = Alats::all();
+        $alat = AlatPraktikum::all();
         $bahan = Bahan::all();
         $kelas = Kelas::all();
         $praktik = Praktikum::all();
@@ -156,24 +156,22 @@ class ModulController extends BaseController
         $membermodul = Membermodul::where('modul_id',$id_modul)->delete();
 
         $data = $request->all();
-        $tanggal = \DateTime::createFromFormat('m/d/Y', $request->tanggal_praktek);
-        $newtanggal = $tanggal->format('Y-m-d');
 
 
         $modul = Modul::find($id_modul);
         $modul->nama_modul=$data['nama_modul'];
         $modul->praktikum_id=$data['kelas_id'];
-        $modul->tanggal_praktek=$newtanggal;
+        $modul->tanggal_praktek=$data['tanggal_praktek'];
         $modul->save();
 
-         foreach ($data['alat'] as $index=>$alat){
-             $x = ['modul_id'=>$modul->id_modul,
-                 'alat_id'=>$data['alat'][$index],
-                 'bahan_id'=>0,
-                 'jumlah_bahan'=>0,
-                 ];
-             Membermodul::create($x);
-         }
+        foreach ($data['id_alat'] as $index=>$alat){
+            $x = ['modul_id'=>$modul->id_modul,
+                'alat_id'=>$alat,
+                'bahan_id'=>0,
+                'jumlah_bahan'=>$data['jumlah_alat'][$index],
+                ];
+            Membermodul::create($x);
+        }
 
          foreach ($data['id_bahan'] as $index=>$bahan){
              $x = ['modul_id'=>$modul->id_modul,

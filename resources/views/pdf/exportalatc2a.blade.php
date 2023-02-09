@@ -37,7 +37,7 @@
             <td style="font-size:12px">{{ $a->merk }}</td>
             <td style="font-size:12px">{{ $a->ukuran }}</td>
             <td style="font-size:12px">{{ $a->jumlah }}</td>
-            <td style="font-size:12px"> {{ $a->nama_lokasi }}<br>Lemari : {{ $a->nama_lemari }}.{{ $a->baris }}.{{ $a->kolom }}</td>
+            <td style="font-size:12px"> {{ $a->nama_lokasi }} <br>Lemari : {{ $a->nama_lemari }}.{{ $a->baris }}.{{ $a->kolom }}</td>
         </tr>
         @endforeach
         </tbody>

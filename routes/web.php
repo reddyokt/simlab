@@ -69,6 +69,8 @@ Route::post('/login',[LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 Route::post('/uploadjawaban', [DashboardController::class, 'uploadjawabantugas']);
+Route::post('/uploadjawabanujian', [DashboardController::class, 'uploadjawabanujian']);
+Route::get('/hapusjawabanujian/{id_jawaban_ujian}', [DashboardController::class, 'hapusjawabanujian']);
 
 //----------------------------------User-------------------------------------//
 Route::get('/user', [UserController::class, 'index']);
@@ -258,4 +260,7 @@ Route::get('/mahasiswa/nilaidetail', [MahasiswaController::class, 'nilaimhs']);
 Route::get('/indexalat', [AlatPraktikumController::class, 'index']);
 Route::get('/createalat', [AlatPraktikumController::class, 'createalat']);
 Route::post('/createalat', [AlatPraktikumController::class, 'storealat']);
+Route::get('/editalat/{id_alat_praktikum}', [AlatPraktikumController::class, 'editalat']);
+Route::post('/editalat/{id_alat_praktikum}', [AlatPraktikumController::class, 'storeeditalat']);
+
 

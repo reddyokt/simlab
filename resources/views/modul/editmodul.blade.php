@@ -42,7 +42,7 @@
                     </div>
         </div>
 
-        <div class="form-group mb-1">
+        {{-- <div class="form-group mb-1">
             <label for="nama_modul">Tambah Alat</label>
             <div class="input-group">
                 <select class="selectpicker form-control w-100" name="alat[]" id="alat" multiple data-live-search="true">
@@ -51,12 +51,42 @@
                     @endforeach
                 </select>
             </div>
+        </div> --}}
+
+        <div class="listalat">
+            <div class="col form-group mb-1">
+                <label for="tambah">Tambah Alat</label>
+            <button class="w-100 btn btn-md btn-primary " id="add_button_alat" type="button">+ alat +</button>
+            </div>
+            @foreach ( $modul->alat as $ba)
+            <div class="clonealat row align-items-start">
+                <div class="col-8 form-group mb-1">
+                    <label for="nama_modul">Pilih Alat</label>
+                    <div class="alat_wrapper">
+                        <div class="clone_alat">
+                            <div class="input-group">
+                                <select class="form-control w-50" name="id_alat[]" id="alat" data-live-search="true">
+                                    @foreach ($alat as $a )
+                                        <option {{ $ba->pivot->alat_id == $a->id_alat_praktikum ? "selected" : "" }} value="{{ $a->id_alat_praktikum }}">{{ $a->nama_alat }} - Stock Alat = {{' '.$a->jumlah  }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 form-group mb-1">
+                    <label for="jumlah_bahan">Jumlah Alat</label>
+                    <input type="number" name="jumlah_alat[]" class="form-control" placeholder="Masukkan Jumlah Alat" value="{{ $ba->pivot->jumlah_bahan }}">
+                </div>
+            </div>
+            @endforeach
         </div>
+
         <div class="listbahan">
             {{-- @dd($modul->bahan->toArray()) --}}
             <div class="col form-group mb-1">
                 <label for="tambah">Tambah</label>
-            <button class="w-100 btn btn-md btn-warning " id="add_button" type="button">+</button>
+            <button class="w-100 btn btn-md btn-warning " id="add_button" type="button">+ bahan +</button>
             </div>
             @foreach ( $modul->bahan as $bh)
             <div class="clonebahan row align-items-start">
@@ -82,7 +112,7 @@
             @endforeach
         </div>
 
-        <button class="btn btn-md btn-primary d-flex justify-content-end" type="submit">Buat Modul</button>
+        <button class="btn btn-md btn-primary d-flex justify-content-end" type="submit">Ubah Modul</button>
     </div>
 
     </form>

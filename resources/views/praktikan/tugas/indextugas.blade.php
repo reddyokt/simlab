@@ -82,7 +82,7 @@
                                             <a href="/praktikan/edittugas/{{ $dt->id_tugas }}" class="badge bg-info"><span data-feather="edit"></span></a>
                                             @if ($dt->is_validated !='N')
                                                 @if ($dt->is_active =='N')
-                                                <a href="/praktikan/showtugas/{{ $dt->id_tugas }}" class="badge bg-warning" onclick="return confirm('Yakin akan mengirimkan Tugas ini?!!!')">
+                                                <a href="/praktikan/showtugas/{{ $dt->id_tugas }}" class="badge bg-warning" onclick="return confirm('Yakin akan mengirimkan Tugas ini kepada Mahasiswa?!!!')">
                                                     <span data-feather="sunrise"></span></a>
                                                     @else
                                                     <a href="/praktikan/hidetugas/{{ $dt->id_tugas }}" class="badge bg-danger" onclick="return confirm('Yakin akan menyembunyikan Tugas ini?!!!')">
